@@ -9,8 +9,10 @@ book:
 
   chapters:
     - index.qmd
-    - text: "Programa del curso"
-      href: gf0604-procesamientodatosgeograficos-g001-2026-i.pdf
+    - text: "Programa del curso (grupo 1)"
+      href: gf0604-procesamientodatosgeograficos-2026-i-g001.pdf
+    - text: "Programa del curso (grupo 2)"
+      href: gf0604-procesamientodatosgeograficos-2026-i-g002.pdf
     - part: "I Introducción a la programación de computadoras y a la ciencia de datos"
       chapters:
         - 01-introduccion-programacion-computadoras.qmd
