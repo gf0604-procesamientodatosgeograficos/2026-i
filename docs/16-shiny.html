@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>16&nbsp; shiny - desarrollo de aplicaciones web interactivas – GF-0604 Procesamiento de datos geográficos 2026-I</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./15-tableros-control.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-1702ab35f4090e412b6131ee68bfb1ab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No se han encontrado resultados",
+    "search-matching-documents-text": "documentos encontrados",
+    "search-copy-link-title": "Copiar el enlace en la búsqueda",
+    "search-hide-matches-text": "Ocultar resultados adicionales",
+    "search-more-match-text": "resultado adicional en este documento",
+    "search-more-matches-text": "resultados adicionales en este documento",
+    "search-clear-button-title": "Borrar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Buscar"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-tableros-control.html">VII Visualización avanzada de datos</a></li><li class="breadcrumb-item"><a href="./16-shiny.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">shiny - desarrollo de aplicaciones web interactivas</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="./index.html" class="sidebar-logo-link">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">GF-0604 Procesamiento de datos geográficos 2026-I</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Buscar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Bienvenida</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./gf0604-procesamientodatosgeograficos-g001-2026-i.pdf" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Programa del curso</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">I Introducción a la programación de computadoras y a la ciencia de datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-introduccion-programacion-computadoras.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introducción a la programación de computadoras</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-introduccion-ciencia-datos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Introducción a la ciencia de datos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">II El lenguaje de programación R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-r.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R - lenguaje de programación para análisis estadístico</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">III Herramientas para investigación reproducible y desarrollo colaborativo</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-reproducibilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-markdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Markdown - lenguaje de marcado</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-git.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Git - sistema de control de versiones</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">IV La colección de paquetes Tidyverse para ciencia de datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-tidyverse.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Tidyverse - colección de paquetes para ciencia de datos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-dplyr.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">dplyr - gramática para manipulación de datos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">V Graficación estadística en R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-ggplot2-plotly.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">ggplot2 y plotly - creación declarativa de gráficos interactivos</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">VI El ecosistema espacial de R</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-introduccion-manejo-datos-geoespaciales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Introducción al manejo de datos geoespaciales con R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-operaciones-datos-atributos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Operaciones con datos de atributos</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-operaciones-datos-espaciales.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Operaciones con datos espaciales</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-operaciones-datos-geometrias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Operaciones con geometrías</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">VII Visualización avanzada de datos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./15-tableros-control.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tableros de control</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./16-shiny.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">shiny - desarrollo de aplicaciones web interactivas</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="5">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen"><span class="header-section-number">16.1</span> Resumen</a></li>
+  <li><a href="#trabajo-previo" id="toc-trabajo-previo" class="nav-link" data-scroll-target="#trabajo-previo"><span class="header-section-number">16.2</span> Trabajo previo</a>
+  <ul class="collapse">
+  <li><a href="#lecturas" id="toc-lecturas" class="nav-link" data-scroll-target="#lecturas"><span class="header-section-number">16.2.1</span> Lecturas</a></li>
+  <li><a href="#instalación-y-carga-de-paquetes" id="toc-instalación-y-carga-de-paquetes" class="nav-link" data-scroll-target="#instalación-y-carga-de-paquetes"><span class="header-section-number">16.2.2</span> Instalación y carga de paquetes</a></li>
+  </ul></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">16.3</span> Introducción</a></li>
+  <li><a href="#arquitectura" id="toc-arquitectura" class="nav-link" data-scroll-target="#arquitectura"><span class="header-section-number">16.4</span> Arquitectura</a></li>
+  <li><a href="#ejemplo-de-aplicación-básica" id="toc-ejemplo-de-aplicación-básica" class="nav-link" data-scroll-target="#ejemplo-de-aplicación-básica"><span class="header-section-number">16.5</span> Ejemplo de aplicación básica</a></li>
+  <li><a href="#bloques-para-compartir-código-y-datos" id="toc-bloques-para-compartir-código-y-datos" class="nav-link" data-scroll-target="#bloques-para-compartir-código-y-datos"><span class="header-section-number">16.6</span> Bloques para compartir código y datos</a>
+  <ul class="collapse">
+  <li><a href="#context-setup" id="toc-context-setup" class="nav-link" data-scroll-target="#context-setup"><span class="header-section-number">16.6.1</span> <code>context: setup</code></a></li>
+  <li><a href="#context-data" id="toc-context-data" class="nav-link" data-scroll-target="#context-data"><span class="header-section-number">16.6.2</span> <code>context: data</code></a></li>
+  </ul></li>
+  <li><a href="#configuración-de-la-interfaz-de-usuario" id="toc-configuración-de-la-interfaz-de-usuario" class="nav-link" data-scroll-target="#configuración-de-la-interfaz-de-usuario"><span class="header-section-number">16.7</span> Configuración de la interfaz de usuario</a>
+  <ul class="collapse">
+  <li><a href="#barras-laterales" id="toc-barras-laterales" class="nav-link" data-scroll-target="#barras-laterales"><span class="header-section-number">16.7.1</span> Barras laterales</a></li>
+  </ul></li>
+  <li><a href="#funciones-reactivas" id="toc-funciones-reactivas" class="nav-link" data-scroll-target="#funciones-reactivas"><span class="header-section-number">16.8</span> Funciones reactivas</a></li>
+  <li><a href="#ejemplo-desarrollo-de-una-aplicación-interactiva-para-el-atlas-de-desarrollo-humano-cantonal-2024" id="toc-ejemplo-desarrollo-de-una-aplicación-interactiva-para-el-atlas-de-desarrollo-humano-cantonal-2024" class="nav-link" data-scroll-target="#ejemplo-desarrollo-de-una-aplicación-interactiva-para-el-atlas-de-desarrollo-humano-cantonal-2024"><span class="header-section-number">16.9</span> Ejemplo: Desarrollo de una aplicación interactiva para el Atlas de Desarrollo Humano Cantonal 2024</a>
+  <ul class="collapse">
+  <li><a href="#creación-del-proyecto-y-del-archivo-principal-de-la-aplicación" id="toc-creación-del-proyecto-y-del-archivo-principal-de-la-aplicación" class="nav-link" data-scroll-target="#creación-del-proyecto-y-del-archivo-principal-de-la-aplicación"><span class="header-section-number">16.9.1</span> Creación del proyecto y del archivo principal de la aplicación</a></li>
+  <li><a href="#creación-de-los-bloques-iniciales-de-código" id="toc-creación-de-los-bloques-iniciales-de-código" class="nav-link" data-scroll-target="#creación-de-los-bloques-iniciales-de-código"><span class="header-section-number">16.9.2</span> Creación de los bloques iniciales de código</a></li>
+  <li><a href="#creación-de-la-barra-lateral-con-widgets-para-filtros" id="toc-creación-de-la-barra-lateral-con-widgets-para-filtros" class="nav-link" data-scroll-target="#creación-de-la-barra-lateral-con-widgets-para-filtros"><span class="header-section-number">16.9.3</span> Creación de la barra lateral con <em>widgets</em> para filtros</a></li>
+  <li><a href="#creación-de-los-controles-de-salida" id="toc-creación-de-los-controles-de-salida" class="nav-link" data-scroll-target="#creación-de-los-controles-de-salida"><span class="header-section-number">16.9.4</span> Creación de los controles de salida</a></li>
+  <li><a href="#creación-de-una-función-reactiva-para-filtrar-los-datos" id="toc-creación-de-una-función-reactiva-para-filtrar-los-datos" class="nav-link" data-scroll-target="#creación-de-una-función-reactiva-para-filtrar-los-datos"><span class="header-section-number">16.9.5</span> Creación de una función reactiva para filtrar los datos</a></li>
+  <li><a href="#creación-de-funciones-para-generar-las-salidas" id="toc-creación-de-funciones-para-generar-las-salidas" class="nav-link" data-scroll-target="#creación-de-funciones-para-generar-las-salidas"><span class="header-section-number">16.9.6</span> Creación de funciones para generar las salidas</a></li>
+  </ul></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">16.10</span> Ejercicios</a></li>
+  <li><a href="#recursos-de-interés" id="toc-recursos-de-interés" class="nav-link" data-scroll-target="#recursos-de-interés"><span class="header-section-number">16.11</span> Recursos de interés</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./15-tableros-control.html">VII Visualización avanzada de datos</a></li><li class="breadcrumb-item"><a href="./16-shiny.html"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">shiny - desarrollo de aplicaciones web interactivas</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">shiny - desarrollo de aplicaciones web interactivas</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="resumen" class="level2" data-number="16.1">
+<h2 data-number="16.1" class="anchored" data-anchor-id="resumen"><span class="header-section-number">16.1</span> Resumen</h2>
+<p>Shiny es un paquete de R que facilita el desarrollo de aplicaciones web interactivas. Las aplicaciones shiny se componen de una interfaz de usuario y de un servidor. En la interfaz de usuario, este puede realizar operaciones como filtros, búsquedas y ordenamientos de datos, entre otras. El servidor se encarga de procesar los datos de acuerdo con los parámetros especificados y de retornar los resultados a la interfaz de usuario.</p>
+<p>Además de los bloques de código en R para la interfaz de usuario y el servidor, shiny proporciona bloques para compartir código y datos. También para personalizar la interfaz de usuario.</p>
+<p>Las funciones reactivas de shiny se ejecutan cada vez que el usuario cambia los controles de la interfaz, lo que permite a las aplicaciones shiny responder dinámicamente a las entradas del usuario.</p>
+</section>
+<section id="trabajo-previo" class="level2" data-number="16.2">
+<h2 data-number="16.2" class="anchored" data-anchor-id="trabajo-previo"><span class="header-section-number">16.2</span> Trabajo previo</h2>
+<section id="lecturas" class="level3" data-number="16.2.1">
+<h3 data-number="16.2.1" class="anchored" data-anchor-id="lecturas"><span class="header-section-number">16.2.1</span> Lecturas</h3>
+<p>Quarto - Dashboards with Shiny for R. (s.f.). Quarto. Recuperado el 1 de marzo de 2024, de <a href="https://quarto.org/docs/dashboards/interactivity/shiny-r.html">https://quarto.org/docs/dashboards/interactivity/shiny-r.html</a></p>
+</section>
+<section id="instalación-y-carga-de-paquetes" class="level3" data-number="16.2.2">
+<h3 data-number="16.2.2" class="anchored" data-anchor-id="instalación-y-carga-de-paquetes"><span class="header-section-number">16.2.2</span> Instalación y carga de paquetes</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalación de shiny</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"shiny"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalación de rsconnect</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"rsconnect"</span>)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de paquetes</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsconnect)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+</section>
+<section id="introducción" class="level2" data-number="16.3">
+<h2 data-number="16.3" class="anchored" data-anchor-id="introducción"><span class="header-section-number">16.3</span> Introducción</h2>
+<p>En una aplicación interactiva, el usuario puede configurar las salidas, usualmente mediante una interfaz que le permite realizar operaciones como filtros, búsquedas y ordenamientos, entre otras. <a href="https://shiny.posit.co/">Shiny</a> es un paquete de R que facilita el desarrollo de este tipo de aplicaciones.</p>
+<p>Las aplicaciones shiny requieren un <a href="https://www.rstudio.com/products/shiny/shiny-server/">servidor</a>, el cual es un proceso que puede alojarse en cualquier computador habilitado para ejecutar código en R (o Python) como, por ejemplo, la estación de trabajo del programador (esta opción se usa principalmente para efectos de desarrollo y pruebas), un servidor ubicado en la red de una organización o un servidor en la nube (ej. <a href="https://www.shinyapps.io/">shinyapps.io</a>, <a href="https://posit.co/products/enterprise/connect/">Posit Connect</a>, <a href="https://posit.co/products/cloud/cloud/">Posit Cloud</a>).</p>
+<p>Para ejemplos de aplicaciones shiny, puede visitar la siguiente <a href="https://shiny.rstudio.com/gallery/">galería</a>.</p>
+</section>
+<section id="arquitectura" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="arquitectura"><span class="header-section-number">16.4</span> Arquitectura</h2>
+<p>Una aplicación shiny tiene dos componentes principales:</p>
+<ol type="1">
+<li><strong>Interfaz de usuario</strong>: despliega controles de entrada y salida (<em>widgets</em>), los cuales eventualente convierte a <a href="https://es.wikipedia.org/wiki/HTML">Lenguaje de Marcado de Hipertexto (HTML)</a>.
+<ul>
+<li><a href="https://shiny.rstudio.com/gallery/widget-gallery.html"><strong>Widgets de entrada</strong></a>: campos de texto, listas de selección, botones de radio, etc.</li>
+<li><strong>Widgets de salida</strong>: tablas, gráficos, mapas, etc. Muchos de estos controles están incluídos en los paquetes que generan los diferentes tipos de salidas (ej. DT, plotly, leaflet).</li>
+</ul></li>
+<li><strong>Servidor</strong>: es un proceso que recibe las entradas y realiza el procesamiento necesario para generar las salidas y retornar los resultados a la interfaz de usuario.</li>
+</ol>
+<p>Para más información sobre la arquitectura de aplicaciones shiny, se recomienda leer <a href="https://www.r-bloggers.com/2021/04/the-anatomy-of-a-shiny-application/">The Anatomy of a Shiny Application</a>.</p>
+</section>
+<section id="ejemplo-de-aplicación-básica" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="ejemplo-de-aplicación-básica"><span class="header-section-number">16.5</span> Ejemplo de aplicación básica</h2>
+<p>El siguiente documento Quarto contiene una aplicación shiny con un tablero de control interactivo para el conjunto de datos <a href="https://ggplot2.tidyverse.org/reference/diamonds.html">diamonds</a>. Esta aplicación se incluye como ejemplo en:</p>
+<p><a href="https://quarto.org/docs/dashboards/interactivity/shiny-r.html">https://quarto.org/docs/dashboards/interactivity/shiny-r.html</a>.</p>
+<p>Puede acceder a la aplicación ejecutable en:</p>
+<p><a href="https://mfvargas.shinyapps.io/2024-i-tablero-interactivo-diamantes/">https://mfvargas.shinyapps.io/2024-i-tablero-interactivo-diamantes/</a>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Diamonds Explorer"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> "Barkamian Analytics"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> dashboard</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="an">server:</span><span class="co"> shiny</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: setup</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> diamonds</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu"># {.sidebar}</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">'sampleSize'</span>, <span class="st">'Sample Size'</span>, </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span><span class="fu">nrow</span>(dataset),</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">value=</span><span class="fu">min</span>(<span class="dv">1000</span>, <span class="fu">nrow</span>(dataset)), </span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">step=</span><span class="dv">500</span>, <span class="at">round=</span><span class="dv">0</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">br</span>()</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="fu">checkboxInput</span>(<span class="st">'jitter'</span>, <span class="st">'Jitter'</span>)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="fu">checkboxInput</span>(<span class="st">'smooth'</span>, <span class="st">'Smooth'</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'x'</span>, <span class="st">'X'</span>, <span class="fu">names</span>(dataset)) </span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'y'</span>, <span class="st">'Y'</span>, <span class="fu">names</span>(dataset), <span class="fu">names</span>(dataset)[[<span class="dv">2</span>]])</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'color'</span>, <span class="st">'Color'</span>, <span class="fu">c</span>(<span class="st">'None'</span>, <span class="fu">names</span>(dataset)))</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'facet_row'</span>, <span class="st">'Facet Row'</span>,</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">None=</span><span class="st">'.'</span>, <span class="fu">names</span>(diamonds[<span class="fu">sapply</span>(diamonds, is.factor)])))</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'facet_col'</span>, <span class="st">'Facet Column'</span>,</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">None=</span><span class="st">'.'</span>, <span class="fu">names</span>(diamonds[<span class="fu">sapply</span>(diamonds, is.factor)])))</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="fu"># Plot</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="fu">plotOutput</span>(<span class="st">'plot'</span>)</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="fu">tableOutput</span>(<span class="st">'data'</span>)</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: server</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>dataset <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  diamonds[<span class="fu">sample</span>(<span class="fu">nrow</span>(diamonds), input<span class="sc">$</span>sampleSize),]</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    <span class="fu">dataset</span>(), </span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes_string</span>(<span class="at">x=</span>input<span class="sc">$</span>x, <span class="at">y=</span>input<span class="sc">$</span>y)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>color <span class="sc">!=</span> <span class="st">'None'</span>)</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">aes_string</span>(<span class="at">color=</span>input<span class="sc">$</span>color)</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>  facets <span class="ot">&lt;-</span> <span class="fu">paste</span>(input<span class="sc">$</span>facet_row, <span class="st">'~'</span>, input<span class="sc">$</span>facet_col)</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (facets <span class="sc">!=</span> <span class="st">'. ~ .'</span>)</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">facet_grid</span>(facets)</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>jitter)</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_jitter</span>()</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>smooth)</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> p <span class="sc">+</span> <span class="fu">geom_smooth</span>()</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>  p</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>data <span class="ot">&lt;-</span> <span class="fu">renderTable</span>({</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">dataset</span>()</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Es de vital importancia comprender que el último bloque de código (con la opción <code>#| context: server</code>) se ejecuta en una sesión separada de R. Esto implica que no es posible, en principio, acceder desde ese bloque variables definidas en otros bloques, ni viceversa. Sin embargo, existen varias estrategias para compartir código, como las que se detallan en <a href="https://quarto.org/docs/interactive/shiny/execution.html#sharing-code">Sharing Code</a> y también en las secciones siguientes de este documento.</p>
+<p>Una forma en la que la interfaz de usuario y el servidor pueden comunicarse, es a través de las listas <code>input</code> y <code>output</code>.</p>
+<ul>
+<li><code>input</code> contiene la lista de widgets de entrada (listas de selección, campos de entrada de texto, botones de radio, etc.). Cada uno de estos widgets tiene un <code>inputId</code> único. En el ejemplo, “sampleSize” es el inputId del widget tipo sliderInput. Se referencia como <code>input$sampleSize</code> en el bloque del servidor.</li>
+<li><code>output</code> es una lista de componentes que se crean o modifican en el servidor (tablas, gráficos, mapas, etc). y que luego se envían a la interfaz de usuario para su visualización. Para crear o modificar un elemento de <code>output</code>, se utiliza una función <code>render*</code>, y para mostrarlo en la interfaz de usuario, se utiliza una función <code>*Output</code>. En el ejemplo, <code>output$plot</code> es un gráfico que se crea con la función <code>renderPlot()</code> en función de los valores de los widgets de entrada.</li>
+</ul>
+<p>Nótese que hay diferencias importantes entre este documento y otros documentos Quarto:</p>
+<ol type="1">
+<li><p>La opción <code>server: shiny</code>: en la sección YAML, la cual le indica a Quarto que debe iniciar un servidor Shiny.</p></li>
+<li><p>La opción <code>context: server</code>: en el último bloque de código, la cual indica que ese bloque debe ejecutarse en el servidor.</p></li>
+</ol>
+<p>Existen otros posibles valores de <code>context</code> para los bloques de código en aplicaciones shiny, los cuales permiten compartir código y datos.</p>
+</section>
+<section id="bloques-para-compartir-código-y-datos" class="level2" data-number="16.6">
+<h2 data-number="16.6" class="anchored" data-anchor-id="bloques-para-compartir-código-y-datos"><span class="header-section-number">16.6</span> Bloques para compartir código y datos</h2>
+<p>Como puede apreciarse en el ejemplo anterior, las aplicaciones shiny pueden contener bloques de código que se ejecutan en tiempo de despliegue (<em>rendering</em>) de la interfaz de usuario y también bloques que se ejecutan en el servidor en respuesta a las acciones del usuario y a los cambios en los valores de entrada. Estos tipos de bloques se identifican respectivamente mediante las opciones <code>context: render</code> (valor por defecto de <code>context</code>) y <code>context: server</code>.</p>
+<p>Existen también otros tipos de bloques, los cuales permiten compartir código y datos.</p>
+<section id="context-setup" class="level3" data-number="16.6.1">
+<h3 data-number="16.6.1" class="anchored" data-anchor-id="context-setup"><span class="header-section-number">16.6.1</span> <code>context: setup</code></h3>
+<p>El código de este tipo de bloques se ejecuta tanto en el contexto de la interfaz de usuario como del servidor. Puede usarse para operaciones que se ejecutan al inicio de una aplicación, como la carga de paquetes.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: inicio</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: setup</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de paquetes</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="context-data" class="level3" data-number="16.6.2">
+<h3 data-number="16.6.2" class="anchored" data-anchor-id="context-data"><span class="header-section-number">16.6.2</span> <code>context: data</code></h3>
+<p>Se utiliza para cargar datos que deben compartirse entre todos los bloques de código. Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: lectura-datos</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: data</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Lectura de archivo CSV</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>felidos <span class="ot">&lt;-</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_read</span>(</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">dsn =</span> <span class="st">"felidos.csv"</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="configuración-de-la-interfaz-de-usuario" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="configuración-de-la-interfaz-de-usuario"><span class="header-section-number">16.7</span> Configuración de la interfaz de usuario</h2>
+<section id="barras-laterales" class="level3" data-number="16.7.1">
+<h3 data-number="16.7.1" class="anchored" data-anchor-id="barras-laterales"><span class="header-section-number">16.7.1</span> Barras laterales</h3>
+<p>Las <a href="https://quarto.org/docs/dashboards/inputs.html#sidebars">barras laterales o <em>sidebars</em></a> se utilizan generalmente para colocar widgets de entrada. Para incluir una barra lateral, se agrega la clase <code>.sidebar</code> a un encabezado de nivel 2. Por ejemplo:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># {.sidebar}</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(<span class="st">'sampleSize'</span>, <span class="st">'Sample Size'</span>, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">min=</span><span class="dv">1</span>, <span class="at">max=</span><span class="fu">nrow</span>(dataset),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">value=</span><span class="fu">min</span>(<span class="dv">1000</span>, <span class="fu">nrow</span>(dataset)), </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">step=</span><span class="dv">500</span>, <span class="at">round=</span><span class="dv">0</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">br</span>()</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">checkboxInput</span>(<span class="st">'jitter'</span>, <span class="st">'Jitter'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">checkboxInput</span>(<span class="st">'smooth'</span>, <span class="st">'Smooth'</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'x'</span>, <span class="st">'X'</span>, <span class="fu">names</span>(dataset)) </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'y'</span>, <span class="st">'Y'</span>, <span class="fu">names</span>(dataset), <span class="fu">names</span>(dataset)[[<span class="dv">2</span>]])</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'color'</span>, <span class="st">'Color'</span>, <span class="fu">c</span>(<span class="st">'None'</span>, <span class="fu">names</span>(dataset)))</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'facet_row'</span>, <span class="st">'Facet Row'</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">None=</span><span class="st">'.'</span>, <span class="fu">names</span>(diamonds[<span class="fu">sapply</span>(diamonds, is.factor)])))</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(<span class="st">'facet_col'</span>, <span class="st">'Facet Column'</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="at">None=</span><span class="st">'.'</span>, <span class="fu">names</span>(diamonds[<span class="fu">sapply</span>(diamonds, is.factor)])))</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Puede consultar sobre más recursos para configurar el tablero en <a href="https://quarto.org/docs/dashboards/inputs.html">https://quarto.org/docs/dashboards/inputs.html</a>.</p>
+</section>
+</section>
+<section id="funciones-reactivas" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="funciones-reactivas"><span class="header-section-number">16.8</span> Funciones reactivas</h2>
+<p>Son funciones especiales que se ejecutan cada vez que cambia uno de los datos que utiliza como entrada, como un widget de la interfaz de usuario. En el siguiente bloque de código se define una función reactiva que utiliza el valor especificado por el usuario en una lista de selección para filtrar un conjunto de datos.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Función reactiva para filtrar los registros de presencia de félidos</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># de acuerdo con el valor de una lista de selección</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>filtrar_felidos <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Valor inicial del objeto que va a retornarse</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  felidos_filtrados <span class="ot">&lt;-</span> felidos</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>especie <span class="sc">!=</span> <span class="st">"Todas"</span>) {</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    felidos_filtrados <span class="ot">&lt;-</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      felidos_filtrados <span class="sc">|&gt;</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(species <span class="sc">==</span> input<span class="sc">$</span>especie)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(felidos_filtrados)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>})  </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Las funciones reactivas permiten a las aplicaciones shiny responder dinámicamente a las entradas del usuario.</p>
+</section>
+<section id="ejemplo-desarrollo-de-una-aplicación-interactiva-para-el-atlas-de-desarrollo-humano-cantonal-2024" class="level2" data-number="16.9">
+<h2 data-number="16.9" class="anchored" data-anchor-id="ejemplo-desarrollo-de-una-aplicación-interactiva-para-el-atlas-de-desarrollo-humano-cantonal-2024"><span class="header-section-number">16.9</span> Ejemplo: Desarrollo de una aplicación interactiva para el Atlas de Desarrollo Humano Cantonal 2024</h2>
+<p>A manera de ejemplo, se presenta el desarrollo, paso por paso, de una aplicación interactiva para el <a href="https://www.undp.org/es/costa-rica/publicaciones/atlas-de-desarrollo-humano-cantonal-2024">Atlas de Desarrollo Humano Cantonal 2024</a>.</p>
+<ul>
+<li><a href="https://mfvargas.shinyapps.io/aplicacion-interactiva-atlas-desarrollo-humano/">Aplicación publicada en shinyapps.io</a></li>
+<li><a href="https://github.com/gf0604-procesamientodatosgeograficos/aplicacion-interactiva-atlas-desarrollo-humano">Código fuente</a></li>
+</ul>
+<p>En el capítulo anterior de este curso, se desarrolló un <a href="https://gf0604-procesamientodatosgeograficos.github.io/2025-i-atlas-desarrollo-humano/">tablero de control</a> sobre el mismo conjunto de datos. La aplicación interactiva le permite al usuario visualizar y explorar mayores cantidades de datos que en el tablero de control y también especificar filtros.</p>
+<p>Esta aplicación interactiva cuenta con controles (<em>widgets</em>) para filtrar los datos por:</p>
+<ul>
+<li>Provincia.</li>
+<li>Año.</li>
+</ul>
+<p>Los datos se presentan en tres salidas:</p>
+<ul>
+<li>Una tabla DT.</li>
+<li>Un gráfico plotly.</li>
+<li>Un mapa tmap.</li>
+</ul>
+<p>Para fines didácticos, el desarrollo se dividió en las siguientes secciones:</p>
+<ul>
+<li>Creación del proyecto y del archivo principal de la aplicación.</li>
+<li>Creación de los bloques iniciales de código.</li>
+<li>Creación de la barra lateral con <em>widgets</em> para filtros.</li>
+<li>Creación de los controles de salida.</li>
+<li>Creación de una función reactiva para filtrar los datos.</li>
+<li>Creación de funciones para generar las salidas.</li>
+</ul>
+<p>Seguidamente, se enumeran los pasos detallados de cada una de estas secciones.</p>
+<section id="creación-del-proyecto-y-del-archivo-principal-de-la-aplicación" class="level3" data-number="16.9.1">
+<h3 data-number="16.9.1" class="anchored" data-anchor-id="creación-del-proyecto-y-del-archivo-principal-de-la-aplicación"><span class="header-section-number">16.9.1</span> Creación del proyecto y del archivo principal de la aplicación</h3>
+<p><strong>1. Cree un proyecto en RStudio con un nombre apropiado de su elección (ej. <code>aplicacion-interactiva-atlas-desarrollo-humano</code>).</strong></p>
+<p><strong>2. Descargue y copie en el directorio de su proyecto los siguientes archivos de datos:</strong></p>
+<ul>
+<li><a href="https://github.com/gf0604-procesamientodatosgeograficos/2025-i-atlas-desarrollo-humano/blob/main/datos/cantones-simplificados.gpkg"><code>cantones-simplificados.gpkg</code></a> (polígonos de cantones de Costa Rica con geometrías simplificadas en formato GeoPackage).</li>
+<li><a href="https://github.com/gf0604-procesamientodatosgeograficos/2025-i-atlas-desarrollo-humano/blob/main/datos/indice_de_desarrollo_humano.xlsx"><code>indice_de_desarrollo_humano.xlsx</code></a> (datos del índice de desarrollo humano, por cantón y por año, en formato Microsoft Excel).</li>
+</ul>
+<p><strong>3. En el nuevo proyecto, cree un documento Quarto con un nombre de su elección (ej. <code>aplicacion-interactiva-atlas-desarrollo-humano.qmd</code>).</strong> Puede borrar el contenido que RStudio genera automáticamente en el documento.</p>
+</section>
+<section id="creación-de-los-bloques-iniciales-de-código" class="level3" data-number="16.9.2">
+<h3 data-number="16.9.2" class="anchored" data-anchor-id="creación-de-los-bloques-iniciales-de-código"><span class="header-section-number">16.9.2</span> Creación de los bloques iniciales de código</h3>
+<p><strong>4. Agregue un encabezado en el nuevo documento. Asegúrese de incluir las opciones <code>format: dashboard</code> y <code>server: shiny</code>. Por ejemplo:</strong></p>
+<pre><code>---
+title: "Atlas de Desarrollo Humano Cantonal"
+format: dashboard
+server: shiny
+---</code></pre>
+<p><strong>5. Agregue un bloque de código en R para cargar las bibliotecas. Asegúrese de incluir la opción <code>context: setup</code>.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-bibliotecas</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: setup</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de bibliotecas</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(terra)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Especificar modo interactivo para tmap</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"view"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Todas las bibliotecas deben haber sido instaladas previamente con la función <code>install.packages()</code>. En este bloque se incluye también el llamado a la función <code>tmap_mode("view")</code> para especificar el modo interactivo de tmap.</p>
+<p><strong>6. Agregue un bloque de código en R para cargar los datos y realizar cualquier transformación necesaria (filtrados, ordenamientos, uniones, etc.). Asegúrese de incluir la opción <code>context: data</code>.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-datos</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: data</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># CANTONES</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar datos de cantones</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>cantones <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"cantones-simplificados.gpkg"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># ÍNDICE DE DESARROLLO HUMANO (IDH)</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Cargar datos del IDH</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>idh <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"indice_de_desarrollo_humano.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"IDH"</span>)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear la columna CÓDIGO_CANTÓN (el mismo nombre que tiene en cantones)</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co"># y renombrar "Cantón" como "CANTÓN", para que quede en mayúscula como las otras</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>idh <span class="ot">&lt;-</span> </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  idh <span class="sc">|&gt;</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">CÓDIGO_CANTÓN</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">substr</span>(Cantón, <span class="dv">1</span>, <span class="dv">3</span>) <span class="sc">|&gt;</span> <span class="co"># toma los 3 primeros caracteres</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">as.integer</span>()            <span class="co"># los convierte a entero</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co"># UNIÓN DE CANTONES E ÍNDICES</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Crear unión de cantones e IDH</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>datos_anchos <span class="ot">&lt;-</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>  cantones <span class="sc">|&gt;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>    idh,</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">"CÓDIGO_CANTÓN"</span> <span class="co"># llave para realizar la unión</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co"># "Alargar" el dataframe al poner todas las columnas de años en una sola </span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>datos <span class="ot">&lt;-</span> datos_anchos <span class="sc">|&gt;</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols      =</span> <span class="st">`</span><span class="at">2010</span><span class="st">`</span><span class="sc">:</span><span class="st">`</span><span class="at">2022</span><span class="st">`</span>,   <span class="co"># columnas a “alargar”</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to  =</span> <span class="st">"ANIO"</span>,          <span class="co"># nueva columna con los nombres (años)</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"IDH"</span>            <span class="co"># nueva columna con los valores (IDH)</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">ANIO =</span> <span class="fu">as.integer</span>(ANIO)) <span class="co"># opcional: convertir a número</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="creación-de-la-barra-lateral-con-widgets-para-filtros" class="level3" data-number="16.9.3">
+<h3 data-number="16.9.3" class="anchored" data-anchor-id="creación-de-la-barra-lateral-con-widgets-para-filtros"><span class="header-section-number">16.9.3</span> Creación de la barra lateral con <em>widgets</em> para filtros</h3>
+<p><strong>7. Agregue un encabezado Markdown para crear una barra lateral para los <em>widgets</em> de filtros de datos.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># {.sidebar}</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>8. Agregue un bloque de código en R para agregar una lista de selección (<code>selectInput()</code>) de provincia.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: selectinput-provincia</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lista ordenada de provincias con un elemento adicional = "Todas"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>lista_provincias <span class="ot">&lt;-</span> <span class="fu">unique</span>(datos<span class="sc">$</span>PROVINCIA)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>lista_provincias <span class="ot">&lt;-</span> <span class="fu">sort</span>(lista_provincias)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>lista_provincias <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Todas"</span>, lista_provincias)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Widget de lista de selección ("selectInput") de provincias</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId =</span> <span class="st">"provincia"</span>,      <span class="co"># identificador del widget</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"Provincia"</span>,        <span class="co"># etiqueta de la lista (la que ve el usuario)</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">choices =</span> lista_provincias, <span class="co"># lista de opciones para seleccionar de la lista</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="st">"Todas"</span>          <span class="co"># opción seleccionada por defecto</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Note el argumento <code>inputId = "provincia"</code> de la función <code>selectInput()</code>. Este es el identificador de este widget y luego se utilizará en las funciones de filtrado.</p>
+<p><strong>9. Agregue un bloque de código en R para agregar un widget deslizador de selección (<code>sliderInput()</code>) de año.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: slider-anio</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Año mínimo y año máximo</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>anio_minimo <span class="ot">&lt;-</span> <span class="fu">min</span>(datos<span class="sc">$</span>ANIO)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>anio_maximo <span class="ot">&lt;-</span> <span class="fu">max</span>(datos<span class="sc">$</span>ANIO)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Widget deslizador de selección ("sliderInput") de año</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId =</span> <span class="st">"anio"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">label =</span> <span class="st">"Año"</span>,</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">min =</span> anio_minimo,   <span class="co"># año mínimo permitido</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">max =</span> anio_maximo,   <span class="co"># año máximo permitido</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="fu">round</span>((anio_minimo <span class="sc">+</span> anio_maximo) <span class="sc">/</span> <span class="dv">2</span>), <span class="co"># año inicial seleccionado</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">step    =</span> <span class="dv">1</span>,    <span class="co"># solo incrementos de un año (evita decimales)</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">round   =</span> <span class="cn">TRUE</span>, <span class="co"># redondea al entero más cercano</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep     =</span> <span class="st">""</span>    <span class="co"># sin separador de miles</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Note el argumento <code>inputId = "anio"</code> de la función <code>sliderInput()</code>. Este es el identificador de este widget y luego se utilizará en las funciones de filtrado.</p>
+</section>
+<section id="creación-de-los-controles-de-salida" class="level3" data-number="16.9.4">
+<h3 data-number="16.9.4" class="anchored" data-anchor-id="creación-de-los-controles-de-salida"><span class="header-section-number">16.9.4</span> Creación de los controles de salida</h3>
+<p><strong>10. Agregue un encabezado Markdown para crear una página y un bloque de código en R para crear el control de salida de una tabla DT.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Tabla</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-tabla</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Tabla"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Tabla</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="fu">dataTableOutput</span>(</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">outputId =</span>  <span class="st">"tabla"</span> <span class="co"># identificador del widget</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Note el argumento <code>outputId = "tabla"</code> de la función <code>dataTableOutput()</code>. Este es el identificador de este control.</p>
+<p><strong>11. Agregue un encabezado Markdown para crear una página y un bloque de código en R para crear el control de salida de un gráfico plotly.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Gráfico</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-grafico</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Gráfico"</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Gráfico</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plotlyOutput</span>(</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">outputId =</span>  <span class="st">"grafico"</span> <span class="co"># identificador del widget</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Note el argumento <code>outputId = "grafico"</code> de la función <code>plotlyOutput()</code>. Este es el identificador de este control.</p>
+<p><strong>12. Agregue un encabezado Markdown para crear una página y un bloque de código en R para crear el control de salida de un mapa tmap.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Mapa</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-mapa</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Mapa"</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Mapa</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tmapOutput</span>(</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">outputId =</span>  <span class="st">"mapa"</span> <span class="co"># identificador del widget</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Note el argumento <code>outputId = "mapa"</code> de la función <code>tmapOutput()</code>. Este es el identificador de este control.</p>
+</section>
+<section id="creación-de-una-función-reactiva-para-filtrar-los-datos" class="level3" data-number="16.9.5">
+<h3 data-number="16.9.5" class="anchored" data-anchor-id="creación-de-una-función-reactiva-para-filtrar-los-datos"><span class="header-section-number">16.9.5</span> Creación de una función reactiva para filtrar los datos</h3>
+<p><strong>13. Agregue un bloque de código en R para definir una función reactiva que filtre los datos. Asegúrese de incluir la opción <code>context: server</code>.</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: servidor</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: server</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Función reactiva para filtrar los datos</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># de acuerdo con los filtros especificados por el usuario</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>filtrar_datos <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Para comenzar, se toman los datos sin filtrar</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  datos_filtrados <span class="ot">&lt;-</span> datos</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtro por provincia</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>provincia <span class="sc">!=</span> <span class="st">"Todas"</span>) {</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>    datos_filtrados <span class="ot">&lt;-</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>      datos_filtrados <span class="sc">|&gt;</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(PROVINCIA <span class="sc">==</span> input<span class="sc">$</span>provincia)</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtro por año</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  datos_filtrados <span class="ot">&lt;-</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>    datos_filtrados <span class="sc">|&gt;</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(ANIO <span class="sc">==</span> input<span class="sc">$</span>anio)</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(datos_filtrados)</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>}) </span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Note el uso de los identificadores de los widgets de entrada: <code>input$provincia</code> e <code>input$anio</code>.</p>
+</section>
+<section id="creación-de-funciones-para-generar-las-salidas" class="level3" data-number="16.9.6">
+<h3 data-number="16.9.6" class="anchored" data-anchor-id="creación-de-funciones-para-generar-las-salidas"><span class="header-section-number">16.9.6</span> Creación de funciones para generar las salidas</h3>
+<p><strong>14. En el mismo bloque de código de la función reactiva, defina una función para generar la tabla.</strong></p>
+<pre class="{r}"><code>output$tabla &lt;- renderDataTable({
+  # Filtrado del conjunto de datos
+  datos &lt;- filtrar_datos()
+  
+  # Definir la tabla
+  tabla &lt;- 
+    datos |&gt;
+      st_drop_geometry() |&gt;
+      dplyr::select(PROVINCIA, CANTÓN, ANIO, IDH) |&gt;
+      mutate(IDH = round(IDH, 3)) |&gt;
+      arrange(desc(IDH)) |&gt;                 
+      datatable(
+        rownames = FALSE,
+        colnames = c("Provincia", "Cantón", "Año", "IDH"),
+        options = list(                 
+          pageLength = 8,
+          language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+        )    
+      )
+  
+  # Mostrar la tabla
+  tabla
+})</code></pre>
+<pre><code>
+**15. En el mismo bloque de código de la función reactiva, defina una función para generar el gráfico.**
+
+```{r}
+output$grafico &lt;- renderPlotly({
+  # Filtrado del conjunto de datos
+  datos &lt;- filtrar_datos()
+  
+  # Definir el gráfico ggplot2
+  grafico_ggplot2 &lt;-
+    datos |&gt;
+    slice_head(n = 15) |&gt;
+    ggplot(aes(x = reorder(CANTÓN, -IDH), y = IDH)) +
+    geom_col(
+      aes(
+        text = paste0(
+          "Cantón: ", CANTÓN, "\n",
+          "IDH: ", round(IDH, 3)
+        )
+      ),
+      fill = "#1f77b4"
+    ) +
+    xlab("Cantón") +
+    ylab("IDH") +
+    theme_classic() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) # etiquetas a 45°
+  
+  # Mostrar el gráfico plotly
+  ggplotly(grafico_ggplot2, tooltip = "text") |&gt; 
+    config(locale = 'es')
+})
+```</code></pre>
+<p>Note como el valor que retorna la función <code>renderPlotly()</code> es asignado a <code>output$grafico</code>, el identificador del control de salida del gráfico.</p>
+<p><strong>16. En el mismo bloque de código de la función reactiva, defina una función para generar el mapa.</strong></p>
+<pre class="{r}"><code>output$mapa &lt;- renderTmap({
+  # Filtrado del conjunto de datos
+  datos &lt;- filtrar_datos()
+  
+  # Definir y configurar el mapa
+  mapa &lt;-
+    tm_basemap(c("Esri.WorldGrayCanvas", "OpenStreetMap", "Esri.WorldImagery")) +
+    tm_shape(datos, name = "Cantones") +
+      tm_fill(
+        fill = "IDH",
+        fill.scale = tm_scale_intervals(
+        style  = "quantile",
+        values = "Blues"
+      ),
+      fill.legend = tm_legend(title = "IDH"),
+      id = "CANTÓN",
+      popup.vars  = c(
+        "IDH" = "IDH"
+      )
+    ) +
+    tm_borders(col = "black", lwd = 0.5) +
+    tm_scale_bar(position = c("left", "bottom"))
+  
+  # Mostrar el mapa
+  mapa
+})</code></pre>
+<p>````</p>
+<p>Note como el valor que retorna la función <code>renderTmap()</code> es asignado a <code>output$mapa</code>, el identificador del control de salida del mapa.</p>
+</section>
+</section>
+<section id="ejercicios" class="level2" data-number="16.10">
+<h2 data-number="16.10" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">16.10</span> Ejercicios</h2>
+<ol type="1">
+<li><p>Ejecute en su computadora el código del tablero de control sobre diamantes mostrado anteriormente.</p>
+<ol type="a">
+<li>Cree un proyecto en RStudio.</li>
+<li>Cree un documento Quarto.</li>
+<li>Copie en el nuevo documento el código de la aplicación.</li>
+<li>Ejecute el documento con el botón <code>Run Document</code>.</li>
+</ol></li>
+<li><p>Publique el tablero de control en shinyapps.io (puede consultar <a href="https://quarto.org/docs/interactive/shiny/running.html">Quarto - Running Documents</a> y <a href="https://www.youtube.com/watch?v=2QstfyGX4ZU">How to Deploy R Shiny App for Free on Shinyapps.io</a>).</p>
+<ol type="a">
+<li>Cree una cuenta en <a href="https://www.shinyapps.io/">shinyapps.io</a>.</li>
+<li>Obtenga su <em>token</em> de autenticación de shinyapps.io en <strong>Accounts - Tokens - Show- Show secret - Copy to clipboard</strong>.</li>
+<li>Ejecute la aplicación en su computadora y publíquela en shinyapps.io con el botón <strong>Publish</strong>. Elija la opción shinyapps.io e ingrese el <em>token</em> cuando se le solicite. Debe seleccionar todos los archivos requeridos para que su aplicación funciones (archivos .qmd, archivos .html, archivos de datos, etc).</li>
+</ol></li>
+<li><p>Ejecute en su computadora y luego publique en shinyapps.io la aplicación <a href="https://quarto.org/docs/interactive/shiny/#custom-layout">Iris K-Means Clustering</a>.</p></li>
+<li><p>Estudie el resto de los ejemplos en <a href="https://quarto.org/docs/interactive/shiny/#examples">Quarto - Shiny - Examples</a>.</p></li>
+<li><p>Analice el siguiente tablero de control sobre datos de mamíferos:</p>
+<ul>
+<li>Código fuente: <a href="https://github.com/gf0604-procesamientodatosgeograficos/2025-i-tablero-interactivo-mamiferos">https://github.com/gf0604-procesamientodatosgeograficos/2025-i-tablero-interactivo-mamiferos</a></li>
+<li>Aplicación ejecutable: <a href="https://mfvargas.shinyapps.io/tablero-interactivo-mamiferos/">https://mfvargas.shinyapps.io/tablero-interactivo-mamiferos/</a></li>
+</ul>
+<ol type="a">
+<li>Agregue un gráfico y un mapa al tablero de control.</li>
+</ol></li>
+</ol>
+</section>
+<section id="recursos-de-interés" class="level2" data-number="16.11">
+<h2 data-number="16.11" class="anchored" data-anchor-id="recursos-de-interés"><span class="header-section-number">16.11</span> Recursos de interés</h2>
+<p>Quarto - Running Documents. (s. f.). Recuperado 20 de noviembre de 2022, de <a href="https://quarto.org/docs/interactive/shiny/running.html">https://quarto.org/docs/interactive/shiny/running.html</a></p>
+<p>Shiny. (s. f.). Recuperado 20 de noviembre de 2022, de <a href="https://shiny.rstudio.com/">https://shiny.rstudio.com/</a></p>
+<p>Shiny - Gallery. (s. f.). Recuperado 20 de noviembre de 2022, de <a href="https://shiny.rstudio.com/gallery/">https://shiny.rstudio.com/gallery/</a></p>
+<p>The Anatomy of a Shiny Application | R-bloggers. (2021). Recuperado 21 de noviembre de 2022, de <a href="https://www.r-bloggers.com/2021/04/the-anatomy-of-a-shiny-application/">https://www.r-bloggers.com/2021/04/the-anatomy-of-a-shiny-application/</a></p>
+<p>1littlecoder. (2020). How to Deploy R Shiny App for Free on Shinyapps.io. <a href="https://www.youtube.com/watch?v=2QstfyGX4ZU">https://www.youtube.com/watch?v=2QstfyGX4ZU</a></p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiado");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiado");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./15-tableros-control.html" class="pagination-link" aria-label="Tableros de control">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Tableros de control</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
