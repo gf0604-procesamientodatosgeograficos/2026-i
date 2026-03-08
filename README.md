@@ -13,7 +13,7 @@ docker build -t gf0604-2026-i .
 
 docker run -d --name gf0604-2026-i \
   -p 8787:8787 \
-  -v ~/gf0604-procesamientodatosgeograficos/2026-i/github:/home/rstudio \
+  -v ~/gf0604-procesamientodatosgeograficos/2026-i/git/2026-i:/home/rstudio \
   --env-file ~/gf0604-2026-i.env \
   gf0604-2026-i
 ```

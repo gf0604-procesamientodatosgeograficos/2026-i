@@ -19,6 +19,8 @@
 ├── img/                  # Imágenes referenciadas en los capítulos
 ├── scratch/              # Archivos auxiliares (Scratch .sb3)
 ├── docs/                 # Salida renderizada (GitHub Pages)
+├── gf0604-...-g001.pdf   # Programa del curso (grupo 1)
+├── gf0604-...-g002.pdf   # Programa del curso (grupo 2)
 ├── referencias.bib       # Bibliografía BibTeX
 ├── apa-6th-edition.csl   # Estilo de citas
 └── 2026-i.Rproj          # Proyecto RStudio
@@ -37,7 +39,7 @@ docker build -t gf0604-2026-i .
 
 # Ejecutar contenedor Docker
 docker run -d --name gf0604-2026-i -p 8787:8787 \
-  -v ~/gf0604-procesamientodatosgeograficos/2026-i/github:/home/rstudio \
+  -v ~/gf0604-procesamientodatosgeograficos/2026-i/git/2026-i:/home/rstudio \
   --env-file ~/gf0604-2026-i.env gf0604-2026-i
 ```
 
