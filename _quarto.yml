@@ -17,32 +17,6 @@ book:
       chapters:
         - 01-introduccion-programacion-computadoras.qmd
         - 02-introduccion-ciencia-datos.qmd
-    - part: "II El lenguaje de programación R"
-      chapters:
-        - 03-r.qmd
-    - part: "III Herramientas para investigación reproducible y desarrollo colaborativo"
-      chapters:
-        - 04-reproducibilidad.qmd
-        - 05-markdown.qmd
-        - 06-git.qmd
-        - 07-quarto.qmd
-    - part: "IV La colección de paquetes Tidyverse para ciencia de datos"
-      chapters:
-        - 08-tidyverse.qmd
-        - 09-dplyr.qmd
-    - part: "V Graficación estadística en R"
-      chapters:
-        - 10-ggplot2-plotly.qmd
-    - part: "VI El ecosistema espacial de R"
-      chapters:
-        - 11-introduccion-manejo-datos-geoespaciales.qmd
-        - 12-operaciones-datos-atributos.qmd
-        - 13-operaciones-datos-espaciales.qmd
-        - 14-operaciones-datos-geometrias.qmd
-    - part: "VII Visualización avanzada de datos"
-      chapters:
-        - 15-tableros-control.qmd
-        - 16-shiny.qmd
 bibliography: referencias.bib
 csl: apa-6th-edition.csl
 
