@@ -6,7 +6,7 @@ En este capítulo se explica la característica principal de las computadoras: s
 
 Una computadora es una máquina que ejecuta secuencias de instrucciones. Estas secuencias se denominan programas. La capacidad que tienen las computadoras de ser programadas permite modificar su funcionamiento sin necesidad de alterar sus componentes físicos, por lo que pueden ayudar a resolver una gran cantidad de problemas. Como paso previo a la elaboración de un programa, se acostumbra especificar la secuencia de pasos que lo componen en un algoritmo, el cual se expresa en lenguaje natural o en un diagrama. Los algoritmos y los programas reciben datos de entrada, los procesan y generan salidas. 
 
-Las computadoras modernas están construídas con base en circuitos integrados, también llamados *chips* o *microchips*. Los circuitos integrados procesan información digital (que usa valores discretos), la cual generalmente es binaria (i.e. de dos valores). Los circuitos integrados de una computadora procesan dos estados correspondientes a dos niveles de tensión eléctrica: alto y bajo. Estos estados se representan con 0 y 1. Esto facilita la aplicación de la teoría de la información y del álgebra *booleana*.
+Las computadoras modernas están construidas con base en circuitos integrados, también llamados *chips* o *microchips*. Los circuitos integrados procesan información digital (que usa valores discretos), la cual generalmente es binaria (i.e. de dos valores). Los circuitos integrados de una computadora procesan dos estados correspondientes a dos niveles de tensión eléctrica: alto y bajo. Estos estados se representan con 0 y 1. Esto facilita la aplicación de la teoría de la información y del álgebra *booleana*.
 
 Durante el período entre las guerras mundiales, Allan Turing desarrolló la máquina de Turing, un dispositivo teórico que manipula símbolos de una cinta de acuerdo con una tabla de reglas. La máquina de Turing simula el funcionamiento de un algoritmo y los conceptos de entrada, procesamiento y salida. En 1945, John von Neumann propuso un concepto conocido como programa almacenado, en el cual los datos y los programas se almacenan en una estructura llamada memoria, separada del hardware que ejecuta las instrucciones. Este esquema permite que las computadoras sean más fáciles de reprogramar y es conocido actualmente como arquitectura de von Neumann. Sus componentes principales son la memoria principal, la unidad central de procesamiento (CPU) y los sistemas de entrada y salida.
 
@@ -41,9 +41,9 @@ Una computadora es una máquina que ejecuta secuencias de instrucciones. Estas s
 - **Manipulación de datos**: crear, leer, actualizar y eliminar datos en estructuras de datos (ej. listas, vectores, matrices) o en bases de datos.
 - **Interacciones con el usuario**: recibir entradas del usuario (ej. del teclado o del ratón) y mostrarle información (ej. en la pantalla o en la impresora).
 - **Manejo de archivos**: leer, escribir y modificar archivos.
-- **Comunicaciones en red**: enviar y recibir datos a través de una red local o de la Internet (ej. páginas web, corres electrónicos).
+- **Comunicaciones en red**: enviar y recibir datos a través de una red local o de la Internet (ej. páginas web, correos electrónicos).
 
-La capacidad que tienen las computadoras de ser programadas, permite que su funcionamiento sea modificado sin necesidad de alterar sus componentes físicos, lo que las hace muy versátiles y aptas para ayudar a resolver una gran variedad de problemas, por lo que se dice que son de propósito general. Estas características las diferencian de otros tipos de máquinas, las cuales han sido construídas con fines específicos.
+La capacidad que tienen las computadoras de ser programadas, permite que su funcionamiento sea modificado sin necesidad de alterar sus componentes físicos, lo que las hace muy versátiles y aptas para ayudar a resolver una gran variedad de problemas, por lo que se dice que son de propósito general. Estas características las diferencian de otros tipos de máquinas, las cuales han sido construidas con fines específicos.
 
 ### Algoritmos
 
@@ -101,7 +101,7 @@ Seguidamente, se muestra la aplicación de este algoritmo a una lista de ejemplo
 
 5. Al finalizar el recorrido de la lista, se imprime el máximo actual como valor máximo de la lista: **90.2**
 
-Note que el algoritmo tiene claramente definido un inicio (la lectura de la lista) y establace cual es la condición que debe cumplirse para su finalización (que termine el recorrido de la lista). Asimismo, cada uno de los pasos intermedios está especificado con claridad, incluyendo las condiciones para que se ejecuten.
+Note que el algoritmo tiene claramente definido un inicio (la lectura de la lista) y establece cual es la condición que debe cumplirse para su finalización (que termine el recorrido de la lista). Asimismo, cada uno de los pasos intermedios está especificado con claridad, incluyendo las condiciones para que se ejecuten.
 
 Note además que el algoritmo incluye:
 
@@ -123,7 +123,7 @@ A continuación se describen los componentes del modelo:
 - **Procesamiento (*Process*)**: Una vez que los datos de entrada son recibidos, el sistema los procesa de acuerdo con un conjunto de instrucciones o pasos. El procesamiento puede involucrar operaciones como cálculos matemáticos, operaciones lógicas, transformaciones o cualquier otra acción necesaria para generar la salida que se requiere. En este componente es usualmente donde se realiza el "trabajo" principal del sistema.
 - **Salida (*Output*)**: Una vez finalizado el procesamiento, el sistema genera una salida. La salida es el resultado del proceso y puede presentarse en varias formas, como una visualización en pantalla, un archivo o un documento impreso, entre otras posibilidades. La salida puede ser el final del algoritmo o programa o puede servir como entrada para otro algoritmo o programa.
 
-Para ilustrar el modelo *Entrada - Procesamiento - Salida*, se muestra su aplicación al cálculo del [índice de masa corporal (IMC)](https://es.wikipedia.org/wiki/%C3%8Dndice_de_masa_corporal), una razón matemática que clasifica el peso de las personas en categorías como bajo, normal y sobrepeso, con base en su masa y su estatura. El IMC necesita dos entradas: masa (en kilogramos) y estatura (en metros). El procesamiento se realiza mediante la fórmula: imc = imc = masa/estatura^2^.
+Para ilustrar el modelo *Entrada - Procesamiento - Salida*, se muestra su aplicación al cálculo del [índice de masa corporal (IMC)](https://es.wikipedia.org/wiki/%C3%8Dndice_de_masa_corporal), una razón matemática que clasifica el peso de las personas en categorías como bajo, normal y sobrepeso, con base en su masa y su estatura. El IMC necesita dos entradas: masa (en kilogramos) y estatura (en metros). El procesamiento se realiza mediante la fórmula: imc = masa/estatura^2^.
 
 Entonces, un posible algoritmo para calcular el IMC de una persona es:
 
@@ -254,7 +254,7 @@ Allan Turing es considerado uno de los padres de la computación moderna. Sus co
 
 #### Primeras computadoras electrónicas
 
-Con base en las ideas de Turing, las computadoras de tipo [Bombe](https://es.wikipedia.org/wiki/Bombe) y [Colossus](https://es.wikipedia.org/wiki/Colossus) fueron construídas durante la II Guerra Mundial (1939 - 1945) en el Reino Unido para descifrar mensajes codificados. A pesar de que se consideran de las primeras computadoras digitales electrónicas programables, su programación se realizaba a través de componentes de *hardware*, como interruptores y enchufes, y no con un [programa almacenado en la memoria](https://es.wikipedia.org/wiki/Computador_de_programa_almacenado). La @fig-colossus muestra una computadora Colossus.
+Con base en las ideas de Turing, las computadoras de tipo [Bombe](https://es.wikipedia.org/wiki/Bombe) y [Colossus](https://es.wikipedia.org/wiki/Colossus) fueron construidas durante la II Guerra Mundial (1939 - 1945) en el Reino Unido para descifrar mensajes codificados. A pesar de que se consideran de las primeras computadoras digitales electrónicas programables, su programación se realizaba a través de componentes de *hardware*, como interruptores y enchufes, y no con un [programa almacenado en la memoria](https://es.wikipedia.org/wiki/Computador_de_programa_almacenado). La @fig-colossus muestra una computadora Colossus.
 
 ![Computadora Colossus operada por integrantes del Women's Royal Naval Service (WRNS). Fuente: Fotografía de autor desconicido compartida a través de [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Colossus.jpg).](img/colossus.jpg){#fig-colossus .lightbox fig-alt="Computadora Colossus operada por integrantes del Women's Royal Naval Service (WRNS)" fig-align="center"}
 
@@ -281,11 +281,11 @@ Los principales componentes de esta arquitectura son:
 
 ### Sistemas binarios
 
-Las computadoras modernas están construídas con base en [circuitos integrados](https://es.wikipedia.org/wiki/Circuito_integrado), también llamados *chips* o *microchips*, como el que se muestra en la @fig-circuito-integrado.
+Las computadoras modernas están construidas con base en [circuitos integrados](https://es.wikipedia.org/wiki/Circuito_integrado), también llamados *chips* o *microchips*, como el que se muestra en la @fig-circuito-integrado.
 
 ![Procesador Intel. Imagen de [Slejven Djurakovic](https://unsplash.com/@slavudin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) compartida a través de [Unsplash](https://unsplash.com/s/photos/chip?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText).](img/circuito-integrado.jpg){#fig-circuito-integrado .lightbox fig-alt="Procesador Intel" fig-align="center"}
 
-Los circuitos integrados procesan información digital (que usa valores discretos), la cual generalmente es binaria, lo que significa que puede tener dos valores. Para representar estos dos valores internamente, las computadoras emplean dos niveles de tensión eléctrica: bajo (o ausencia de tensión) y alto (o presencia de tensión eléctrica). Estos estados se representan respectivamente con 0 y 1 (o viceversa). Este es un sistema binario y cada dígito binario se denomina *bit* (*binary digit*). Los *bits* se agrupan en grupos de ocho llamados [*bytes*](https://es.wikipedia.org/wiki/Byte)) para representar elementos de información más complejos, como números más grandes o carácteres de texto. Por ejemplo:
+Los circuitos integrados procesan información digital (que usa valores discretos), la cual generalmente es binaria, lo que significa que puede tener dos valores. Para representar estos dos valores internamente, las computadoras emplean dos niveles de tensión eléctrica: bajo (o ausencia de tensión) y alto (o presencia de tensión eléctrica). Estos estados se representan respectivamente con 0 y 1 (o viceversa). Este es un sistema binario y cada dígito binario se denomina *bit* (*binary digit*). Los *bits* se agrupan en grupos de ocho llamados [*bytes*](https://es.wikipedia.org/wiki/Byte) para representar elementos de información más complejos, como números más grandes o caracteres de texto. Por ejemplo:
 
 - El número decimal ```14``` se representa en binario como ```1110```:  
 ```1110``` = ```2^3*1 + 2^2*1 + 2^1*1 + 2^0*0``` = ```8 + 4 + 2 + 0``` = ```14```
@@ -447,7 +447,7 @@ Se identifican los siguientes subproblemas:
 **Reconocimiento de patrones**
 
 1. Dibujar una base es lo mismo que dibujar un cuadrado (cuatro lados iguales y cuatro ángulos iguales de 90°).
-2. Dibujar un techa es lo mismo que dibujar un triángulo equilátero (tres lados iguales y tres ángulos iguales de 60°).
+2. Dibujar un techo es lo mismo que dibujar un triángulo equilátero (tres lados iguales y tres ángulos iguales de 60°).
 
 **Abstracción**
 
@@ -559,7 +559,7 @@ El siguiente algoritmo describe paso por paso el procesamiento para llegar a una
     a. Al presionar flecha arriba, aumentar y en 10 (o la cantidad deseada).
     b. Al presionar flecha abajo, disminuir y en 10.
     c. Al presionar flecha derecha, aumentar x en 10.
-    d. Al presionar flecha izquierda, disminuir y en 10.
+    d. Al presionar flecha izquierda, disminuir x en 10.
 3. Detectar colisión.
     a. Si el gato toca la manzana, entonces:
         - Aumentar `Puntos` en 1.
