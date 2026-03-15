@@ -1,4 +1,4 @@
-# R - lenguaje de programación para análisis estadístico {#sec-pencom}
+# R - lenguaje de programación para análisis estadístico {#sec-r}
 
 En este capítulo se introduce el lenguaje de programación R, sus tipos de datos, sus estructuras de control y sus funciones para generación de gráficos estadísticos.
 
@@ -8,7 +8,7 @@ R es un lenguaje de programación y un entorno para graficación y análisis est
 
 El código de R se estructura en funciones, las cuales pueden distribuirse en paquetes. Cada paquete contiene un conjunto de funciones relacionadas. Algunos paquetes están incorporados en la instalación base de R y otros deben instalarse separadamente.
 
-La instación base de R incluye una gran variedad de funciones que permiten crear gráficos estadísticos como diagramas de dispersión, histogramas y gráficos de barras, entre otros.
+La instalación base de R incluye una gran variedad de funciones que permiten crear gráficos estadísticos como diagramas de dispersión, histogramas y gráficos de barras, entre otros.
 
 R puede manejar diversos tipos de datos básicos, como números, textos y valores lógicos, entre otros. También tipos de datos compuestos, como factores y data frames. Al igual que otros lenguajes de programación, cuenta con estructuras de control como condicionales y ciclos.
 
@@ -1223,7 +1223,7 @@ La función [read.table()](https://rdrr.io/r/utils/read.table.html) lee los dato
 # Lectura de archivo CSV ubicado en la Web
 covid <-
   read.csv(
-    "https://raw.githubusercontent.com/pf0953-programacionr/2022-ii/main/datos/cepredenac/covid/covid-20210422.csv"
+    "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/main/datos/cepredenac/covid/covid-20210422.csv"
   )
 
 # Despliegue de los datos del data frame
@@ -1425,7 +1425,7 @@ nota_final(100, promedio_proyectos = 50)
 
 ### Condicionales
 
-Las sentencias condicionales evalúan una expresión lógica (i.e. condición) y ejecutan, o no, un bloque de intrucciones dependiendo de si la expresión es verdadera (`TRUE`) o falsa (`FALSE`). Permiten que los programas "tomen decisiones" y varíen su curso de acción.
+Las sentencias condicionales evalúan una expresión lógica (i.e. condición) y ejecutan, o no, un bloque de instrucciones dependiendo de si la expresión es verdadera (`TRUE`) o falsa (`FALSE`). Permiten que los programas "tomen decisiones" y varíen su curso de acción.
 
 [Los condicionales en R](https://cran.r-project.org/doc/manuals/r-devel/R-lang.html#if) se implementa mediante la sentencia `if` y sus cláusulas `else` y `else if`.
 
@@ -1586,7 +1586,7 @@ for (j in 1:ncol(matriz_numeros)) {
 2. Utilice dos ciclos `for` anidados para recorrer la matriz `vector_numeros` y calcular el promedio de cada una de sus columnas.
 
 #### La sentencia `while`
-La sentencia [while](https://cran.r-project.org/doc/manuals/r-devel/R-lang.html#while) evalúa una condición (i.e. una expresión lógica) en cada iteración de un ciclo y ejecuta las intrucciones del bloque mientras la condición sea verdadera. Generalmente, en algún momento la condición se vuelve falsa y así finaliza el ciclo.
+La sentencia [while](https://cran.r-project.org/doc/manuals/r-devel/R-lang.html#while) evalúa una condición (i.e. una expresión lógica) en cada iteración de un ciclo y ejecuta las instrucciones del bloque mientras la condición sea verdadera. Generalmente, en algún momento la condición se vuelve falsa y así finaliza el ciclo.
 
 ```{r}
 #| label: ciclos-while
