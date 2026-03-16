@@ -48,3 +48,6 @@ rsconnect/
 # Quarto files
 /.quarto/
 **/*.quarto_ipynb
+
+# Exámenes (no publicar en repo público)
+examenes/
