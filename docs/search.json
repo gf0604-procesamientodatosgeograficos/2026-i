@@ -217,5 +217,49 @@
       "II El lenguaje de programación R",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>R - lenguaje de programación para análisis estadístico</span>"
     ]
+  },
+  {
+    "objectID": "tareas/tarea-01-g001.html",
+    "href": "tareas/tarea-01-g001.html",
+    "title": "Tarea 1 – Grupo 1",
+    "section": "",
+    "text": "Descripción\nFecha y hora límite de entrega:\nMiércoles 25 de marzo a las 3:00 p.m. a través de Mediación Virtual.\nEsta tarea es estrictamente individual. Cada estudiante puede consultar los materiales del curso y también recursos externos (ej. tutoriales, videos) para resolverla, pero debe ser capaz de demostrar que es la autora o el autor de la solución entregada y de explicarla detalladamente en caso de que el profesor lo solicite.\nDesarrolle en Scratch un juego llamado “El perro y sus juguetes”. En este juego, un perro debe recoger un juguete (ej. una pelota) que aparece en posiciones aleatorias del escenario antes de que se agote el tiempo o se alcance un puntaje determinado.",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1 – Grupo 1"
+    ]
+  },
+  {
+    "objectID": "tareas/tarea-01-g001.html#requisitos",
+    "href": "tareas/tarea-01-g001.html#requisitos",
+    "title": "Tarea 1 – Grupo 1",
+    "section": "Requisitos",
+    "text": "Requisitos\n\n1. Mensaje de bienvenida\n\nAl iniciar el juego (al presionar la bandera verde), el perro debe decir una frase de bienvenida utilizando el bloque decir de la sección Apariencia (por ejemplo: “¡Hola! Ayudame a recoger mis juguetes”). La frase debe mostrarse durante al menos 2 segundos antes de que comience el juego.\nAdemás, el perro debe pronunciar un mensaje usando la extensión Texto a voz (bloque decir en voz alta). Puede ser la misma frase u otra diferente.\n\n\n\n2. Dibujo con la extensión Lápiz y bloques propios\n\nAl inicio del juego, se debe dibujar una casa para perros en el escenario utilizando la extensión Lápiz.\nEl dibujo debe implementarse mediante bloques propios (bloques personalizados en la sección “Mis bloques”) con datos de entrada.\nLa casa del perro debe dibujarse antes de que el perro comience a moverse.\n\n\n\n3. Mecánica del juego\n\nSprites: Use un perro como personaje principal y un juguete como objeto a recoger (puede elegir sprites de la biblioteca de Scratch o dibujar los propios).\nMovimiento: El perro se mueve con las flechas de dirección del teclado (arriba, abajo, izquierda, derecha).\nDetección de colisiones con efecto: Cuando el perro toque el juguete, se debe detectar la colisión. Al detectarla, además de sumar un punto, se debe producir un efecto: cambiar brevemente el disfraz del juguete, reproducir un sonido, o aplicar un efecto gráfico (por ejemplo, el efecto desvanecer).\nReubicación: Al ser recogido, el juguete debe moverse a una posición aleatoria dentro del escenario.\nPuntuación: Una variable llamada Puntos debe comenzar en 0 y aumentar en 1 cada vez que el perro recoge un juguete.\nCuenta regresiva: Una variable llamada Tiempo debe comenzar en 30 (u otro número de su elección) y disminuir en 1 cada segundo (como un cronómetro regresivo).\nFin del juego: El juego termina cuando la persona jugadora alcance 10 puntos (u otro número de su elección) o cuando el tiempo llegue a 0. En ambos casos, se debe mostrar un mensaje apropiado (por ejemplo: “¡Ganaste! Recogiste todos los juguetes” o “¡Se acabó el tiempo!”).",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1 – Grupo 1"
+    ]
+  },
+  {
+    "objectID": "tareas/tarea-01-g001.html#entregables",
+    "href": "tareas/tarea-01-g001.html#entregables",
+    "title": "Tarea 1 – Grupo 1",
+    "section": "Entregables",
+    "text": "Entregables\nCada estudiante debe entregar:\n\nArchivo .sb3: El proyecto de Scratch con el juego, guardado desde Archivo &gt; Guardar en tu computador.\nDocumento con descripción del pensamiento computacional aplicado: Un documento en formato PDF que describa cómo se aplicaron los cuatro principios del pensamiento computacional en el desarrollo del juego:\n\nDescomposición: ¿En qué subproblemas se dividió el problema principal? (por ejemplo: dibujar la casa del perro, mostrar y pronunciar el mensaje, mover el perro, detectar colisiones con efecto, manejar la cuenta regresiva, etc.)\nReconocimiento de patrones: ¿Qué patrones se identificaron? (por ejemplo: el movimiento con flechas sigue un patrón repetitivo, el ciclo de recoger y reubicar se repite, el bloque propio permite reutilizar el mismo patrón de dibujo, etc.)\nAbstracción: ¿Qué información es relevante y cuál se puede ignorar? (por ejemplo: las coordenadas (x, y) del perro y del juguete son relevantes; los colores del escenario no lo son. El bloque propio abstrae los detalles del dibujo, etc.)\nDiseño de algoritmos: Describa paso a paso el algoritmo general del juego, desde el inicio hasta el fin, incluyendo la lógica de la cuenta regresiva.",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1 – Grupo 1"
+    ]
+  },
+  {
+    "objectID": "tareas/tarea-01-g001.html#rúbrica-de-evaluación",
+    "href": "tareas/tarea-01-g001.html#rúbrica-de-evaluación",
+    "title": "Tarea 1 – Grupo 1",
+    "section": "Rúbrica de evaluación",
+    "text": "Rúbrica de evaluación\n\n\n\n\n\n\n\n\nCriterio\nDescripción\nPuntos\n\n\n\n\nMensaje con decir + Texto a voz\nEl perro muestra una frase de bienvenida con el bloque decir y además pronuncia un mensaje con la extensión Texto a voz.\n10\n\n\nDibujo con Lápiz usando bloques propios\nSe dibuja una casa visible usando la extensión Lápiz, implementada con bloques propios con datos de entrada.\n15\n\n\nSprites personalizados\nSe utilizan un perro y juguetes (pelotas u otros) como sprites del juego (no el gato ni la manzana originales).\n10\n\n\nMovimiento con teclado\nEl perro se desplaza correctamente con las cuatro flechas de dirección.\n10\n\n\nDetección de colisiones + efecto\nSe detecta correctamente cuándo el perro toca el juguete y se produce un efecto (cambio de disfraz, sonido o efecto gráfico).\n10\n\n\nReubicación aleatoria\nEl juguete se mueve a una posición aleatoria cada vez que es recogido.\n10\n\n\nSistema de puntuación\nLa variable Puntos se inicializa en 0 y aumenta en 1 con cada colisión.\n10\n\n\nCuenta regresiva y fin del juego\nEl juego incluye una cuenta regresiva y termina correctamente al alcanzar cierta cantidad de puntos o al agotarse el tiempo, mostrando un mensaje apropiado.\n10\n\n\nPensamiento computacional\nEl documento describe adecuadamente la descomposición, patrones, abstracción y algoritmo.\n15\n\n\nTotal\n\n100",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1 – Grupo 1"
+    ]
   }
 ]

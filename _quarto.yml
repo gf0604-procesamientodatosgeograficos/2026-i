@@ -9,9 +9,9 @@ book:
 
   chapters:
     - index.qmd
-    - text: "Programa del curso (grupo 1)"
+    - text: "Programa del curso - Grupo 1"
       href: gf0604-procesamientodatosgeograficos-2026-i-g001.pdf
-    - text: "Programa del curso (grupo 2)"
+    - text: "Programa del curso - Grupo 2"
       href: gf0604-procesamientodatosgeograficos-2026-i-g002.pdf
     - part: "I Introducción a la programación de computadoras y a la ciencia de datos"
       chapters:
@@ -20,6 +20,9 @@ book:
     - part: "II El lenguaje de programación R"
       chapters:
         - 03-r.qmd
+    - part: "Tareas"
+      chapters:
+        - tareas/tarea-01-g001.md
 bibliography: referencias.bib
 csl: apa-6th-edition.csl
 
