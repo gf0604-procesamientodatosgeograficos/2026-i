@@ -56,11 +56,10 @@ Cada estudiante debe entregar:
 |---|---|---:|
 | **Mensaje con *decir* + Texto a voz** | El perro muestra una frase de bienvenida con el bloque *decir* y además pronuncia un mensaje con la extensión Texto a voz. | 10 |
 | **Dibujo con Lápiz usando bloques propios** | Se dibuja una casa visible usando la extensión Lápiz, implementada con bloques propios con datos de entrada. | 15 |
-| **Sprites personalizados** | Se utilizan un perro y juguetes (pelotas u otros) como sprites del juego (no el gato ni la manzana originales). | 10 |
 | **Movimiento con teclado** | El perro se desplaza correctamente con las cuatro flechas de dirección. | 10 |
 | **Detección de colisiones + efecto** | Se detecta correctamente cuándo el perro toca el juguete y se produce un efecto (cambio de disfraz, sonido o efecto gráfico). | 10 |
 | **Reubicación aleatoria** | El juguete se mueve a una posición aleatoria cada vez que es recogido. | 10 |
 | **Sistema de puntuación** | La variable `Puntos` se inicializa en 0 y aumenta en 1 con cada colisión. | 10 |
-| **Cuenta regresiva y fin del juego** | El juego incluye una cuenta regresiva y termina correctamente al alcanzar cierta cantidad de puntos o al agotarse el tiempo, mostrando un mensaje apropiado. | 10 |
+| **Cuenta regresiva y fin del juego** | El juego incluye una cuenta regresiva y termina correctamente al alcanzar cierta cantidad de puntos o al agotarse el tiempo, mostrando un mensaje apropiado. | 20 |
 | **Pensamiento computacional** | El documento describe adecuadamente la descomposición, patrones, abstracción y algoritmo. | 15 |
 | **Total** | | **100** |
