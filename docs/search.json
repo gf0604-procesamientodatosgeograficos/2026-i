@@ -261,5 +261,49 @@
       "Tareas",
       "Tarea 1 – Grupo 1"
     ]
+  },
+  {
+    "objectID": "tareas/tarea-01-g002.html",
+    "href": "tareas/tarea-01-g002.html",
+    "title": "Tarea 1 – Grupo 2",
+    "section": "",
+    "text": "Descripción\nFecha y hora límite de entrega:\nJueves 26 de marzo a las 3:00 p.m. a través de Mediación Virtual.\nEsta tarea es estrictamente individual. Cada persona estudiante puede consultar los materiales del curso y también recursos externos (ej. tutoriales, videos) para resolverla, pero debe ser capaz de demostrar que es la autora o el autor de la solución entregada y de explicarla detalladamente en caso de que el profesor lo solicite.\nDesarrolle en Scratch un juego llamado “El pez y las estrellas”. En este juego, un pez debe recoger estrellas de mar que aparecen en posiciones aleatorias del escenario antes de que se agote el tiempo o se alcance un puntaje determinado.",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1 – Grupo 2"
+    ]
+  },
+  {
+    "objectID": "tareas/tarea-01-g002.html#requisitos",
+    "href": "tareas/tarea-01-g002.html#requisitos",
+    "title": "Tarea 1 – Grupo 2",
+    "section": "Requisitos",
+    "text": "Requisitos\n\n1. Dibujo con la extensión Lápiz y bloques propios\n\nAl inicio del juego (al presionar la bandera verde), se deben dibujar olas (por ejemplo, una serie de triángulos repetidos en la parte inferior del escenario, simulando el mar) utilizando la extensión Lápiz.\nEl dibujo debe implementarse mediante bloques propios (bloques personalizados en la sección “Mis bloques”) con datos de entrada.\nLas olas deben dibujarse antes de que el pez comience a moverse.\n\n\n\n2. Mecánica del juego\n\nSprites: Use un pez como personaje principal y una estrella de mar como objeto a recoger (puede elegir sprites de la biblioteca de Scratch o dibujar los propios).\nMovimiento: El pez se mueve con las flechas de dirección del teclado (arriba, abajo, izquierda, derecha).\nDetección de colisiones con efecto: Cuando el pez toque la estrella de mar, se debe detectar la colisión. Al detectarla, además de sumar un punto, se debe producir un efecto: cambiar brevemente el disfraz de la estrella, reproducir un sonido, o aplicar un efecto gráfico (por ejemplo, el efecto desvanecer).\nReubicación: Al ser recogida, la estrella de mar debe moverse a una posición aleatoria dentro del escenario.\nPuntuación: Una variable llamada Puntos debe comenzar en 0 y aumentar en 1 cada vez que el pez recoge una estrella.\nCuenta regresiva: Una variable llamada Tiempo debe comenzar en 30 (u otro número de su elección) y disminuir en 1 cada segundo (como un cronómetro regresivo).\nFin del juego: El juego termina cuando la persona jugadora alcance 10 puntos (u otro número de su elección) o cuando el tiempo llegue a 0.\n\n\n\n3. Mensaje de despedida\n\nAl finalizar el juego (al alcanzar los puntos requeridos o al agotarse el tiempo), el pez debe decir una frase utilizando el bloque decir de la sección Apariencia (por ejemplo: “¡Gracias por jugar! Recogí todas las estrellas” o “¡Se acabó el tiempo!”). La frase debe mostrarse y pronunciarse durante al menos 2 segundos.\nAdemás, el pez debe pronunciar un mensaje usando la extensión Texto a voz (bloque decir en voz alta). Puede ser la misma frase u otra diferente.",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1 – Grupo 2"
+    ]
+  },
+  {
+    "objectID": "tareas/tarea-01-g002.html#entregables",
+    "href": "tareas/tarea-01-g002.html#entregables",
+    "title": "Tarea 1 – Grupo 2",
+    "section": "Entregables",
+    "text": "Entregables\nCada estudiante debe entregar:\n\nArchivo .sb3: El proyecto de Scratch con el juego, guardado desde Archivo &gt; Guardar en tu computador.\nDocumento con descripción del pensamiento computacional aplicado: Un documento en formato PDF que describa cómo se aplicaron los cuatro principios del pensamiento computacional en el desarrollo del juego:\n\nDescomposición: ¿En qué subproblemas se dividió el problema principal? (por ejemplo: dibujar las olas con bloque propio, mover el pez, detectar colisiones con efecto, manejar la cuenta regresiva, mostrar y pronunciar el mensaje de despedida, etc.)\nReconocimiento de patrones: ¿Qué patrones se identificaron? (por ejemplo: el movimiento con flechas sigue un patrón repetitivo, el ciclo de recoger y reubicar se repite, el bloque propio permite reutilizar el mismo patrón de dibujo para cada ola, etc.)\nAbstracción: ¿Qué información es relevante y cuál se puede ignorar? (por ejemplo: las coordenadas (x, y) del pez y de la estrella son relevantes; los colores del escenario no lo son. El bloque propio abstrae los detalles del dibujo de cada ola, etc.)\nDiseño de algoritmos: Describa paso a paso el algoritmo general del juego, desde el inicio hasta el fin, incluyendo la lógica de la cuenta regresiva.",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1 – Grupo 2"
+    ]
+  },
+  {
+    "objectID": "tareas/tarea-01-g002.html#rúbrica-de-evaluación",
+    "href": "tareas/tarea-01-g002.html#rúbrica-de-evaluación",
+    "title": "Tarea 1 – Grupo 2",
+    "section": "Rúbrica de evaluación",
+    "text": "Rúbrica de evaluación\n\n\n\n\n\n\n\n\nCriterio\nDescripción\nPuntos\n\n\n\n\nDibujo con Lápiz usando bloque propio\nSe dibujan olas usando la extensión Lápiz, implementadas con bloques propios con datos de entrada.\n15\n\n\nMovimiento con teclado\nEl pez se desplaza correctamente con las cuatro flechas de dirección.\n10\n\n\nDetección de colisiones + efecto\nSe detecta correctamente cuándo el pez toca la estrella de mar y se produce un efecto (cambio de disfraz, sonido o efecto gráfico).\n10\n\n\nReubicación aleatoria\nLa estrella de mar se mueve a una posición aleatoria cada vez que es recogida.\n10\n\n\nSistema de puntuación\nLa variable Puntos se inicializa en 0 y aumenta en 1 con cada colisión.\n10\n\n\nCuenta regresiva y fin del juego\nEl juego incluye una cuenta regresiva de 40 segundos y termina correctamente al alcanzar 15 puntos o al agotarse el tiempo, mostrando un mensaje apropiado.\n20\n\n\nPensamiento computacional\nEl documento describe adecuadamente la descomposición, patrones, abstracción y algoritmo.\n15\n\n\nMensaje con decir + Texto a voz\nEl pez muestra un mensaje con el bloque decir y además lo pronuncia con la extensión Texto a voz.\n10\n\n\nTotal\n\n100",
+    "crumbs": [
+      "Tareas",
+      "Tarea 1 – Grupo 2"
+    ]
   }
 ]
