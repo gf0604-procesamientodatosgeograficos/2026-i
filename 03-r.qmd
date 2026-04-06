@@ -846,9 +846,10 @@ datatable(
 
 13. Mediante la función `aggregate()`, cree un data frame llamado `radiacion_x_periodo` con el promedio de radiacion por periodo.
 14. En un gráfico estadístico, muestre la evolución de la temperatura a través de las horas del día (puede ver un ejemplo en la [página web de la estación](https://www.imn.ac.cr/especial/estacionCigefi.html)). Antes de escribir el código en R, medite cuál tipo de gráfico de los vistos en clase puede ser apropiado.
-15. En un gráfico estadístico, muestre la distribución de frecuencias de la variable presion. Antes de escribir el código en R, medite cuál tipo de gráfico de los vistos en clase puede ser apropiado.
-16. En un gráfico estadístico, muestre los promedios de radiación por periodo. Antes de escribir el código en R, medite cuál tipo de gráfico de los vistos en clase puede ser apropiado.
-17. Guarde los tres gráficos en un archivo PDF llamado `estacion-cigefi-graficos.pdf` mediante las funciones `pdf()` y `dev.off()`.
+15. En un gráfico estadístico, muestre la relación entre las variables radiación y temperatura. Antes de escribir el código en R, medite cuál tipo de gráfico de los vistos en clase puede ser apropiado.
+16. En un gráfico estadístico, muestre la distribución de frecuencias de la variable presion. Antes de escribir el código en R, medite cuál tipo de gráfico de los vistos en clase puede ser apropiado.
+17. En un gráfico estadístico, muestre los promedios de radiación por periodo. Antes de escribir el código en R, medite cuál tipo de gráfico de los vistos en clase puede ser apropiado.
+18. Guarde los cuatro gráficos en un archivo PDF llamado `estacion-cigefi-graficos.pdf` mediante las funciones `pdf()` y `dev.off()`.
 
 ### Tipos de datos
 
