@@ -795,7 +795,7 @@ datatable(
 
 1. Cree un proyecto en RStudio y nómbrelo `estacion_cigefi` (puede usar el nombre que desee).
 2. Descargue el archivo [`estacion_cigefi.csv`](https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/imn/estacion_cigefi.csv) a la carpeta de su proyecto. Puede usar la opción *Guardar enlace como...* del clic derecho de su navegador de Internet.
-3. Cree un script R llamado `cigefi.R` y agregue instrucciones para ejecutar las siguientes tareas.
+3. Cree un script R llamado `estacion_cigefi.R` y agregue instrucciones para ejecutar las siguientes tareas.
 4. Cargue el archivo CSV en un data frame llamado `datos`. Use la función `read.csv()`.
 
     ```r
