@@ -802,7 +802,7 @@ datatable(
     datos <- read.csv(file = "estacion_cigefi.csv")
     ```
 
-5. Observe el contenido del data frame con la función `View()`.
+5. Observe el contenido del data frame en la pestaña **Environment** o desde la consola con la función `View()` (no se recomienda incluir este comando en el script).
 
     ```r
     View(datos)
