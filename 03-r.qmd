@@ -757,6 +757,99 @@ plot(
 dev.off()
 ```
 
+**Ejercicios**
+
+Los siguientes ejercicios se basan en un conjunto de datos de la [Estación Meteorológica Automática del Instituto Meteorológico Nacional (IMN)](https://www.imn.ac.cr/especial/estacionCigefi.html), ubicada en el Centro de Investigaciones Geofísicas (CIGEFI), en Montes de Oca, San José. Los datos corresponden a mediciones horarias del 05 de abril de 2026, entre las 6:00 a. m. y las 6:00 p. m.
+
+Las variables del conjunto de datos son:
+
+- `id`: identificador de la medición (consecutivo).
+- `fecha_hora`: fecha y hora de la medición.
+- `hora`: hora de la medición (formato 24 horas).
+- `temperatura`: temperatura promedio horaria (°C).
+- `lluvia`: total de lluvia horaria (mm).
+- `radiacion`: radiación máxima horaria (KW/m²).
+- `presion`: presión atmosférica horaria (mb).
+
+```{r}
+#| label: dt-cigefi
+#| warning: false
+#| message: false
+#| echo: false
+
+library(DT)
+
+cigefi <- read.csv(
+  file = "datos/imn/estacion_cigefi.csv"
+)
+
+datatable(
+  cigefi,
+  rownames = FALSE,
+  options = list(
+    pageLength = 13,
+    language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+  )
+)
+```
+
+1. Cree un proyecto en RStudio y nómbrelo `estacion_cigefi` (puede usar el nombre que desee).
+2. Descargue el archivo [`estacion_cigefi.csv`](https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/imn/estacion_cigefi.csv) a la carpeta de su proyecto. Puede usar la opción *Guardar enlace como...* del clic derecho de su navegador de Internet.
+3. Cree un script R llamado `cigefi.R` y agregue instrucciones para ejecutar las siguientes tareas.
+4. Cargue el archivo CSV en un data frame llamado `datos`. Use la función `read.csv()`.
+
+    ```r
+    datos <- read.csv(file = "estacion_cigefi.csv")
+    ```
+
+5. Observe el contenido del data frame con la función `View()`.
+
+    ```r
+    View(datos)
+    ```
+
+6. En el data frame `datos`, conserve solamente las variables `hora`, `temperatura`, `radiacion` y `presion` y todas las observaciones. Use la notación base de R.
+
+    ```r
+    datos <- datos[, c("hora", "temperatura", "radiacion", "presion")]
+    ```
+
+7. Cree en el data frame `datos` una nueva variable llamada `periodo` que contenga `"mañana"` si la hora es menor a 12 y `"tarde"` en caso contrario. Use la función `ifelse()`.
+
+    ```r
+    datos$periodo <- ifelse(datos$hora < 12, "mañana", "tarde")
+    ```
+
+8. Cree un subconjunto de `datos` llamado `horas_frias` con las observaciones con temperatura menor o igual a 20 °C.
+
+    ```r
+    horas_frias <- datos[datos$temperatura <= 20, ]
+    ```
+
+9. Cree un subconjunto de `datos` llamado `horas_calientes` con las observaciones con temperatura mayor o igual a 24 °C.
+10. Cree un subconjunto de `datos` llamado `horas_calientes_soleadas` con las observaciones con temperatura mayor o igual a 22 °C **y** radiación mayor que 1.0 KW/m².
+11. Ordene el data frame `datos` por la variable `hora` en orden ascendente, mediante la función `order()`.
+
+    ```r
+    datos <- datos[order(datos$hora), ]
+    ```
+
+12. Mediante la función `aggregate()`, cree un data frame llamado `temperatura_x_periodo` con el promedio de temperatura por periodo.
+
+    ```r
+    temperatura_x_periodo <- aggregate(
+      data = datos,
+      temperatura ~ periodo,
+      FUN = mean
+    )
+    ```
+
+13. Mediante la función `aggregate()`, cree un data frame llamado `radiacion_x_periodo` con el promedio de radiacion por periodo.
+14. En un gráfico estadístico, muestre la evolución de la temperatura a través de las horas del día (puede ver un ejemplo en la [página web de la estación](https://www.imn.ac.cr/especial/estacionCigefi.html)). Antes de escribir el código en R, medite cuál tipo de gráfico de los vistos en clase puede ser apropiado.
+15. En un gráfico estadístico, muestre la distribución de frecuencias de la variable presion. Antes de escribir el código en R, medite cuál tipo de gráfico de los vistos en clase puede ser apropiado.
+16. En un gráfico estadístico, muestre los promedios de radiación por periodo. Antes de escribir el código en R, medite cuál tipo de gráfico de los vistos en clase puede ser apropiado.
+17. Guarde los tres gráficos en un archivo PDF llamado `estacion-cigefi-graficos.pdf` mediante las funciones `pdf()` y `dev.off()`.
+
 ### Tipos de datos
 
 R puede trabajar con varios [tipos de datos básicos](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Basic-types), entre los que están números, caracteres (i.e. textos) y lógicos. También puede trabajar con [tipos compuestos](https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Special-compound-objects), como factores y *data frames*.
