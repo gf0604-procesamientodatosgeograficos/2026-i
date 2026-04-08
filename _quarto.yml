@@ -24,6 +24,8 @@ book:
       chapters:
         - tareas/tarea-01-g001.md
         - tareas/tarea-01-g002.md
+        - tareas/tarea-02-g001.md
+        # - tareas/tarea-02-g002.md
 bibliography: referencias.bib
 csl: apa-6th-edition.csl
 
