@@ -1,7 +1,7 @@
 # Tarea 2 – Grupo 1 {.unnumbered}
 
 **Fecha y hora límite de entrega:**  
-Miércoles 15 de abril a las 3:00 p.m. a través de Mediación Virtual.
+Jueves 16 de abril a las 11:59 p.m. a través de Mediación Virtual.
 
 **Esta tarea es estrictamente individual. Cada persona estudiante puede consultar los materiales del curso y también recursos externos (ej. tutoriales, videos) para resolverla, pero debe ser capaz de demostrar que es la autora o el autor de la solución entregada y de explicarla detalladamente en caso de que el profesor lo solicite.**
 
