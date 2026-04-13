@@ -44,7 +44,7 @@ La sintaxis del documento incluye marcas para un encabezado, texto en negrita, t
 
 ***
 <pre><code>
-### Los satélites galileanos
+# Los satélites galileanos
 
 Se llaman **satélites galileanos** los cuatro satélites de
 [Júpiter](https://es.wikipedia.org/wiki/J%C3%BApiter_(planeta))
@@ -64,8 +64,10 @@ En orden descendente, son *Ío*, *Europa*, *Ganimedes* y *Calisto*.
 
 ### Visualización
 
+A continuación se muestra el documento Markdown de la subsección anterior una vez renderizado a HTML.
+
 ***
-### Los satélites galileanos {.unnumbered}
+# Los satélites galileanos {.unnumbered}
 
 Se llaman **satélites galileanos** los cuatro satélites
 de [Júpiter](https://es.wikipedia.org/wiki/J%C3%BApiter_(planeta)) descubiertos en 1610 por el astrónomo italiano

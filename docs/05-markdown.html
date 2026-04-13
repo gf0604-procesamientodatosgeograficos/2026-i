@@ -311,9 +311,10 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#sintaxis" id="toc-sintaxis" class="nav-link" data-scroll-target="#sintaxis"><span class="header-section-number">5.4.1</span> Sintaxis</a></li>
   <li><a href="#visualización" id="toc-visualización" class="nav-link" data-scroll-target="#visualización"><span class="header-section-number">5.4.2</span> Visualización</a></li>
-  <li><a href="#los-satélites-galileanos" id="toc-los-satélites-galileanos" class="nav-link" data-scroll-target="#los-satélites-galileanos">Los satélites galileanos</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">5.4.3</span> Ejercicios</a></li>
   </ul></li>
+  <li><a href="#los-satélites-galileanos" id="toc-los-satélites-galileanos" class="nav-link" data-scroll-target="#los-satélites-galileanos">Los satélites galileanos</a>
+  <ul class="collapse">
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">5.4.3</span> Ejercicios</a></li>
   <li><a href="#sintaxis-1" id="toc-sintaxis-1" class="nav-link" data-scroll-target="#sintaxis-1"><span class="header-section-number">5.5</span> Sintaxis</a>
   <ul class="collapse">
   <li><a href="#encabezados" id="toc-encabezados" class="nav-link" data-scroll-target="#encabezados"><span class="header-section-number">5.5.1</span> Encabezados</a></li>
@@ -334,6 +335,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#ejercicios-1" id="toc-ejercicios-1" class="nav-link" data-scroll-target="#ejercicios-1"><span class="header-section-number">5.6</span> Ejercicios</a></li>
   <li><a href="#recursos-de-interés" id="toc-recursos-de-interés" class="nav-link" data-scroll-target="#recursos-de-interés"><span class="header-section-number">5.7</span> Recursos de interés</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -398,7 +400,7 @@ window.Quarto = {
 <p>La sintaxis del documento incluye marcas para un encabezado, texto en negrita, texto en itálica, hipervínculos y una imagen.</p>
 <hr>
 <pre><code>
-### Los satélites galileanos
+# Los satélites galileanos
 
 Se llaman **satélites galileanos** los cuatro satélites de
 [Júpiter](https://es.wikipedia.org/wiki/J%C3%BApiter_(planeta))
@@ -418,16 +420,17 @@ En orden descendente, son *Ío*, *Europa*, *Ganimedes* y *Calisto*.
 </section>
 <section id="visualización" class="level3" data-number="5.4.2">
 <h3 data-number="5.4.2" class="anchored" data-anchor-id="visualización"><span class="header-section-number">5.4.2</span> Visualización</h3>
+<p>A continuación se muestra el documento Markdown de la subsección anterior una vez renderizado a HTML.</p>
 <hr>
 </section>
-<section id="los-satélites-galileanos" class="level3 unnumbered">
-<h3 class="unnumbered anchored" data-anchor-id="los-satélites-galileanos">Los satélites galileanos</h3>
+</section>
+<section id="los-satélites-galileanos" class="level1 unnumbered">
+<h1 class="unnumbered">Los satélites galileanos</h1>
 <p>Se llaman <strong>satélites galileanos</strong> los cuatro satélites de <a href="https://es.wikipedia.org/wiki/J%C3%BApiter_(planeta)">Júpiter</a> descubiertos en 1610 por el astrónomo italiano <a href="https://es.wikipedia.org/wiki/Galileo_Galilei">Galileo Galilei</a> (1564 - 1642): <em>Ío</em>, <em>Europa</em>, <em>Ganimedes</em> y <em>Calisto</em>. Son los más grandes de los satélites de Júpiter, siendo visibles incluso con telescopios de baja potencia.</p>
 <p><img src="https://images-assets.nasa.gov/image/PIA00600/PIA00600~small.jpg" class="img-fluid"></p>
 <p><strong>Figura 1</strong>. Los cuatro satélites galileanos, en una composición que compara sus tamaños con el tamaño de Júpiter. En orden descendente, son <em>Ío</em>, <em>Europa</em>, <em>Ganimedes</em> y <em>Calisto</em>.</p>
 <hr>
 <p>El contenido de este ejemplo está basado en <a href="https://es.wikipedia.org/wiki/Sat%C3%A9lite_galileano">Satélite galileano - Wikipedia, la enciclopedia libre</a>.</p>
-</section>
 <section id="ejercicios" class="level3" data-number="5.4.3">
 <h3 data-number="5.4.3" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">5.4.3</span> Ejercicios</h3>
 <p>En los siguientes pasos se practica la edición de un documento Markdown en RStudio, la visualización local del documento renderizado y su publicación en GitHub Pages.</p>
@@ -454,7 +457,6 @@ En orden descendente, son *Ío*, *Europa*, *Ganimedes* y *Calisto*.
 <li><p>Espere uno o dos minutos y recargue la página <em>Settings - Pages</em>. Cuando el sitio esté publicado, aparecerá un mensaje con la URL pública, con el formato <code>https://&lt;usuario&gt;.github.io/satelites-galileanos/</code>, donde <code>&lt;usuario&gt;</code> es su nombre de usuario en GitHub. Haga clic en la URL para visitar el documento publicado.</p></li>
 <li><p>Para actualizar el documento en el futuro, edite el archivo <code>README.md</code> directamente en la interfaz web de GitHub (haciendo clic en el archivo y luego en el ícono de lápiz) o cargue una nueva versión desde su computadora repitiendo el paso 3. Los cambios se reflejarán en el sitio publicado pocos minutos después.</p></li>
 </ol>
-</section>
 </section>
 </section>
 <section id="sintaxis-1" class="level2" data-number="5.5">
@@ -1143,6 +1145,7 @@ plot(
 <p>Writing mathematical expressions. (s. f.). <em>GitHub Docs</em>. Recuperado 25 de marzo de 2023, de <a href="https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions">https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions</a></p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
