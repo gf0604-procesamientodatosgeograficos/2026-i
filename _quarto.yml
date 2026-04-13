@@ -20,6 +20,9 @@ book:
     - part: "II El lenguaje de programación R"
       chapters:
         - 03-r.qmd
+    - part: "III Herramientas para investigación reproducible y desarrollo colaborativo"
+      chapters:
+        - 04-reproducibilidad.qmd
     - part: "Tareas"
       chapters:
         - tareas/tarea-01-g001.md

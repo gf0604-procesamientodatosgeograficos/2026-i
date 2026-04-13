@@ -1,4 +1,4 @@
-# Reproducibilidad {#sec-pencom}
+# Reproducibilidad {#sec-reproducibilidad}
 
 En este capítulo se introduce el concepto de reproducibilidad, las características que debe cumplir una investigación reproducible y algunas de las herramientas informáticas que pueden ayudar a implementarlas.
 
@@ -6,7 +6,7 @@ En este capítulo se introduce el concepto de reproducibilidad, las característ
 
 El trabajo de un investigador se considera reproducible si otros investigadores, trabajando de manera independiente, pueden alcanzar los mismos resultados. Para esto se requiere tener acceso a los datos y al código fuente empleados por el investigador original.
 
-Hay varias herramientas informáticas que faciitan la reproducibilidad, entre las que están los lenguajes de programación, los lenguajes de marcado y los sistemas de control de versiones.
+Hay varias herramientas informáticas que facilitan la reproducibilidad, entre las que están los lenguajes de programación, los lenguajes de marcado y los sistemas de control de versiones.
 
 ## Trabajo previo
 
@@ -44,6 +44,6 @@ Para facilitar la reproducibilidad, se cuenta con diversas herramientas informá
 
 La programación de computadoras es una actividad presente durante todos los procesos de ciencia de datos. Hay muchos lenguajes que pueden utilizarse en este campo. Algunos de los más populares son [Python](https://www.python.org/), [R](https://www.r-project.org/), [SQL](https://www.iso.org/standard/76583.html) y [JavaScript](https://ecma-international.org/publications-and-standards/standards/ecma-262/).
 
-Por otra parte, la documentación es vital durante todo el ciclo de vida de una investigación reproducible. Se recomienda utilizar mecanismos estandarizados y abiertos como el [lenguaje de marcado de hipertexto (HTML, en inglés, *HyperText Markup Language*)](https://es.wikipedia.org/wiki/HTML) o [Markdown](https://en.wikipedia.org/wiki/Markdown), con los cuales pueden crearse documentos mediante editores de texto simples (i.e. no se requiere de software propietario), y exportables a varios formatos (ej. [LaTeX](https://es.wikipedia.org/wiki/LaTeX), [PDF](https://es.wikipedia.org/wiki/PDF)).
+Por otra parte, la documentación es vital durante todo el ciclo de vida de una investigación reproducible. Se recomienda utilizar mecanismos estandarizados y abiertos como el [lenguaje de marcado de hipertexto (HTML, en inglés, *HyperText Markup Language*)](https://es.wikipedia.org/wiki/HTML) o [Markdown](https://es.wikipedia.org/wiki/Markdown), con los cuales pueden crearse documentos mediante editores de texto simples (i.e. no se requiere de software propietario), y exportables a varios formatos (ej. [LaTeX](https://es.wikipedia.org/wiki/LaTeX), [PDF](https://es.wikipedia.org/wiki/PDF)).
 
 Para dar mantenimiento, tanto al código fuente como a la documentación, es necesario un sistema de [control de versiones](https://es.wikipedia.org/wiki/Control_de_versiones) como [Git](https://es.wikipedia.org/wiki/Git), el cual permite llevar el registro de los cambios en archivos y también facilita el trabajo colaborativo al reunir las modificaciones hechas por varias personas. Git es usado en varias plataformas que comparten código fuente (ej. [GitHub](https://github.com/), [GitLab](https://about.gitlab.com/)) y que ofrecen servicios relacionados, como hospedaje de sitios web.
