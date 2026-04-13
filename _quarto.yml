@@ -23,6 +23,7 @@ book:
     - part: "III Herramientas para investigación reproducible y desarrollo colaborativo"
       chapters:
         - 04-reproducibilidad.qmd
+        - 05-markdown.qmd
     - part: "Tareas"
       chapters:
         - tareas/tarea-01-g001.md

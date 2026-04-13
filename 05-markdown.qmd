@@ -1,6 +1,12 @@
-# Markdown - lenguaje de marcado {#sec-pencom}
+# Markdown - lenguaje de marcado {#sec-markdown}
 
 En este capítulo se introduce el lenguaje de marcado ligero Markdown, el cual permite especificar la estructura, los estilos y la semántica de un documento. El Markdown es apropiado para intercalar texto con código fuente y sus salidas (ej. tablas, gráficos y mapas).
+
+## Resumen
+
+Markdown es un lenguaje de marcado ligero creado en 2004 por John Gruber y Aaron Swartz. Las marcas se utilizan para indicar aspectos estructurales (ej. encabezados, listas), estilísticos (ej. negritas, itálicas) y semánticos de un documento. En comparación con otros lenguajes de marcado como HTML, Markdown es más sencillo de leer y de escribir, por lo que suele emplearse en documentación técnica, páginas web y archivos README de proyectos de software.
+
+Los documentos escritos en Markdown pueden exportarse a una gran variedad de formatos, como HTML, PDF, DOC o LaTeX. Existen además múltiples variaciones o *flavors* (ej. R Markdown, Quarto, GitHub Flavored Markdown, Pandoc's Markdown) que extienden el lenguaje original para soportar funcionalidades adicionales, como la inclusión de bloques de código ejecutables o expresiones matemáticas.
 
 ## Trabajo previo
 
@@ -18,12 +24,12 @@ En este capítulo se introduce el lenguaje de marcado ligero Markdown, el cual p
 
 Los documentos escritos en Markdown pueden exportarse a una gran variedad de formatos (ej. HTML, DOC, PDF, LaTex) para ser usados en libros, presentaciones o páginas web, entre otros fines.
 
-Las variaciones de Markdown, también llamadas *flavors*, son extensiones o modificaciones de la [especificación original]((https://daringfireball.net/projects/markdown/)). Entre las más populares están:
+Las variaciones de Markdown, también llamadas *flavors*, son extensiones o modificaciones de la [especificación original](https://daringfireball.net/projects/markdown/). Entre las más populares están:
 
 - [R Markdown](https://rmarkdown.rstudio.com/): para el lenguaje R.
 - [Quarto](https://quarto.org/): es la "siguiente generación" de R Markdown, con soporte para más lenguajes de programación (Python, Julia, Observable, R) y motores de procesamiento (Jupyter, Knitr), entre otras mejoras. Más que una variación de Markdown es un sistema de publicación de documentos técnicos y científicos que utiliza Markdown.
 - [Python Markdown](https://github.com/Python-Markdown/markdown): para el lenguaje Python.
-- [GitHub Flavored Markdown](https://help.github.com/en/github/writing-on-github): para la plataforma GitHub.
+- [GitHub Flavored Markdown](https://docs.github.com/en/get-started/writing-on-github): para la plataforma GitHub.
 - [Pandoc's Markdown](https://pandoc.org/MANUAL.html#pandocs-markdown): para el programa [Pandoc](https://pandoc.org/) de conversión entre formatos.
 
 Puede encontrarse una lista más extensa de variaciones de Markdown en [Markdown Flavors](https://github.com/commonmark/commonmark-spec/wiki/markdown-flavors).
@@ -48,7 +54,7 @@ descubiertos en 1610 por el astrónomo italiano
 Son los más grandes de los satélites de Júpiter, 
 siendo visibles incluso con telescopios de baja potencia.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Jupiter_and_the_Galilean_Satellites.jpg/168px-Jupiter_and_the_Galilean_Satellites.jpg)
+![](https://images-assets.nasa.gov/image/PIA00600/PIA00600~small.jpg)
 
 **Figura 1**. Los cuatro satélites galileanos, 
 en una composición que compara sus tamaños con el tamaño de Júpiter. 
@@ -68,7 +74,7 @@ de [Júpiter](https://es.wikipedia.org/wiki/J%C3%BApiter_(planeta)) descubiertos
 Son los más grandes de los satélites de Júpiter, 
 siendo visibles incluso con telescopios de baja potencia.
 
-![](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Jupiter_and_the_Galilean_Satellites.jpg/168px-Jupiter_and_the_Galilean_Satellites.jpg)
+![](https://images-assets.nasa.gov/image/PIA00600/PIA00600~small.jpg)
 
 **Figura 1**. Los cuatro satélites galileanos, 
 en una composición que compara sus tamaños con el tamaño de Júpiter. 
@@ -78,6 +84,41 @@ En orden descendente, son *Ío*, *Europa*, *Ganimedes* y *Calisto*.
 
 El contenido de este ejemplo está basado en [Satélite galileano - Wikipedia, la enciclopedia libre](https://es.wikipedia.org/wiki/Sat%C3%A9lite_galileano).
 
+### Ejercicios
+
+En los siguientes pasos se practica la edición de un documento Markdown en RStudio, la visualización local del documento renderizado y su publicación en GitHub Pages.
+
+#### Creación y edición de un documento Markdown
+
+1. En RStudio, cree un nuevo proyecto con la opción *File - New Project - New Directory - New Project*. Asigne al directorio el nombre `satelites-galileanos` y seleccione una ubicación en su computadora para almacenarlo. Haga clic en *Create Project*; RStudio abrirá automáticamente el nuevo proyecto.
+
+2. Dentro del proyecto, cree un archivo Markdown con la opción *File - New File - Markdown File*. RStudio abrirá un editor de texto vacío para el nuevo archivo.
+
+3. Copie en el editor el contenido Markdown del documento sobre los satélites galileanos que se muestra en la subsección anterior, *Sintaxis*.
+
+4. Guarde el archivo con la opción *File - Save* (o el atajo `Ctrl + S` en Windows/Linux, `Cmd + S` en macOS) y asígnele el nombre `README.md`. El archivo quedará almacenado en la raíz del proyecto `satelites-galileanos`.
+
+5. Para visualizar localmente el documento renderizado, haga clic en el botón *Preview* ubicado en la barra de herramientas del editor (con el ícono de un ojo). RStudio convertirá el archivo Markdown a HTML y lo mostrará en una ventana aparte o en el panel *Viewer*, según la configuración. El resultado debería ser similar al que aparece en la subsección anterior, *Visualización*.
+
+6. Con el archivo `README.md` abierto en el editor, practique la edición agregando y modificando contenido. Por ejemplo: incluya un nuevo párrafo o enlaces adicionales a otros artículos de Wikipedia.
+
+7. Guarde los cambios (*File - Save*) y vuelva a hacer clic en *Preview* para ver el resultado actualizado. Repita el ciclo de *editar → guardar → previsualizar* hasta familiarizarse con el proceso de edición.
+
+#### Publicación en GitHub Pages
+
+[GitHub](https://github.com/) es una plataforma de desarrollo colaborativo basada en el sistema de control de versiones [Git](https://git-scm.com/), que permite alojar y compartir código fuente y otros archivos en repositorios públicos o privados. [GitHub Pages](https://pages.github.com/) es un servicio gratuito de GitHub que publica sitios web estáticos a partir del contenido de un repositorio. Cuando el repositorio contiene un archivo `README.md` en su raíz y no incluye un `index.html`, GitHub Pages usa automáticamente el `README.md` como página principal del sitio.
+
+1. Si aún no cuenta con una, cree una cuenta gratuita en [GitHub](https://github.com/signup). Complete el formulario de registro con una dirección de correo electrónico, un nombre de usuario y una contraseña, y verifique la cuenta mediante el correo de confirmación que GitHub le enviará.
+
+2. Con la sesión iniciada en GitHub, cree un nuevo repositorio haciendo clic en el botón **+** (en la esquina superior derecha de la página) y seleccionando *New repository*. Asigne al repositorio el nombre `satelites-galileanos`, marque la opción *Public* (requerida para publicar en GitHub Pages con una cuenta gratuita) y haga clic en *Create repository*. No active las opciones *Add a README file*, *Add .gitignore* ni *Choose a license*, ya que va a subir su propio archivo `README.md`.
+
+3. En la página del repositorio recién creado, haga clic en el enlace *uploading an existing file*. Arrastre el archivo `README.md` desde el directorio del proyecto `satelites-galileanos` al área indicada en el navegador (o haga clic en *choose your files* para seleccionarlo). Al final de la página, haga clic en *Commit changes* para confirmar la carga.
+
+4. Para activar GitHub Pages, vaya a la pestaña *Settings* del repositorio y seleccione *Pages* en el menú lateral izquierdo. En la sección *Build and deployment*, en *Source*, escoja *Deploy from a branch*. En *Branch*, seleccione `main` con la carpeta `/ (root)` y haga clic en *Save*.
+
+5. Espere uno o dos minutos y recargue la página *Settings - Pages*. Cuando el sitio esté publicado, aparecerá un mensaje con la URL pública, con el formato `https://<usuario>.github.io/satelites-galileanos/`, donde `<usuario>` es su nombre de usuario en GitHub. Haga clic en la URL para visitar el documento publicado.
+
+6. Para actualizar el documento en el futuro, edite el archivo `README.md` directamente en la interfaz web de GitHub (haciendo clic en el archivo y luego en el ícono de lápiz) o cargue una nueva versión desde su computadora repitiendo el paso 3. Los cambios se reflejarán en el sitio publicado pocos minutos después.
 
 ## Sintaxis
 
@@ -280,7 +321,7 @@ Hay dos sintaxis para especificar texto en *itálica*: con un asterisco (`*`) o 
 
 ### Texto tachado
 
-El texto tachado se especifica con dos guiones (`--`) antes y después del texto.
+El texto tachado se especifica con dos tildes (`~~`) antes y después del texto.
 
 <table>
   <tr>
@@ -289,7 +330,7 @@ El texto tachado se especifica con dos guiones (`--`) antes y después del texto
   </tr>
   <tr>
     <td>
-      `--Texto tachado--`
+      `~~Texto tachado~~`
     </td>
     <td>
       <s>Texto tachado</s>
@@ -299,7 +340,7 @@ El texto tachado se especifica con dos guiones (`--`) antes y después del texto
 
 ### Superíndices y subíndices
 
-Un superíndice se especifica con un acento circunflejo (`^`) antes y después del texto que se desea mostrar como superíndice. Un subíndice se especifica con un guión (`-`) antes y después del texto que se desea mostrar como subíndice.
+Un superíndice se especifica con un acento circunflejo (`^`) antes y después del texto que se desea mostrar como superíndice. Un subíndice se especifica con una tilde (`~`) antes y después del texto que se desea mostrar como subíndice.
 
 <table>
   <tr>
@@ -316,7 +357,7 @@ Un superíndice se especifica con un acento circunflejo (`^`) antes y después d
   </tr>
   <tr>
     <td>
-      `subíndice-2-`
+      `subíndice~2~`
     </td>
     <td>
       subíndice<sub>2</sub>
@@ -405,10 +446,10 @@ Se definen con un signo de admiración de cierre (`!`), paréntesis cuadrados (`
   </tr>
   <tr>
     <td>
-      `![Imagen remota](https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Jupiter_and_the_Galilean_Satellites.jpg/168px-Jupiter_and_the_Galilean_Satellites.jpg)`
+      `![Imagen remota](https://images-assets.nasa.gov/image/PIA00600/PIA00600~small.jpg)`
     </td>
     <td>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Jupiter_and_the_Galilean_Satellites.jpg/168px-Jupiter_and_the_Galilean_Satellites.jpg" alt="Imagen remota">
+      <img src="https://images-assets.nasa.gov/image/PIA00600/PIA00600~small.jpg" alt="Imagen remota">
     </td>
   </tr>  
 </table>
@@ -649,7 +690,7 @@ Si el código es de un lenguaje específico, puede indicarse para resaltar (y co
 Sintaxis de código en R:
 <pre><code>
 ```r
-# Gráfico de dispersón del conjunto de datos cars con etiquetas en los ejes x e y
+# Gráfico de dispersión del conjunto de datos cars con etiquetas en los ejes x e y
 plot(
   x=cars$speed,
   y=cars$dist,
@@ -661,7 +702,7 @@ plot(
 
 Visualización de código en R:
 ```r
-# Gráfico de dispersón del conjunto de datos cars con etiquetas en los ejes x e y
+# Gráfico de dispersión del conjunto de datos cars con etiquetas en los ejes x e y
 plot(
   x=cars$speed,
   y=cars$dist,
@@ -678,35 +719,25 @@ Para más información sobre el uso de bloques de código en documentos Markdown
 - [The languages YAML file](https://github.com/github-linguist/linguist/blob/main/lib/linguist/languages.yml)
 - [Markdown Code Block: Including Code In .md Files - Markdown Land](https://markdown.land/markdown-code-block)
 
-Nótese que los bloques de código en un documento Markdown normal (con extensión `.md`) no se ejecutan, solo se muestran. Sin embargo, hay sistemas como [Quarto](https://quarto.org/) y [Jupyter Notebooks](https://jupyter.org/) que permiten combinar narrativa em Markdown con bloques de código ejecutables.
+Nótese que los bloques de código en un documento Markdown normal (con extensión `.md`) no se ejecutan, solo se muestran. Sin embargo, hay sistemas como [Quarto](https://quarto.org/) y [Jupyter Notebooks](https://jupyter.org/) que permiten combinar narrativa en Markdown con bloques de código ejecutables.
 
 ## Ejercicios
 
-1. En RStudio, cree un nuevo proyecto con la opción *File - New Project - New Directory - New Project* de RStudio.
+En el siguiente ejercicio se aplica lo visto en este capítulo a un documento con contenido propio.
 
-2.  En el nuevo proyecto, cree un nuevo documento Markdown con la opción *File - New File - Markdown File* de RStudio. y escriba en este un breve *curriculum* académico o profesional (o cualquier otro tema que sea de su interés: su trabajo final de graduación, un proyecto personal, etc).
-    a. Incluya información como: nombre, fotografía, datos de contacto, áreas de interés, carrera, cursos aprobados, publicaciones, etc.
-    b. Puede usar información ficticia (**no incluya datos confidenciales o sensibles**).
-    c. Especifique la fuente de las imágenes (y de cualquier otra información para la que sea necesario) y no utilice imágenes para las que no tiene autorización. Considere utilizar sitios con imágenes con licencias abiertas (ej. [Wikimedia Commons](https://commons.wikimedia.org/), [Unsplash](https://unsplash.com/), [FreeImages](https://www.freeimages.com/)).
-    d. Asegúrese de utilizar los siguientes elementos de sintaxis Markdown:
-        -   Encabezados de varios niveles.
-        -   Negritas e itálicas.
-        -   Listas.
-        -   Enlaces a sitios web.
-        -   Imágenes (al menos una local y una remota).
-        
-3. Guarde el documento con el nombre `README.md` (RStudio asigna la extensión automáticamente).
+Siguiendo el mismo procedimiento descrito en la subsección *Ejercicios* del *Ejemplo de documento* (creación del proyecto en RStudio, edición del archivo `README.md`, visualización local y publicación en GitHub Pages), cree un nuevo proyecto con un archivo `README.md` que contenga un breve *curriculum* académico o profesional (o cualquier otro tema que sea de su interés: su trabajo final de graduación, un proyecto personal, etc.). Asigne al proyecto y al repositorio en GitHub un nombre descriptivo del contenido (ej. `curriculum-vitae`).
 
-4. Cree una cuenta gratuita en la plataforma de desarrollo colaborativo de software [GitHub](https://github.com/).
+Considere las siguientes recomendaciones y requisitos adicionales:
 
-5. Cree un repositorio vacío en su cuenta en GitHub (ej. `curriculum-vitae`).
-
-6. Suba al nuevo repositorio el archivo `README.md` junto con cualquier otro documento asociado (ej. imágenes).
-
-7. Genere un sitio web en el servicio de alojamiento [GitHub Pages](https://pages.github.com/) con la opción *Settings - Pages - Branch - main - Save* de GitHub.
-
-8. Repita los pasos 6 y 7 para cada modificación que realice en el documento Markdown.
-
+- El contenido puede incluir información como nombre, fotografía, datos de contacto, áreas de interés, carrera, cursos aprobados, publicaciones, etc.
+- Puede usar información ficticia. **No incluya datos confidenciales o sensibles.**
+- Especifique la fuente de las imágenes (y de cualquier otra información para la que sea necesario) y no utilice imágenes para las que no tiene autorización. Considere utilizar sitios con imágenes con licencias abiertas (ej. [Wikimedia Commons](https://commons.wikimedia.org/), [Unsplash](https://unsplash.com/), [FreeImages](https://www.freeimages.com/)).
+- Asegúrese de utilizar los siguientes elementos de sintaxis Markdown:
+    - Encabezados de varios niveles.
+    - Negritas e itálicas.
+    - Listas.
+    - Enlaces a sitios web.
+    - Imágenes (al menos una local y una remota).
 
 ## Recursos de interés
 
@@ -716,4 +747,4 @@ Nótese que los bloques de código en un documento Markdown normal (con extensi�
 
 *Markdown Guide*. (s. f.). Recuperado 10 de abril de 2022, de [https://www.markdownguide.org/](https://www.markdownguide.org/)
 
-Writing mathematical expressions. (s. f.). *GitHub Docs*. Recuperado 25 de marzo de 2023, de [https://ghdocs-prod.azurewebsites.net/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions](https://ghdocs-prod.azurewebsites.net/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)
+Writing mathematical expressions. (s. f.). *GitHub Docs*. Recuperado 25 de marzo de 2023, de [https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)

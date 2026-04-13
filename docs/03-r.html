@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./tareas/tarea-01-g001.html" rel="next">
+<link href="./04-reproducibilidad.html" rel="next">
 <link href="./02-introduccion-ciencia-datos.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -219,12 +219,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Tareas</span></a>
+ <span class="menu-text">III Herramientas para investigación reproducible y desarrollo colaborativo</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar sección">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-reproducibilidad.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-markdown.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Markdown - lenguaje de marcado</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Tareas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Alternar sección">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tareas/tarea-01-g001.html" class="sidebar-item-text sidebar-link">
@@ -235,6 +258,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./tareas/tarea-01-g002.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Tarea 1 – Grupo 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tareas/tarea-02-g001.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tarea 2 – Grupo 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tareas/tarea-02-g002.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Tarea 2 – Grupo 2</span></a>
   </div>
 </li>
       </ul>
@@ -327,7 +362,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="el-ambiente-de-desarrollo-integrado-rstudio" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="el-ambiente-de-desarrollo-integrado-rstudio"><span class="header-section-number">3.4</span> El ambiente de desarrollo integrado RStudio</h2>
 <p><a href="https://posit.co/download/rstudio-desktop/">RStudio</a> es el IDE más popular para el lenguaje R. Está disponible en una versión de escritorio (RStudio Desktop) y en una versión para servidor (RStudio Server). Esta última permite la conexión de varios usuarios a través de un navegador web. RStudio se ofrece también como un servicio en la nube, a través de <a href="https://posit.cloud/">Posit Cloud</a>. La <a href="#fig-interfaz-rstudio" class="quarto-xref">Figura&nbsp;<span>3.1</span></a> muestra la interfaz de RStudio.</p>
-<div id="fig-interfaz-rstudio" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Interfaz del ambiente de desarrollo integrado RStudio">
+<div id="fig-interfaz-rstudio" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Interfaz del ambiente de desarrollo integrado RStudio" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-interfaz-rstudio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/rstudio-interfaz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;3.1: Interfaz del ambiente de desarrollo integrado RStudio."><img src="img/rstudio-interfaz.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Interfaz del ambiente de desarrollo integrado RStudio"></a>
@@ -473,7 +508,7 @@ Figura&nbsp;3.1: Interfaz del ambiente de desarrollo integrado RStudio.
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Impresión del directorio de trabajo</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">getwd</span>()</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/rstudio/2026-i"</code></pre>
+<pre><code>[1] "/home/rstudio"</code></pre>
 </div>
 </div>
 <p>La función <a href="https://rdrr.io/r/base/getwd.html">setwd()</a> (<em>set working directory</em>) establece la ruta del directorio de trabajo de la sesión actual de R. Como argumento, recibe una hilera de texto con la ruta.</p>
@@ -1110,8 +1145,8 @@ TV-Y7-FV       UR
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-e282d6b80fd1e12edd48" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-e282d6b80fd1e12edd48">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13],["05/04/2026 06:00 p. m.","05/04/2026 05:00 p. m.","05/04/2026 04:00 p. m.","05/04/2026 03:00 p. m.","05/04/2026 02:00 p. m.","05/04/2026 01:00 p. m.","05/04/2026 12:00 p. m.","05/04/2026 11:00 a. m.","05/04/2026 10:00 a. m.","05/04/2026 09:00 a. m.","05/04/2026 08:00 a. m.","05/04/2026 07:00 a. m.","05/04/2026 06:00 a. m."],[18,17,16,15,14,13,12,11,10,9,8,7,6],[21.6,22.52,22.69,23.92,24.06,23.93,23.43,21.69,21.31,21.7,21.03,19.22,18.16],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0.06,0.44,0.57,1.2,1.27,1.47,1.53,1.48,0.96,0.78,0.55,0.37,0.05],[878.42,878.05,877.88,878.13,878.46,879.14,879.8200000000001,880.3200000000001,880.35,880.47,880.28,879.83,879.22]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>id<\/th>\n      <th>fecha_hora<\/th>\n      <th>hora<\/th>\n      <th>temperatura<\/th>\n      <th>lluvia<\/th>\n      <th>radiacion<\/th>\n      <th>presion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":13,"language":{"url":"//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"},"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,5,6]},{"name":"id","targets":0},{"name":"fecha_hora","targets":1},{"name":"hora","targets":2},{"name":"temperatura","targets":3},{"name":"lluvia","targets":4},{"name":"radiacion","targets":5},{"name":"presion","targets":6}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,13,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-bcbd9db5b51df7b88d1b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-bcbd9db5b51df7b88d1b">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13],["05/04/2026 06:00 p. m.","05/04/2026 05:00 p. m.","05/04/2026 04:00 p. m.","05/04/2026 03:00 p. m.","05/04/2026 02:00 p. m.","05/04/2026 01:00 p. m.","05/04/2026 12:00 p. m.","05/04/2026 11:00 a. m.","05/04/2026 10:00 a. m.","05/04/2026 09:00 a. m.","05/04/2026 08:00 a. m.","05/04/2026 07:00 a. m.","05/04/2026 06:00 a. m."],[18,17,16,15,14,13,12,11,10,9,8,7,6],[21.6,22.52,22.69,23.92,24.06,23.93,23.43,21.69,21.31,21.7,21.03,19.22,18.16],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0.06,0.44,0.57,1.2,1.27,1.47,1.53,1.48,0.96,0.78,0.55,0.37,0.05],[878.42,878.05,877.88,878.13,878.46,879.14,879.8200000000001,880.3200000000001,880.35,880.47,880.28,879.83,879.22]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>id<\/th>\n      <th>fecha_hora<\/th>\n      <th>hora<\/th>\n      <th>temperatura<\/th>\n      <th>lluvia<\/th>\n      <th>radiacion<\/th>\n      <th>presion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":13,"language":{"url":"//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"},"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,5,6]},{"name":"id","targets":0},{"name":"fecha_hora","targets":1},{"name":"hora","targets":2},{"name":"temperatura","targets":3},{"name":"lluvia","targets":4},{"name":"radiacion","targets":5},{"name":"presion","targets":6}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,13,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <ol type="1">
@@ -1701,7 +1736,7 @@ TV-Y7-FV       UR
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Fecha actual</span></span>
 <span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>fecha_actual <span class="ot">&lt;-</span> <span class="fu">Sys.Date</span>()</span>
 <span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>fecha_actual</span>
-<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "2026-04-06"</span></span>
+<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] "2026-04-13"</span></span>
 <span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Tipo de datos</span></span>
 <span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(fecha_actual)</span>
@@ -2831,8 +2866,8 @@ if (length(imcs) > 0) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./tareas/tarea-01-g001.html" class="pagination-link" aria-label="Tarea 1 – Grupo 1">
-        <span class="nav-page-text">Tarea 1 – Grupo 1</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04-reproducibilidad.html" class="pagination-link" aria-label="Reproducibilidad">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
