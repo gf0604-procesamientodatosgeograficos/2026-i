@@ -1,4 +1,4 @@
-# Git - sistema de control de versiones {#sec-pencom}
+# Git - sistema de control de versiones {#sec-git}
 
 En este capítulo se introduce el sistema de control de versiones Git, el cual permite llevar un control de los cambios que se realizan en diversos tipos de archivos, incluyendo los que se efectúan en el código fuente durante el proceso de desarrollo de software.
 
@@ -45,11 +45,35 @@ Las operaciones _push_ y _pull_ se ilustran en la @fig-git-push-pull.
 
 ## Ejercicios
 
-1. En la interfaz de usuario de GitHub, realice un ***Fork*** (bifurcación) del repositorio [https://github.com/gf0604-procesamientodatosgeograficos/2025-i-mundo-mascota](https://github.com/gf0604-procesamientodatosgeograficos/2025-i-mundo-mascota) a su cuenta personal. La operación **fork** es una copia de un repositorio a otra cuenta. Así, es posible modificar libremente el repositorio copiado, pero con la posibilidad de integrar cambios del repositorio original, o viceversa. El botón para realizar la operación **fork** se encuentra en la parte superior derecha de la interfaz de usuario de GitHub.
+En los siguientes pasos se practica el flujo de trabajo básico con Git y GitHub: bifurcar un repositorio existente, clonarlo a la computadora local, editar su contenido, enviar los cambios al repositorio remoto y publicarlos como un sitio web en GitHub Pages.
 
-2. Con la opción de menú de RStudio *File - New Project - Version Control - Git*, realice un **clone** (clonación) del repositorio que bifurcó en el paso 1 a su computadora local. La operación **clone** en Git (y GitHub) sirve para crear una copia completa de un repositorio que está alojado en línea, por ejemplo en GitHub, a una computadora local. Para realizar esta operación, debe haber instalado el sistema Git en su computadora.
+### Bifurcación del repositorio en GitHub
 
-3. Realice cambios en el repositorio clonado, súbalos (**push**) a su repostorio en GitHub y publíquelos en un sitio en GitHub Pages, como en los ejercicios que realizó en el capítulo sobre Markdown.
+1. Si aún no cuenta con una, cree una cuenta gratuita en [GitHub](https://github.com/signup). Complete el formulario de registro con una dirección de correo electrónico, un nombre de usuario y una contraseña, y verifique la cuenta mediante el correo de confirmación que GitHub le enviará.
+
+2. Con la sesión iniciada en GitHub, visite la página del repositorio [https://github.com/gf0604-procesamientodatosgeograficos/mundo-mascota](https://github.com/gf0604-procesamientodatosgeograficos/mundo-mascota). Este repositorio contiene un archivo `index.md` con el catálogo de ejemplo de una tienda ficticia de artículos para mascotas llamada *Mundo Mascota*.
+
+3. En la parte superior derecha de la página del repositorio, haga clic en el botón *Fork*. En la pantalla *Create a new fork*, mantenga los valores por defecto (en *Owner* aparecerá su cuenta personal y en *Repository name* el nombre `mundo-mascota`) y haga clic en *Create fork*. La operación *fork* (bifurcación) crea una copia del repositorio original en su cuenta personal, sobre la que puede realizar cambios libremente sin afectar al repositorio original, pero con la posibilidad de integrar cambios entre ambos repositorios.
+
+### Clonación del repositorio a la computadora local
+
+4. En RStudio, cree un nuevo proyecto con la opción *File - New Project - Version Control - Git*. En el campo *Repository URL*, pegue la URL del repositorio que bifurcó en el paso 3 (con el formato `https://github.com/<usuario>/mundo-mascota`, donde `<usuario>` es su nombre de usuario en GitHub). El campo *Project directory name* se completará automáticamente con `mundo-mascota`. En *Create project as subdirectory of*, seleccione una ubicación en su computadora para almacenar el proyecto. Haga clic en *Create Project*; RStudio clonará el repositorio remoto a la ubicación seleccionada y abrirá automáticamente el nuevo proyecto. La operación *clone* (clonación) crea una copia completa del repositorio remoto en su computadora, incluyendo su historial de cambios. Para realizar esta operación, debe tener instalado el sistema Git en su computadora.
+
+### Edición, _commit_ y _push_ de los cambios
+
+5. En el panel *Files* de RStudio, haga clic en el archivo `index.md` para abrirlo en el editor. Realice cambios en su contenido para personalizarlo. Por ejemplo: agregue un nuevo artículo al catálogo, edite la información de contacto o modifique el título. Guarde los cambios con *File - Save* (o el atajo `Ctrl + S` en Windows/Linux, `Cmd + S` en macOS).
+
+6. Con la sesión iniciada en GitHub, vaya a la página de su repositorio bifurcado (con el formato `https://github.com/<usuario>/mundo-mascota`). Sobre la lista de archivos, haga clic en el botón *Add file* y seleccione *Upload files*. Arrastre el archivo `index.md` desde el directorio del proyecto en su computadora al área indicada en el navegador (o haga clic en *choose your files* para seleccionarlo). GitHub cargará la nueva versión del archivo y detectará automáticamente que reemplaza al archivo existente.
+
+7. Al final de la misma página se encuentra el formulario *Commit changes*. En el campo de texto superior, escriba un mensaje corto y descriptivo que resuma el cambio realizado (por ejemplo, *"Agregar nuevo artículo al catálogo"*). Un *commit* es una "captura" que registra un conjunto de cambios en el historial del repositorio en un momento determinado. El mensaje del *commit* es importante porque permite entender —al revisar el historial del proyecto, ya sea uno mismo o cualquier otra persona colaboradora— qué se modificó y por qué; por eso conviene que sea claro, específico y conciso. Haga clic en el botón *Commit changes* para confirmar el envío. Esta acción realiza dos operaciones en una sola: registra el *commit* en el historial del repositorio y ejecuta un *push* (envío) del cambio al repositorio remoto en GitHub. Verifique en la página del repositorio que los cambios se reflejen en el archivo `index.md`.
+
+### Publicación en GitHub Pages
+
+8. En la página del repositorio en GitHub, vaya a la pestaña *Settings* y seleccione *Pages* en el menú lateral izquierdo. En la sección *Build and deployment*, en *Source*, escoja *Deploy from a branch*. En *Branch*, seleccione `main` con la carpeta `/ (root)` y haga clic en *Save*.
+
+9. Espere uno o dos minutos y recargue la página *Settings - Pages*. Cuando el sitio esté publicado, aparecerá un mensaje con la URL pública, con el formato `https://<usuario>.github.io/mundo-mascota/`, donde `<usuario>` es su nombre de usuario en GitHub. Haga clic en la URL para visitar el catálogo publicado.
+
+10. Para practicar el ciclo completo de trabajo con Git, repita los pasos 5 a 7: realice nuevas ediciones en el archivo `index.md`, haga *commit* y *push*. Los cambios se reflejarán en el sitio de GitHub Pages pocos minutos después. Repita el ciclo de *editar → commit → push* hasta familiarizarse con el proceso.
 
 ## Recursos de interés
 
