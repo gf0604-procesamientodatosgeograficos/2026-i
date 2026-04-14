@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>4&nbsp; Reproducibilidad – GF-0604 Procesamiento de datos geográficos 2026-I</title>
+<title>7&nbsp; Quarto - sistema de publicación técnica y científica – GF-0604 Procesamiento de datos geográficos 2026-I</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,27 +20,42 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
 }
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -50,8 +65,8 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./05-markdown.html" rel="next">
-<link href="./03-r.html" rel="prev">
+<link href="./tareas/tarea-01-g001.html" rel="next">
+<link href="./06-git.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -106,7 +121,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-reproducibilidad.html">III Herramientas para investigación reproducible y desarrollo colaborativo</a></li><li class="breadcrumb-item"><a href="./04-reproducibilidad.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-reproducibilidad.html">III Herramientas para investigación reproducible y desarrollo colaborativo</a></li><li class="breadcrumb-item"><a href="./07-quarto.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Buscar" onclick="window.quartoOpenSearch();">
@@ -202,7 +217,7 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04-reproducibilidad.html" class="sidebar-item-text sidebar-link active">
+  <a href="./04-reproducibilidad.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></span></a>
   </div>
 </li>
@@ -220,7 +235,7 @@ div.csl-indent {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./07-quarto.html" class="sidebar-item-text sidebar-link">
+  <a href="./07-quarto.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></span></a>
   </div>
 </li>
@@ -271,22 +286,36 @@ div.csl-indent {
     <h2 id="toc-title">Tabla de contenidos</h2>
    
   <ul>
-  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen"><span class="header-section-number">4.1</span> Resumen</a></li>
-  <li><a href="#trabajo-previo" id="toc-trabajo-previo" class="nav-link" data-scroll-target="#trabajo-previo"><span class="header-section-number">4.2</span> Trabajo previo</a>
+  <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen"><span class="header-section-number">7.1</span> Resumen</a></li>
+  <li><a href="#trabajo-previo" id="toc-trabajo-previo" class="nav-link" data-scroll-target="#trabajo-previo"><span class="header-section-number">7.2</span> Trabajo previo</a>
   <ul class="collapse">
-  <li><a href="#lecturas" id="toc-lecturas" class="nav-link" data-scroll-target="#lecturas"><span class="header-section-number">4.2.1</span> Lecturas</a></li>
+  <li><a href="#lecturas" id="toc-lecturas" class="nav-link" data-scroll-target="#lecturas"><span class="header-section-number">7.2.1</span> Lecturas</a></li>
   </ul></li>
-  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">4.3</span> Introducción</a></li>
-  <li><a href="#herramientas" id="toc-herramientas" class="nav-link" data-scroll-target="#herramientas"><span class="header-section-number">4.4</span> Herramientas</a></li>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">7.3</span> Introducción</a></li>
+  <li><a href="#anatomía-de-un-documento-quarto" id="toc-anatomía-de-un-documento-quarto" class="nav-link" data-scroll-target="#anatomía-de-un-documento-quarto"><span class="header-section-number">7.4</span> Anatomía de un documento Quarto</a>
+  <ul class="collapse">
+  <li><a href="#metadatos-en-yaml" id="toc-metadatos-en-yaml" class="nav-link" data-scroll-target="#metadatos-en-yaml"><span class="header-section-number">7.4.1</span> Metadatos en YAML</a></li>
+  <li><a href="#narrativa-en-markdown" id="toc-narrativa-en-markdown" class="nav-link" data-scroll-target="#narrativa-en-markdown"><span class="header-section-number">7.4.2</span> Narrativa en Markdown</a></li>
+  <li><a href="#bloques-de-código-fuente" id="toc-bloques-de-código-fuente" class="nav-link" data-scroll-target="#bloques-de-código-fuente"><span class="header-section-number">7.4.3</span> Bloques de código fuente</a></li>
+  </ul></li>
+  <li><a href="#cómo-funciona-quarto" id="toc-cómo-funciona-quarto" class="nav-link" data-scroll-target="#cómo-funciona-quarto"><span class="header-section-number">7.5</span> ¿Cómo funciona Quarto?</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">7.6</span> Ejercicios</a>
+  <ul class="collapse">
+  <li><a href="#creación-del-proyecto-y-del-documento-quarto" id="toc-creación-del-proyecto-y-del-documento-quarto" class="nav-link" data-scroll-target="#creación-del-proyecto-y-del-documento-quarto"><span class="header-section-number">7.6.1</span> Creación del proyecto y del documento Quarto</a></li>
+  <li><a href="#edición-del-documento" id="toc-edición-del-documento" class="nav-link" data-scroll-target="#edición-del-documento"><span class="header-section-number">7.6.2</span> Edición del documento</a></li>
+  <li><a href="#creación-del-repositorio-en-github-y-carga-de-los-archivos" id="toc-creación-del-repositorio-en-github-y-carga-de-los-archivos" class="nav-link" data-scroll-target="#creación-del-repositorio-en-github-y-carga-de-los-archivos"><span class="header-section-number">7.6.3</span> Creación del repositorio en GitHub y carga de los archivos</a></li>
+  <li><a href="#publicación-en-github-pages" id="toc-publicación-en-github-pages" class="nav-link" data-scroll-target="#publicación-en-github-pages"><span class="header-section-number">7.6.4</span> Publicación en GitHub Pages</a></li>
+  </ul></li>
+  <li><a href="#recursos-de-interés" id="toc-recursos-de-interés" class="nav-link" data-scroll-target="#recursos-de-interés"><span class="header-section-number">7.7</span> Recursos de interés</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-reproducibilidad.html">III Herramientas para investigación reproducible y desarrollo colaborativo</a></li><li class="breadcrumb-item"><a href="./04-reproducibilidad.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-reproducibilidad.html">III Herramientas para investigación reproducible y desarrollo colaborativo</a></li><li class="breadcrumb-item"><a href="./07-quarto.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-reproducibilidad" class="quarto-section-identifier"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Reproducibilidad</span></span></h1>
+<h1 class="title"><span id="sec-quarto" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Quarto - sistema de publicación técnica y científica</span></span></h1>
 </div>
 
 
@@ -303,71 +332,153 @@ div.csl-indent {
 </header>
 
 
-<p>En este capítulo se introduce el concepto de reproducibilidad, las características que debe cumplir una investigación reproducible y algunas de las herramientas informáticas que pueden ayudar a implementarlas.</p>
-<section id="resumen" class="level2" data-number="4.1">
-<h2 data-number="4.1" class="anchored" data-anchor-id="resumen"><span class="header-section-number">4.1</span> Resumen</h2>
-<p>El trabajo de un investigador se considera reproducible si otros investigadores, trabajando de manera independiente, pueden alcanzar los mismos resultados. Para esto se requiere tener acceso a los datos y al código fuente empleados por el investigador original.</p>
-<p>Hay varias herramientas informáticas que facilitan la reproducibilidad, entre las que están los lenguajes de programación, los lenguajes de marcado y los sistemas de control de versiones.</p>
+<p>En este capítulo se introduce el sistema de publicación técnica y científica Quarto, el cual permite crear contenido dinámico mediante lenguajes de programación y Markdown.</p>
+<section id="resumen" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="resumen"><span class="header-section-number">7.1</span> Resumen</h2>
+<p>Quarto es una herramienta de publicación de documentos y creación de contenido desarrollada por Posit (anteriormente RStudio). Se diseñó para facilitar la elaboración de informes, artículos, libros, páginas web y presentaciones de manera reproducible y dinámica, integrando texto, código y resultados en un solo entorno.</p>
+<p>Un documento Quarto se compone de metadatos, narrativa y código fuente.</p>
 </section>
-<section id="trabajo-previo" class="level2" data-number="4.2">
-<h2 data-number="4.2" class="anchored" data-anchor-id="trabajo-previo"><span class="header-section-number">4.2</span> Trabajo previo</h2>
-<section id="lecturas" class="level3" data-number="4.2.1">
-<h3 data-number="4.2.1" class="anchored" data-anchor-id="lecturas"><span class="header-section-number">4.2.1</span> Lecturas</h3>
-<p>Singleton, Alex David; Spielman, Seth; &amp; Brunsdon, Chris (2016). <em>Establishing a framework for Open Geographic Information science. International Journal of Geographical Information Science, 30</em>(8), 1507-1521. <a href="https://doi.org/10.1080/13658816.2015.1137579">https://doi.org/10.1080/13658816.2015.1137579</a></p>
+<section id="trabajo-previo" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="trabajo-previo"><span class="header-section-number">7.2</span> Trabajo previo</h2>
+<section id="lecturas" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="lecturas"><span class="header-section-number">7.2.1</span> Lecturas</h3>
+<p><em>Quarto - Tutorial: Hello, Quarto</em>. (s.f.). Quarto. Recuperado el 1 de marzo de 2024, de <a href="https://quarto.org/docs/get-started/hello/rstudio.html">https://quarto.org/docs/get-started/hello/rstudio.html</a></p>
 </section>
 </section>
-<section id="introducción" class="level2" data-number="4.3">
-<h2 data-number="4.3" class="anchored" data-anchor-id="introducción"><span class="header-section-number">4.3</span> Introducción</h2>
-<p>La <a href="https://es.wikipedia.org/wiki/Reproducibilidad_y_repetibilidad">reproducibilidad</a> es la capacidad de un ensayo o experimento de ser reproducido por otros, en particular, por la comunidad científica. Más formalmente, en investigación cuantitativa, un análisis se considera reproducible si <em>“el código fuente y los datos utilizados por un investigador para llegar a un resultado están disponibles y son suficientes para que otro investigador, trabajando de manera independiente, pueda llegar al mismo resultado”</em> <span class="citation" data-cites="gandrud_reproducible_2020">(<a href="02-introduccion-ciencia-datos.html#ref-gandrud_reproducible_2020" role="doc-biblioref">Gandrud, 2020</a>)</span>.</p>
-<p>La reproducibilidad, junto con la <a href="https://es.wikipedia.org/wiki/Falsabilidad">falsabilidad</a>, es uno de los pilares del <a href="https://es.wikipedia.org/wiki/M%C3%A9todo_cient%C3%ADfico">método científico</a>. Sin embargo, en años recientes, se ha generado una creciente preocupación debido a que muchos estudios científicos publicados fallan las pruebas de reproducibilidad, dando lugar a una <a href="https://es.wikipedia.org/wiki/Crisis_de_replicaci%C3%B3n">crisis de reproducibilidad o replicabilidad</a> en varias ciencias <span class="citation" data-cites="krugman_opinion_2013">(<a href="02-introduccion-ciencia-datos.html#ref-krugman_opinion_2013" role="doc-biblioref">Krugman, 2013</a>)</span>.</p>
-<p>El concepto de reproducibilidad es cada vez más importante debido, entre otras razones, al aumento exponencial de datos disponibles y a la aplicación de la programación de computadoras, para procesar estos datos, por parte de especialistas de muchas disciplinas.</p>
-<p>Alex Singleton y otros autores han identificado los siguientes retos para la reproducibilidad en ciencia de datos geoespaciales <span class="citation" data-cites="singleton_establishing_2016">(<a href="02-introduccion-ciencia-datos.html#ref-singleton_establishing_2016" role="doc-biblioref">Singleton, Spielman, &amp; Brunsdon, 2016</a>)</span>:</p>
-<ol type="1">
-<li>Los datos deben ser de dominio público y estar disponibles para los investigadores.</li>
-<li>El software utilizado debe ser de código abierto (<em>open source</em>) y estar disponible para ser revisado.</li>
-<li>Siempre que sea posible, los <a href="https://es.wikipedia.org/wiki/Flujo_de_trabajo">flujos de trabajo</a> deben ser públicos y con enlaces a los datos, software y métodos de análisis, junto con la documentación necesaria.</li>
-<li>El proceso de <a href="https://es.wikipedia.org/wiki/Revisi%C3%B3n_por_pares">revisión por pares (<em>peer review process</em>)</a> y la publicación académica deben requerir la presentación de un modelo de flujo de trabajo e idealmente la disponibilidad de los materiales necesarios para la replicación.</li>
-<li>En los casos en los que la reproducibilidad total no sea posible (ej. datos sensibles), los investigadores deben esforzarse por incluir todos los aspectos que puedan de un marco de trabajo abierto.</li>
-</ol>
-<p>En general, el estándar mínimo de reproducibilidad requiere que los datos y el código fuente estén disponibles para otros investigadores <span class="citation" data-cites="peng_reproducible_2011">(<a href="02-introduccion-ciencia-datos.html#ref-peng_reproducible_2011" role="doc-biblioref">Peng, 2011</a>)</span>. Sin embargo, dependiendo de las circunstancias y recursos disponibles, existe todo un espectro de posibilidades, que se ilustra en la <a href="#fig-espectro-reproducibilidad" class="quarto-xref">Figura&nbsp;<span>4.1</span></a>.</p>
-<div id="fig-espectro-reproducibilidad" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Imagen del espectro de reproducibilidad" data-fig-align="center">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-espectro-reproducibilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/espectro-reproducibilidad.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;4.1: Espectro de reproducibilidad. Imagen de Anita Graser basada en (Peng, 2011)."><img src="img/espectro-reproducibilidad.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Imagen del espectro de reproducibilidad"></a>
+<section id="introducción" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="introducción"><span class="header-section-number">7.3</span> Introducción</h2>
+<p><a href="https://quarto.org/">Quarto</a> es un sistema de publicación de documentos técnicos y científicos, basado en código abierto. Entre sus principales capacidades están:</p>
+<ul>
+<li>Crear contenido dinámico con los lenguajes <a href="https://www.r-project.org/">R</a>, <a href="https://www.python.org/">Python</a>, <a href="https://julialang.org/">Julia</a> y <a href="https://observablehq.com/@observablehq/observables-not-javascript">Observable</a>.</li>
+<li>Crear documentos Markdown de texto plano o <a href="https://jupyter.org/">cuadernos de notas de Jupyter</a>.</li>
+<li>Publicar artículos académicos, reportes, presentaciones, sitios web, <em>blogs</em> y libros en HTML, PDF, MS Word, ePub y otros formatos.</li>
+<li>Crear contenido científico, incluyendo ecuaciones, citas bibliográficas, referencias cruzadas, figuras y otros elementos.</li>
+</ul>
+<p>Quarto es la <a href="https://quarto.org/docs/faq/rmarkdown.html">siguiente generación</a> de <a href="https://rmarkdown.rstudio.com/">R Markdown</a>, un formato que permite insertar código en R, y sus salidas, en documentos escritos en Markdown. R Markdown fue introducido por Yihui Xie en 2012, junto con el paquete <a href="https://yihui.org/knitr/">knitr</a>, cuyo propósito es facilitar la investigación reproducible en R a través de la <a href="https://es.wikipedia.org/wiki/Programaci%C3%B3n_literaria">programación literaria (<em>literate programming</em>)</a>, un paradigma de programación propuesto por Donald Knuth en 1984.</p>
+<p>Los programas “literarios” (o “letrados”) están escritos como una exposición lógica en un lenguaje humano similar a la explicación de las fórmulas y ecuaciones empleadas para representar y resolver un problema en un texto de física o de matemáticas. En estos programas, se describe el análisis del problema, su solución y su implementación, intercalando código fuente entre los párrafos (y otros contenidos como imágenes, tablas, gráficos estadísticos y mapas), de forma similar a como en los textos de matemáticas se intercalan las fórmulas y las ecuaciones. La programación literaria puede mejorar enormemente un programa, ya que permite documentar ampliamente en qué consiste el problema a resolver, cómo se resuelve, cómo y por qué se adoptó cierto diseño, cómo se optimizó y cómo se implementó en un lenguaje de programación.</p>
+</section>
+<section id="anatomía-de-un-documento-quarto" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="anatomía-de-un-documento-quarto"><span class="header-section-number">7.4</span> Anatomía de un documento Quarto</h2>
+<p>Un documento Quarto tiene tres tipos de contenido:</p>
+<ul>
+<li>Metadatos en YAML.</li>
+<li>Narrativa en Markdown.</li>
+<li>Bloques de código fuente.</li>
+</ul>
+<section id="metadatos-en-yaml" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="metadatos-en-yaml"><span class="header-section-number">7.4.1</span> Metadatos en YAML</h3>
+<p>Todo documento Quarto inicia con un encabezado en la sintaxis <a href="https://es.wikipedia.org/wiki/YAML">YAML (YAML Ain’t Markup Language)</a>, el cual contiene metadatos del documento como el título, el autor, la fecha de creación, el formato de salida y la estructura de la tabla de contenidos, entre muchos otros.</p>
+<p>Un encabezado YAML comienza y termina con tres guiones (<code>---</code>) y contiene un conjunto de campos y valores de la forma:</p>
+<pre><code>---
+campo01: valor01
+campo02: valor02
+campo0n: valor0n
+---</code></pre>
+<p>Por ejemplo, un encabezado YAML típico puede ser el siguiente:</p>
+<pre><code>---
+title: Mi primer documento Quarto
+format:
+  html:
+    toc: true
+    toc_float: true
+---</code></pre>
+<p>Los campos del encabezado que dependen de otros campos se anidan con sangrías de dos espacios.</p>
+<p>Los elementos de metadatos que pueden especificarse en el encabezado, pueden variar de acuerdo al formato de salida, como puede verse en los siguientes enlaces:</p>
+<ul>
+<li><a href="https://quarto.org/docs/reference/formats/html.html">Elementos de metadatos para HTML</a></li>
+<li><a href="https://quarto.org/docs/reference/formats/pdf.html">Elementos de metadatos para PDF</a></li>
+<li><a href="https://quarto.org/docs/reference/formats/docx.html">Elementos metadatos para MS Word</a></li>
+</ul>
+<p>Existen elementos de metadatos para muchos otros formatos de salida (OpenOffice, ePub, presentaciones, wikis, etc.), como puede apreciarse en la <a href="https://quarto.org/docs/reference/">Referencia de Quarto</a>.</p>
+</section>
+<section id="narrativa-en-markdown" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="narrativa-en-markdown"><span class="header-section-number">7.4.2</span> Narrativa en Markdown</h3>
+<p>La narrativa proporciona estructura y contenido al documento en la forma de encabezados, párrafos, enlaces y otros elementos de la sintaxis de <a href="https://daringfireball.net/projects/markdown/">Markdown</a>.</p>
+</section>
+<section id="bloques-de-código-fuente" class="level3" data-number="7.4.3">
+<h3 data-number="7.4.3" class="anchored" data-anchor-id="bloques-de-código-fuente"><span class="header-section-number">7.4.3</span> Bloques de código fuente</h3>
+<p>En Quarto, los bloques (<em>chunks</em>) de código fuente se delimitan con tres <a href="https://en.wikipedia.org/wiki/Backtick"><code>backticks</code></a>, tanto al inicio como al final del bloque. Los bloques de código en R se identifican con <code>{r}</code> y diferentes opciones identificadas con <code>#|</code>. Los bloques de otros lenguajes de programación se identifican con <code>{python}</code> y <code>{julia}</code>, por ejemplo.</p>
+<p>El siguiente es un ejemplo de bloque de código en R y su salida:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: graficacion-cars</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: true</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> cars<span class="sc">$</span>speed,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> cars<span class="sc">$</span>dist,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">"Velocidad vs distancia de frenado"</span>,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Velocidad (MPH)"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Distancia (pies)"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="07-quarto_files/figure-html/graficacion-cars-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-espectro-reproducibilidad-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4.1: Espectro de reproducibilidad. Imagen de <a href="https://www.youtube.com/watch?v=ZjXb53pOor0">Anita Graser</a> basada en (Peng, 2011).
+</div>
+</div>
+<p>La opción <code>label</code> se utiliza para etiquetar el bloque y la de <code>include</code> para especificar si se desea que el bloque y sus resultados se incluyan en el documento de salida.</p>
+<p>La documentación de las diferentes opciones disponibles para los bloques de código que utilizan el motor (<em>engine</em>) Knitr (el más utilizado con R) se encuentra en <a href="https://quarto.org/docs/reference/cells/cells-knitr.html">Code Cells: Knitr - Quarto</a>.</p>
+</section>
+</section>
+<section id="cómo-funciona-quarto" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="cómo-funciona-quarto"><span class="header-section-number">7.5</span> ¿Cómo funciona Quarto?</h2>
+<p>Quarto se apoya en <a href="https://yihui.org/knitr/">knitr</a> y en <a href="http://pandoc.org/">Pandoc</a>. knitr ejecuta el código en R (u otro lenguaje) y convierte los documentos a Markdown. Por su parte, Pandoc exporta los documentos Markdown al formato de salida deseado (ej. HTML, PDF, MS Word, MS PowerPoint). Este proceso se ilustra en la <a href="#fig-quarto-knitr-pandoc" class="quarto-xref">Figura&nbsp;<span>7.1</span></a>.</p>
+<div id="fig-quarto-knitr-pandoc" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Conversión de un documento Quarto (.qmd) a su formato de salida">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-quarto-knitr-pandoc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/rstudio-qmd-how-it-works.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;7.1: Conversión de un documento Quarto (.qmd) a su formato de salida. Imagen de quarto.org."><img src="img/rstudio-qmd-how-it-works.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Conversión de un documento Quarto (.qmd) a su formato de salida"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-quarto-knitr-pandoc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;7.1: Conversión de un documento Quarto (.qmd) a su formato de salida. Imagen de <a href="https://quarto.org/">quarto.org</a>.
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="herramientas" class="level2" data-number="4.4">
-<h2 data-number="4.4" class="anchored" data-anchor-id="herramientas"><span class="header-section-number">4.4</span> Herramientas</h2>
-<p>Para facilitar la reproducibilidad, se cuenta con diversas herramientas informáticas, entre las que pueden mencionarse:</p>
-<ul>
-<li>Lenguajes de programación.</li>
-<li>Lenguajes de marcado.</li>
-<li>Sistemas de control de versiones.</li>
-</ul>
-<p>La programación de computadoras es una actividad presente durante todos los procesos de ciencia de datos. Hay muchos lenguajes que pueden utilizarse en este campo. Algunos de los más populares son <a href="https://www.python.org/">Python</a>, <a href="https://www.r-project.org/">R</a>, <a href="https://www.iso.org/standard/76583.html">SQL</a> y <a href="https://ecma-international.org/publications-and-standards/standards/ecma-262/">JavaScript</a>.</p>
-<p>Por otra parte, la documentación es vital durante todo el ciclo de vida de una investigación reproducible. Se recomienda utilizar mecanismos estandarizados y abiertos como el <a href="https://es.wikipedia.org/wiki/HTML">lenguaje de marcado de hipertexto (HTML, en inglés, <em>HyperText Markup Language</em>)</a> o <a href="https://es.wikipedia.org/wiki/Markdown">Markdown</a>, con los cuales pueden crearse documentos mediante editores de texto simples (i.e.&nbsp;no se requiere de software propietario), y exportables a varios formatos (ej. <a href="https://es.wikipedia.org/wiki/LaTeX">LaTeX</a>, <a href="https://es.wikipedia.org/wiki/PDF">PDF</a>).</p>
-<p>Para dar mantenimiento, tanto al código fuente como a la documentación, es necesario un sistema de <a href="https://es.wikipedia.org/wiki/Control_de_versiones">control de versiones</a> como <a href="https://es.wikipedia.org/wiki/Git">Git</a>, el cual permite llevar el registro de los cambios en archivos y también facilita el trabajo colaborativo al reunir las modificaciones hechas por varias personas. Git es usado en varias plataformas que comparten código fuente (ej. <a href="https://github.com/">GitHub</a>, <a href="https://about.gitlab.com/">GitLab</a>) y que ofrecen servicios relacionados, como hospedaje de sitios web.</p>
+<section id="ejercicios" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">7.6</span> Ejercicios</h2>
+<p>En los siguientes pasos se practica el uso de Quarto para elaborar un documento que combina narrativa en Markdown con bloques de código en R. El documento final se renderiza a HTML y se publica como un sitio web en GitHub Pages. El documento debe incluir los gráficos que la persona estudiante programó en los ejercicios sobre datos de la <a href="https://www.imn.ac.cr/especial/estacionCigefi.html">Estación Meteorológica Automática del Instituto Meteorológico Nacional (IMN)</a> —ubicada en el Centro de Investigaciones Geofísicas (CIGEFI) de la Universidad de Costa Rica— de la sección <em>Manipulación de datos</em> del capítulo sobre R.</p>
+<section id="creación-del-proyecto-y-del-documento-quarto" class="level3" data-number="7.6.1">
+<h3 data-number="7.6.1" class="anchored" data-anchor-id="creación-del-proyecto-y-del-documento-quarto"><span class="header-section-number">7.6.1</span> Creación del proyecto y del documento Quarto</h3>
+<ol type="1">
+<li><p>En RStudio, cree un nuevo proyecto con la opción <em>File - New Project - New Directory - New Project</em>. Asigne al directorio un nombre descriptivo (por ejemplo, <code>graficos-estacion-cigefi</code>) y seleccione una ubicación en su computadora para almacenarlo. Haga clic en <em>Create Project</em>; RStudio abrirá automáticamente el nuevo proyecto.</p></li>
+<li><p>Dentro del proyecto, cree un nuevo documento Quarto con la opción <em>File - New File - Quarto Document</em>. En la ventana <em>New Quarto Document</em>, complete el campo <em>Title</em> con un título descriptivo (por ejemplo, <em>“Gráficos de la Estación Meteorológica del CIGEFI”</em>) y el campo <em>Author</em> con su nombre. En <em>Engine</em> seleccione <em>Knitr</em> y verifique que en el panel lateral el formato de salida seleccionado sea <em>HTML</em>. Haga clic en <em>Create</em>. RStudio abrirá el nuevo documento con una plantilla inicial que incluye un encabezado YAML y algunos bloques de código de ejemplo.</p></li>
+<li><p>Guarde el documento con la opción <em>File - Save</em> (o el atajo <code>Ctrl + S</code> en Windows/Linux, <code>Cmd + S</code> en macOS) y asígnele el nombre <code>index.qmd</code> (RStudio agregará automáticamente la extensión <code>.qmd</code> si no la incluye). El archivo quedará almacenado en la raíz del proyecto.</p></li>
+</ol>
+</section>
+<section id="edición-del-documento" class="level3" data-number="7.6.2">
+<h3 data-number="7.6.2" class="anchored" data-anchor-id="edición-del-documento"><span class="header-section-number">7.6.2</span> Edición del documento</h3>
+<ol start="4" type="1">
+<li><p>En el editor, reemplace el contenido de la plantilla por su propio contenido. Conserve al inicio el encabezado YAML (delimitado por <code>---</code>) con los metadatos del documento. Debajo del encabezado, agregue una sección de narrativa en Markdown que explique el propósito del documento, la fuente de los datos utilizados (la Estación Meteorológica Automática del IMN ubicada en el CIGEFI) y la dirección del repositorio en GitHub con el código fuente (este repositorio se creará en un paso posterior).</p></li>
+<li><p>Agregue al documento los gráficos y los comentarios elaborados en los ejercicios de la sección <em>Manipulación de datos</em> del capítulo sobre R (evolución de la temperatura a través de las horas del día, relación entre radiación y temperatura, distribución de frecuencias de la presión atmosférica y promedios de radiación por periodo), intercalando bloques de código en R con narrativa en Markdown. Un bloque de código en R se delimita con tres comillas invertidas seguidas de <code>{r}</code> al inicio del bloque, y con tres comillas invertidas al final. Divida el documento en secciones mediante el uso de encabezados de varios niveles, una sección por gráfico. Se recomienda asignar una etiqueta a cada bloque de código con la opción <code>#| label:</code> (por ejemplo, <code>#| label: fig-temperatura-horas</code>). Considere además el uso de otras opciones de Quarto para controlar el despliegue de las salidas y del código fuente; por ejemplo, <code>#| echo: false</code> oculta el código fuente y muestra solo la salida, y <code>#| fig-cap:</code> agrega un título a una figura.</p></li>
+<li><p>Guarde los cambios (<em>File - Save</em>) y presione el botón <em>Render</em> en la barra de herramientas del editor (con el ícono de una flecha azul). Quarto ejecutará el código en R, generará el archivo <code>index.html</code> en el directorio del proyecto y abrirá una vista previa del documento renderizado en el panel <em>Viewer</em> o en una ventana aparte. Revise el resultado y realice los ajustes necesarios. Repita el ciclo de <em>editar → guardar → render</em> hasta que el documento esté listo.</p></li>
+</ol>
+</section>
+<section id="creación-del-repositorio-en-github-y-carga-de-los-archivos" class="level3" data-number="7.6.3">
+<h3 data-number="7.6.3" class="anchored" data-anchor-id="creación-del-repositorio-en-github-y-carga-de-los-archivos"><span class="header-section-number">7.6.3</span> Creación del repositorio en GitHub y carga de los archivos</h3>
+<ol start="7" type="1">
+<li><p>Con la sesión iniciada en GitHub, cree un nuevo repositorio haciendo clic en el botón <strong>+</strong> (en la esquina superior derecha de la página) y seleccionando <em>New repository</em>. Asigne al repositorio un nombre descriptivo (por ejemplo, <code>graficos-estacion-cigefi</code>), marque la opción <em>Public</em> (requerida para publicar en GitHub Pages con una cuenta gratuita) y haga clic en <em>Create repository</em>. No active las opciones <em>Add a README file</em>, <em>Add .gitignore</em> ni <em>Choose a license</em>, ya que va a subir sus propios archivos.</p></li>
+<li><p>En la página del repositorio recién creado, haga clic en el enlace <em>uploading an existing file</em>. Arrastre los archivos <code>index.qmd</code> e <code>index.html</code> desde el directorio del proyecto al área indicada en el navegador (o haga clic en <em>choose your files</em> para seleccionarlos). Al final de la página, en el formulario <em>Commit changes</em>, escriba un mensaje corto y descriptivo del cambio (por ejemplo, <em>“Publicar primera versión del sitio”</em>) y haga clic en <em>Commit changes</em> para confirmar la carga y registrarla en el historial del repositorio.</p></li>
+</ol>
+</section>
+<section id="publicación-en-github-pages" class="level3" data-number="7.6.4">
+<h3 data-number="7.6.4" class="anchored" data-anchor-id="publicación-en-github-pages"><span class="header-section-number">7.6.4</span> Publicación en GitHub Pages</h3>
+<ol start="9" type="1">
+<li><p>Vaya a la pestaña <em>Settings</em> del repositorio y seleccione <em>Pages</em> en el menú lateral izquierdo. En la sección <em>Build and deployment</em>, en <em>Source</em>, escoja <em>Deploy from a branch</em>. En <em>Branch</em>, seleccione <code>main</code> con la carpeta <code>/ (root)</code> y haga clic en <em>Save</em>.</p></li>
+<li><p>Espere uno o dos minutos y recargue la página <em>Settings - Pages</em>. Cuando el sitio esté publicado, aparecerá un mensaje con la URL pública, con el formato <code>https://&lt;usuario&gt;.github.io/graficos-estacion-cigefi/</code>, donde <code>&lt;usuario&gt;</code> es su nombre de usuario en GitHub. Haga clic en la URL para visitar el documento publicado.</p></li>
+<li><p>Para actualizar el sitio con futuras modificaciones, edite el archivo <code>index.qmd</code> en RStudio, repita el paso 6 para generar una nueva versión del <code>index.html</code> y vuelva a subir los archivos actualizados al repositorio. Como el repositorio ya no está vacío, utilice el botón <em>Add file - Upload files</em> sobre la lista de archivos (en lugar del enlace <em>uploading an existing file</em> del paso 8) y complete el formulario <em>Commit changes</em> con un mensaje descriptivo. El paso 9 (configuración de GitHub Pages) solo se realiza una vez. Los cambios se reflejarán en el sitio publicado pocos minutos después.</p></li>
+</ol>
+</section>
+</section>
+<section id="recursos-de-interés" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="recursos-de-interés"><span class="header-section-number">7.7</span> Recursos de interés</h2>
+<p><em>Code Cells: Knitr - Quarto</em> (opciones para bloques de código). (s. f.). Recuperado el 26 de setiembre de 2024, de <a href="https://quarto.org/docs/reference/cells/cells-knitr.html">Code Cells: Knitr - Quarto</a></p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list" style="display: none">
-<div id="ref-gandrud_reproducible_2020" class="csl-entry" role="listitem">
-Gandrud, C. (2020). <em>Reproducible research with <span>R</span> and <span>RStudio</span></em> (Third edition). Boca Raton, FL: CRC Press.
-</div>
-<div id="ref-krugman_opinion_2013" class="csl-entry" role="listitem">
-Krugman, P. (2013). Opinion <span></span> <span>The</span> <span>Excel</span> <span>Depression</span>. <em>The New York Times</em>. Recuperado de <a href="https://www.nytimes.com/2013/04/19/opinion/krugman-the-excel-depression.html">https://www.nytimes.com/2013/04/19/opinion/krugman-the-excel-depression.html</a>
-</div>
-<div id="ref-peng_reproducible_2011" class="csl-entry" role="listitem">
-Peng, R. D. (2011). Reproducible <span>Research</span> in <span>Computational</span> <span>Science</span>. <em>Science</em>, <em>334</em>(6060), 1226-1227. <a href="https://doi.org/10.1126/science.1213847">https://doi.org/10.1126/science.1213847</a>
-</div>
-<div id="ref-singleton_establishing_2016" class="csl-entry" role="listitem">
-Singleton, A. D., Spielman, S., &amp; Brunsdon, C. (2016). Establishing a framework for <span>Open</span> <span>Geographic</span> <span>Information</span> science. <em>International Journal of Geographical Information Science</em>, <em>30</em>(8), 1507-1521. <a href="https://doi.org/10.1080/13658816.2015.1137579">https://doi.org/10.1080/13658816.2015.1137579</a>
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -773,13 +884,13 @@ Singleton, A. D., Spielman, S., &amp; Brunsdon, C. (2016). Establishing a framew
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./03-r.html" class="pagination-link" aria-label="R - lenguaje de programación para análisis estadístico">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R - lenguaje de programación para análisis estadístico</span></span>
+      <a href="./06-git.html" class="pagination-link" aria-label="Git - sistema de control de versiones">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Git - sistema de control de versiones</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./05-markdown.html" class="pagination-link" aria-label="Markdown - lenguaje de marcado">
-        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Markdown - lenguaje de marcado</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./tareas/tarea-01-g001.html" class="pagination-link" aria-label="Tarea 1 – Grupo 1">
+        <span class="nav-page-text">Tarea 1 – Grupo 1</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

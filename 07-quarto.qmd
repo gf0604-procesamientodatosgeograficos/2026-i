@@ -1,4 +1,4 @@
-# Quarto - sistema de publicación técnica y científica {#sec-pencom}
+# Quarto - sistema de publicación técnica y científica {#sec-quarto}
 
 En este capítulo se introduce el sistema de publicación técnica y científica Quarto, el cual permite crear contenido dinámico mediante lenguajes de programación y Markdown.
 
@@ -119,29 +119,37 @@ Quarto se apoya en [knitr](https://yihui.org/knitr/) y en [Pandoc](http://pandoc
 
 ## Ejercicios
 
-Con Quarto, cree un sitio web en GitHub Pages que muestre los gráficos que programó en la tarea 1 de este curso. 
+En los siguientes pasos se practica el uso de Quarto para elaborar un documento que combina narrativa en Markdown con bloques de código en R. El documento final se renderiza a HTML y se publica como un sitio web en GitHub Pages. El documento debe incluir los gráficos que la persona estudiante programó en los ejercicios sobre datos de la [Estación Meteorológica Automática del Instituto Meteorológico Nacional (IMN)](https://www.imn.ac.cr/especial/estacionCigefi.html) —ubicada en el Centro de Investigaciones Geofísicas (CIGEFI) de la Universidad de Costa Rica— de la sección *Manipulación de datos* del capítulo sobre R.
 
-Seguidamente, se sugiere una serie de pasos para elaborar el sitio.
+### Creación del proyecto y del documento Quarto
 
-1. Cree un nuevo proyecto con la opción *File - New Project - New Directory - New Project* de RStudio.
+1. En RStudio, cree un nuevo proyecto con la opción *File - New Project - New Directory - New Project*. Asigne al directorio un nombre descriptivo (por ejemplo, `graficos-estacion-cigefi`) y seleccione una ubicación en su computadora para almacenarlo. Haga clic en *Create Project*; RStudio abrirá automáticamente el nuevo proyecto.
 
-2. En el nuevo proyecto, cree un nuevo documento con la opción *File - New File - Quarto Document* de RStudio. Llene los metadatos (título, autor, etc.). Elija HTML como formato de salida.
+2. Dentro del proyecto, cree un nuevo documento Quarto con la opción *File - New File - Quarto Document*. En la ventana *New Quarto Document*, complete el campo *Title* con un título descriptivo (por ejemplo, *"Gráficos de la Estación Meteorológica del CIGEFI"*) y el campo *Author* con su nombre. En *Engine* seleccione *Knitr* y verifique que en el panel lateral el formato de salida seleccionado sea *HTML*. Haga clic en *Create*. RStudio abrirá el nuevo documento con una plantilla inicial que incluye un encabezado YAML y algunos bloques de código de ejemplo.
 
-3. Guarde el documento con el nombre `index.qmd` (RStudio asigna la extensión automáticamente).
+3. Guarde el documento con la opción *File - Save* (o el atajo `Ctrl + S` en Windows/Linux, `Cmd + S` en macOS) y asígnele el nombre `index.qmd` (RStudio agregará automáticamente la extensión `.qmd` si no la incluye). El archivo quedará almacenado en la raíz del proyecto.
 
-4. Al inicio del documento, agregue narrativa en Markdown que explique el contenido, la fuente de los datos y la dirección del repositorio en GitHub con el código fuente (este repositorio se crea en un paso posterior).
+### Edición del documento
 
-5. Agregue los gráficos y los comentarios de la tarea 1 mediante bloques de código en R y narrativa en Markdown. Divida el documento en secciones mediante el uso de encabezados. Se recomienda asignar una etiqueta a cada bloque de código con la opción `#| label:`. Considere el uso de otras etiquetas Quarto para, por ejemplo, controlar el despliegue de las salidas y del código fuente.
+4. En el editor, reemplace el contenido de la plantilla por su propio contenido. Conserve al inicio el encabezado YAML (delimitado por `---`) con los metadatos del documento. Debajo del encabezado, agregue una sección de narrativa en Markdown que explique el propósito del documento, la fuente de los datos utilizados (la Estación Meteorológica Automática del IMN ubicada en el CIGEFI) y la dirección del repositorio en GitHub con el código fuente (este repositorio se creará en un paso posterior).
 
-6. Presione el botón *Render* de RStudio para generar el archivo `index.html`. Este será el arhivo que se desplegará en GitHub Pages.
+5. Agregue al documento los gráficos y los comentarios elaborados en los ejercicios de la sección *Manipulación de datos* del capítulo sobre R (evolución de la temperatura a través de las horas del día, relación entre radiación y temperatura, distribución de frecuencias de la presión atmosférica y promedios de radiación por periodo), intercalando bloques de código en R con narrativa en Markdown. Un bloque de código en R se delimita con tres comillas invertidas seguidas de `{r}` al inicio del bloque, y con tres comillas invertidas al final. Divida el documento en secciones mediante el uso de encabezados de varios niveles, una sección por gráfico. Se recomienda asignar una etiqueta a cada bloque de código con la opción `#| label:` (por ejemplo, `#| label: fig-temperatura-horas`). Considere además el uso de otras opciones de Quarto para controlar el despliegue de las salidas y del código fuente; por ejemplo, `#| echo: false` oculta el código fuente y muestra solo la salida, y `#| fig-cap:` agrega un título a una figura.
 
-7. Cree un repositorio vacío en su cuenta en GitHub (ej. `graficos-base-r`).
+6. Guarde los cambios (*File - Save*) y presione el botón *Render* en la barra de herramientas del editor (con el ícono de una flecha azul). Quarto ejecutará el código en R, generará el archivo `index.html` en el directorio del proyecto y abrirá una vista previa del documento renderizado en el panel *Viewer* o en una ventana aparte. Revise el resultado y realice los ajustes necesarios. Repita el ciclo de *editar → guardar → render* hasta que el documento esté listo.
 
-8. Suba al nuevo repositorio los archivos `index.qmd` e `index.html`.
+### Creación del repositorio en GitHub y carga de los archivos
 
-9. Genere el sitio en GitHub Pages con la opción *Settings - Pages - Branch - main - Save* de GitHub.
+7. Con la sesión iniciada en GitHub, cree un nuevo repositorio haciendo clic en el botón **+** (en la esquina superior derecha de la página) y seleccionando *New repository*. Asigne al repositorio un nombre descriptivo (por ejemplo, `graficos-estacion-cigefi`), marque la opción *Public* (requerida para publicar en GitHub Pages con una cuenta gratuita) y haga clic en *Create repository*. No active las opciones *Add a README file*, *Add .gitignore* ni *Choose a license*, ya que va a subir sus propios archivos.
 
-10. Repita los pasos 6, 8 y 9 para cada modificación que realice en el documento Quarto.
+8. En la página del repositorio recién creado, haga clic en el enlace *uploading an existing file*. Arrastre los archivos `index.qmd` e `index.html` desde el directorio del proyecto al área indicada en el navegador (o haga clic en *choose your files* para seleccionarlos). Al final de la página, en el formulario *Commit changes*, escriba un mensaje corto y descriptivo del cambio (por ejemplo, *"Publicar primera versión del sitio"*) y haga clic en *Commit changes* para confirmar la carga y registrarla en el historial del repositorio.
+
+### Publicación en GitHub Pages
+
+9. Vaya a la pestaña *Settings* del repositorio y seleccione *Pages* en el menú lateral izquierdo. En la sección *Build and deployment*, en *Source*, escoja *Deploy from a branch*. En *Branch*, seleccione `main` con la carpeta `/ (root)` y haga clic en *Save*.
+
+10. Espere uno o dos minutos y recargue la página *Settings - Pages*. Cuando el sitio esté publicado, aparecerá un mensaje con la URL pública, con el formato `https://<usuario>.github.io/graficos-estacion-cigefi/`, donde `<usuario>` es su nombre de usuario en GitHub. Haga clic en la URL para visitar el documento publicado.
+
+11. Para actualizar el sitio con futuras modificaciones, edite el archivo `index.qmd` en RStudio, repita el paso 6 para generar una nueva versión del `index.html` y vuelva a subir los archivos actualizados al repositorio. Como el repositorio ya no está vacío, utilice el botón *Add file - Upload files* sobre la lista de archivos (en lugar del enlace *uploading an existing file* del paso 8) y complete el formulario *Commit changes* con un mensaje descriptivo. El paso 9 (configuración de GitHub Pages) solo se realiza una vez. Los cambios se reflejarán en el sitio publicado pocos minutos después.
 
 
 ## Recursos de interés

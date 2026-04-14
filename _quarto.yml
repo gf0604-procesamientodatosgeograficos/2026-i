@@ -25,6 +25,7 @@ book:
         - 04-reproducibilidad.qmd
         - 05-markdown.qmd
         - 06-git.qmd
+        - 07-quarto.qmd
     - part: "Tareas"
       chapters:
         - tareas/tarea-01-g001.md

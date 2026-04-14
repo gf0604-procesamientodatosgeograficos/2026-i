@@ -406,6 +406,83 @@
     ]
   },
   {
+    "objectID": "07-quarto.html",
+    "href": "07-quarto.html",
+    "title": "7  Quarto - sistema de publicación técnica y científica",
+    "section": "",
+    "text": "7.1 Resumen\nEn este capítulo se introduce el sistema de publicación técnica y científica Quarto, el cual permite crear contenido dinámico mediante lenguajes de programación y Markdown.\nQuarto es una herramienta de publicación de documentos y creación de contenido desarrollada por Posit (anteriormente RStudio). Se diseñó para facilitar la elaboración de informes, artículos, libros, páginas web y presentaciones de manera reproducible y dinámica, integrando texto, código y resultados en un solo entorno.\nUn documento Quarto se compone de metadatos, narrativa y código fuente.",
+    "crumbs": [
+      "III Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto - sistema de publicación técnica y científica</span>"
+    ]
+  },
+  {
+    "objectID": "07-quarto.html#trabajo-previo",
+    "href": "07-quarto.html#trabajo-previo",
+    "title": "7  Quarto - sistema de publicación técnica y científica",
+    "section": "7.2 Trabajo previo",
+    "text": "7.2 Trabajo previo\n\n7.2.1 Lecturas\nQuarto - Tutorial: Hello, Quarto. (s.f.). Quarto. Recuperado el 1 de marzo de 2024, de https://quarto.org/docs/get-started/hello/rstudio.html",
+    "crumbs": [
+      "III Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto - sistema de publicación técnica y científica</span>"
+    ]
+  },
+  {
+    "objectID": "07-quarto.html#introducción",
+    "href": "07-quarto.html#introducción",
+    "title": "7  Quarto - sistema de publicación técnica y científica",
+    "section": "7.3 Introducción",
+    "text": "7.3 Introducción\nQuarto es un sistema de publicación de documentos técnicos y científicos, basado en código abierto. Entre sus principales capacidades están:\n\nCrear contenido dinámico con los lenguajes R, Python, Julia y Observable.\nCrear documentos Markdown de texto plano o cuadernos de notas de Jupyter.\nPublicar artículos académicos, reportes, presentaciones, sitios web, blogs y libros en HTML, PDF, MS Word, ePub y otros formatos.\nCrear contenido científico, incluyendo ecuaciones, citas bibliográficas, referencias cruzadas, figuras y otros elementos.\n\nQuarto es la siguiente generación de R Markdown, un formato que permite insertar código en R, y sus salidas, en documentos escritos en Markdown. R Markdown fue introducido por Yihui Xie en 2012, junto con el paquete knitr, cuyo propósito es facilitar la investigación reproducible en R a través de la programación literaria (literate programming), un paradigma de programación propuesto por Donald Knuth en 1984.\nLos programas “literarios” (o “letrados”) están escritos como una exposición lógica en un lenguaje humano similar a la explicación de las fórmulas y ecuaciones empleadas para representar y resolver un problema en un texto de física o de matemáticas. En estos programas, se describe el análisis del problema, su solución y su implementación, intercalando código fuente entre los párrafos (y otros contenidos como imágenes, tablas, gráficos estadísticos y mapas), de forma similar a como en los textos de matemáticas se intercalan las fórmulas y las ecuaciones. La programación literaria puede mejorar enormemente un programa, ya que permite documentar ampliamente en qué consiste el problema a resolver, cómo se resuelve, cómo y por qué se adoptó cierto diseño, cómo se optimizó y cómo se implementó en un lenguaje de programación.",
+    "crumbs": [
+      "III Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto - sistema de publicación técnica y científica</span>"
+    ]
+  },
+  {
+    "objectID": "07-quarto.html#anatomía-de-un-documento-quarto",
+    "href": "07-quarto.html#anatomía-de-un-documento-quarto",
+    "title": "7  Quarto - sistema de publicación técnica y científica",
+    "section": "7.4 Anatomía de un documento Quarto",
+    "text": "7.4 Anatomía de un documento Quarto\nUn documento Quarto tiene tres tipos de contenido:\n\nMetadatos en YAML.\nNarrativa en Markdown.\nBloques de código fuente.\n\n\n7.4.1 Metadatos en YAML\nTodo documento Quarto inicia con un encabezado en la sintaxis YAML (YAML Ain’t Markup Language), el cual contiene metadatos del documento como el título, el autor, la fecha de creación, el formato de salida y la estructura de la tabla de contenidos, entre muchos otros.\nUn encabezado YAML comienza y termina con tres guiones (---) y contiene un conjunto de campos y valores de la forma:\n---\ncampo01: valor01\ncampo02: valor02\ncampo0n: valor0n\n---\nPor ejemplo, un encabezado YAML típico puede ser el siguiente:\n---\ntitle: Mi primer documento Quarto\nformat:\n  html:\n    toc: true\n    toc_float: true\n---\nLos campos del encabezado que dependen de otros campos se anidan con sangrías de dos espacios.\nLos elementos de metadatos que pueden especificarse en el encabezado, pueden variar de acuerdo al formato de salida, como puede verse en los siguientes enlaces:\n\nElementos de metadatos para HTML\nElementos de metadatos para PDF\nElementos metadatos para MS Word\n\nExisten elementos de metadatos para muchos otros formatos de salida (OpenOffice, ePub, presentaciones, wikis, etc.), como puede apreciarse en la Referencia de Quarto.\n\n\n7.4.2 Narrativa en Markdown\nLa narrativa proporciona estructura y contenido al documento en la forma de encabezados, párrafos, enlaces y otros elementos de la sintaxis de Markdown.\n\n\n7.4.3 Bloques de código fuente\nEn Quarto, los bloques (chunks) de código fuente se delimitan con tres backticks, tanto al inicio como al final del bloque. Los bloques de código en R se identifican con {r} y diferentes opciones identificadas con #|. Los bloques de otros lenguajes de programación se identifican con {python} y {julia}, por ejemplo.\nEl siguiente es un ejemplo de bloque de código en R y su salida:\n```{r}\n#| label: graficacion-cars\n#| include: true\n#| echo: false\n\nplot(\n  x = cars$speed,\n  y = cars$dist,\n  main = \"Velocidad vs distancia de frenado\",\n  xlab = \"Velocidad (MPH)\",\n  ylab = \"Distancia (pies)\"\n)\n```\n\n\n\n\n\n\n\n\n\nLa opción label se utiliza para etiquetar el bloque y la de include para especificar si se desea que el bloque y sus resultados se incluyan en el documento de salida.\nLa documentación de las diferentes opciones disponibles para los bloques de código que utilizan el motor (engine) Knitr (el más utilizado con R) se encuentra en Code Cells: Knitr - Quarto.",
+    "crumbs": [
+      "III Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto - sistema de publicación técnica y científica</span>"
+    ]
+  },
+  {
+    "objectID": "07-quarto.html#cómo-funciona-quarto",
+    "href": "07-quarto.html#cómo-funciona-quarto",
+    "title": "7  Quarto - sistema de publicación técnica y científica",
+    "section": "7.5 ¿Cómo funciona Quarto?",
+    "text": "7.5 ¿Cómo funciona Quarto?\nQuarto se apoya en knitr y en Pandoc. knitr ejecuta el código en R (u otro lenguaje) y convierte los documentos a Markdown. Por su parte, Pandoc exporta los documentos Markdown al formato de salida deseado (ej. HTML, PDF, MS Word, MS PowerPoint). Este proceso se ilustra en la Figura 7.1.\n\n\n\n\n\n\nFigura 7.1: Conversión de un documento Quarto (.qmd) a su formato de salida. Imagen de quarto.org.",
+    "crumbs": [
+      "III Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto - sistema de publicación técnica y científica</span>"
+    ]
+  },
+  {
+    "objectID": "07-quarto.html#ejercicios",
+    "href": "07-quarto.html#ejercicios",
+    "title": "7  Quarto - sistema de publicación técnica y científica",
+    "section": "7.6 Ejercicios",
+    "text": "7.6 Ejercicios\nEn los siguientes pasos se practica el uso de Quarto para elaborar un documento que combina narrativa en Markdown con bloques de código en R. El documento final se renderiza a HTML y se publica como un sitio web en GitHub Pages. El documento debe incluir los gráficos que la persona estudiante programó en los ejercicios sobre datos de la Estación Meteorológica Automática del Instituto Meteorológico Nacional (IMN) —ubicada en el Centro de Investigaciones Geofísicas (CIGEFI) de la Universidad de Costa Rica— de la sección Manipulación de datos del capítulo sobre R.\n\n7.6.1 Creación del proyecto y del documento Quarto\n\nEn RStudio, cree un nuevo proyecto con la opción File - New Project - New Directory - New Project. Asigne al directorio un nombre descriptivo (por ejemplo, graficos-estacion-cigefi) y seleccione una ubicación en su computadora para almacenarlo. Haga clic en Create Project; RStudio abrirá automáticamente el nuevo proyecto.\nDentro del proyecto, cree un nuevo documento Quarto con la opción File - New File - Quarto Document. En la ventana New Quarto Document, complete el campo Title con un título descriptivo (por ejemplo, “Gráficos de la Estación Meteorológica del CIGEFI”) y el campo Author con su nombre. En Engine seleccione Knitr y verifique que en el panel lateral el formato de salida seleccionado sea HTML. Haga clic en Create. RStudio abrirá el nuevo documento con una plantilla inicial que incluye un encabezado YAML y algunos bloques de código de ejemplo.\nGuarde el documento con la opción File - Save (o el atajo Ctrl + S en Windows/Linux, Cmd + S en macOS) y asígnele el nombre index.qmd (RStudio agregará automáticamente la extensión .qmd si no la incluye). El archivo quedará almacenado en la raíz del proyecto.\n\n\n\n7.6.2 Edición del documento\n\nEn el editor, reemplace el contenido de la plantilla por su propio contenido. Conserve al inicio el encabezado YAML (delimitado por ---) con los metadatos del documento. Debajo del encabezado, agregue una sección de narrativa en Markdown que explique el propósito del documento, la fuente de los datos utilizados (la Estación Meteorológica Automática del IMN ubicada en el CIGEFI) y la dirección del repositorio en GitHub con el código fuente (este repositorio se creará en un paso posterior).\nAgregue al documento los gráficos y los comentarios elaborados en los ejercicios de la sección Manipulación de datos del capítulo sobre R (evolución de la temperatura a través de las horas del día, relación entre radiación y temperatura, distribución de frecuencias de la presión atmosférica y promedios de radiación por periodo), intercalando bloques de código en R con narrativa en Markdown. Un bloque de código en R se delimita con tres comillas invertidas seguidas de {r} al inicio del bloque, y con tres comillas invertidas al final. Divida el documento en secciones mediante el uso de encabezados de varios niveles, una sección por gráfico. Se recomienda asignar una etiqueta a cada bloque de código con la opción #| label: (por ejemplo, #| label: fig-temperatura-horas). Considere además el uso de otras opciones de Quarto para controlar el despliegue de las salidas y del código fuente; por ejemplo, #| echo: false oculta el código fuente y muestra solo la salida, y #| fig-cap: agrega un título a una figura.\nGuarde los cambios (File - Save) y presione el botón Render en la barra de herramientas del editor (con el ícono de una flecha azul). Quarto ejecutará el código en R, generará el archivo index.html en el directorio del proyecto y abrirá una vista previa del documento renderizado en el panel Viewer o en una ventana aparte. Revise el resultado y realice los ajustes necesarios. Repita el ciclo de editar → guardar → render hasta que el documento esté listo.\n\n\n\n7.6.3 Creación del repositorio en GitHub y carga de los archivos\n\nCon la sesión iniciada en GitHub, cree un nuevo repositorio haciendo clic en el botón + (en la esquina superior derecha de la página) y seleccionando New repository. Asigne al repositorio un nombre descriptivo (por ejemplo, graficos-estacion-cigefi), marque la opción Public (requerida para publicar en GitHub Pages con una cuenta gratuita) y haga clic en Create repository. No active las opciones Add a README file, Add .gitignore ni Choose a license, ya que va a subir sus propios archivos.\nEn la página del repositorio recién creado, haga clic en el enlace uploading an existing file. Arrastre los archivos index.qmd e index.html desde el directorio del proyecto al área indicada en el navegador (o haga clic en choose your files para seleccionarlos). Al final de la página, en el formulario Commit changes, escriba un mensaje corto y descriptivo del cambio (por ejemplo, “Publicar primera versión del sitio”) y haga clic en Commit changes para confirmar la carga y registrarla en el historial del repositorio.\n\n\n\n7.6.4 Publicación en GitHub Pages\n\nVaya a la pestaña Settings del repositorio y seleccione Pages en el menú lateral izquierdo. En la sección Build and deployment, en Source, escoja Deploy from a branch. En Branch, seleccione main con la carpeta / (root) y haga clic en Save.\nEspere uno o dos minutos y recargue la página Settings - Pages. Cuando el sitio esté publicado, aparecerá un mensaje con la URL pública, con el formato https://&lt;usuario&gt;.github.io/graficos-estacion-cigefi/, donde &lt;usuario&gt; es su nombre de usuario en GitHub. Haga clic en la URL para visitar el documento publicado.\nPara actualizar el sitio con futuras modificaciones, edite el archivo index.qmd en RStudio, repita el paso 6 para generar una nueva versión del index.html y vuelva a subir los archivos actualizados al repositorio. Como el repositorio ya no está vacío, utilice el botón Add file - Upload files sobre la lista de archivos (en lugar del enlace uploading an existing file del paso 8) y complete el formulario Commit changes con un mensaje descriptivo. El paso 9 (configuración de GitHub Pages) solo se realiza una vez. Los cambios se reflejarán en el sitio publicado pocos minutos después.",
+    "crumbs": [
+      "III Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto - sistema de publicación técnica y científica</span>"
+    ]
+  },
+  {
+    "objectID": "07-quarto.html#recursos-de-interés",
+    "href": "07-quarto.html#recursos-de-interés",
+    "title": "7  Quarto - sistema de publicación técnica y científica",
+    "section": "7.7 Recursos de interés",
+    "text": "7.7 Recursos de interés\nCode Cells: Knitr - Quarto (opciones para bloques de código). (s. f.). Recuperado el 26 de setiembre de 2024, de Code Cells: Knitr - Quarto",
+    "crumbs": [
+      "III Herramientas para investigación reproducible y desarrollo colaborativo",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Quarto - sistema de publicación técnica y científica</span>"
+    ]
+  },
+  {
     "objectID": "tareas/tarea-01-g001.html",
     "href": "tareas/tarea-01-g001.html",
     "title": "Tarea 1 – Grupo 1",
