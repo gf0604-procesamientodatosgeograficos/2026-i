@@ -456,7 +456,7 @@ hist(
 2. Muestre la distribución de pasajeros fallecidos y sobrevivientes por sexo en un gráfico de barras agrupadas.
 3. Guarde los gráficos en un archivo PDF (puede consultar [Saving plots to a file with pdf(), jpeg() and png()](https://bookdown.org/ndphillips/YaRrr/saving-plots-to-a-file-with-pdf-jpeg-and-png.html)).
 
-### Manipulación de datos
+### Manipulación de datos {#sec-manipulacion-datos}
 
 En esta sección se estudian varias operaciones para manipular data frames mediante la sintaxis y las funciones base de R:
 

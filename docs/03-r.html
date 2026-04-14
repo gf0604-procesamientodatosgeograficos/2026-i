@@ -309,7 +309,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#funciones" id="toc-funciones" class="nav-link" data-scroll-target="#funciones"><span class="header-section-number">3.5.2</span> Funciones</a></li>
   <li><a href="#paquetes" id="toc-paquetes" class="nav-link" data-scroll-target="#paquetes"><span class="header-section-number">3.5.3</span> Paquetes</a></li>
   <li><a href="#visualización-de-datos" id="toc-visualización-de-datos" class="nav-link" data-scroll-target="#visualización-de-datos"><span class="header-section-number">3.5.4</span> Visualización de datos</a></li>
-  <li><a href="#manipulación-de-datos" id="toc-manipulación-de-datos" class="nav-link" data-scroll-target="#manipulación-de-datos"><span class="header-section-number">3.5.5</span> Manipulación de datos</a></li>
+  <li><a href="#sec-manipulacion-datos" id="toc-sec-manipulacion-datos" class="nav-link" data-scroll-target="#sec-manipulacion-datos"><span class="header-section-number">3.5.5</span> Manipulación de datos</a></li>
   <li><a href="#tipos-de-datos" id="toc-tipos-de-datos" class="nav-link" data-scroll-target="#tipos-de-datos"><span class="header-section-number">3.5.6</span> Tipos de datos</a></li>
   <li><a href="#definición-de-funciones" id="toc-definición-de-funciones" class="nav-link" data-scroll-target="#definición-de-funciones"><span class="header-section-number">3.5.7</span> Definición de funciones</a></li>
   <li><a href="#condicionales" id="toc-condicionales" class="nav-link" data-scroll-target="#condicionales"><span class="header-section-number">3.5.8</span> Condicionales</a></li>
@@ -374,7 +374,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="el-ambiente-de-desarrollo-integrado-rstudio" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="el-ambiente-de-desarrollo-integrado-rstudio"><span class="header-section-number">3.4</span> El ambiente de desarrollo integrado RStudio</h2>
 <p><a href="https://posit.co/download/rstudio-desktop/">RStudio</a> es el IDE más popular para el lenguaje R. Está disponible en una versión de escritorio (RStudio Desktop) y en una versión para servidor (RStudio Server). Esta última permite la conexión de varios usuarios a través de un navegador web. RStudio se ofrece también como un servicio en la nube, a través de <a href="https://posit.cloud/">Posit Cloud</a>. La <a href="#fig-interfaz-rstudio" class="quarto-xref">Figura&nbsp;<span>3.1</span></a> muestra la interfaz de RStudio.</p>
-<div id="fig-interfaz-rstudio" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Interfaz del ambiente de desarrollo integrado RStudio">
+<div id="fig-interfaz-rstudio" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Interfaz del ambiente de desarrollo integrado RStudio" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-interfaz-rstudio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/rstudio-interfaz.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;3.1: Interfaz del ambiente de desarrollo integrado RStudio."><img src="img/rstudio-interfaz.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Interfaz del ambiente de desarrollo integrado RStudio"></a>
@@ -792,8 +792,8 @@ mean&gt; c(xm, mean(x, trim = 0.10))
 </section>
 </section>
 </section>
-<section id="manipulación-de-datos" class="level3" data-number="3.5.5">
-<h3 data-number="3.5.5" class="anchored" data-anchor-id="manipulación-de-datos"><span class="header-section-number">3.5.5</span> Manipulación de datos</h3>
+<section id="sec-manipulacion-datos" class="level3" data-number="3.5.5">
+<h3 data-number="3.5.5" class="anchored" data-anchor-id="sec-manipulacion-datos"><span class="header-section-number">3.5.5</span> Manipulación de datos</h3>
 <p>En esta sección se estudian varias operaciones para manipular data frames mediante la sintaxis y las funciones base de R:</p>
 <ul>
 <li>Creación de subconjuntos.</li>
@@ -1157,8 +1157,8 @@ TV-Y7-FV       UR
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-100bd1944ff8eb53f807" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-100bd1944ff8eb53f807">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13],["05/04/2026 06:00 p. m.","05/04/2026 05:00 p. m.","05/04/2026 04:00 p. m.","05/04/2026 03:00 p. m.","05/04/2026 02:00 p. m.","05/04/2026 01:00 p. m.","05/04/2026 12:00 p. m.","05/04/2026 11:00 a. m.","05/04/2026 10:00 a. m.","05/04/2026 09:00 a. m.","05/04/2026 08:00 a. m.","05/04/2026 07:00 a. m.","05/04/2026 06:00 a. m."],[18,17,16,15,14,13,12,11,10,9,8,7,6],[21.6,22.52,22.69,23.92,24.06,23.93,23.43,21.69,21.31,21.7,21.03,19.22,18.16],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0.06,0.44,0.57,1.2,1.27,1.47,1.53,1.48,0.96,0.78,0.55,0.37,0.05],[878.42,878.05,877.88,878.13,878.46,879.14,879.8200000000001,880.3200000000001,880.35,880.47,880.28,879.83,879.22]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>id<\/th>\n      <th>fecha_hora<\/th>\n      <th>hora<\/th>\n      <th>temperatura<\/th>\n      <th>lluvia<\/th>\n      <th>radiacion<\/th>\n      <th>presion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":13,"language":{"url":"//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"},"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,5,6]},{"name":"id","targets":0},{"name":"fecha_hora","targets":1},{"name":"hora","targets":2},{"name":"temperatura","targets":3},{"name":"lluvia","targets":4},{"name":"radiacion","targets":5},{"name":"presion","targets":6}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,13,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-9e501cc0368d9b6d4d3f" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-9e501cc0368d9b6d4d3f">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13],["05/04/2026 06:00 p. m.","05/04/2026 05:00 p. m.","05/04/2026 04:00 p. m.","05/04/2026 03:00 p. m.","05/04/2026 02:00 p. m.","05/04/2026 01:00 p. m.","05/04/2026 12:00 p. m.","05/04/2026 11:00 a. m.","05/04/2026 10:00 a. m.","05/04/2026 09:00 a. m.","05/04/2026 08:00 a. m.","05/04/2026 07:00 a. m.","05/04/2026 06:00 a. m."],[18,17,16,15,14,13,12,11,10,9,8,7,6],[21.6,22.52,22.69,23.92,24.06,23.93,23.43,21.69,21.31,21.7,21.03,19.22,18.16],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0.06,0.44,0.57,1.2,1.27,1.47,1.53,1.48,0.96,0.78,0.55,0.37,0.05],[878.42,878.05,877.88,878.13,878.46,879.14,879.8200000000001,880.3200000000001,880.35,880.47,880.28,879.83,879.22]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>id<\/th>\n      <th>fecha_hora<\/th>\n      <th>hora<\/th>\n      <th>temperatura<\/th>\n      <th>lluvia<\/th>\n      <th>radiacion<\/th>\n      <th>presion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":13,"language":{"url":"//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"},"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,5,6]},{"name":"id","targets":0},{"name":"fecha_hora","targets":1},{"name":"hora","targets":2},{"name":"temperatura","targets":3},{"name":"lluvia","targets":4},{"name":"radiacion","targets":5},{"name":"presion","targets":6}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,13,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <ol type="1">
