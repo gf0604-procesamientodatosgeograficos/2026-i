@@ -1,4 +1,4 @@
-# Introducción a la programación de computadoras {#sec-pencom}
+# Introducción a la programación de computadoras {#sec-programacion-computadoras}
 
 En este capítulo se explica la característica principal de las computadoras: su capacidad para ser programadas y así ayudar a resolver problemas. Se detallan los componentes físicos de la arquitectura que sustenta esta capacidad, la forma en que trabajan los lenguajes de programación, así como los principios del pensamiento computacional, un enfoque para la resolución de problemas basado en conceptos y métodos de las ciencias de la computación. Estos principios se ilustran con el lenguaje de programación Scratch.
 

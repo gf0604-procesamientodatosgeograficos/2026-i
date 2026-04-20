@@ -1,4 +1,4 @@
-# Introducción a la ciencia de datos {#sec-pencom}
+# Introducción a la ciencia de datos {#sec-ciencia-datos}
 
 En este capítulo se definen algunos conceptos fundamentales de estadística, como observaciones y variables. También se introduce el área de conocimiento denominada ciencia de datos.
 
