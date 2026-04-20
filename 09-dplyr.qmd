@@ -552,7 +552,7 @@ En los siguientes pasos la persona estudiante practica el uso combinado de los v
 
 ### Preparación
 
-1. Abra el proyecto `exploracion-palmerpenguins` creado en el ejercicio del @sec-tidyverse. Si no lo tiene disponible, créelo siguiendo los pasos 1 a 3 de ese capítulo.
+1. Abra el proyecto `analisis-palmerpenguins` creado en el ejercicio del @sec-tidyverse. Si no lo tiene disponible, créelo siguiendo los pasos 1 a 3 de ese capítulo.
 
 2. En el proyecto, cree un nuevo *script* de R con la opción *File - New File - R Script* y guárdelo como `dplyr-penguins.R`. Al inicio del *script*, cargue los paquetes `tidyverse` y `palmerpenguins`.
 

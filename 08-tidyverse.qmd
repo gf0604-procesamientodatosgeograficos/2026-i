@@ -226,7 +226,7 @@ En los siguientes pasos la persona estudiante practica el flujo básico de Tidyv
 
 ### Preparación del entorno
 
-1. En RStudio, cree un nuevo proyecto con la opción *File - New Project - New Directory - New Project*. Asigne al directorio el nombre `exploracion-palmerpenguins` y seleccione una ubicación en su computadora para almacenarlo. Haga clic en *Create Project*; RStudio abrirá automáticamente el nuevo proyecto.
+1. En RStudio, cree un nuevo proyecto con la opción *File - New Project - New Directory - New Project*. Asigne al directorio el nombre `analisis-palmerpenguins` y seleccione una ubicación en su computadora para almacenarlo. Haga clic en *Create Project*; RStudio abrirá automáticamente el nuevo proyecto.
 
 2. Dentro del proyecto, cree un nuevo *script* de R con la opción *File - New File - R Script*. Guárdelo (`Ctrl + S` en Windows/Linux, `Cmd + S` en macOS) con el nombre `exploracion.R`.
 
