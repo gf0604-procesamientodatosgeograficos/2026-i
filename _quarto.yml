@@ -29,6 +29,7 @@ book:
     - part: "IV La colección de paquetes Tidyverse para ciencia de datos"
       chapters:
         - 08-tidyverse.qmd
+        - 09-dplyr.qmd
     - part: "Tareas"
       chapters:
         - tareas/tarea-01-g001.md
