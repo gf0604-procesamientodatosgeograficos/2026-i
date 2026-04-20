@@ -1016,7 +1016,7 @@ vector_nombres
 
 Los vectores también pueden crearse con el operador `:`, el cual especifica una secuencia (i.e. una lista ordenada):
 
-```{r collapse=TRUE}
+```{r}
 #| label: definicion-vectores-secuencias
 #| collapse: true
 
