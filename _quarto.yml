@@ -26,6 +26,9 @@ book:
         - 05-markdown.qmd
         - 06-git.qmd
         - 07-quarto.qmd
+    - part: "IV La colección de paquetes Tidyverse para ciencia de datos"
+      chapters:
+        - 08-tidyverse.qmd
     - part: "Tareas"
       chapters:
         - tareas/tarea-01-g001.md

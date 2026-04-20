@@ -1,4 +1,4 @@
-# Tidyverse - colección de paquetes para ciencia de datos {#sec-pencom}
+# Tidyverse - colección de paquetes para ciencia de datos {#sec-tidyverse}
 
 En este capítulo se presenta Tidyverse, una colección de paquetes de R enfocados en ciencia de datos. También se introduce el concepto de datos *tidy* y el de los *pipes*, ambos fundamentales para el manejo de datos a través de Tidyverse.
 
@@ -153,7 +153,7 @@ penguins |>
   labs(color = "Especie", shape = "Especie")
 ```
 
-```{r ejemplo-palmerpenguins-02}
+```{r}
 #| label: ejemplo-palmerpenguins-02
 #| warning: false
 
@@ -169,68 +169,6 @@ penguins |>
   xlab("Longitud del pico (mm)") +
   ylab("Masa (g)") +
   labs(color = "Especie", shape = "Especie")
-```
-
-#### Histogramas
-
-Este tipo de gráficos muestra distribuciones de variables numéricas.
-
-```{r ejemplo-palmerpenguins-03}
-#| label: ejemplo-palmerpenguins-03
-#| warning: false
-#| message: false
-
-# Distribución de la variable de masa (peso)
-penguins |>
-  ggplot(aes(x = body_mass_g)) +
-  geom_histogram() +
-  ggtitle("Distribución de la variable masa (peso)") +
-  xlab("Masa (g)") +
-  ylab("n")
-```
-
-```{r ejemplo-palmerpenguins-04}
-#| label: ejemplo-palmerpenguins-04
-#| warning: false
-#| message: false
-
-# Distribución de la variable de masa (peso) por especie
-penguins |>
-  ggplot(aes(x = body_mass_g)) +
-  geom_histogram(aes(fill = species), alpha = 0.5, position = "identity") +
-  scale_fill_manual(values = c("darkorange", "darkorchid", "cyan4")) +
-  ggtitle("Distribución de la variable masa (peso) por especie") +
-  xlab("Masa (g)") +
-  ylab("n") +
-  labs(fill = "Especie")
-```
-
-#### Diagramas de caja
-
-Este tipo de gráficos muestra datos a través de sus cuartiles.
-
-```{r}
-#| label: ejemplo-palmerpenguins-05
-#| warning: false
-
-# Diagrama de caja de la variable masa (peso)
-penguins |>
-  ggplot(aes(y = body_mass_g)) +
-  geom_boxplot() +
-  ylab("Masa (g)")
-```
-
-```{r}
-#| label: ejemplo-palmerpenguins-06
-#| warning: false
-
-# Diagrama de caja de la variable masa (peso) por especie
-penguins |>
-  ggplot(aes(x = species, y = body_mass_g)) +
-  geom_boxplot(aes(color = species), width = 0.3, show.legend = FALSE) +
-  scale_color_manual(values = c("darkorange", "purple", "cyan4")) +
-  xlab("Especie") +
-  ylab("Masa (g)")
 ```
 
 ## Datos *tidy*
@@ -281,6 +219,38 @@ El uso de *pipes* permite un funcionamiento homogéneo de las funciones de Tidyv
 1.  El primer argumento es un data frame. Puede omitirse si la función recibe el data frame a través del operador *pipe*.
 2.  Los argumentos siguientes describen que hacer con el data frame, utilizando los nombres de las columnas (sin comillas).\
 3.  El resultado es un nuevo data frame.
+
+## Ejercicios
+
+En los siguientes pasos la persona estudiante practica el flujo básico de Tidyverse: instalación y carga de paquetes, exploración de un conjunto de datos, manipulación con un *pipeline* y visualización con `ggplot2`. Se utiliza el conjunto de datos `palmerpenguins` introducido en este capítulo.
+
+### Preparación del entorno
+
+1. En RStudio, cree un nuevo proyecto con la opción *File - New Project - New Directory - New Project*. Asigne al directorio el nombre `exploracion-palmerpenguins` y seleccione una ubicación en su computadora para almacenarlo. Haga clic en *Create Project*; RStudio abrirá automáticamente el nuevo proyecto.
+
+2. Dentro del proyecto, cree un nuevo *script* de R con la opción *File - New File - R Script*. Guárdelo (`Ctrl + S` en Windows/Linux, `Cmd + S` en macOS) con el nombre `exploracion.R`.
+
+3. Al inicio del *script*, instale (si aún no lo ha hecho) y cargue los paquetes `tidyverse` y `palmerpenguins`. Para instalar utilice `install.packages("tidyverse")` y `install.packages("palmerpenguins")`; para cargar, `library(tidyverse)` y `library(palmerpenguins)`. Las llamadas a `install.packages()` se ejecutan una sola vez y conviene comentarlas (con `#`) después de la primera instalación.
+
+### Exploración del conjunto de datos
+
+4. Aplique `glimpse(penguins)` y, en un comentario del *script*, describa brevemente la cantidad de observaciones, la cantidad de columnas y los tipos de datos presentes.
+
+5. Aplique `summary(penguins)` y, en un comentario del *script*, mencione al menos dos hallazgos sobre las variables numéricas (por ejemplo, valores mínimos, máximos, promedios o presencia de valores faltantes `NA`).
+
+6. Aplique `unique(penguins$species)` y `unique(penguins$island)` para identificar las especies y las islas presentes en el conjunto de datos. En un comentario del *script*, registre los valores observados.
+
+### Manipulación con un *pipeline*
+
+7. Construya un *pipeline* con el operador `|>` que filtre las observaciones de la especie *Adelie* (con `filter()`) y conserve únicamente las columnas `species`, `island`, `bill_length_mm` y `body_mass_g` (con `select()`). Asigne el resultado a un objeto llamado `adelie`.
+
+8. Encadene al *pipeline* anterior una llamada a `head(10)` para mostrar las diez primeras filas del subconjunto resultante.
+
+### Visualización
+
+9. Genere con `ggplot2` un gráfico de dispersión a partir del subconjunto `adelie`, con `bill_length_mm` en el eje x y `body_mass_g` en el eje y. Incluya un título descriptivo y etiquetas de ejes en español.
+
+10. Guarde el *script* y ejecútelo completo (con el botón *Source* o el atajo `Ctrl + Shift + S` en Windows/Linux, `Cmd + Shift + S` en macOS). Verifique que las salidas se generen sin errores y que el gráfico aparezca en el panel *Plots* de RStudio.
 
 ## Recursos de interés
 
