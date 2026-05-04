@@ -256,7 +256,7 @@ paises |>
 ```
 
 **Ejercicios**  
-1. Revise la documentación de estilos de ggplot2 y pruebe diferentes opciones en el gráfico anterior.
+1. Revise la documentación de estilos de ggplot2 y pruebe diferentes opciones en el gráfico anterior, sustituyendo la última línea por otro `theme_*()` (por ejemplo, `theme_minimal()`, `theme_classic()` o `theme_void()`).
 
 Existen paquetes que ofrecen estilos adicionales como, por ejemplo, [ggthemes](https://yutannihilation.github.io/allYourFigureAreBelongToUs/ggthemes/).
 
@@ -294,29 +294,6 @@ paises |>
   labs(caption = "Fuentes: Natural Earth y Banco Mundial",
        color = "Continente") +
   theme_economist() # estilo de ggthemes
-```
-
-El paquete ggplot2 también incluye el estilo `theme_minimal()`, que proporciona un aspecto limpio y moderno a los gráficos.
-
-```{r}
-#| label: grafico-dispersion-paises-theme-minimal
-#| warning: false
-#| message: false
-
-# Gráfico de dispersión de PIB per cápita vs esperanza de vida al nacer
-# coloreado por continente
-# + curva de tendencia
-paises |>
-  ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
-  geom_point() +
-  geom_smooth() +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
-  ggtitle("PIB per cápita vs esperanza de vida al nacer por continente") +
-  xlab("PIB per cápita  (USD)") +
-  ylab("Esperanza de vida (años)") +
-  labs(caption = "Fuentes: Natural Earth y Banco Mundial",
-       color = "Continente") +
-  theme_minimal() # tema de ggplot2
 ```
 
 ##### Colores
