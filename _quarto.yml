@@ -30,6 +30,9 @@ book:
       chapters:
         - 08-tidyverse.qmd
         - 09-dplyr.qmd
+    - part: "V Graficación estadística en R"
+      chapters:
+        - 10-ggplot2-plotly.qmd
     - part: "Tareas"
       chapters:
         - tareas/tarea-01-g001.md
