@@ -328,20 +328,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen"><span class="header-section-number">8.1</span> Resumen</a></li>
   <li><a href="#trabajo-previo" id="toc-trabajo-previo" class="nav-link" data-scroll-target="#trabajo-previo"><span class="header-section-number">8.2</span> Trabajo previo</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#lecturas" id="toc-lecturas" class="nav-link" data-scroll-target="#lecturas"><span class="header-section-number">8.2.1</span> Lecturas</a></li>
   </ul></li>
   <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">8.3</span> Introducción</a></li>
   <li><a href="#paquetes" id="toc-paquetes" class="nav-link" data-scroll-target="#paquetes"><span class="header-section-number">8.4</span> Paquetes</a></li>
   <li><a href="#instalación-y-carga" id="toc-instalación-y-carga" class="nav-link" data-scroll-target="#instalación-y-carga"><span class="header-section-number">8.5</span> Instalación y carga</a></li>
   <li><a href="#el-conjunto-de-datos-palmerpenguins" id="toc-el-conjunto-de-datos-palmerpenguins" class="nav-link" data-scroll-target="#el-conjunto-de-datos-palmerpenguins"><span class="header-section-number">8.6</span> El conjunto de datos <code>palmerpenguins</code></a>
+  <ul>
+  <li><a href="#ejemplos-de-visualizaciones" id="toc-ejemplos-de-visualizaciones" class="nav-link" data-scroll-target="#ejemplos-de-visualizaciones"><span class="header-section-number">8.6.1</span> Ejemplos de visualizaciones</a>
   <ul class="collapse">
-  <li><a href="#ejemplos-de-visualizaciones" id="toc-ejemplos-de-visualizaciones" class="nav-link" data-scroll-target="#ejemplos-de-visualizaciones"><span class="header-section-number">8.6.1</span> Ejemplos de visualizaciones</a></li>
+  <li><a href="#gráficos-de-dispersión" id="toc-gráficos-de-dispersión" class="nav-link" data-scroll-target="#gráficos-de-dispersión"><span class="header-section-number">8.6.1.1</span> Gráficos de dispersión</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#datos-tidy" id="toc-datos-tidy" class="nav-link" data-scroll-target="#datos-tidy"><span class="header-section-number">8.7</span> Datos <em>tidy</em></a></li>
   <li><a href="#pipes" id="toc-pipes" class="nav-link" data-scroll-target="#pipes"><span class="header-section-number">8.8</span> <em>Pipes</em></a></li>
   <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">8.9</span> Ejercicios</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#preparación-del-entorno" id="toc-preparación-del-entorno" class="nav-link" data-scroll-target="#preparación-del-entorno"><span class="header-section-number">8.9.1</span> Preparación del entorno</a></li>
   <li><a href="#exploración-del-conjunto-de-datos" id="toc-exploración-del-conjunto-de-datos" class="nav-link" data-scroll-target="#exploración-del-conjunto-de-datos"><span class="header-section-number">8.9.2</span> Exploración del conjunto de datos</a></li>
   <li><a href="#manipulación-con-un-pipeline" id="toc-manipulación-con-un-pipeline" class="nav-link" data-scroll-target="#manipulación-con-un-pipeline"><span class="header-section-number">8.9.3</span> Manipulación con un <em>pipeline</em></a></li>
@@ -397,7 +400,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="8.3" class="anchored" data-anchor-id="introducción"><span class="header-section-number">8.3</span> Introducción</h2>
 <p><a href="https://www.tidyverse.org/">Tidyverse</a> es una colección de paquetes de R enfocados en <a href="https://es.wikipedia.org/wiki/Ciencia_de_datos">ciencia de datos</a>, una discipina que permite convertir datos no procesados en entendimiento, comprensión y conocimiento.</p>
 <p>La <a href="#fig-modelo-ciencia-datos" class="quarto-xref">Figura&nbsp;<span>8.1</span></a> ilustra el modelo de un proyecto típico de ciencia de datos, el cual incluye los procesos de importar, ordenar, transformar, visualizar, modelar y comunicar. Todos se articulan mediante <strong>programación</strong> de computadoras.</p>
-<div id="fig-modelo-ciencia-datos" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Modelo de ciencia de datos">
+<div id="fig-modelo-ciencia-datos" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Modelo de ciencia de datos" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-modelo-ciencia-datos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/modelo-ciencia-datos.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;8.1: Modelo de ciencia de datos. Fuente: R for Data Science."><img src="img/modelo-ciencia-datos.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Modelo de ciencia de datos"></a>
@@ -554,7 +557,7 @@ Attaching package: 'palmerpenguins'</code></pre>
 <li>Cada valor debe tener su propia celda.</li>
 </ol>
 <p>Estas características se ilustran en la <a href="#fig-datos-tidy" class="quarto-xref">Figura&nbsp;<span>8.2</span></a>.</p>
-<div id="fig-datos-tidy" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Datos tidy">
+<div id="fig-datos-tidy" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Datos tidy" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-datos-tidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/datos-tidy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figura&nbsp;8.2: Datos tidy. Fuente: R for Data Science."><img src="img/datos-tidy.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Datos tidy"></a>

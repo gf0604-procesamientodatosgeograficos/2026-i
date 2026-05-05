@@ -338,22 +338,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#resumen" id="toc-resumen" class="nav-link active" data-scroll-target="#resumen"><span class="header-section-number">3.1</span> Resumen</a></li>
   <li><a href="#trabajo-previo" id="toc-trabajo-previo" class="nav-link" data-scroll-target="#trabajo-previo"><span class="header-section-number">3.2</span> Trabajo previo</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#lecturas" id="toc-lecturas" class="nav-link" data-scroll-target="#lecturas"><span class="header-section-number">3.2.1</span> Lecturas</a></li>
   </ul></li>
   <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">3.3</span> Introducción</a></li>
   <li><a href="#el-ambiente-de-desarrollo-integrado-rstudio" id="toc-el-ambiente-de-desarrollo-integrado-rstudio" class="nav-link" data-scroll-target="#el-ambiente-de-desarrollo-integrado-rstudio"><span class="header-section-number">3.4</span> El ambiente de desarrollo integrado RStudio</a></li>
   <li><a href="#conceptos-fundamentales" id="toc-conceptos-fundamentales" class="nav-link" data-scroll-target="#conceptos-fundamentales"><span class="header-section-number">3.5</span> Conceptos fundamentales</a>
+  <ul>
+  <li><a href="#representación-de-datos" id="toc-representación-de-datos" class="nav-link" data-scroll-target="#representación-de-datos"><span class="header-section-number">3.5.1</span> Representación de datos</a>
   <ul class="collapse">
-  <li><a href="#representación-de-datos" id="toc-representación-de-datos" class="nav-link" data-scroll-target="#representación-de-datos"><span class="header-section-number">3.5.1</span> Representación de datos</a></li>
-  <li><a href="#funciones" id="toc-funciones" class="nav-link" data-scroll-target="#funciones"><span class="header-section-number">3.5.2</span> Funciones</a></li>
+  <li><a href="#objetos" id="toc-objetos" class="nav-link" data-scroll-target="#objetos"><span class="header-section-number">3.5.1.1</span> Objetos</a></li>
+  <li><a href="#conjuntos-de-datos-para-ejemplos-y-pruebas" id="toc-conjuntos-de-datos-para-ejemplos-y-pruebas" class="nav-link" data-scroll-target="#conjuntos-de-datos-para-ejemplos-y-pruebas"><span class="header-section-number">3.5.1.2</span> Conjuntos de datos para ejemplos y pruebas</a></li>
+  </ul></li>
+  <li><a href="#funciones" id="toc-funciones" class="nav-link" data-scroll-target="#funciones"><span class="header-section-number">3.5.2</span> Funciones</a>
+  <ul class="collapse">
+  <li><a href="#concepto" id="toc-concepto" class="nav-link" data-scroll-target="#concepto"><span class="header-section-number">3.5.2.1</span> Concepto</a></li>
+  <li><a href="#ejemplos" id="toc-ejemplos" class="nav-link" data-scroll-target="#ejemplos"><span class="header-section-number">3.5.2.2</span> Ejemplos</a></li>
+  <li><a href="#argumentos" id="toc-argumentos" class="nav-link" data-scroll-target="#argumentos"><span class="header-section-number">3.5.2.3</span> Argumentos</a></li>
+  <li><a href="#ayuda" id="toc-ayuda" class="nav-link" data-scroll-target="#ayuda"><span class="header-section-number">3.5.2.4</span> Ayuda</a></li>
+  </ul></li>
   <li><a href="#paquetes" id="toc-paquetes" class="nav-link" data-scroll-target="#paquetes"><span class="header-section-number">3.5.3</span> Paquetes</a></li>
-  <li><a href="#visualización-de-datos" id="toc-visualización-de-datos" class="nav-link" data-scroll-target="#visualización-de-datos"><span class="header-section-number">3.5.4</span> Visualización de datos</a></li>
-  <li><a href="#sec-manipulacion-datos" id="toc-sec-manipulacion-datos" class="nav-link" data-scroll-target="#sec-manipulacion-datos"><span class="header-section-number">3.5.5</span> Manipulación de datos</a></li>
-  <li><a href="#tipos-de-datos" id="toc-tipos-de-datos" class="nav-link" data-scroll-target="#tipos-de-datos"><span class="header-section-number">3.5.6</span> Tipos de datos</a></li>
+  <li><a href="#visualización-de-datos" id="toc-visualización-de-datos" class="nav-link" data-scroll-target="#visualización-de-datos"><span class="header-section-number">3.5.4</span> Visualización de datos</a>
+  <ul class="collapse">
+  <li><a href="#la-función-view" id="toc-la-función-view" class="nav-link" data-scroll-target="#la-función-view"><span class="header-section-number">3.5.4.1</span> La función <code>View()</code></a></li>
+  <li><a href="#funciones-básicas-de-graficación-estadística" id="toc-funciones-básicas-de-graficación-estadística" class="nav-link" data-scroll-target="#funciones-básicas-de-graficación-estadística"><span class="header-section-number">3.5.4.2</span> Funciones básicas de graficación estadística</a></li>
+  </ul></li>
+  <li><a href="#sec-manipulacion-datos" id="toc-sec-manipulacion-datos" class="nav-link" data-scroll-target="#sec-manipulacion-datos"><span class="header-section-number">3.5.5</span> Manipulación de datos</a>
+  <ul class="collapse">
+  <li><a href="#creación-de-subconjuntos" id="toc-creación-de-subconjuntos" class="nav-link" data-scroll-target="#creación-de-subconjuntos"><span class="header-section-number">3.5.5.1</span> Creación de subconjuntos</a></li>
+  <li><a href="#ordenamiento" id="toc-ordenamiento" class="nav-link" data-scroll-target="#ordenamiento"><span class="header-section-number">3.5.5.2</span> Ordenamiento</a></li>
+  <li><a href="#creación-y-modificación-de-columnas" id="toc-creación-y-modificación-de-columnas" class="nav-link" data-scroll-target="#creación-y-modificación-de-columnas"><span class="header-section-number">3.5.5.3</span> Creación y modificación de columnas</a></li>
+  <li><a href="#agrupación-y-sumarización" id="toc-agrupación-y-sumarización" class="nav-link" data-scroll-target="#agrupación-y-sumarización"><span class="header-section-number">3.5.5.4</span> Agrupación y sumarización</a></li>
+  <li><a href="#ejemplo" id="toc-ejemplo" class="nav-link" data-scroll-target="#ejemplo"><span class="header-section-number">3.5.5.5</span> Ejemplo</a></li>
+  </ul></li>
+  <li><a href="#tipos-de-datos" id="toc-tipos-de-datos" class="nav-link" data-scroll-target="#tipos-de-datos"><span class="header-section-number">3.5.6</span> Tipos de datos</a>
+  <ul class="collapse">
+  <li><a href="#tipos-básicos" id="toc-tipos-básicos" class="nav-link" data-scroll-target="#tipos-básicos"><span class="header-section-number">3.5.6.1</span> Tipos básicos</a></li>
+  <li><a href="#tipos-compuestos" id="toc-tipos-compuestos" class="nav-link" data-scroll-target="#tipos-compuestos"><span class="header-section-number">3.5.6.2</span> Tipos compuestos</a></li>
+  <li><a href="#otros" id="toc-otros" class="nav-link" data-scroll-target="#otros"><span class="header-section-number">3.5.6.3</span> Otros</a></li>
+  </ul></li>
   <li><a href="#definición-de-funciones" id="toc-definición-de-funciones" class="nav-link" data-scroll-target="#definición-de-funciones"><span class="header-section-number">3.5.7</span> Definición de funciones</a></li>
-  <li><a href="#condicionales" id="toc-condicionales" class="nav-link" data-scroll-target="#condicionales"><span class="header-section-number">3.5.8</span> Condicionales</a></li>
-  <li><a href="#ciclos" id="toc-ciclos" class="nav-link" data-scroll-target="#ciclos"><span class="header-section-number">3.5.9</span> Ciclos</a></li>
+  <li><a href="#condicionales" id="toc-condicionales" class="nav-link" data-scroll-target="#condicionales"><span class="header-section-number">3.5.8</span> Condicionales</a>
+  <ul class="collapse">
+  <li><a href="#la-sentencia-if" id="toc-la-sentencia-if" class="nav-link" data-scroll-target="#la-sentencia-if"><span class="header-section-number">3.5.8.1</span> La sentencia <code>if</code></a></li>
+  <li><a href="#la-cláusula-else" id="toc-la-cláusula-else" class="nav-link" data-scroll-target="#la-cláusula-else"><span class="header-section-number">3.5.8.2</span> La cláusula <code>else</code></a></li>
+  <li><a href="#la-cláusula-else-if" id="toc-la-cláusula-else-if" class="nav-link" data-scroll-target="#la-cláusula-else-if"><span class="header-section-number">3.5.8.3</span> La cláusula <code>else if</code></a></li>
+  </ul></li>
+  <li><a href="#ciclos" id="toc-ciclos" class="nav-link" data-scroll-target="#ciclos"><span class="header-section-number">3.5.9</span> Ciclos</a>
+  <ul class="collapse">
+  <li><a href="#la-sentencia-for" id="toc-la-sentencia-for" class="nav-link" data-scroll-target="#la-sentencia-for"><span class="header-section-number">3.5.9.1</span> La sentencia <code>for</code></a></li>
+  <li><a href="#la-sentencia-while" id="toc-la-sentencia-while" class="nav-link" data-scroll-target="#la-sentencia-while"><span class="header-section-number">3.5.9.2</span> La sentencia <code>while</code></a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#recursos-de-interés" id="toc-recursos-de-interés" class="nav-link" data-scroll-target="#recursos-de-interés"><span class="header-section-number">3.6</span> Recursos de interés</a></li>
   </ul>
@@ -1197,8 +1232,8 @@ TV-Y7-FV       UR
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<div class="datatables html-widget html-fill-item" id="htmlwidget-a325ec98efd870be3925" style="width:100%;height:auto;"></div>
-<script type="application/json" data-for="htmlwidget-a325ec98efd870be3925">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13],["05/04/2026 06:00 p. m.","05/04/2026 05:00 p. m.","05/04/2026 04:00 p. m.","05/04/2026 03:00 p. m.","05/04/2026 02:00 p. m.","05/04/2026 01:00 p. m.","05/04/2026 12:00 p. m.","05/04/2026 11:00 a. m.","05/04/2026 10:00 a. m.","05/04/2026 09:00 a. m.","05/04/2026 08:00 a. m.","05/04/2026 07:00 a. m.","05/04/2026 06:00 a. m."],[18,17,16,15,14,13,12,11,10,9,8,7,6],[21.6,22.52,22.69,23.92,24.06,23.93,23.43,21.69,21.31,21.7,21.03,19.22,18.16],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0.06,0.44,0.57,1.2,1.27,1.47,1.53,1.48,0.96,0.78,0.55,0.37,0.05],[878.42,878.05,877.88,878.13,878.46,879.14,879.8200000000001,880.3200000000001,880.35,880.47,880.28,879.83,879.22]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>id<\/th>\n      <th>fecha_hora<\/th>\n      <th>hora<\/th>\n      <th>temperatura<\/th>\n      <th>lluvia<\/th>\n      <th>radiacion<\/th>\n      <th>presion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":13,"language":{"url":"//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"},"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,5,6]},{"name":"id","targets":0},{"name":"fecha_hora","targets":1},{"name":"hora","targets":2},{"name":"temperatura","targets":3},{"name":"lluvia","targets":4},{"name":"radiacion","targets":5},{"name":"presion","targets":6}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,13,25,50,100]}},"evals":[],"jsHooks":[]}</script>
+<div class="datatables html-widget html-fill-item" id="htmlwidget-525e96908f866408bbb1" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-525e96908f866408bbb1">{"x":{"filter":"none","vertical":false,"data":[[1,2,3,4,5,6,7,8,9,10,11,12,13],["05/04/2026 06:00 p. m.","05/04/2026 05:00 p. m.","05/04/2026 04:00 p. m.","05/04/2026 03:00 p. m.","05/04/2026 02:00 p. m.","05/04/2026 01:00 p. m.","05/04/2026 12:00 p. m.","05/04/2026 11:00 a. m.","05/04/2026 10:00 a. m.","05/04/2026 09:00 a. m.","05/04/2026 08:00 a. m.","05/04/2026 07:00 a. m.","05/04/2026 06:00 a. m."],[18,17,16,15,14,13,12,11,10,9,8,7,6],[21.6,22.52,22.69,23.92,24.06,23.93,23.43,21.69,21.31,21.7,21.03,19.22,18.16],[0,0,0,0,0,0,0,0,0,0,0,0,0],[0.06,0.44,0.57,1.2,1.27,1.47,1.53,1.48,0.96,0.78,0.55,0.37,0.05],[878.42,878.05,877.88,878.13,878.46,879.14,879.8200000000001,880.3200000000001,880.35,880.47,880.28,879.83,879.22]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>id<\/th>\n      <th>fecha_hora<\/th>\n      <th>hora<\/th>\n      <th>temperatura<\/th>\n      <th>lluvia<\/th>\n      <th>radiacion<\/th>\n      <th>presion<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"pageLength":13,"language":{"url":"//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json"},"columnDefs":[{"className":"dt-right","targets":[0,2,3,4,5,6]},{"name":"id","targets":0},{"name":"fecha_hora","targets":1},{"name":"hora","targets":2},{"name":"temperatura","targets":3},{"name":"lluvia","targets":4},{"name":"radiacion","targets":5},{"name":"presion","targets":6}],"order":[],"autoWidth":false,"orderClasses":false,"lengthMenu":[10,13,25,50,100]}},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <ol type="1">
