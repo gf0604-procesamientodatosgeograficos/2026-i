@@ -221,7 +221,7 @@ paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
   geom_point() +
   scale_x_continuous(labels = comma, limits = c(0, NA)) +
-  ggtitle("PIB per cápita vs esperanza de vida al nacer por continente") +
+  ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
   labs(caption = "Fuentes: Natural Earth y Banco Mundial",
@@ -245,9 +245,8 @@ ggplot2 incluye un conjunto de [estilos](https://ggplot2.tidyverse.org/reference
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
   geom_point() +
-  geom_smooth() +
   scale_x_continuous(labels = comma, limits = c(0, NA)) +
-  ggtitle("PIB per cápita vs esperanza de vida al nacer por continente") +
+  ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
   labs(caption = "Fuentes: Natural Earth y Banco Mundial",
@@ -286,9 +285,8 @@ library(ggthemes)
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
   geom_point() +
-  geom_smooth() +
   scale_x_continuous(labels = comma, limits = c(0, NA)) +
-  ggtitle("PIB per cápita vs esperanza de vida al nacer por continente") +
+  ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
   labs(caption = "Fuentes: Natural Earth y Banco Mundial",
@@ -304,7 +302,7 @@ ggplot2 incluye múltiples funciones para escalas de colores, entre las que pued
 - [scale_color_viridis_d()](https://ggplot2.tidyverse.org/reference/scale_viridis.html): para escalas [viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html), diseñadas para mejorar la legibilidad de gráficos para lectores con formas comunes de daltonismo y discapacidades relacionadas con la percepción de colores.
 - [scale_color_manual()](https://ggplot2.tidyverse.org/reference/scale_manual.html): para especificar directamente los colores a utilizar.
 
-El siguiente bloque de código genera un gráfico de dispersión para los datos de países. Muestra el PIB per cápita (`GDP_PC`) en el eje X y la esperanza de vida (`LIFE_EXPECTANCY`) en el eje Y. La variable correspondiente al continente (`CONTINENT`) se muestra mediante el color de los puntos, de acuerdo con una escala de ColorBrewer.
+El siguiente bloque de código genera un gráfico de dispersión para los datos de países. Muestra el PIB per cápita (`GDP_PC`) en el eje X y la esperanza de vida (`LIFE_EXPECTANCY`) en el eje Y. La variable correspondiente al continente (`CONTINENT`) se muestra mediante el color de los puntos, de acuerdo con una escala cualitativa de ColorBrewer (apropiada para variables categóricas).
 
 ```{r}
 #| label: grafico-dispersion--scale_color
@@ -316,15 +314,13 @@ El siguiente bloque de código genera un gráfico de dispersión para los datos 
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
   geom_point() +
-  geom_smooth() +
   scale_x_continuous(labels = comma, limits = c(0, NA)) +
-  scale_y_continuous(labels = comma, limits = c(50, 90)) +
-  ggtitle("PIB per cápita vs esperanza de vida al nacer por continente") +
+  ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
   labs(caption = "Fuentes: Natural Earth y Banco Mundial",
        color = "Continente") +
-  scale_colour_brewer(palette = "YlOrBr", direction = -1) +
+  scale_colour_brewer(palette = "Set1") + # escala de colores cualitativa
   theme_minimal() # estilo de ggplot2
 ```
 
