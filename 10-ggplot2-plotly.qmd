@@ -565,13 +565,9 @@ grafico_pastel_ggplot2 <-
 
 # Despliegue del gráfico
 grafico_pastel_ggplot2
-
-# Gráfico de pastel plotly (está generando un error)
-# ggplotly(grafico_pastel_ggplot2) |>
-#   config(locale = 'es')
 ```
 
-El gráfico interactivo no se presenta en este caso, debido a que la función `ggplotly()` produce un error al procesar el gráfico de pastel generado por ggplot2.
+En este caso no se presenta una versión interactiva del gráfico, ya que la función `ggplotly()` no admite el sistema de coordenadas polares (`coord_polar()`) que utiliza ggplot2 para construir el gráfico de pastel.
 
 ### Gráficos de barras
 
