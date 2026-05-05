@@ -470,6 +470,13 @@ poblacion_por_region <-
   summarize(POP_TOTAL = sum(POP_EST)) |>
   mutate(POP_PCT = POP_TOTAL / sum(POP_TOTAL) * 100)
 
+# Paleta de colores compartida entre el gráfico ggplot2 y el plotly
+# (corresponde a la paleta cualitativa por defecto de plotly)
+colores_pastel <- c(
+  "#636EFA", "#EF553B", "#00CC96", "#AB63FA", "#FFA15A",
+  "#19D3F3", "#FF6692", "#B6E880", "#FF97FF", "#FECB52"
+)
+
 # Gráfico de pastel
 grafico_pastel_ggplot2 <-
   poblacion_por_region |>
@@ -480,6 +487,7 @@ grafico_pastel_ggplot2 <-
     aes(label = number(POP_PCT, accuracy = 0.1, suffix = "%")),
     position = position_stack(vjust = 0.6) # para ajustar la posición del texto en cada porción
   ) +
+  scale_fill_manual(values = colores_pastel) +
   ggtitle("Población mundial por región de la ONU") +
   labs(fill = "Región de la ONU", caption = "Fuente: Natural Earth") +
   theme_void()
@@ -501,7 +509,8 @@ plot_ly(
   values = ~POP_TOTAL,
   type = "pie",
   textinfo = "label+percent",
-  hoverinfo = "label+value+percent"
+  hoverinfo = "label+value+percent",
+  marker = list(colors = colores_pastel)
 ) |>
   layout(title = "Población mundial por región de la ONU") |>
   config(locale = "es")
