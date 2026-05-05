@@ -389,8 +389,39 @@ grafico_ggplot2 <-
   theme_minimal() # estilo de ggplot2
 
 # Gráfico plotly
-ggplotly(grafico_ggplot2, tooltip = "text") |> 
+ggplotly(grafico_ggplot2, tooltip = "text") |>
   config(locale = 'es') # para mostrar los controles en español
+```
+
+#### Personalización de plotly
+
+El objeto que produce `ggplotly()` puede ajustarse con las funciones [config()](https://plotly.com/r/configuration-options/) (controles de la barra de herramientas) y [layout()](https://plotly.com/r/reference/layout/) (apariencia y comportamiento general). Algunas opciones útiles de `config()`:
+
+- `locale`: idioma de los controles (ya se utilizó en el ejemplo anterior).
+- `displaylogo = FALSE`: oculta el logotipo de Plotly de la barra de herramientas.
+- `modeBarButtonsToRemove`: elimina botones específicos (p. ej. selección por área, selección con lazo).
+- `toImageButtonOptions`: configura el botón que exporta el gráfico como imagen (formato, nombre del archivo, dimensiones).
+
+El siguiente bloque aplica estas opciones al mismo gráfico de dispersión.
+
+```{r}
+#| label: grafico-dispersion-paises-plotly-personalizado
+#| warning: false
+#| message: false
+
+# Gráfico plotly con la barra de herramientas personalizada
+ggplotly(grafico_ggplot2, tooltip = "text") |>
+  config(
+    locale = "es",
+    displaylogo = FALSE,
+    modeBarButtonsToRemove = c("select2d", "lasso2d"),
+    toImageButtonOptions = list(
+      format = "png",
+      filename = "pib-vs-esperanza-vida",
+      width = 1000,
+      height = 600
+    )
+  )
 ```
 
 ## Otros tipos de gráficos
