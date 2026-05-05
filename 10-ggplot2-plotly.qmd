@@ -619,39 +619,9 @@ El cálculo de la cantidad de países por continente o el de la cantidad de diam
 knitr::include_graphics(rep("img/ggplot2-transformacion-estadistica.png"))
 ```
 
-Las barras pueden mostrar otras transformaciones estadísticas a través del uso de los argumentos `stat` y `fun.y` de `geom_bar()`. Por ejemplo, `stat = "summary"` y `fun.y = "mean"`generan un gráfico que muestra el promedio de esperanza de vida (`LIFE_EXPECTANCY`) para cada región de la ONU.
+Las barras pueden mostrar otras transformaciones estadísticas a través del argumento `stat` de `geom_bar()` (por ejemplo, `stat = "summary"` con `fun = "mean"` para graficar promedios). Sin embargo, suele ser más práctico **pre-computar el resumen** con `summarize()` y luego graficarlo con `geom_col()`, lo que además facilita el ordenamiento de las barras con [reorder()](https://rdrr.io/r/stats/reorder.factor.html).
 
-```{r}
-#| label: grafico-barras-paises-mean-lifeexp-region
-#| warning: false
-#| message: false
-
-# Gráfico de barras con promedio de esperanza de vida
-# para cada región de la ONU
-grafico_barras_ggplot2 <-
-  paises |>
-  ggplot(aes(x = fct_infreq(REGION_UN), y = LIFE_EXPECTANCY)) +
-  geom_bar(
-    stat = "summary", 
-    fun.y = "mean",
-    aes(
-      text = paste0(
-        "Promedio de esperanza de vida: ", number(after_stat(y), accuracy = 0.1, suffix = " años")
-      )
-    )
-  ) +
-  ggtitle("Promedio de esperanza de vida por región de la ONU") +
-  xlab("Región de la ONU") +
-  ylab("Promedio de esperanza de vida") +
-  labs(caption = "Fuente: Natural Earth") +
-  theme_economist()
-
-# Gráfico de barras plotly
-ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
-  config(locale = 'es')
-```
-
-**Nota: ** la función `fct_infreq()` no está ordenando en este caso las columnas. El ordenamiento aún puede conseguirse si se realiza primero el cálculo del promedio y luego se grafica la columna correspondiente, como en el siguiente bloque de código.
+Por ejemplo, para mostrar el promedio de esperanza de vida (`LIFE_EXPECTANCY`) por región de la ONU, primero se calcula el promedio:
 
 ```{r}
 # Cálculo del promedio de esperanza de vida por región
@@ -666,7 +636,7 @@ promedio_esperanza_vida_por_region |>
 
 ```
 
-Luego se dibuja luego el gráfico con `geom_col()` y se ordenan las barras con la función [reorder()](https://rdrr.io/cran/gplots/man/reorder.html).
+Luego se dibuja el gráfico con `geom_col()` y se ordenan las barras con `reorder()`.
 
 ```{r}
 #| label: grafico-barras-paises-mean-lifeexp-region-ordered
