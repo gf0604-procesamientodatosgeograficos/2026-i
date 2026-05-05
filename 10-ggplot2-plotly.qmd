@@ -447,7 +447,43 @@ histograma_ggplot2 <-
   theme_minimal()
 
 # Histograma plotly
-ggplotly(histograma_ggplot2, tooltip = "text") |> 
+ggplotly(histograma_ggplot2, tooltip = "text") |>
+  config(locale = 'es')
+```
+
+El argumento `bins` define la cantidad de barras (en el ejemplo anterior, 10) y `ggplot2` calcula automáticamente el ancho de cada una. Como alternativa, el argumento `binwidth` fija directamente el ancho de cada barra en las unidades de la variable y `ggplot2` calcula la cantidad de barras. La elección de uno u otro afecta la apariencia del histograma: un `binwidth` pequeño revela más detalle de la distribución, pero puede introducir ruido; uno grande resalta el patrón general a costa de detalle.
+
+El siguiente histograma reemplaza `bins = 10` por `binwidth = 5000` (en dólares), lo que produce barras más estrechas y un perfil más fino de la distribución.
+
+```{r}
+#| label: histograma-paises-gdppc-binwidth
+#| warning: false
+
+# Histograma ggplot2 con ancho de barra fijo
+histograma_ggplot2 <-
+  paises |>
+  ggplot(aes(x = GDP_PC)) +
+  geom_histogram(
+    aes(
+      text = paste0(
+        "PIB per cápita (valor medio del rango): ",
+        number(after_stat(x), accuracy = 1, prefix = "$", big.mark = ","),
+        "\n",
+        "Frecuencia: ", after_stat(count)
+      )
+    ),
+    binwidth = 5000
+  ) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
+  ggtitle("Distribución del PIB per cápita (binwidth = $5,000)") +
+  xlab("PIB per cápita ($ EE.UU.)") +
+  ylab("Frecuencia") +
+  labs(subtitle = paste0("Datos de ", nrow(paises), " países"),
+       caption = "Fuentes: Natural Earth y Banco Mundial") +
+  theme_minimal()
+
+# Histograma plotly
+ggplotly(histograma_ggplot2, tooltip = "text") |>
   config(locale = 'es')
 ```
 
