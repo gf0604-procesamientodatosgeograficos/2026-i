@@ -374,7 +374,7 @@ grafico_ggplot2 <-
     # datos que se muestran al colocar el ratón sobre un punto
     text = paste0(
       "País: ", NAME, "\n",
-      "PIB per cápita: ", comma(GDP_PC, accuracy = 1), "\n",
+      "PIB per cápita: ", dollar(GDP_PC, accuracy = 1), "\n",
       "Esperanza de vida: ", comma(LIFE_EXPECTANCY, accuracy = 0.1)
     )
   )) +
