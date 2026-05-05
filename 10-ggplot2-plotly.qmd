@@ -518,6 +518,37 @@ ggplotly(histograma_ggplot2, tooltip = "text") |>
   config(locale = 'es')
 ```
 
+### Diagramas de caja
+
+Un [diagrama de caja (*boxplot*)](https://es.wikipedia.org/wiki/Diagrama_de_caja) resume la distribución de una variable numérica mediante cinco estadísticos: el mínimo, el primer cuartil (Q1), la mediana, el tercer cuartil (Q3) y el máximo. La caja se extiende del Q1 al Q3 y la línea interna marca la mediana; los bigotes (*whiskers*) llegan hasta los valores no atípicos más extremos y los puntos fuera de los bigotes representan valores atípicos (*outliers*). Los diagramas de caja son particularmente útiles para comparar la distribución de una variable numérica entre categorías.
+
+En ggplot2, los diagramas de caja se implementan con la función [geom_boxplot()](https://ggplot2.tidyverse.org/reference/geom_boxplot.html).
+
+El siguiente bloque de código muestra un diagrama de caja de la esperanza de vida por continente, con los continentes ordenados por mediana ascendente.
+
+```{r}
+#| label: diagrama-caja-paises-lifeexp-continent
+#| warning: false
+
+# Diagrama de caja de esperanza de vida por continente
+diagrama_caja_ggplot2 <-
+  paises |>
+  ggplot(aes(x = reorder(CONTINENT, LIFE_EXPECTANCY, median, na.rm = TRUE),
+             y = LIFE_EXPECTANCY)) +
+  geom_boxplot() +
+  ggtitle("Esperanza de vida por continente") +
+  xlab("Continente") +
+  ylab("Esperanza de vida (años)") +
+  labs(caption = "Fuentes: Natural Earth y Banco Mundial") +
+  theme_minimal()
+
+# Diagrama de caja plotly
+ggplotly(diagrama_caja_ggplot2) |>
+  config(locale = 'es')
+```
+
+Al convertir el gráfico con `ggplotly()`, el *tooltip* muestra automáticamente los cinco estadísticos al pasar el ratón sobre cada caja y los valores individuales de los puntos atípicos.
+
 ### Gráficos de pastel
 
 Un [gráfico de pastel](https://es.wikipedia.org/wiki/Gr%C3%A1fico_circular) representa porcentajes y porciones en secciones (*slices*) de un círculo. Son muy populares, pero también criticados debido a la dificultad del cerebro humano de comparar áreas de sectores circulares, por lo que [algunos expertos recomiendan sustituirlos por otros tipos de gráficos como, por ejemplo, gráficos de barras](https://www.data-to-viz.com/caveat/pie.html).
