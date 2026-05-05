@@ -429,7 +429,9 @@ histograma_ggplot2 <-
   geom_histogram(
     aes(
       text = paste0(
-        "PIB per cápita (valor medio del rango): ", number(after_stat(x), accuracy = 1, prefix = "$", big.mark = ","), "\n",
+        "PIB per cápita (valor medio del rango): ", 
+        number(after_stat(x), accuracy = 1, prefix = "$", big.mark = ","), 
+        "\n",
         "Frecuencia: ", after_stat(count)
       )
     ), 
@@ -440,7 +442,8 @@ histograma_ggplot2 <-
   ggtitle("Distribución del PIB per cápita") +
   xlab("PIB per cápita ($ EE.UU.)") +
   ylab("Frecuencia") +
-  labs(subtitle = "Datos de 201 países", caption = "Fuentes: Natural Earth y Banco Mundial") +
+  labs(subtitle = "Datos de 201 países", 
+       caption = "Fuentes: Natural Earth y Banco Mundial") +
   theme_minimal()
 
 # Histograma plotly
@@ -460,35 +463,49 @@ El siguiente gráfico de pastel muestra la distribución de la población según
 #| label: grafico-pastel-poblacion
 #| warning: false
 
-# Agrupar y resumir los datos
-suma_poblacion_por_region <- paises |>
+# Población total y porcentaje por región de la ONU
+poblacion_por_region <-
+  paises |>
   group_by(REGION_UN) |>
-  summarise(POP_TOTAL = sum(POP_EST))
-
-# Calcular porcentajes
-porcentaje_poblacion_por_region <- suma_poblacion_por_region |>
-  mutate(POP_PCT = round(POP_TOTAL / sum(POP_TOTAL) * 100, 1))
+  summarize(POP_TOTAL = sum(POP_EST)) |>
+  mutate(POP_PCT = POP_TOTAL / sum(POP_TOTAL) * 100)
 
 # Gráfico de pastel
 grafico_pastel_ggplot2 <-
-  ggplot(porcentaje_poblacion_por_region, aes(x = "", y = POP_TOTAL, fill = REGION_UN)) +
+  poblacion_por_region |>
+  ggplot(aes(x = "", y = POP_TOTAL, fill = REGION_UN)) +
   geom_bar(width = 1, stat = "identity") +
   coord_polar(theta = "y") +
   geom_text(
-    aes(label = paste0(POP_PCT, "%")), 
+    aes(label = number(POP_PCT, accuracy = 0.1, suffix = "%")),
     position = position_stack(vjust = 0.6) # para ajustar la posición del texto en cada porción
   ) +
-  labs(title = "Distribución de la población por región de la ONU",
-       x = NULL,
-       y = NULL,
-       fill = "Región de la ONU") +
+  ggtitle("Distribución de la población por región de la ONU") +
+  labs(fill = "Región de la ONU", caption = "Fuente: Natural Earth") +
   theme_void()
 
 # Despliegue del gráfico
 grafico_pastel_ggplot2
 ```
 
-En este caso no se presenta una versión interactiva del gráfico, ya que la función `ggplotly()` no admite el sistema de coordenadas polares (`coord_polar()`) que utiliza ggplot2 para construir el gráfico de pastel.
+La función `ggplotly()` no admite el sistema de coordenadas polares (`coord_polar()`) que utiliza ggplot2 para construir el gráfico de pastel, por lo que no es posible convertir directamente el gráfico anterior a plotly. Sin embargo, plotly dispone de una **API propia** (más allá de `ggplotly()`) que permite construir gráficos de pastel interactivos con la función [plot_ly()](https://plotly.com/r/pie-charts/) y el argumento `type = "pie"`.
+
+```{r}
+#| label: grafico-pastel-poblacion-plotly
+#| warning: false
+
+# Gráfico de pastel interactivo con la API nativa de plotly
+plot_ly(
+  data = poblacion_por_region,
+  labels = ~REGION_UN,
+  values = ~POP_TOTAL,
+  type = "pie",
+  textinfo = "label+percent",
+  hoverinfo = "label+value+percent"
+) |>
+  layout(title = "Distribución de la población por región de la ONU") |>
+  config(locale = "es")
+```
 
 ### Gráficos de barras
 
