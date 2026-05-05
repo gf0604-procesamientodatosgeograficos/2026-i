@@ -657,20 +657,27 @@ ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
 
 Al usar el argumento `fill` de `aes()`, las barras de un gráfico pueden dividirse de acuerdo con una variable adicional, produciendo el efecto de barras apiladas (i.e. unas sobre otras).
 
-En el siguiente bloque de código, se genera un gráfico de barras apiladas que, para el conjunto de datos de países, muestra las cantidades de países por región de la ONU (`REGION_UN`) subdivididas por nivel de economía (`ECONOMY`). 
+En el siguiente bloque de código, se genera un gráfico de barras apiladas que, para el conjunto de datos de países, muestra las cantidades de países por región de la ONU (`REGION_UN`) subdivididas por nivel de economía (`ECONOMY`). Para que los *tooltips* muestren simultáneamente la región, el nivel de economía y la cantidad, los conteos se pre-calculan con [count()](https://dplyr.tidyverse.org/reference/count.html) y se grafican con `geom_col()`. Los argumentos de posicionamiento (`position`) que se ilustran a continuación funcionan tanto con `geom_bar()` como con `geom_col()`.
 
 ```{r}
 #| label: grafico-barras-apiladas-paises
 #| warning: false
 
+# Cantidad de países por región y nivel de economía
+paises_por_region_economia <-
+  paises |>
+  count(REGION_UN, ECONOMY, name = "n_paises")
+
 # Gráfico de barras apiladas por región de la ONU y nivel de economía
 grafico_barras_ggplot2 <-
-paises |>
-  ggplot(aes(x = REGION_UN, fill = ECONOMY)) +
-  geom_bar(
+  paises_por_region_economia |>
+  ggplot(aes(x = REGION_UN, y = n_paises, fill = ECONOMY)) +
+  geom_col(
     aes(
       text = paste0(
-        "Cantidad de países: ", after_stat(count)
+        "Región de la ONU: ", REGION_UN, "\n",
+        "Nivel de economía: ", ECONOMY, "\n",
+        "Cantidad de países: ", n_paises
       )
     )
   ) +
@@ -685,7 +692,7 @@ ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
   config(locale = 'es')
 ```
 
-El argumento `position = "fill"` de `geom_bar()` también genera barras apiladas, pero le asigna a todas las barras la misma longitud, facilitando así la comparación de proporciones.
+El argumento `position = "fill"` también genera barras apiladas, pero le asigna a todas las barras la misma longitud, facilitando así la comparación de proporciones.
 
 ```{r}
 #| label: grafico-barras-apiladas-paises-proporcion
@@ -693,13 +700,15 @@ El argumento `position = "fill"` de `geom_bar()` también genera barras apiladas
 
 # Gráfico de barras apiladas por región de la ONU y nivel de economía
 grafico_barras_ggplot2 <-
-paises |>
-  ggplot(aes(x = REGION_UN, fill = ECONOMY)) +
-  geom_bar(
+  paises_por_region_economia |>
+  ggplot(aes(x = REGION_UN, y = n_paises, fill = ECONOMY)) +
+  geom_col(
     position = "fill",
     aes(
       text = paste0(
-        "Cantidad de países: ", after_stat(count)
+        "Región de la ONU: ", REGION_UN, "\n",
+        "Nivel de economía: ", ECONOMY, "\n",
+        "Cantidad de países: ", n_paises
       )
     )
   ) +
@@ -716,7 +725,7 @@ ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
 
 #### Barras agrupadas
 
-El argumento `position = "dodge"` de `geom_bar()` genera barras agrupadas (i.e. unas al lado de otras), facilitando así la comparación de valores individuales.
+El argumento `position = "dodge"` genera barras agrupadas (i.e. unas al lado de otras), facilitando así la comparación de valores individuales.
 
 ```{r}
 #| label: grafico-barras-agrupadas-paises
@@ -724,13 +733,15 @@ El argumento `position = "dodge"` de `geom_bar()` genera barras agrupadas (i.e. 
 
 # Gráfico de barras agrupadas por región de la ONU y nivel de economía
 grafico_barras_ggplot2 <-
-paises |>
-  ggplot(aes(x = REGION_UN, fill = ECONOMY)) +
-  geom_bar(
+  paises_por_region_economia |>
+  ggplot(aes(x = REGION_UN, y = n_paises, fill = ECONOMY)) +
+  geom_col(
     position = "dodge",
     aes(
       text = paste0(
-        "Cantidad de países: ", after_stat(count)
+        "Región de la ONU: ", REGION_UN, "\n",
+        "Nivel de economía: ", ECONOMY, "\n",
+        "Cantidad de países: ", n_paises
       )
     )
   ) +
