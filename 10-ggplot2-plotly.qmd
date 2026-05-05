@@ -375,7 +375,7 @@ grafico_ggplot2 <-
     text = paste0(
       "País: ", NAME, "\n",
       "PIB per cápita: ", dollar(GDP_PC, accuracy = 1), "\n",
-      "Esperanza de vida: ", comma(LIFE_EXPECTANCY, accuracy = 0.1)
+      "Esperanza de vida: ", comma(LIFE_EXPECTANCY, accuracy = 0.1, suffix = " años")
     )
   )) +
   scale_x_continuous(labels = comma, limits = c(0, NA)) +
