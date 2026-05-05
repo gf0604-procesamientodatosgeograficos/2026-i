@@ -480,7 +480,7 @@ grafico_pastel_ggplot2 <-
     aes(label = number(POP_PCT, accuracy = 0.1, suffix = "%")),
     position = position_stack(vjust = 0.6) # para ajustar la posición del texto en cada porción
   ) +
-  ggtitle("Distribución de la población por región de la ONU") +
+  ggtitle("Población mundial por región de la ONU") +
   labs(fill = "Región de la ONU", caption = "Fuente: Natural Earth") +
   theme_void()
 
@@ -503,7 +503,7 @@ plot_ly(
   textinfo = "label+percent",
   hoverinfo = "label+value+percent"
 ) |>
-  layout(title = "Distribución de la población por región de la ONU") |>
+  layout(title = "Población mundial por región de la ONU") |>
   config(locale = "es")
 ```
 
