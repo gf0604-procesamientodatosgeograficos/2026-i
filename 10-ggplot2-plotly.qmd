@@ -14,19 +14,20 @@ plotly, por su parte, agrega interactividad (acercamientos, filtrados, *tooltips
 
 Chang, W. (2018). *R graphics cookbook: Practical recipes for visualizing data*. O'Reilly. <https://r-graphics.org/>
 
-Wickham, H., & Grolemund, G. (2017). *R for Data Science: Import, Tidy, Transform, Visualize, and Model Data* (capítulo 3). O'Reilly Media. <https://r4ds.had.co.nz/>
+Wickham, H., & Grolemund, G. (2017). *R for Data Science: Import, Tidy, Transform, Visualize, and Model Data* (1.ª ed., capítulo 3). O'Reilly Media. <https://r4ds.had.co.nz/>
 
-Wickham, H., & Grolemund, G. (s. f.). *R para Ciencia de Datos (1era ed.)* (capítulo 3). <https://es.r4ds.hadley.nz/>
+Wickham, H., & Grolemund, G. (2017). *R para Ciencia de Datos* (1.ª ed., capítulo 3). <https://es.r4ds.hadley.nz/>
 
-Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (s. f.). *R for Data Science (2nd ed.)* (capítulo 2). <https://r4ds.hadley.nz/>
+Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* (2.ª ed., capítulo 2). O'Reilly Media. <https://r4ds.hadley.nz/>
 
-Wickham, H., Navarro, D., & Pedersen, T. L. (s.f.). *ggplot2: Elegant graphics for data analysis*. <https://ggplot2-book.org/>
+Wickham, H., Navarro, D., & Pedersen, T. L. (s. f.). *ggplot2: Elegant graphics for data analysis*. <https://ggplot2-book.org/>
 
 ## Introducción
 
 R proporciona una gran cantidad de funciones para la elaboración de gráficos estadísticos y otros tipos de visualizaciones. El paquete base de R, por ejemplo, contiene un conjunto básico de funciones muy versátiles, especialmente para gráficos simples de conjuntos de datos relativamente pequeños. Sin embargo, para visualizaciones más avanzadas, puede ser conveniente explorar otras bibliotecas.
 
-ggplot2 es una de las bibliotecas más populares de graficación de R. Implementa el concepto de "gramática de gráficos", que permite crear visualizaciones complejas a partir de capas y componentes simples. Forma parte de Tidyverse, por lo que se comunica muy bien con los demás paquetes de esta familia, enfocada en conjuntos de datos grandes y en ciencia de datos. 
+ggplot2 es una de las bibliotecas más populares de graficación de R. Implementa el concepto de "gramática de gráficos", que permite crear visualizaciones complejas a partir de capas y componentes simples. Forma parte de Tidyverse, por lo que se comunica muy bien con los demás paquetes de esta familia, enfocada en conjuntos de datos grandes y en ciencia de datos.
+
 plotly es una biblioteca para crear gráficos interactivos y dinámicos. Contiene capacidades para agregar controles y mecanismos que le permiten al usuario interactuar con los gráficos y realizar operaciones como filtrados, acercamientos y alejamientos, entre otras.
 
 Adicionalmente, el paquete DT permite presentar conjuntos de datos en tablas interactivas en las que se pueden realizar operaciones como ordenamientos, consultas y filtrados.
@@ -438,11 +439,10 @@ histograma_ggplot2 <-
     bins = 10
   )  +
   scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
-  coord_cartesian(ylim = c(0, 40)) +
   ggtitle("Distribución del PIB per cápita") +
   xlab("PIB per cápita ($ EE.UU.)") +
   ylab("Frecuencia") +
-  labs(subtitle = "Datos de 201 países", 
+  labs(subtitle = paste0("Datos de ", nrow(paises), " países"),
        caption = "Fuentes: Natural Earth y Banco Mundial") +
   theme_minimal()
 
@@ -457,7 +457,7 @@ Un [gráfico de pastel](https://es.wikipedia.org/wiki/Gr%C3%A1fico_circular) rep
 
 En ggplot2, los gráficos de pastel se implementan con la función de geometría `geom_bar(stat = "identity", width = 1)` y la función [coord_polar()](https://ggplot2.tidyverse.org/reference/coord_polar.html), la cual implementa un sistema de coordenadas polares.
 
-El siguiente gráfico de pastel muestra la distribución de la población según las regiones de la Organización de Naciones Unidas (ONU).
+El siguiente gráfico de pastel muestra la población mundial por región de la Organización de Naciones Unidas (ONU).
 
 ```{r}
 #| label: grafico-pastel-poblacion
