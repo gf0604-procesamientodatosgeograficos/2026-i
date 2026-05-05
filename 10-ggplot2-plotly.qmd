@@ -373,18 +373,18 @@ grafico_ggplot2 <-
   geom_point(aes(
     # datos que se muestran al colocar el ratón sobre un punto
     text = paste0(
+      "País: ", NAME, "\n",
       "PIB per cápita: ", GDP_PC, "\n",
       "Esperanza de vida: ", LIFE_EXPECTANCY
     )
   )) +
   scale_x_continuous(labels = comma, limits = c(0, NA)) +
-  scale_y_continuous(labels = comma, limits = c(50, 90)) +
-  ggtitle("PIB per cápita vs esperanza de vida al nacer por continente") +
+  scale_colour_brewer(palette = "Set1") +
+  ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
   labs(caption = "Fuentes: Natural Earth y Banco Mundial",
        color = "Continente") +
-  labs(color = "Población estimada") +
   theme_minimal() # estilo de ggplot2
 
 # Gráfico plotly
