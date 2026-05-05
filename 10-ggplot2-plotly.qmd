@@ -353,24 +353,6 @@ paises |>
 
 Para más información sobre etiquetas, estilos, colores y otros temas relacionados en ggplot2, se recomienda leer [ggplot2: Elegant Graphics for Data Analysis - Themes](https://ggplot2-book.org/themes.html).
 
-#### Opciones avanzadas
-
-En las secciones y ejemplos anteriores, se han estudiado las opciones básicas para crear un gráfico en ggplot2: datos, mapeos de variables a propiedades visuales y capas. También se mostraron algunos recursos para mejorar la apariencia de los gráficos.
-
-ggplot2 incluye otras opciones para la creación de gráficos, como transformaciones estadísticas, transformaciones de sistemas de coordenadas y posicionamiento de las geometrías, las cuales pueden esquematizarse de la siguiente forma:
-
-```
-<DATOS> |>
-  ggplot(aes(<MAPEOS>)) +
-  <FUNCION_GEOMETRIA>(
-    stat = <ESTADISTICA>,
-    position = <POSICION>
-  ) +
-  <FUNCION_COORDENADAS>
-```
-
-En las secciones siguientes, se explicarán y ejemplificarán alguna de estas opciones.
-
 ### plotly
 
 [plotly R](https://plotly.com/r/) es una biblioteca para gráficos interactivos que forma parte del [grupo de bibliotecas de graficación de Plotly](https://plotly.com/graphing-libraries/), el cual también incluye bibliotecas para otros lenguajes como Python, Julia, F# y MATLAB. Plotly fue originalmente escrita en JavaScript, por lo que es particularmente adecuada para gráficos interactivos en la Web.
@@ -413,6 +395,20 @@ ggplotly(grafico_ggplot2, tooltip = "text") |>
 ## Tipos de gráficos
 
 En esta sección, se ejemplifican varios tipos de gráficos, los cuales se construyen con ggplot2 y luego se convierten a plotly.
+
+Hasta ahora se utilizó la sintaxis básica de ggplot2 (datos, mapeos y geometrías). Para algunos tipos de gráficos —especialmente los de barras— es útil ampliar ese esquema con tres elementos adicionales: la transformación estadística (`stat`), el posicionamiento de las geometrías (`position`) y el sistema de coordenadas (`coord_*`):
+
+```
+<DATOS> |>
+  ggplot(aes(<MAPEOS>)) +
+  <FUNCION_GEOMETRIA>(
+    stat = <ESTADISTICA>,
+    position = <POSICION>
+  ) +
+  <FUNCION_COORDENADAS>
+```
+
+Estas opciones se ilustran más adelante, principalmente en los gráficos de barras (transformaciones estadísticas, barras apiladas y agrupadas).
 
 ### Gráficos de dispersión
 Un [gráfico de dispersión (*scatterplot*)](https://es.wikipedia.org/wiki/Diagrama_de_dispersi%C3%B3n) despliega los valores de dos variables numéricas, como puntos en un sistema de coordenadas. El valor de una variable se despliega en el eje X y el de la otra variable en el eje Y. Variables adicionales pueden ser mostradas mediante atributos de los puntos, tales como su tamaño, color o forma.
