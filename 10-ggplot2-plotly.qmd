@@ -445,7 +445,7 @@ grafico_dispersion_ggplot2 <-
   xlab("PIB per cápita (USD)") +
   ylab("Esperanza de vida (años)") +
   labs(caption = "Fuentes: Natural Earth y Banco Mundial") +
-  theme_economist()  
+  theme_minimal()  
 
 # Gráfico de dispersión plotly
 ggplotly(grafico_dispersion_ggplot2, tooltip = "text") |>
@@ -482,7 +482,7 @@ grafico_dispersion_ggplot2 <-
   xlab("PIB per cápita (USD)") +
   ylab("Esperanza de vida (años)") +
   labs(caption = "Fuentes: Natural Earth y Banco Mundial", color = "Continente") +
-  theme_economist()  
+  theme_minimal()  
 
 # Gráfico de dispersión plotly
 ggplotly(grafico_dispersion_ggplot2, tooltip = "text") |>
@@ -520,7 +520,7 @@ histograma_ggplot2 <-
   xlab("PIB per cápita ($ EE.UU.)") +
   ylab("Frecuencia") +
   labs(subtitle = "Datos de 201 países", caption = "Fuentes: Natural Earth y Banco Mundial") +
-  theme_economist()
+  theme_minimal()
 
 # Histograma plotly
 ggplotly(histograma_ggplot2, tooltip = "text") |> 
@@ -600,7 +600,7 @@ paises |>
   xlab("Región de la ONU") +
   ylab("Cantidad de países") +
   labs(caption = "Fuente: Natural Earth") +
-  theme_economist()
+  theme_minimal()
 
 # Gráfico de barras plotly
 ggplotly(grafico_barras_ggplot2, tooltip = "text") |> 
@@ -658,7 +658,7 @@ grafico_barras_ggplot2 <-
   xlab("Región de la ONU") +
   ylab("Promedio de esperanza de vida") +
   labs(caption = "Fuente: Natural Earth") +
-  theme_economist()
+  theme_minimal()
 
 # Gráfico de barras plotly
 ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
@@ -699,7 +699,7 @@ paises |>
   xlab("País") +
   ylab("Población (millones de habitantes)") +
   labs(caption = "Fuente: Natural Earth") +
-  theme_economist()
+  theme_minimal()
 
 # Gráfico de barras plotly
 ggplotly(grafico_barras_ggplot2, tooltip = "text") |> 
@@ -731,7 +731,7 @@ paises |>
   xlab("Región de la ONU") +
   ylab("Cantidad de países") +
   labs(fill = "Nivel de economía", caption = "Fuente: Natural Earth") +
-  theme_economist()
+  theme_minimal()
 
 # Gráfico de barras plotly
 ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
@@ -760,7 +760,7 @@ paises |>
   xlab("Región de la ONU") +
   ylab("Proporción") +
   labs(fill = "Nivel de economía", caption = "Fuente: Natural Earth") +
-  theme_economist()
+  theme_minimal()
 
 # Gráfico de barras plotly
 ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
@@ -791,7 +791,7 @@ paises |>
   xlab("Región de la ONU") +
   ylab("Cantidad de países") +
   labs(fill = "Nivel de economía", caption = "Fuente: Natural Earth") +
-  theme_economist()
+  theme_minimal()
 
 # Gráfico de barras plotly
 ggplotly(grafico_barras_ggplot2, tooltip = "text") |>
