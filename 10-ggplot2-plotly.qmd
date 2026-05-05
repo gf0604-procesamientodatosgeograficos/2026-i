@@ -141,7 +141,7 @@ El siguiente gráfico de dispersión muestra la variable producto interno bruto 
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY)) +
   geom_point() +
-  scale_x_continuous(labels = comma, limits = c(0, NA))
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA))
 ```
 
 La función `scale_x_continuous()` permite usar comas como separadores de miles y establecer los límites del eje X. También evita la notación científica.
@@ -162,7 +162,7 @@ Se pueden incluir variables adicionales en el gráfico mediante su mapeo a otras
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
   geom_point() +
-  scale_x_continuous(labels = comma, limits = c(0, NA))
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA))
 ```
 
 El siguiente bloque de código mapea la variable de la población estimada (`POP_EST`) con la propiedad visual tamaño (`size`).
@@ -177,8 +177,8 @@ El siguiente bloque de código mapea la variable de la población estimada (`POP
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT, size = POP_EST)) +
   geom_point() +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
-  scale_size_continuous(labels = comma)
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
+  scale_size_continuous(labels = label_comma())
 ```
 
 #### Capas adicionales
@@ -196,7 +196,7 @@ paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY)) +
   geom_point() +
   geom_smooth(method = 'lm') +
-  scale_x_continuous(labels = comma, limits = c(0, NA))
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA))
 ```
 
 **Ejercicios**  
@@ -220,7 +220,7 @@ Algunas de las opciones que ofrecen estas funciones se ilustran en el siguiente 
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
   geom_point() +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
   ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
@@ -245,7 +245,7 @@ ggplot2 incluye un conjunto de [estilos](https://ggplot2.tidyverse.org/reference
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
   geom_point() +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
   ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
@@ -285,7 +285,7 @@ library(ggthemes)
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
   geom_point() +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
   ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
@@ -314,7 +314,7 @@ El siguiente bloque de código genera un gráfico de dispersión para los datos 
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
   geom_point() +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
   ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
@@ -338,7 +338,7 @@ En el siguiente bloque, se mapea la población estimada (`POP_EST`) al color. De
 paises |>
   ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = POP_EST)) +
   geom_point() +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
   ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
   ylab("Esperanza de vida (años)") +
@@ -347,7 +347,7 @@ paises |>
   scale_color_distiller(palette = "YlOrBr",
                         direction = 1,
                         trans = "log10",
-                        labels = comma) + # escala secuencial continua
+                        labels = label_comma()) + # escala secuencial continua
   theme_minimal() # estilo de ggplot2
 ```
 
@@ -374,11 +374,11 @@ grafico_ggplot2 <-
     # datos que se muestran al colocar el ratón sobre un punto
     text = paste0(
       "País: ", NAME, "\n",
-      "PIB per cápita: ", dollar(GDP_PC, accuracy = 1), "\n",
-      "Esperanza de vida: ", comma(LIFE_EXPECTANCY, accuracy = 0.1, suffix = " años")
+      "PIB per cápita: ", label_currency(accuracy = 1)(GDP_PC), "\n",
+      "Esperanza de vida: ", label_comma(accuracy = 0.1, suffix = " años")(LIFE_EXPECTANCY)
     )
   )) +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
   scale_colour_brewer(palette = "Set1") +
   ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita  (USD)") +
@@ -432,15 +432,15 @@ grafico_dispersion_ggplot2 <-
       NAME,
       "\n",
       "PIB per cápita: ",
-      scales::comma(round(GDP_PC, 2)),
+      scales::label_comma()(round(GDP_PC, 2)),
       "\n",
       "Esperanza de vida: ",
       round(LIFE_EXPECTANCY, 2)
     )
   )) +
   geom_smooth(method = "lm") +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
-  scale_y_continuous(labels = comma, limits = c(50, 90)) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
+  scale_y_continuous(labels = label_comma(), limits = c(50, 90)) +
   ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita (USD)") +
   ylab("Esperanza de vida (años)") +
@@ -469,15 +469,15 @@ grafico_dispersion_ggplot2 <-
       NAME,
       "\n",
       "PIB per cápita: ",
-      scales::comma(round(GDP_PC, 2)),
+      scales::label_comma()(round(GDP_PC, 2)),
       "\n",
       "Esperanza de vida: ",
       round(LIFE_EXPECTANCY, 2)
     )
   )) +
   geom_smooth(method = "lm") +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
-  scale_y_continuous(labels = comma, limits = c(50, 90)) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
+  scale_y_continuous(labels = label_comma(), limits = c(50, 90)) +
   ggtitle("PIB per cápita vs esperanza de vida al nacer") +
   xlab("PIB per cápita (USD)") +
   ylab("Esperanza de vida (años)") +
@@ -514,7 +514,7 @@ histograma_ggplot2 <-
     ), 
     bins = 10
   )  +
-  scale_x_continuous(labels = comma, limits = c(0, NA)) +
+  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
   coord_cartesian(ylim = c(0, 40)) +
   ggtitle("Distribución del PIB per cápita") +
   xlab("PIB per cápita ($ EE.UU.)") +
