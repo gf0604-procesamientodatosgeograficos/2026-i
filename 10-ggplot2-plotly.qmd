@@ -324,6 +324,33 @@ paises |>
   theme_minimal() # estilo de ggplot2
 ```
 
+Cuando la variable mapeada al color es **numérica**, lo apropiado es una **escala secuencial**, que representa la magnitud mediante una variación gradual de claro a oscuro. La función [scale_color_distiller()](https://ggplot2.tidyverse.org/reference/scale_brewer.html) interpola los colores de una paleta de ColorBrewer para variables continuas.
+
+En el siguiente bloque, se mapea la población estimada (`POP_EST`) al color. Debido a que la población tiene una distribución muy sesgada (pocos países muy poblados y muchos con poblaciones pequeñas), se aplica una transformación logarítmica al eje del color con el argumento `trans = "log10"`.
+
+```{r}
+#| label: grafico-dispersion--scale_color-numerica
+#| warning: false
+#| message: false
+
+# Gráfico de dispersión de PIB per cápita vs esperanza de vida al nacer
+#  coloreado por población estimada (escala logarítmica)
+paises |>
+  ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = POP_EST)) +
+  geom_point() +
+  scale_x_continuous(labels = comma, limits = c(0, NA)) +
+  ggtitle("PIB per cápita vs esperanza de vida al nacer") +
+  xlab("PIB per cápita  (USD)") +
+  ylab("Esperanza de vida (años)") +
+  labs(caption = "Fuentes: Natural Earth y Banco Mundial",
+       color = "Población estimada") +
+  scale_color_distiller(palette = "YlOrBr",
+                        direction = 1,
+                        trans = "log10",
+                        labels = comma) + # escala secuencial continua
+  theme_minimal() # estilo de ggplot2
+```
+
 Para más información sobre etiquetas, estilos, colores y otros temas relacionados en ggplot2, se recomienda leer [ggplot2: Elegant Graphics for Data Analysis - Themes](https://ggplot2-book.org/themes.html).
 
 #### Opciones avanzadas
