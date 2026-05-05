@@ -432,10 +432,10 @@ grafico_dispersion_ggplot2 <-
       NAME,
       "\n",
       "PIB per cápita: ",
-      scales::number(round(GDP_PC, 2), big.mark = ","),
+      number(GDP_PC, accuracy = 1, prefix = "$", big.mark = ","),
       "\n",
       "Esperanza de vida: ",
-      round(LIFE_EXPECTANCY, 2)
+      number(LIFE_EXPECTANCY, accuracy = 0.1, suffix = " años")
     )
   )) +
   geom_smooth(method = "lm") +
@@ -469,10 +469,10 @@ grafico_dispersion_ggplot2 <-
       NAME,
       "\n",
       "PIB per cápita: ",
-      scales::number(round(GDP_PC, 2), big.mark = ","),
+      number(GDP_PC, accuracy = 1, prefix = "$", big.mark = ","),
       "\n",
       "Esperanza de vida: ",
-      round(LIFE_EXPECTANCY, 2)
+      number(LIFE_EXPECTANCY, accuracy = 0.1, suffix = " años")
     )
   )) +
   geom_smooth(method = "lm") +
@@ -508,7 +508,7 @@ histograma_ggplot2 <-
   geom_histogram(
     aes(
       text = paste0(
-        "PIB per cápita (valor medio del rango): $", round(after_stat(x), 2), "\n",
+        "PIB per cápita (valor medio del rango): ", number(after_stat(x), accuracy = 1, prefix = "$", big.mark = ","), "\n",
         "Frecuencia: ", after_stat(count)
       )
     ), 
@@ -636,7 +636,7 @@ grafico_barras_ggplot2 <-
     fun.y = "mean",
     aes(
       text = paste0(
-        "Promedio de esperanza de vida: ", round(after_stat(y), 2)
+        "Promedio de esperanza de vida: ", number(after_stat(y), accuracy = 0.1, suffix = " años")
       )
     )
   ) +
@@ -680,7 +680,7 @@ grafico_barras_ggplot2 <-
   geom_col(
     aes(
       text = paste0(
-        "Promedio de esperanza de vida: ", round(after_stat(y), 2)
+        "Promedio de esperanza de vida: ", number(after_stat(y), accuracy = 0.1, suffix = " años")
       )
     )    
   ) +
@@ -719,7 +719,7 @@ paises |>
     aes(
       text = paste0(
         "País: ", NAME, "\n",
-        "Población (millones de habitantes): ", round(POP_EST/1000000, 2)
+        "Población (millones de habitantes): ", number(POP_EST/1000000, accuracy = 0.1)
       )
     )
   ) +
