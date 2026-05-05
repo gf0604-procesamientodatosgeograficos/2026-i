@@ -392,11 +392,11 @@ ggplotly(grafico_ggplot2, tooltip = "text") |>
   config(locale = 'es') # para mostrar los controles en español
 ```
 
-## Tipos de gráficos
+## Otros tipos de gráficos
 
-En esta sección, se ejemplifican varios tipos de gráficos, los cuales se construyen con ggplot2 y luego se convierten a plotly.
+Hasta ahora se utilizaron gráficos de dispersión para presentar la sintaxis de ggplot2 y plotly. En esta sección se ejemplifican otros tipos de gráficos (histogramas, gráficos de pastel y gráficos de barras), los cuales se construyen con ggplot2 y luego se convierten a plotly.
 
-Hasta ahora se utilizó la sintaxis básica de ggplot2 (datos, mapeos y geometrías). Para algunos tipos de gráficos —especialmente los de barras— es útil ampliar ese esquema con tres elementos adicionales: la transformación estadística (`stat`), el posicionamiento de las geometrías (`position`) y el sistema de coordenadas (`coord_*`):
+Para algunos de estos —especialmente los de barras— es útil ampliar la sintaxis básica con tres elementos adicionales: la transformación estadística (`stat`), el posicionamiento de las geometrías (`position`) y el sistema de coordenadas (`coord_*`):
 
 ```
 <DATOS> |>
@@ -409,85 +409,6 @@ Hasta ahora se utilizó la sintaxis básica de ggplot2 (datos, mapeos y geometr�
 ```
 
 Estas opciones se ilustran más adelante, principalmente en los gráficos de barras (transformaciones estadísticas, barras apiladas y agrupadas).
-
-### Gráficos de dispersión
-Un [gráfico de dispersión (*scatterplot*)](https://es.wikipedia.org/wiki/Diagrama_de_dispersi%C3%B3n) despliega los valores de dos variables numéricas, como puntos en un sistema de coordenadas. El valor de una variable se despliega en el eje X y el de la otra variable en el eje Y. Variables adicionales pueden ser mostradas mediante atributos de los puntos, tales como su tamaño, color o forma.
-
-En `ggplot2`, los gráficos de dispersión se implementan con la función de geometría [geom_point()](https://ggplot2.tidyverse.org/reference/geom_point.html).
-
-El siguiente bloque de código muestra la relación entre el PIB per cápita y la esperanza de vida de países.
-
-```{r}
-#| label: grafico-dispersion-gdpPercap-lifeExp
-#| warning: false
-
-# Gráfico de dispersión PIB per cápita vs esperanza de vida
-# + línea de tendencia
-grafico_dispersion_ggplot2 <-
-  paises |>
-  ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY)) +
-  geom_point(aes(
-    text = paste0(
-      "País: ",
-      NAME,
-      "\n",
-      "PIB per cápita: ",
-      number(GDP_PC, accuracy = 1, prefix = "$", big.mark = ","),
-      "\n",
-      "Esperanza de vida: ",
-      number(LIFE_EXPECTANCY, accuracy = 0.1, suffix = " años")
-    )
-  )) +
-  geom_smooth(method = "lm") +
-  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
-  scale_y_continuous(labels = label_comma(), limits = c(50, 90)) +
-  ggtitle("PIB per cápita vs esperanza de vida al nacer") +
-  xlab("PIB per cápita (USD)") +
-  ylab("Esperanza de vida (años)") +
-  labs(caption = "Fuentes: Natural Earth y Banco Mundial") +
-  theme_minimal()  
-
-# Gráfico de dispersión plotly
-ggplotly(grafico_dispersion_ggplot2, tooltip = "text") |>
-  config(locale = 'es')
-```
-
-Como se explicó anteriormente, se pueden agregar al gráfico variables adicionales mediante su mapeo a propiedades visuales. En el siguiente ejemplo, se agrega la variable de continente al gráfico anterior, mediante su mapeo a la propiedad correspondiente al color.
-
-```{r}
-#| label: grafico-dispersion-gdpPercap-lifeExp-continent
-#| warning: false
-
-# Gráfico de dispersión PIB per cápita vs esperanza de vida
-# + línea de tendencia
-grafico_dispersion_ggplot2 <-
-  paises |>
-  ggplot(aes(x = GDP_PC, y = LIFE_EXPECTANCY, color = CONTINENT)) +
-  geom_point(aes(
-    text = paste0(
-      "País: ",
-      NAME,
-      "\n",
-      "PIB per cápita: ",
-      number(GDP_PC, accuracy = 1, prefix = "$", big.mark = ","),
-      "\n",
-      "Esperanza de vida: ",
-      number(LIFE_EXPECTANCY, accuracy = 0.1, suffix = " años")
-    )
-  )) +
-  geom_smooth(method = "lm") +
-  scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
-  scale_y_continuous(labels = label_comma(), limits = c(50, 90)) +
-  ggtitle("PIB per cápita vs esperanza de vida al nacer") +
-  xlab("PIB per cápita (USD)") +
-  ylab("Esperanza de vida (años)") +
-  labs(caption = "Fuentes: Natural Earth y Banco Mundial", color = "Continente") +
-  theme_minimal()  
-
-# Gráfico de dispersión plotly
-ggplotly(grafico_dispersion_ggplot2, tooltip = "text") |>
-  config(locale = 'es')
-```
 
 ### Histogramas
 
