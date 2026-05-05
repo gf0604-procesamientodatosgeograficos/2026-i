@@ -374,8 +374,8 @@ grafico_ggplot2 <-
     # datos que se muestran al colocar el ratón sobre un punto
     text = paste0(
       "País: ", NAME, "\n",
-      "PIB per cápita: ", label_currency(accuracy = 1)(GDP_PC), "\n",
-      "Esperanza de vida: ", label_comma(accuracy = 0.1, suffix = " años")(LIFE_EXPECTANCY)
+      "PIB per cápita: ", number(GDP_PC, accuracy = 1, prefix = "$", big.mark = ","), "\n",
+      "Esperanza de vida: ", number(LIFE_EXPECTANCY, accuracy = 0.1, suffix = " años")
     )
   )) +
   scale_x_continuous(labels = label_comma(), limits = c(0, NA)) +
@@ -432,7 +432,7 @@ grafico_dispersion_ggplot2 <-
       NAME,
       "\n",
       "PIB per cápita: ",
-      scales::label_comma()(round(GDP_PC, 2)),
+      scales::number(round(GDP_PC, 2), big.mark = ","),
       "\n",
       "Esperanza de vida: ",
       round(LIFE_EXPECTANCY, 2)
@@ -469,7 +469,7 @@ grafico_dispersion_ggplot2 <-
       NAME,
       "\n",
       "PIB per cápita: ",
-      scales::label_comma()(round(GDP_PC, 2)),
+      scales::number(round(GDP_PC, 2), big.mark = ","),
       "\n",
       "Esperanza de vida: ",
       round(LIFE_EXPECTANCY, 2)
