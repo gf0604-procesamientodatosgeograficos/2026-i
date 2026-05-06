@@ -48,7 +48,7 @@ Cada estudiante debe mostrar que es capaz de:
 - Genere **3 gráficos**, programados con `ggplot2` y convertidos a interactivos con `plotly::ggplotly()`. Cada gráfico puede ser de cualquiera de los cinco tipos cubiertos en el capítulo 10 del libro del curso:
   - Gráfico de dispersión: `geom_point()`
   - Histograma: `geom_histogram()`
-  - Gráfico de pastel: `geom_bar(stat = "identity", width = 1)` junto con `coord_polar()`
+  - Gráfico de pastel: `geom_bar(stat = "identity", width = 1)` junto con `coord_polar()`. Como `ggplotly()` no admite el sistema de coordenadas polares, los gráficos de pastel pueden presentarse como gráficos estáticos de `ggplot2` o, si se desea una versión interactiva, construirse directamente con la función `plot_ly(type = "pie")` de la API nativa de `plotly`, tal como se explica en el capítulo 10 del libro del curso.
   - Gráfico de barras: `geom_bar()` o `geom_col()`
   - Diagrama de caja: `geom_boxplot()`
 - Cada gráfico debe tener:

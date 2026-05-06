@@ -391,7 +391,7 @@ Jueves 14 de mayo a las 11:59 p.m. a través de Mediación Virtual.</p>
 <ul>
 <li>Gráfico de dispersión: <code>geom_point()</code></li>
 <li>Histograma: <code>geom_histogram()</code></li>
-<li>Gráfico de pastel: <code>geom_bar(stat = "identity", width = 1)</code> junto con <code>coord_polar()</code></li>
+<li>Gráfico de pastel: <code>geom_bar(stat = "identity", width = 1)</code> junto con <code>coord_polar()</code>. Como <code>ggplotly()</code> no admite el sistema de coordenadas polares, los gráficos de pastel pueden presentarse como gráficos estáticos de <code>ggplot2</code> o, si se desea una versión interactiva, construirse directamente con la función <code>plot_ly(type = "pie")</code> de la API nativa de <code>plotly</code>, tal como se explica en el capítulo 10 del libro del curso.</li>
 <li>Gráfico de barras: <code>geom_bar()</code> o <code>geom_col()</code></li>
 <li>Diagrama de caja: <code>geom_boxplot()</code></li>
 </ul></li>
