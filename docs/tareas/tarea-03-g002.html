@@ -393,7 +393,14 @@ Viernes 15 de mayo a las 11:59 p.m. a través de Mediación Virtual.</p>
 <section id="gráficos-con-ggplot2-ggplotly" class="level3">
 <h3 class="anchored" data-anchor-id="gráficos-con-ggplot2-ggplotly">5. Gráficos con <code>ggplot2</code> + <code>ggplotly()</code></h3>
 <ul>
-<li>Genere <strong>3 gráficos</strong>, programados con <code>ggplot2</code> y convertidos a interactivos con <code>plotly::ggplotly()</code>.</li>
+<li>Genere <strong>3 gráficos</strong>, programados con <code>ggplot2</code> y convertidos a interactivos con <code>plotly::ggplotly()</code>. Cada gráfico puede ser de cualquiera de los cinco tipos cubiertos en el capítulo 10 del libro del curso:
+<ul>
+<li>Gráfico de dispersión: <code>geom_point()</code></li>
+<li>Histograma: <code>geom_histogram()</code></li>
+<li>Gráfico de pastel: <code>geom_bar(stat = "identity", width = 1)</code> junto con <code>coord_polar()</code></li>
+<li>Gráfico de barras: <code>geom_bar()</code> o <code>geom_col()</code></li>
+<li>Diagrama de caja: <code>geom_boxplot()</code></li>
+</ul></li>
 <li>Cada gráfico debe tener:
 <ul>
 <li>Un <strong>título</strong> descriptivo.</li>

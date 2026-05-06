@@ -45,7 +45,12 @@ Cada estudiante debe mostrar que es capaz de:
 - La tabla debe permitir **paginación**, **búsqueda** y **ordenamiento** por columna.
 
 ### 5. Gráficos con `ggplot2` + `ggplotly()`
-- Genere **3 gráficos**, programados con `ggplot2` y convertidos a interactivos con `plotly::ggplotly()`.
+- Genere **3 gráficos**, programados con `ggplot2` y convertidos a interactivos con `plotly::ggplotly()`. Cada gráfico puede ser de cualquiera de los cinco tipos cubiertos en el capítulo 10 del libro del curso:
+  - Gráfico de dispersión: `geom_point()`
+  - Histograma: `geom_histogram()`
+  - Gráfico de pastel: `geom_bar(stat = "identity", width = 1)` junto con `coord_polar()`
+  - Gráfico de barras: `geom_bar()` o `geom_col()`
+  - Diagrama de caja: `geom_boxplot()`
 - Cada gráfico debe tener:
   - Un **título** descriptivo.
   - **Etiquetas** apropiadas en los ejes.
