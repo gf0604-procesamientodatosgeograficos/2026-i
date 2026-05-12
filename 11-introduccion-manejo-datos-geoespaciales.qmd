@@ -1,12 +1,22 @@
-# Introducción al manejo de datos geoespaciales con R
+# Introducción al manejo de datos geoespaciales en R {#sec-introduccion-geoespaciales}
 
 En este capítulo se introducen los modelos de datos geoespaciales vectorial y raster, así como las principales bibliotecas de R para manejarlos: sf y terra, respectivamente. También se presenta la biblioteca tmap para la generación de mapas.
+
+## Resumen
+
+El modelo **vectorial** representa el espacio mediante geometrías discretas (puntos, líneas y polígonos) asociadas a atributos, y se utiliza típicamente para fenómenos con límites bien definidos como caminos, ríos, fincas o divisiones administrativas. El paquete **sf** implementa este modelo siguiendo el estándar *Simple Features* del OGC y se apoya en GDAL, GEOS y PROJ para lectura/escritura, operaciones geométricas y transformaciones entre sistemas de coordenadas.
+
+El modelo **raster** representa el espacio mediante una matriz regular de celdas con un valor por celda y se utiliza típicamente para fenómenos continuos como elevación, temperatura o precipitación. El paquete **terra** implementa este modelo en la clase `SpatRaster` y ofrece funciones para lectura, manipulación, álgebra de mapas y reproyección.
+
+Sobre ambos modelos, el paquete **tmap** permite construir mapas estáticos e interactivos con una sintaxis declarativa por capas, similar a la de ggplot2.
 
 ## Trabajo previo
 
 ### Lecturas
 
-Lovelace, R., Nowosad, J., & Münchow, J. (2019). *Geocomputation with R* (capítulos 1, 2 y 9). CRC Press. <https://geocompr.robinlovelace.net/>
+Lovelace, R., Nowosad, J., & Münchow, J. (2019). *Geocomputation with R* (1.ª ed., capítulos 1, 2 y 9). CRC Press. <https://geocompr.robinlovelace.net/>
+
+Lovelace, R., Nowosad, J., & Münchow, J. (2025). *Geocomputation with R* (2.ª ed., capítulos 1, 2 y 9). CRC Press. <https://r.geocompx.org/>
 
 ## Introducción
 
@@ -21,6 +31,49 @@ La comunidad de programadores de R ha desarrollado un conjunto de paquetes para 
 Algunos paquetes de graficación estadística, como [ggplot2](https://cran.r-project.org/web/packages/ggplot2/) y [plotly](https://cran.r-project.org/web/packages/plotly/), también cuentan con capacidades para visualización de datos geoespaciales.
 
 En [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html), puede encontrarse un resumen detallado de los paquetes de R con funciones geoespaciales.
+
+## Instalación y carga
+
+Los paquetes utilizados en este capítulo pueden instalarse con la función `install.packages()`. Se asume que los paquetes de Tidyverse ya fueron instalados en capítulos anteriores.
+
+```{r}
+#| label: instalacion-paquetes
+#| eval: false
+
+# Instalación de sf
+install.packages("sf")
+
+# Instalación de terra
+install.packages("terra")
+
+# Instalación de tmap
+install.packages("tmap")
+```
+
+Una vez instalados, los paquetes pueden cargarse con la función `library()`:
+
+```{r}
+#| label: carga-paquetes
+#| message: false
+#| warning: false
+
+# Carga de sf (datos vectoriales)
+library(sf)
+
+# Carga de terra (datos raster)
+library(terra)
+
+# Carga de tmap (mapas estáticos e interactivos)
+library(tmap)
+```
+
+## Conjuntos de datos de ejemplo
+
+A lo largo del capítulo se utilizan tres conjuntos de datos: las **provincias de Costa Rica** (polígonos), los **registros de presencia de félidos** (puntos) y la **altitud de Costa Rica** (raster). Las cargas detalladas se realizan más adelante, en la sección correspondiente a cada paquete (sf para los dos primeros, terra para el último). Sus fuentes son:
+
+- **Provincias**: capa vectorial GPKG publicada por el Instituto Geográfico Nacional (IGN) a través de un [geoservicio Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_5_CO/wfs?).
+- **Félidos**: registros de presencia de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) descargados del portal de la [Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/) ([consulta original](https://doi.org/10.15468/dl.qgqpe2)).
+- **Altitud**: capa raster GeoTIFF de [WorldClim](https://www.worldclim.org/), un conjunto de capas climáticas globales disponibles en varias resoluciones espaciales.
 
 ## Datos vectoriales
 
@@ -44,7 +97,7 @@ knitr::include_graphics(rep("img/tipos-geometrias-simple-features.png"))
 
 ### El paquete sf
 
-El paquete [sf](https://r-spatial.github.io/sf/) (de *Simple Features*) de R implementa los modelos de datos de las geometrías de tipo vectorial: puntos, líneas, polígonos, sus versiones múltiples y las colecciones de geometrías. Está basado en bibliotecas de sofware ampliamente utilizadas en aplicaciones geoespaciales:
+El paquete [sf](https://r-spatial.github.io/sf/) (de *Simple Features*) de R implementa los modelos de datos de las geometrías de tipo vectorial: puntos, líneas, polígonos, sus versiones múltiples y las colecciones de geometrías. Está basado en bibliotecas de software ampliamente utilizadas en aplicaciones geoespaciales:
 
 -   [Geospatial Data Abstraction Library (GDAL)](https://gdal.org/): es una biblioteca para leer y escribir datos geoespaciales en varios formatos [raster](https://gdal.org/drivers/raster/) y [vectoriales](https://gdal.org/drivers/vector/). Implementa un único [modelo abstracto de datos raster](https://gdal.org/user/raster_data_model.html) y un único [modelo abstracto de datos vectoriales](https://gdal.org/user/vector_data_model.html), lo que permite programar aplicaciones geoespaciales sin tener que ocuparse de las particularidades de cada formato que se utilice (GeoTIFF, NetCDF, ESRI Shapefile, GeoJSON, etc.). A pesar de que GDAL está programada en C/C++, cuenta con una interfaz de programación de aplicaciones (API) para varios lenguajes de programación, incluyendo [C](https://gdal.org/api/index.html#c-api), [C++](https://gdal.org/api/index.html#id3), [Python](https://gdal.org/python/index.html) y [Java](https://gdal.org/java/overview-summary.html). Además, ofrece un conjunto de [utilitarios de línea de comandos](https://gdal.org/programs/) cuyas [distribuciones binarias](https://gdal.org/download.html#binaries) están disponibles para varios sistemas operativos, incluyendo Windows, macOS y Linux.
 -   [Geometry Engine, Open Source (GEOS)](https://trac.osgeo.org/geos): es una implementación en C++ de la biblioteca [JTS Topology Suite](http://www.tsusiatsoftware.net/jts/main.html) (desarrollada en Java) y que implementa un conjunto de operaciones y predicados geoespaciales (ej. unión, intersección, distancia, área).
@@ -53,25 +106,6 @@ El paquete [sf](https://r-spatial.github.io/sf/) (de *Simple Features*) de R imp
 sf provee acceso, desde un mismo paquete de R, a la funcionalidad de estas tres bibliotecas, proporcionando así una interfaz unificada para leer y escribir datos geoespaciales mediante GDAL, realizar operaciones con geometrías mediante GEOS y efectuar transformaciones entre sistemas de coordenadas mediante PROJ.
 
 En sf, los conjuntos de datos geoespaciales se almacenan en objetos de una clase también llamada [sf](https://rdrr.io/cran/sf/man/sf.html), los cuales son data frames que contiene una columna especial para las geometrías. Esta columna se denomina generalmente `geom` o `geometry` (aunque pueden tener cualquier otro nombre). El manejo de datos geoespaciales como data frames permite manipularlos con las funciones ya desarrolladas para este tipo de datos y con la misma forma de referenciar las filas (observaciones) y las columnas (variables).
-
-#### Instalación y carga
-
-```{r}
-#| label: sf-instalacion
-#| eval: false
-
-# Instalación de sf
-install.packages("sf")
-```
-
-```{r}
-#| label: sf-carga
-#| warning: false
-#| message: false
-
-# Carga de sf
-library(sf)
-```
 
 #### Métodos
 
@@ -93,7 +127,7 @@ El método [st_read()](https://r-spatial.github.io/sf/reference/st_read.html) le
 En el siguiente bloque de código en R, se utiliza el método `st_read()` para leer un archivo GPKG con los polígonos de las provincias de Costa Rica. Este archivo proviene de un [geoservicio de tipo Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_5_CO/wfs?) publicado por el Instituto Geográfico Nacional (IGN).
 
 ```{r}
-#| label: st_read-geopespacial
+#| label: st_read-geoespacial
 #| warning: false
 #| message: false
 
@@ -183,15 +217,17 @@ provincias_5367 <-
 
 El método [plot()](https://r-spatial.github.io/sf/reference/plot.html) grafica objetos `sf` en un mapa.
 
+La función [st_geometry()](https://r-spatial.github.io/sf/reference/st_geometry.html) extrae la columna de geometría de un objeto `sf` con independencia de cómo se llame en el archivo de origen (en este caso, la columna se llama `SHAPE`).
+
 ```{r}
 #| label: sf-plot-01
 
 # Mapeo de las geometrías del objeto provincias
-plot(provincias$SHAPE)
+plot(st_geometry(provincias))
 
 # Mapeo con argumentos adicionales de plot()
 plot(
-  provincias$SHAPE,
+  st_geometry(provincias),
   extent = st_bbox(c(xmin = -86.0, xmax = -82.3, ymin = 8.0, ymax = 11.3)),
   main = "Provincias de Costa Rica",
   axes = TRUE,
@@ -206,7 +242,7 @@ Los argumentos `reset` y `add` de `plot()` permiten generar un mapa con varias c
 
 # Primera capa del mapa
 plot(
-  provincias$SHAPE,
+  st_geometry(provincias),
   extent = st_bbox(c(xmin = -86.0, xmax = -82.3, ymin = 8.0, ymax = 11.3)),
   main = "Registros de presencia de félidos en Costa Rica",
   axes = TRUE,
@@ -215,10 +251,12 @@ plot(
 )
 
 # Segunda capa
-plot(felidos$geometry,
-     add = TRUE,     
-     pch = 16,
-     col = "orange")
+plot(
+  st_geometry(felidos),
+  add = TRUE,
+  pch = 16,
+  col = "orange"
+)
 ```
 
 Para conocer los valores del argumento `pch`, puede consultar [R plot pch symbols](http://www.sthda.com/english/wiki/r-plot-pch-symbols-the-different-point-shapes-available-in-r).
@@ -252,7 +290,7 @@ nrow(provincias)
 ncol(provincias)
 
 # Resumen de la columna de geometría
-summary(provincias$SHAPE)
+summary(st_geometry(provincias))
 ```
 
 ### Mapeo de objetos `sf::sf` con otros paquetes
@@ -260,24 +298,6 @@ summary(provincias$SHAPE)
 #### tmap
 
 El paquete [tmap](https://r-tmap.github.io/tmap/) genera mapas estáticos e interactivos con una sintaxis similar a la que utiliza el paquete ggplot2 para generar gráficos.
-
-##### Instalación y carga
-
-```{r}
-#| label: tmap-instalacion
-#| eval: false
-
-# Instalación de tmap
-install.packages("tmap")
-```
-
-```{r}
-#| label: tmap-carga
-#| message: false
-
-# Carga de tmap
-library(tmap)
-```
 
 ##### Ejemplos de uso
 
@@ -390,7 +410,8 @@ mapa_provincias_felidos
 ## Datos raster
 
 ### El modelo raster
-El modelo de datos raster usualmente consiste de un encabezado y de una matriz con celdas (también llamadas pixeles) de un mismo tamaño. El encabezado define el CRS, la extensión y el punto de origen de una capa raster. Por lo general, el origen se ubica en la esquina inferior izquierda o en la esquina superior izquierda de la matriz. La extensión se define mediante el número de filas, el número de columnas y el tamaño (resolución) de la celda.
+
+El modelo de datos raster usualmente consiste en un encabezado y en una matriz con celdas (también llamadas pixeles) de un mismo tamaño. El encabezado define el CRS, la extensión y el punto de origen de una capa raster. Por lo general, el origen se ubica en la esquina inferior izquierda o en la esquina superior izquierda de la matriz. La extensión se define mediante el número de filas, el número de columnas y el tamaño (resolución) de la celda.
 
 Cada celda tiene una identificación (ID) y almacena un único valor, el cual puede ser numérico o categórico, como se muestra en la @fig-modelo-raster.
 
@@ -417,24 +438,6 @@ knitr::include_graphics(rep("img/raster-continuo-categorico.png"))
 ### El paquete terra
 
 El paquete [terra](https://rspatial.org/terra/) implementa un conjunto de funciones para la lectura, escritura, manipulación, análisis y modelado de datos raster y vectoriales. Implementa la clase [SpatRaster](https://rdrr.io/cran/terra/man/SpatRaster-class.html) para manejar los objetos raster.
-
-#### Instalación y carga
-
-```{r}
-#| label:  terra-instalacion
-#| eval: false
-
-# Instalación de terra
-install.packages("terra")
-```
-
-```{r}
-#| label: terra-carga
-#| message: false
-
-# Carga de terra
-library(terra)
-```
 
 #### Métodos
 
@@ -550,8 +553,8 @@ plot(
 
 # Segunda capa (vectorial)
 plot(
-  felidos$geometry,
-  add = TRUE,     
+  st_geometry(felidos),
+  add = TRUE,
   pch = 16,
   col = "orange"
 )
@@ -610,8 +613,8 @@ mapa_altitud_provincias_felidos <-
   # Altitud
   tm_shape(altitud, name = "Altitud") +
   tm_raster(
-    palette = c("green", "yellow", "brown", "gray"), 
-    title = "Altitud (m)"
+    col.scale = tm_scale_continuous(values = c("green", "yellow", "brown", "gray")),
+    col.legend = tm_legend(title = "Altitud (m)")
   ) +
   
   # Provincias (polígonos)
@@ -675,8 +678,16 @@ Si lo desea, puede utilizar datos de otra zona o país y de otro grupo taxonómi
 
 Bivand, R. (2022). *CRAN Task View: Analysis of Spatial Data*. <https://CRAN.R-project.org/view=Spatial>
 
+Hijmans, R. J. (s. f.). *terra: Spatial data analysis*. <https://rspatial.org/>
+
 Holtz, Y. (s. f.). *The R Graph Gallery – Help and inspiration for R charts*. The R Graph Gallery. <https://r-graph-gallery.com/>
+
+Pebesma, E., & Bivand, R. (2023). *Spatial Data Science: With Applications in R*. Chapman and Hall/CRC. <https://r-spatial.org/book/>
 
 Popovic, M. (s. f.). *Milos Makes Maps*. <https://www.youtube.com/@milos-makes-maps>
 
 R-Ladies Madrid. (2021). *R-Ladies Madrid (español)---Analiza datos espaciales---Stephanie Orellana*. <https://www.youtube.com/watch?v=59tO2ARvVVU>
+
+r-spatial. (s. f.). *r-spatial: A platform for sharing knowledge on spatial data science with R*. <https://r-spatial.org/>
+
+Tennekes, M., & Nowosad, J. (s. f.). *tmap: Thematic Maps in R*. <https://r-tmap.github.io/tmap/>
