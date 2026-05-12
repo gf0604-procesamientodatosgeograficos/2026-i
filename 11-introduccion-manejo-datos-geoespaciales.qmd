@@ -204,13 +204,13 @@ st_crs(felidos) <- 4326
 
 El método [st_transform()](https://r-spatial.github.io/sf/reference/st_transform.html) transforma un objeto `sf` a un nuevo CRS.
 
+El objeto `provincias` proviene del WFS del IGN en el sistema [CR-SIRGAS / CRTM05 (EPSG:8908)](https://epsg.io/8908), una proyección cartográfica oficial para Costa Rica. Por su parte, el objeto `felidos` está en el sistema geográfico [WGS84 (EPSG:4326)](https://epsg.io/4326). Para que ambas capas puedan combinarse en un mismo mapa, deben estar en un mismo CRS, así que se transforma `provincias` a WGS84 y se reasigna a la misma variable, de manera que el resto del código del capítulo trabaje con la versión transformada.
+
 ```{r}
 #| label: st_transform
 
-# Transformación del CRS del objeto provincias a CR05 / CRTM05 (EPSG = 5367)
-provincias_5367 <-
-  provincias |>
-  st_transform(5367)
+# Transformación del CRS del objeto provincias a WGS84 (EPSG = 4326)
+provincias <- provincias |> st_transform(4326)
 ```
 
 ##### plot() - mapeo
@@ -270,12 +270,10 @@ El método [st_write()](https://r-spatial.github.io/sf/reference/st_write.html) 
 #| eval: false
 
 # Escritura del objeto provincias en formato GeoJSON
-provincias |>
-  st_write("provincias.geojson")
+provincias |> st_write("provincias.geojson")
 
 # Escritura del objeto felidos en formato KML
-felidos |>
-  st_write("felidos.kml")
+felidos |> st_write("felidos.kml")
 ```
 
 ##### Otros
@@ -569,8 +567,7 @@ La función [writeRaster()](https://rdrr.io/pkg/terra/man/writeRaster.html) guar
 #| eval: false
 
 # Escritura del objeto altitud
-altitud |>
-  writeRaster("altitud.asc")
+altitud |> writeRaster("altitud.asc")
 ```
 
 ##### Otros
