@@ -72,7 +72,7 @@ library(tmap)
 A lo largo del capítulo se utilizan tres conjuntos de datos: las **provincias de Costa Rica** (polígonos), los **registros de presencia de félidos** (puntos) y la **altitud de Costa Rica** (raster). Las cargas detalladas se realizan más adelante, en la sección correspondiente a cada paquete (sf para los dos primeros, terra para el último). Sus fuentes son:
 
 - **Provincias**: capa vectorial GPKG publicada por el Instituto Geográfico Nacional (IGN) a través de un [geoservicio Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_5_CO/wfs?).
-- **Félidos**: registros de presencia de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) descargados del portal de la [Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/) ([consulta original](https://doi.org/10.15468/dl.qgqpe2)).
+- **Félidos**: registros de presencia de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) descargados del portal de la [Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/) ([consulta original](https://doi.org/10.15468/dl.xuza6e)).
 - **Altitud**: capa raster GeoTIFF de [WorldClim](https://www.worldclim.org/), un conjunto de capas climáticas globales disponibles en varias resoluciones espaciales.
 
 ## Datos vectoriales
