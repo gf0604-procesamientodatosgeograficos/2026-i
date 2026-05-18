@@ -60,7 +60,7 @@ Adelie          3710.659
 Gentoo          5076.016
 ```
 
-## Instalación y carga
+## Instalación y carga de paquetes
 
 El paquete dplyr puede instalarse junto con todos los demás paquete de Tidyverse o de manera individual:
 

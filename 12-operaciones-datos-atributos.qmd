@@ -22,7 +22,7 @@ Los **atributos** son los elementos de datos no espaciales asociados a un conjun
 
 En este capítulo se ejemplifican, para datos vectoriales, la creación de subconjuntos (`select()`, `slice()`, `filter()`), la agregación (`group_by()` y `summarize()`) y la unión (`left_join()` y otros *joins*) con los paquetes sf y dplyr; y, para datos raster, la creación de subconjuntos y el resumen de información con el paquete terra.
 
-## Instalación y carga
+## Instalación y carga de paquetes
 
 Los paquetes utilizados en este capítulo pueden instalarse con la función `install.packages()`. Se asume que los paquetes de Tidyverse ya fueron instalados en capítulos anteriores.
 

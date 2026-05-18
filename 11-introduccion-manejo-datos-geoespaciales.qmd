@@ -32,7 +32,7 @@ Algunos paquetes de graficación estadística, como [ggplot2](https://cran.r-pro
 
 En [CRAN Task View: Analysis of Spatial Data](https://cran.r-project.org/web/views/Spatial.html), puede encontrarse un resumen detallado de los paquetes de R con funciones geoespaciales.
 
-## Instalación y carga
+## Instalación y carga de paquetes
 
 Los paquetes utilizados en este capítulo pueden instalarse con la función `install.packages()`. Se asume que los paquetes de Tidyverse ya fueron instalados en capítulos anteriores.
 

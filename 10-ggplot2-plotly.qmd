@@ -32,7 +32,7 @@ plotly es una biblioteca para crear gráficos interactivos y dinámicos. Contien
 
 Adicionalmente, el paquete DT permite presentar conjuntos de datos en tablas interactivas en las que se pueden realizar operaciones como ordenamientos, consultas y filtrados.
 
-## Instalación y carga
+## Instalación y carga de paquetes
 
 Los paquetes necesarios pueden instalarse con la función `install.packages()`. Ya que se usaron en capítulos anteriores, en este punto se asumen instalados los paquetes de Tidyverse.
 

@@ -59,7 +59,7 @@ El núcleo de Tidyverse está compuesto por [ocho paquetes base](https://www.tid
 
 Hay [otros paquetes](https://www.tidyverse.org/packages/) para tareas más especifícas relacionadas con importación, limpieza y modelado de datos, entre otras. Los paquetes de Tidyverse son de los [más descargados](https://www.r-pkg.org/downloaded), entre la totalidad de paquetes del lenguaje de programación R.
 
-## Instalación y carga
+## Instalación y carga de paquetes
 
 Los paquetes de Tidyverse pueden instalarse con la función `install.packages()`, ya sea de manera conjunta (todos los paquetes básicos) o individualmente:
 
