@@ -368,7 +368,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#introducción" id="toc-introducción" class="nav-link" data-scroll-target="#introducción"><span class="header-section-number">8.3</span> Introducción</a></li>
   <li><a href="#paquetes" id="toc-paquetes" class="nav-link" data-scroll-target="#paquetes"><span class="header-section-number">8.4</span> Paquetes</a></li>
-  <li><a href="#instalación-y-carga" id="toc-instalación-y-carga" class="nav-link" data-scroll-target="#instalación-y-carga"><span class="header-section-number">8.5</span> Instalación y carga</a></li>
+  <li><a href="#instalación-y-carga-de-paquetes" id="toc-instalación-y-carga-de-paquetes" class="nav-link" data-scroll-target="#instalación-y-carga-de-paquetes"><span class="header-section-number">8.5</span> Instalación y carga de paquetes</a></li>
   <li><a href="#el-conjunto-de-datos-palmerpenguins" id="toc-el-conjunto-de-datos-palmerpenguins" class="nav-link" data-scroll-target="#el-conjunto-de-datos-palmerpenguins"><span class="header-section-number">8.6</span> El conjunto de datos <code>palmerpenguins</code></a>
   <ul>
   <li><a href="#ejemplos-de-visualizaciones" id="toc-ejemplos-de-visualizaciones" class="nav-link" data-scroll-target="#ejemplos-de-visualizaciones"><span class="header-section-number">8.6.1</span> Ejemplos de visualizaciones</a>
@@ -435,7 +435,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="8.3" class="anchored" data-anchor-id="introducción"><span class="header-section-number">8.3</span> Introducción</h2>
 <p><a href="https://www.tidyverse.org/">Tidyverse</a> es una colección de paquetes de R enfocados en <a href="https://es.wikipedia.org/wiki/Ciencia_de_datos">ciencia de datos</a>, una discipina que permite convertir datos no procesados en entendimiento, comprensión y conocimiento.</p>
 <p>La <a href="#fig-modelo-ciencia-datos" class="quarto-xref">Figura&nbsp;<span>8.1</span></a> ilustra el modelo de un proyecto típico de ciencia de datos, el cual incluye los procesos de importar, ordenar, transformar, visualizar, modelar y comunicar. Todos se articulan mediante <strong>programación</strong> de computadoras.</p>
-<div id="fig-modelo-ciencia-datos" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Modelo de ciencia de datos">
+<div id="fig-modelo-ciencia-datos" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Modelo de ciencia de datos" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-modelo-ciencia-datos-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/modelo-ciencia-datos.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;8.1: Modelo de ciencia de datos. Fuente: R for Data Science."><img src="img/modelo-ciencia-datos.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Modelo de ciencia de datos"></a>
@@ -470,8 +470,8 @@ Figura&nbsp;8.1: Modelo de ciencia de datos. Fuente: <a href="https://r4ds.had.c
 </ul>
 <p>Hay <a href="https://www.tidyverse.org/packages/">otros paquetes</a> para tareas más especifícas relacionadas con importación, limpieza y modelado de datos, entre otras. Los paquetes de Tidyverse son de los <a href="https://www.r-pkg.org/downloaded">más descargados</a>, entre la totalidad de paquetes del lenguaje de programación R.</p>
 </section>
-<section id="instalación-y-carga" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="instalación-y-carga"><span class="header-section-number">8.5</span> Instalación y carga</h2>
+<section id="instalación-y-carga-de-paquetes" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="instalación-y-carga-de-paquetes"><span class="header-section-number">8.5</span> Instalación y carga de paquetes</h2>
 <p>Los paquetes de Tidyverse pueden instalarse con la función <code>install.packages()</code>, ya sea de manera conjunta (todos los paquetes básicos) o individualmente:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Instalación conjunta (toma más tiempo)</span></span>
@@ -592,7 +592,7 @@ Attaching package: 'palmerpenguins'</code></pre>
 <li>Cada valor debe tener su propia celda.</li>
 </ol>
 <p>Estas características se ilustran en la <a href="#fig-datos-tidy" class="quarto-xref">Figura&nbsp;<span>8.2</span></a>.</p>
-<div id="fig-datos-tidy" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Datos tidy">
+<div id="fig-datos-tidy" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Datos tidy" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-datos-tidy-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/datos-tidy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figura&nbsp;8.2: Datos tidy. Fuente: R for Data Science."><img src="img/datos-tidy.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Datos tidy"></a>

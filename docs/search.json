@@ -538,11 +538,11 @@
     ]
   },
   {
-    "objectID": "08-tidyverse.html#instalación-y-carga",
-    "href": "08-tidyverse.html#instalación-y-carga",
+    "objectID": "08-tidyverse.html#instalación-y-carga-de-paquetes",
+    "href": "08-tidyverse.html#instalación-y-carga-de-paquetes",
     "title": "8  Tidyverse - colección de paquetes para ciencia de datos",
-    "section": "8.5 Instalación y carga",
-    "text": "8.5 Instalación y carga\nLos paquetes de Tidyverse pueden instalarse con la función install.packages(), ya sea de manera conjunta (todos los paquetes básicos) o individualmente:\n\n# Instalación conjunta (toma más tiempo)\ninstall.packages(\"tidyverse\")\n\n# Instalación de paquetes individuales\ninstall.packages(\"ggplot2\")\ninstall.packages(\"dplyr\")\n\nUna vez instalados, los paquetes también pueden cargarse conjunta o separadamente con la función library():\n\n# Carga conjunta\nlibrary(tidyverse)\n\n# Carga de paquetes individuales\nlibrary(ggplot2)\nlibrary(dplyr)\n\nTambién es posible utilizar la notación paquete::funcion() para llamar una función sin necesidad de cargar todo el paquete (siempre y cuando este haya sido instalado):\n\n# Llamado a la función glimpse() del paquete dplyr\ndplyr::glimpse(iris)\n\nRows: 150\nColumns: 5\n$ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.…\n$ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.…\n$ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.…\n$ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.…\n$ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…",
+    "section": "8.5 Instalación y carga de paquetes",
+    "text": "8.5 Instalación y carga de paquetes\nLos paquetes de Tidyverse pueden instalarse con la función install.packages(), ya sea de manera conjunta (todos los paquetes básicos) o individualmente:\n\n# Instalación conjunta (toma más tiempo)\ninstall.packages(\"tidyverse\")\n\n# Instalación de paquetes individuales\ninstall.packages(\"ggplot2\")\ninstall.packages(\"dplyr\")\n\nUna vez instalados, los paquetes también pueden cargarse conjunta o separadamente con la función library():\n\n# Carga conjunta\nlibrary(tidyverse)\n\n# Carga de paquetes individuales\nlibrary(ggplot2)\nlibrary(dplyr)\n\nTambién es posible utilizar la notación paquete::funcion() para llamar una función sin necesidad de cargar todo el paquete (siempre y cuando este haya sido instalado):\n\n# Llamado a la función glimpse() del paquete dplyr\ndplyr::glimpse(iris)\n\nRows: 150\nColumns: 5\n$ Sepal.Length &lt;dbl&gt; 5.1, 4.9, 4.7, 4.6, 5.0, 5.4, 4.6, 5.0, 4.4, 4.9, 5.4, 4.…\n$ Sepal.Width  &lt;dbl&gt; 3.5, 3.0, 3.2, 3.1, 3.6, 3.9, 3.4, 3.4, 2.9, 3.1, 3.7, 3.…\n$ Petal.Length &lt;dbl&gt; 1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.…\n$ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2, 0.…\n$ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…",
     "crumbs": [
       "IV La colección de paquetes Tidyverse para ciencia de datos",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Tidyverse - colección de paquetes para ciencia de datos</span>"
@@ -637,11 +637,11 @@
     ]
   },
   {
-    "objectID": "09-dplyr.html#instalación-y-carga",
-    "href": "09-dplyr.html#instalación-y-carga",
+    "objectID": "09-dplyr.html#instalación-y-carga-de-paquetes",
+    "href": "09-dplyr.html#instalación-y-carga-de-paquetes",
     "title": "9  dplyr - gramática para manipulación de datos",
-    "section": "9.4 Instalación y carga",
-    "text": "9.4 Instalación y carga\nEl paquete dplyr puede instalarse junto con todos los demás paquete de Tidyverse o de manera individual:\n\n# Instalación conjunta de Tidyverse\ninstall.packages(\"tidyverse\")\n\n# Instalación individual\ninstall.packages(\"dplyr\")\n\nUna vez instalado, dplyr puede cargarse con la función library():\n\n# Carga conjunta de Tidyverse\nlibrary(tidyverse)\n\n# Carga individual\nlibrary(dplyr)\n\nSeguidamente, se cargan algunos paquetes adicionales que se utilizan en este capítulo.\n\n# Carga de readr, paquete para lectura de datos\nlibrary(readr)\n\n# Carga de tidyr, paquete para creación de datos \"tidy\"\nlibrary(tidyr)\n\n# Carga de knitr, paquete para integrar salidas en R en documentos dinámicos\n# (ej. Quarto). En este capítulo se usa para generar tablas.\nlibrary(knitr)",
+    "section": "9.4 Instalación y carga de paquetes",
+    "text": "9.4 Instalación y carga de paquetes\nEl paquete dplyr puede instalarse junto con todos los demás paquete de Tidyverse o de manera individual:\n\n# Instalación conjunta de Tidyverse\ninstall.packages(\"tidyverse\")\n\n# Instalación individual\ninstall.packages(\"dplyr\")\n\nUna vez instalado, dplyr puede cargarse con la función library():\n\n# Carga conjunta de Tidyverse\nlibrary(tidyverse)\n\n# Carga individual\nlibrary(dplyr)\n\nSeguidamente, se cargan algunos paquetes adicionales que se utilizan en este capítulo.\n\n# Carga de readr, paquete para lectura de datos\nlibrary(readr)\n\n# Carga de tidyr, paquete para creación de datos \"tidy\"\nlibrary(tidyr)\n\n# Carga de knitr, paquete para integrar salidas en R en documentos dinámicos\n# (ej. Quarto). En este capítulo se usa para generar tablas.\nlibrary(knitr)",
     "crumbs": [
       "IV La colección de paquetes Tidyverse para ciencia de datos",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>dplyr - gramática para manipulación de datos</span>"
@@ -725,11 +725,11 @@
     ]
   },
   {
-    "objectID": "10-ggplot2-plotly.html#instalación-y-carga",
-    "href": "10-ggplot2-plotly.html#instalación-y-carga",
+    "objectID": "10-ggplot2-plotly.html#instalación-y-carga-de-paquetes",
+    "href": "10-ggplot2-plotly.html#instalación-y-carga-de-paquetes",
     "title": "10  ggplot2 y plotly - creación declarativa de gráficos interactivos",
-    "section": "10.4 Instalación y carga",
-    "text": "10.4 Instalación y carga\nLos paquetes necesarios pueden instalarse con la función install.packages(). Ya que se usaron en capítulos anteriores, en este punto se asumen instalados los paquetes de Tidyverse.\n\n# Instalación de plotly\ninstall.packages(\"plotly\")\n\n# Instalación de DT\ninstall.packages(\"DT\")\n\nUna vez instalados, los paquetes pueden cargarse con la función library():\n\n# Carga conjunta de Tidyverse \n# (incluye ggplot2, dplyr, readr y otros)\nlibrary(tidyverse)\n\n# Carga de plotly\nlibrary(plotly)\n\n# Carga de DT\nlibrary(DT)\n\n# Carga de scales (para formatear ejes y leyendas en los gráficos)\nlibrary(scales)",
+    "section": "10.4 Instalación y carga de paquetes",
+    "text": "10.4 Instalación y carga de paquetes\nLos paquetes necesarios pueden instalarse con la función install.packages(). Ya que se usaron en capítulos anteriores, en este punto se asumen instalados los paquetes de Tidyverse.\n\n# Instalación de plotly\ninstall.packages(\"plotly\")\n\n# Instalación de DT\ninstall.packages(\"DT\")\n\nUna vez instalados, los paquetes pueden cargarse con la función library():\n\n# Carga conjunta de Tidyverse \n# (incluye ggplot2, dplyr, readr y otros)\nlibrary(tidyverse)\n\n# Carga de plotly\nlibrary(plotly)\n\n# Carga de DT\nlibrary(DT)\n\n# Carga de scales (para formatear ejes y leyendas en los gráficos)\nlibrary(scales)",
     "crumbs": [
       "V Graficación estadística en R",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>ggplot2 y plotly - creación declarativa de gráficos interactivos</span>"
@@ -813,11 +813,11 @@
     ]
   },
   {
-    "objectID": "11-introduccion-manejo-datos-geoespaciales.html#instalación-y-carga",
-    "href": "11-introduccion-manejo-datos-geoespaciales.html#instalación-y-carga",
+    "objectID": "11-introduccion-manejo-datos-geoespaciales.html#instalación-y-carga-de-paquetes",
+    "href": "11-introduccion-manejo-datos-geoespaciales.html#instalación-y-carga-de-paquetes",
     "title": "11  Introducción al manejo de datos geoespaciales en R",
-    "section": "11.4 Instalación y carga",
-    "text": "11.4 Instalación y carga\nLos paquetes utilizados en este capítulo pueden instalarse con la función install.packages(). Se asume que los paquetes de Tidyverse ya fueron instalados en capítulos anteriores.\n\n# Instalación de sf\ninstall.packages(\"sf\")\n\n# Instalación de terra\ninstall.packages(\"terra\")\n\n# Instalación de tmap\ninstall.packages(\"tmap\")\n\nUna vez instalados, los paquetes pueden cargarse con la función library():\n\n# Carga de sf (datos vectoriales)\nlibrary(sf)\n\n# Carga de terra (datos raster)\nlibrary(terra)\n\n# Carga de tmap (mapas estáticos e interactivos)\nlibrary(tmap)",
+    "section": "11.4 Instalación y carga de paquetes",
+    "text": "11.4 Instalación y carga de paquetes\nLos paquetes utilizados en este capítulo pueden instalarse con la función install.packages(). Se asume que los paquetes de Tidyverse ya fueron instalados en capítulos anteriores.\n\n# Instalación de sf\ninstall.packages(\"sf\")\n\n# Instalación de terra\ninstall.packages(\"terra\")\n\n# Instalación de tmap\ninstall.packages(\"tmap\")\n\nUna vez instalados, los paquetes pueden cargarse con la función library():\n\n# Carga de sf (datos vectoriales)\nlibrary(sf)\n\n# Carga de terra (datos raster)\nlibrary(terra)\n\n# Carga de tmap (mapas estáticos e interactivos)\nlibrary(tmap)",
     "crumbs": [
       "VI El ecosistema espacial de R",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Introducción al manejo de datos geoespaciales en R</span>"
@@ -912,11 +912,11 @@
     ]
   },
   {
-    "objectID": "12-operaciones-datos-atributos.html#instalación-y-carga",
-    "href": "12-operaciones-datos-atributos.html#instalación-y-carga",
+    "objectID": "12-operaciones-datos-atributos.html#instalación-y-carga-de-paquetes",
+    "href": "12-operaciones-datos-atributos.html#instalación-y-carga-de-paquetes",
     "title": "12  Operaciones con datos de atributos",
-    "section": "12.4 Instalación y carga",
-    "text": "12.4 Instalación y carga\nLos paquetes utilizados en este capítulo pueden instalarse con la función install.packages(). Se asume que los paquetes de Tidyverse ya fueron instalados en capítulos anteriores.\n\n# Instalación de DT\ninstall.packages(\"DT\")\n\n# Instalación de sf\ninstall.packages(\"sf\")\n\n# Instalación de terra\ninstall.packages(\"terra\")\n\n# Instalación de tmap\ninstall.packages(\"tmap\")\n\nUna vez instalados, los paquetes pueden cargarse con la función library():\n\n# Carga de Tidyverse (manipulación de datos)\nlibrary(tidyverse)\n\n# Carga de DT (tablas interactivas)\nlibrary(DT)\n\n# Carga de sf (datos vectoriales)\nlibrary(sf)\n\n# Carga de terra (datos raster)\nlibrary(terra)\n\n# Carga de tmap (mapas estáticos e interactivos)\nlibrary(tmap)",
+    "section": "12.4 Instalación y carga de paquetes",
+    "text": "12.4 Instalación y carga de paquetes\nLos paquetes utilizados en este capítulo pueden instalarse con la función install.packages(). Se asume que los paquetes de Tidyverse ya fueron instalados en capítulos anteriores.\n\n# Instalación de DT\ninstall.packages(\"DT\")\n\n# Instalación de sf\ninstall.packages(\"sf\")\n\n# Instalación de terra\ninstall.packages(\"terra\")\n\n# Instalación de tmap\ninstall.packages(\"tmap\")\n\nUna vez instalados, los paquetes pueden cargarse con la función library():\n\n# Carga de Tidyverse (manipulación de datos)\nlibrary(tidyverse)\n\n# Carga de DT (tablas interactivas)\nlibrary(DT)\n\n# Carga de sf (datos vectoriales)\nlibrary(sf)\n\n# Carga de terra (datos raster)\nlibrary(terra)\n\n# Carga de tmap (mapas estáticos e interactivos)\nlibrary(tmap)",
     "crumbs": [
       "VI El ecosistema espacial de R",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Operaciones con datos de atributos</span>"
