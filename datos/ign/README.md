@@ -48,6 +48,35 @@ ogr2ogr \
     "provincias.gpkg"
 ```
 
+### Provincias 2020
+
+El archivo de origen `provincias_2020.geojson` (en CR-SIRGAS / CRTM05, EPSG:5367)
+se obtuvo del repositorio del curso del año 2023:
+<https://github.com/gf0604-procesamientodatosgeograficos/2023-i/blob/main/datos/ign/delimitacion-territorial-administrativa/provincias_2020.geojson>
+
+```bash
+# Convertir de GeoJSON a GPKG
+ogr2ogr \
+    -makevalid \
+    -t_srs EPSG:4326 \
+    -nln provincias \
+    "provincias-2020.gpkg" \
+    "provincias_2020.geojson"
+```
+
+### Provincias 2020 simplificadas
+
+```bash
+# Simplificar las geometrías ≈11 m de tolerancia en el ecuador
+ogr2ogr \
+    -makevalid \
+    -t_srs EPSG:4326 \
+    -simplify 0.0001 \
+    -nln provincias \
+    "provincias-2020-simplificados.gpkg" \
+    "provincias-2020.gpkg"
+```
+
 ### Cantones
 
 ```bash
