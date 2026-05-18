@@ -36,6 +36,7 @@ book:
     - part: "VI El ecosistema espacial de R"
       chapters:
         - 11-introduccion-manejo-datos-geoespaciales.qmd
+        - 12-operaciones-datos-atributos.qmd
     - part: "Tareas"
       chapters:
         - tareas/tarea-01-g001.md

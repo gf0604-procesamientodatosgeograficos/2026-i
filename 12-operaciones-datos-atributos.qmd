@@ -1,4 +1,6 @@
-# Operaciones con datos de atributos
+# Operaciones con datos de atributos {#sec-operaciones-datos-atributos}
+
+En este capítulo se presentan las operaciones con datos de atributos —los elementos no espaciales de un conjunto de datos geoespacial— tanto en datos vectoriales (con los paquetes sf y dplyr) como en datos raster (con el paquete terra).
 
 ## Resumen
 
@@ -10,26 +12,81 @@ Las operaciones con atributos en datos vectoriales incluyen creación de subconj
 
 ### Lecturas
 
-Lovelace, R., Nowosad, J., & Münchow, J. (2019). *Geocomputation with R* (capítulo 3). CRC Press. <https://geocompr.robinlovelace.net/>
+Lovelace, R., Nowosad, J., & Münchow, J. (2019). *Geocomputation with R* (1.ª ed., capítulo 3). CRC Press. <https://geocompr.robinlovelace.net/>
 
-## Carga de bibliotecas
+Lovelace, R., Nowosad, J., & Münchow, J. (2025). *Geocomputation with R* (2.ª ed., capítulo 3). CRC Press. <https://r.geocompx.org/>
+
+## Introducción
+
+Los **atributos** son los elementos de datos no espaciales asociados a un conjunto de datos geoespacial. En el modelo vectorial, cada *feature* (fila) puede tener asociados múltiples campos de atributos (columnas), de manera análoga a una tabla o `data.frame`; por eso, las operaciones con atributos vectoriales se asemejan a las de un conjunto de datos tabular y pueden realizarse con funciones del paquete base de R o, de forma más expresiva, con dplyr y el resto de Tidyverse. En el modelo raster, en cambio, cada celda almacena un único valor, por lo que las operaciones con atributos se concentran en la creación de subconjuntos y en el resumen estadístico de ese valor.
+
+En este capítulo se ejemplifican, para datos vectoriales, la creación de subconjuntos (`select()`, `slice()`, `filter()`), la agregación (`group_by()` y `summarize()`) y la unión (`left_join()` y otros *joins*) con los paquetes sf y dplyr; y, para datos raster, la creación de subconjuntos y el resumen de información con el paquete terra.
+
+## Instalación y carga
+
+Los paquetes utilizados en este capítulo pueden instalarse con la función `install.packages()`. Se asume que los paquetes de Tidyverse ya fueron instalados en capítulos anteriores.
 
 ```{r}
-#| label: carga-bibliotecas
-#| warning: false
-#| message: false
+#| label: instalacion-paquetes
+#| eval: false
 
-# Cargar bibliotecas
+# Instalación de DT
+install.packages("DT")
+
+# Instalación de sf
+install.packages("sf")
+
+# Instalación de terra
+install.packages("terra")
+
+# Instalación de tmap
+install.packages("tmap")
+```
+
+Una vez instalados, los paquetes pueden cargarse con la función `library()`:
+
+```{r}
+#| label: carga-paquetes
+#| message: false
+#| warning: false
+
+# Carga de Tidyverse (manipulación de datos)
 library(tidyverse)
+
+# Carga de DT (tablas interactivas)
 library(DT)
+
+# Carga de sf (datos vectoriales)
 library(sf)
+
+# Carga de terra (datos raster)
 library(terra)
+
+# Carga de tmap (mapas estáticos e interactivos)
 library(tmap)
 ```
 
-## Carga de datos
+## Conjuntos de datos de ejemplo
 
-### Cantones de Costa Rica
+A lo largo del capítulo se utilizan tres conjuntos de datos sobre Costa Rica: los **cantones** (polígonos), los **casos positivos de COVID-19 por cantón** (datos tabulares) y la **temperatura** (raster). Las cargas detalladas se realizan más adelante, en la sección correspondiente a cada modelo de datos (sf para los dos primeros, terra para el último). Sus fuentes son:
+
+- **Cantones**: capa vectorial GPKG del año 2020 (82 cantones, con geometrías simplificadas) publicada por el Instituto Geográfico Nacional (IGN) a través de un [geoservicio Web Feature Service (WFS)](http://geos.snitcr.go.cr/be/IGN_5/wfs). Se utiliza la versión de 2020 porque es la que corresponde a los datos de COVID-19 publicados por el Ministerio de Salud durante la pandemia.
+- **Casos positivos de COVID-19 en cantones**: archivos CSV publicados por el Ministerio de Salud de Costa Rica durante la pandemia; la última actualización disponible es del 2022-05-30. La fuente original en línea ya no está disponible, por lo que se trata de un conjunto de datos histórico distribuido en el repositorio del curso.
+- **Temperatura**: capa raster GeoTIFF de [WorldClim](https://www.worldclim.org/), un conjunto de capas climáticas globales disponibles en varias resoluciones espaciales.
+
+## Datos vectoriales
+
+Las operaciones con atributos en datos vectoriales incluyen:
+
+- Creación de subconjuntos (*subsetting*).
+- Agregación (*aggregation*).
+- Unión (*joining*).
+
+Para ejemplificar estas operaciones se utilizan dos conjuntos de datos: los cantones de Costa Rica (polígonos) y los casos positivos de COVID-19 por cantón (datos tabulares).
+
+### Carga de los datos
+
+#### Cantones de Costa Rica
 
 Este archivo proviene de un [geoservicio de tipo Web Feature Service (WFS)](http://geos.snitcr.go.cr/be/IGN_5/wfs) publicado por el Instituto Geográfico Nacional (IGN). Se utiliza una versión del año 2020 (con 82 cantones), debido a que esa es la que corresponde a los datos de COVID-19 que publicó el Ministerio de Salud durante la pandemia.
 
@@ -65,24 +122,25 @@ tmap_mode("view")
 # Definir el mapa
 mapa_cantones <-
   tm_basemap("OpenStreetMap.Mapnik") +            # capa base OSM
-  tm_basemap("OpenTopoMap") +                     # capa base OpenTopoMap 
-  tm_view(set.view = c(
+  tm_basemap("OpenTopoMap") +                     # capa base OpenTopoMap
+  tm_view(set_view = c(
     lon = -84.19452,
     lat =  9.572735,
     zoom = 7
   )) +                                            # centro y zoom
   tm_shape(cantones, name = "Cantones") +         # capa de cantones
-    tm_fill(
-      # relleno transparente
-      col = NA,
-      alpha = 0,
-      id = "canton",                              # texto que se ve al pasar el ratón
-      popup.vars = c(# ventana emergente
-        "Código de cantón" = "cod_canton", "Cantón" = "canton")
-    ) +
-    tm_borders(col = "black", lwd = 1) +          # contorno negro, grosor 1
-    tm_scale_bar(position = c("left", "bottom"))  # barra de escala
-  
+  tm_polygons(
+    fill_alpha = 0,                               # relleno transparente
+    col = "black",                                # contorno negro
+    lwd = 1,                                       # grosor del contorno
+    id = "canton",                                # texto que se ve al pasar el ratón
+    popup.vars = c(                               # ventana emergente
+      "Código de cantón" = "cod_canton",
+      "Cantón" = "canton"
+    )
+  ) +
+  tm_scalebar(position = c("left", "bottom"))     # barra de escala
+
 # Mostrar el mapa
 mapa_cantones
 ```
@@ -102,24 +160,24 @@ cantones |>
   arrange(cod_canton) |>                 # ordenar filas
   datatable(                             # crear tabla
     rownames = FALSE,                      # omitir identificadores de filas
-    options = list(                 
+    options = list(
       dom = 'ft',                          # configuración de la interfaz
       pageLength = 8,                      # cantidad de filas por página
       language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
-    )    
+    )
   )
 ```
 
 Mapa y tabla de cantones de Costa Rica
 :::
 
-### Casos positivos de COVID-19 en cantones de Costa Rica
+#### Casos positivos de COVID-19 en cantones de Costa Rica
 
-Estos datos fueron publicados por el Ministerio de Salud de Costa Rica en <https://geovision.uned.ac.cr/oges/> (a la fecha de escritura de este documento, el enlace no está funcionando). Se distribuyen en archivos CSV, incluyendo un archivo de datos generales para todo el país y varios archivos con datos por cantón. La fecha de la última actualización es 2022-05-30.
+Estos datos fueron publicados por el Ministerio de Salud de Costa Rica en <https://geovision.uned.ac.cr/oges/> (a la fecha de escritura de este documento, el enlace no está funcionando, por lo que se trata de un conjunto de datos histórico). Se distribuyen en archivos CSV, incluyendo un archivo de datos generales para todo el país y varios archivos con datos por cantón. La fecha de la última actualización es 2022-05-30.
 
 [Archivo CSV de casos positivos de COVID-19 en cantones de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/datos/ministerio-salud/05_30_22_CSV_POSITIVOS.csv)
 
-El archivo contiene una columna por cada fecha en la que se tomaron datos en el nivel de cantón. En este caso, Se carga solamente la columna de la última fecha (2022-05-30).
+El archivo contiene una columna por cada fecha en la que se tomaron datos en el nivel de cantón. En este caso, se carga solamente la columna de la última fecha (2022-05-30).
 
 ```{r}
 #| label: carga-datos-covid-cantones-positivos
@@ -163,26 +221,12 @@ covid_positivos_cantones |>
     options = list(
       pageLength = 7,
       language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
-    )    
+    )
   )
 ```
 
 Tabla de casos positivos de COVID-19 en cantones de Costa Rica
 :::
-
-## Introducción
-
-Se les llama atributos a los elementos de datos no espaciales o geométricos de un conjunto de datos geográficos. Estos datos pueden ser de tipos numéricos o textuales, entre otros. Un conjunto de datos vectoriales puede tener asociados varios campos de atributos, mientras que un conjunto de datos raster tiene solamente uno.
-
-## Datos vectoriales
-
-Las operaciones con atributos en datos vectoriales incluyen:
-
-- Creación de subconjuntos (*subsetting*).  
-- Agregación (*aggregation*).  
-- Unión (*joining*). 
-
-Seguidamente, se explica como maneja estas operaciones el paquete sf.
 
 ### Manejo de datos de atributos con el paquete sf
 
@@ -197,7 +241,7 @@ En la secciones siguientes, se explicará el manejo de datos de atributos en con
 [`st_drop_geometry()`](https://rdrr.io/cran/sf/man/st_geometry.html) es un método que remueve las geometrías de un objeto sf. Esto puede ser útil cuando se desea operar solamente con las variables no espaciales.
 
 ```{r}
-#| label: sin-st_drop_geometry()
+#| label: sin-st-drop-geometry
 #| warning: false
 #| message: false
 #| code-fold: false
@@ -210,7 +254,7 @@ cantones |>
 ```
 
 ```{r}
-#| label: con-st_drop_geometry()
+#| label: con-st-drop-geometry
 #| warning: false
 #| message: false
 #| code-fold: false
@@ -226,7 +270,7 @@ Como puede verse, la columna de geometrías se incluye como resultado de cualqui
 
 #### Creación de subconjuntos (filtrado)
 
-Frecuentemente, es necesario extrer subconjuntos del conjunto de datos original, para facilidad de manejo y para atender requerimientos específicos de un análisis. 
+Frecuentemente, es necesario extraer subconjuntos del conjunto de datos original, para facilidad de manejo y para atender requerimientos específicos de un análisis.
 
 El paquete dplyr permite crear flujos de trabajo intuitivos y rápidos. Esto es útil, por ejemplo, cuando se trabaja con conjuntos de datos grandes (_big data_) y cuando se necesita integración con bases de datos. Los principales métodos de dplyr para creación de subconjuntos son `select()`, `slice()` y `filter()`.
 
@@ -288,7 +332,7 @@ Las operaciones de agregación realizan cálculos (ej. sumas, promedios, mínimo
 
 [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) crea grupos de filas de un conjunto de datos, de acuerdo con los valores de una o varias columnas. [`summarize()`](https://dplyr.tidyverse.org/reference/summarise.html) crea columnas adicionales con cálculos para cada grupo, tales como promedios, sumas, mínimos, máximos y otros. Si `summarize()` se ejecuta sin `group_by()`, crea una única fila para todo el conjunto de datos.
 
-Por ejemplo, en un conjunto de datos de ventas de una cadena de tiendas, se podría usar `group_by()` para hacer un grupo por cada ciudad en la que una o varias tiendas. Luego con `summarize()`, se podría crear una columna con el total de ventas para cada ciudad (i.e. para cada grupo).
+Por ejemplo, en un conjunto de datos de ventas de una cadena de tiendas, se podría usar `group_by()` para hacer un grupo por cada ciudad en la que operan una o varias tiendas. Luego con `summarize()`, se podría crear una columna con el total de ventas para cada ciudad (i.e. para cada grupo).
 
 **Agrupación y sumarización**
 
@@ -313,7 +357,7 @@ cantones |>
 cantones |>
   st_drop_geometry() |>
   dplyr::select(area, provincia) |>
-  group_by(provincia) %>%
+  group_by(provincia) |>
   summarize(
     area = sum(area, na.rm = TRUE),
     cantidad_cantones = n()
@@ -387,46 +431,38 @@ tmap_mode("view")
 # Definir el mapa
 mapa_cantones_covid <-
   tm_basemap("OpenStreetMap.Mapnik") +
-  tm_view(set.view = c(
+  tm_view(set_view = c(
     lon = -84.19452,
     lat =  9.572735,
     zoom = 7
   )) +
   tm_shape(cantones_union_covid, name = "Casos positivos de COVID") +
-    tm_fill(
-      fill = "positivos_20220530",
-      fill.scale = tm_scale_intervals(
+  tm_polygons(
+    fill = "positivos_20220530",
+    fill.scale = tm_scale_intervals(
       style  = "quantile",
       values = "Reds"
     ),
     fill.legend = tm_legend(title = "Cantidad de casos"),
+    col = "black",
+    lwd = 0.5,
     id = "canton",
-    popup.vars  = c(
+    popup.vars = c(
       "Cantón" = "canton",
       "Casos" = "positivos_20220530"
     )
   ) +
-  tm_borders(col = "black", lwd = 0.5) +
-  tm_scale_bar(position = c("left", "bottom"))
-
+  tm_scalebar(position = c("left", "bottom"))
 
 # Mostrar el mapa
 mapa_cantones_covid
 ```
 
-### Ejercicios
-
-1. Cree un mapa leaflet de coropletas de las provincias de Costa Rica, coloreado de acuerdo con la cantidad de casos positivos de COVID-19 acumulados al 2022-05-30. Se sugiere seguir los siguientes pasos:
-
-a. Cree un data frame con la suma, por provincia, de casos positivos de cantones (para realizar la agrupación, use el código de la provincia, no el nombre).
-b. Con un *left join*, una la [capa de provincias (del año 2020)](https://github.com/gf0604-procesamientodatosgeograficos/2023-i/blob/main/datos/ign/delimitacion-territorial-administrativa/provincias_2020.geojson) y el dataframe que creó en el punto a.
-c. Genere el mapa leaflet de coropletas con el objeto sf que creó en el punto b.
-
 ## Datos raster
 
 Las operaciones con atributos en datos raster incluyen:
 
-- Creación de subconjuntos (_subsetting_).  
+- Creación de subconjuntos (_subsetting_).
 - Resumen de información (_summarizing_).
 
 Seguidamente, se explicará como maneja estas operaciones el paquete terra.
@@ -458,15 +494,15 @@ tmap_mode("view")
 
 # Definir el mapa
 mapa_temperatura <-
-  tm_view(set.view = c(
+  tm_view(set_view = c(
     lon = -84.19452,
     lat =  9.572735,
     zoom = 7
   )) +
   tm_shape(temperatura, name = "Temperatura") +
   tm_raster(
-    palette = c("lightblue", "brown", "orange", "red"), 
-    title = "Temperatura (°C)"
+    col.scale  = tm_scale_continuous(values = c("lightblue", "brown", "orange", "red")),
+    col.legend = tm_legend(title = "Temperatura (°C)")
   ) +
   tm_scalebar(position = c("left", "bottom"))
 
@@ -506,3 +542,22 @@ hist(temperatura)
 density(temperatura)
 ```
 
+## Ejercicios
+
+1. Cree un mapa leaflet de coropletas de las provincias de Costa Rica, coloreado de acuerdo con la cantidad de casos positivos de COVID-19 acumulados al 2022-05-30. Se sugiere seguir los siguientes pasos:
+
+a. Cree un data frame con la suma, por provincia, de casos positivos de cantones (para realizar la agrupación, use el código de la provincia, no el nombre).
+b. Con un *left join*, una la [capa de provincias (del año 2020)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/datos/ign/provincias-2020-simplificados.gpkg) y el dataframe que creó en el punto a.
+c. Genere el mapa leaflet de coropletas con el objeto sf que creó en el punto b.
+
+## Recursos de interés
+
+Bivand, R. (2022). *CRAN Task View: Analysis of Spatial Data*. <https://CRAN.R-project.org/view=Spatial>
+
+Hijmans, R. J. (s. f.). *terra: Spatial data analysis*. <https://rspatial.org/>
+
+Lovelace, R., Nowosad, J., & Münchow, J. (2025). *Geocomputation with R* (2.ª ed.). CRC Press. <https://r.geocompx.org/>
+
+Pebesma, E. (s. f.). *Simple Features for R*. <https://r-spatial.github.io/sf/>
+
+Wickham, H. (s. f.). *Mutating joins — dplyr*. <https://dplyr.tidyverse.org/reference/mutate-joins.html>
