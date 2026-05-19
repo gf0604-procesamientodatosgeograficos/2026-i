@@ -20,7 +20,7 @@ Lovelace, R., Nowosad, J., & Münchow, J. (2025). *Geocomputation with R* (2.ª 
 
 Los **atributos** son los elementos de datos no espaciales asociados a un conjunto de datos geoespacial. En el modelo vectorial, cada *feature* (fila) puede tener asociados múltiples campos de atributos (columnas), de manera análoga a una tabla o `data.frame`; por eso, las operaciones con atributos vectoriales se asemejan a las de un conjunto de datos tabular y pueden realizarse con funciones del paquete base de R o, de forma más expresiva, con dplyr y el resto de Tidyverse. En el modelo raster, en cambio, cada celda almacena un único valor, por lo que las operaciones con atributos se concentran en la creación de subconjuntos y en el resumen estadístico de ese valor.
 
-En este capítulo se ejemplifican, para datos vectoriales, la creación de subconjuntos (`select()`, `slice()`, `filter()`), la agregación (`group_by()` y `summarize()`) y la unión (`left_join()` y otros *joins*) con los paquetes sf y dplyr; y, para datos raster, la creación de subconjuntos y el resumen de información con el paquete terra.
+En este capítulo se ejemplifican, para datos vectoriales, la creación de subconjuntos (`select()` y `filter()`), la agregación (`group_by()` y `summarize()`) y la unión (`left_join()` y otros *joins*) con los paquetes sf y dplyr; y, para datos raster, la creación de subconjuntos y el resumen de información con el paquete terra.
 
 ## Carga de paquetes
 
@@ -253,7 +253,7 @@ Como puede verse, la columna de geometrías se incluye como resultado de cualqui
 
 Frecuentemente, es necesario extraer subconjuntos del conjunto de datos original, para facilidad de manejo y para atender requerimientos específicos de un análisis.
 
-El paquete dplyr permite crear flujos de trabajo intuitivos y rápidos. Esto es útil, por ejemplo, cuando se trabaja con conjuntos de datos grandes (_big data_) y cuando se necesita integración con bases de datos. Los principales métodos de dplyr para creación de subconjuntos son `select()`, `slice()` y `filter()`.
+El paquete dplyr permite crear flujos de trabajo intuitivos y rápidos. Esto es útil, por ejemplo, cuando se trabaja con conjuntos de datos grandes (_big data_) y cuando se necesita integración con bases de datos. Los principales métodos de dplyr para creación de subconjuntos son `select()` y `filter()`.
 
 ##### El método `select()`
 
@@ -270,22 +270,6 @@ cantones |>
   head(10) |>           # mostrar solo las 10 primeras filas
   st_drop_geometry() |> # remover la columna de geometrías
   dplyr::select(canton, area_km2 = area, provincia)
-```
-
-##### El método `slice()`
-
-[`slice()`](https://dplyr.tidyverse.org/reference/slice.html) crea un subconjunto con base en las posiciones de las filas.
-
-```{r}
-#| label: slice
-#| warning: false
-#| message: false
-#| code-fold: false
-
-# Crear un subconjunto de las filas entre la 1 y la 10
-# del conjunto de datos de COVID-19
-covid_positivos_cantones |>
-  slice(1:10)
 ```
 
 ##### El método `filter()`
