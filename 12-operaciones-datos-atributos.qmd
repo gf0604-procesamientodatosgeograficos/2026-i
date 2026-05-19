@@ -49,11 +49,11 @@ library(tmap)
 
 ## Conjuntos de datos de ejemplo
 
-A lo largo del capítulo se utilizan tres conjuntos de datos sobre Costa Rica: los **cantones** (polígonos), los **casos positivos de COVID-19 por cantón** (datos tabulares) y la **temperatura** (raster). Las cargas detalladas se realizan más adelante, en la sección correspondiente a cada modelo de datos (sf para los dos primeros, terra para el último). Sus fuentes son:
+A lo largo del capítulo se utilizan tres conjuntos de datos sobre Costa Rica: los **cantones** (polígonos), los **casos positivos de COVID-19 por cantón** (datos tabulares) y la **temperatura media anual** (raster). Las cargas detalladas se realizan más adelante, en la sección correspondiente a cada modelo de datos (sf para los dos primeros, terra para el último). Sus fuentes son:
 
 - **Cantones**: capa vectorial GPKG del año 2020 (82 cantones, con geometrías simplificadas) publicada por el Instituto Geográfico Nacional (IGN) a través de un [geoservicio Web Feature Service (WFS)](http://geos.snitcr.go.cr/be/IGN_5/wfs). Se utiliza la versión de 2020 porque es la que corresponde a los datos de COVID-19 publicados por el Ministerio de Salud durante la pandemia.
 - **Casos positivos de COVID-19 en cantones**: archivos CSV publicados por el Ministerio de Salud de Costa Rica durante la pandemia; la última actualización disponible es del 2022-05-30. La fuente original en línea ya no está disponible, por lo que se trata de un conjunto de datos histórico distribuido en el repositorio del curso.
-- **Temperatura**: capa raster GeoTIFF de [WorldClim](https://www.worldclim.org/), un conjunto de capas climáticas globales disponibles en varias resoluciones espaciales.
+- **Temperatura media anual**: capa raster GeoTIFF de la temperatura media anual de [WorldClim](https://www.worldclim.org/), un conjunto de capas climáticas globales disponibles en varias resoluciones espaciales.
 
 ## Datos vectoriales
 
@@ -434,14 +434,14 @@ Seguidamente, se explicará como maneja estas operaciones el paquete terra.
 
 ### Manejo de datos de atributos con el paquete terra
 
-Para ejemplificar las operaciones, se utilizarán datos de temperatura de [WorldClim](https://www.worldclim.org/) para Costa Rica.
+Para ejemplificar las operaciones, se utilizarán datos de temperatura media anual de [WorldClim](https://www.worldclim.org/) para Costa Rica.
 
 ```{r}
 #| label: rast
 #| warning: false
 #| message: false
 
-# Cargar datos de temperatura
+# Cargar datos de temperatura media anual
 temperatura <- rast(
   "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/temperatura.tif"
 )
@@ -464,10 +464,10 @@ mapa_temperatura <-
     lat =  9.572735,
     zoom = 7
   )) +
-  tm_shape(temperatura, name = "Temperatura") +
+  tm_shape(temperatura, name = "Temperatura media anual") +
   tm_raster(
     col.scale  = tm_scale_continuous(values = c("lightblue", "brown", "orange", "red")),
-    col.legend = tm_legend(title = "Temperatura (°C)")
+    col.legend = tm_legend(title = "Temperatura media anual (°C)")
   ) +
   tm_scalebar(position = c("left", "bottom"))
 
