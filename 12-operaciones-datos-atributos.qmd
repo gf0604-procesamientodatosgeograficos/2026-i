@@ -22,28 +22,9 @@ Los **atributos** son los elementos de datos no espaciales asociados a un conjun
 
 En este capítulo se ejemplifican, para datos vectoriales, la creación de subconjuntos (`select()`, `slice()`, `filter()`), la agregación (`group_by()` y `summarize()`) y la unión (`left_join()` y otros *joins*) con los paquetes sf y dplyr; y, para datos raster, la creación de subconjuntos y el resumen de información con el paquete terra.
 
-## Instalación y carga de paquetes
+## Carga de paquetes
 
-Los paquetes utilizados en este capítulo pueden instalarse con la función `install.packages()`. Se asume que los paquetes de Tidyverse ya fueron instalados en capítulos anteriores.
-
-```{r}
-#| label: instalacion-paquetes
-#| eval: false
-
-# Instalación de DT
-install.packages("DT")
-
-# Instalación de sf
-install.packages("sf")
-
-# Instalación de terra
-install.packages("terra")
-
-# Instalación de tmap
-install.packages("tmap")
-```
-
-Una vez instalados, los paquetes pueden cargarse con la función `library()`:
+Todos los paquetes que se utilizan en este capítulo se instalaron en capítulos anteriores: `tidyverse` en el @sec-tidyverse, `DT` en el @sec-ggplot2-plotly, y `sf`, `terra` y `tmap` en el @sec-introduccion-geoespaciales. Por lo tanto, aquí solamente se cargan con la función `library()`; si alguno no estuviera instalado, puede instalarse con `install.packages()`, como se explica en esos capítulos.
 
 ```{r}
 #| label: carga-paquetes
