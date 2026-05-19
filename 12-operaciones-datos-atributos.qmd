@@ -509,6 +509,47 @@ mapa_cantones_covid_tasa <-
 mapa_cantones_covid_tasa
 ```
 
+La siguiente tabla complementa el mapa anterior y permite ordenar los cantones por población, cantidad de casos o tasa por 100 000 habitantes.
+
+```{r}
+#| label: tabla-cantones-tasa-covid
+#| warning: false
+#| message: false
+#| code-fold: true
+#| code-summary: "Código para generar la tabla"
+
+# Tabla DT de población, casos y tasa por 100 000 habitantes
+cantones_union_covid_tasa |>
+  st_drop_geometry() |>
+  dplyr::select(
+    provincia,
+    canton,
+    poblacion,
+    positivos_20220530,
+    tasa_positivos_100k
+  ) |>
+  arrange(desc(tasa_positivos_100k)) |>
+  datatable(
+    colnames = c(
+      "Provincia",
+      "Cantón",
+      "Población",
+      "Casos positivos",
+      "Tasa por 100 000 hab."
+    ),
+    rownames = FALSE,
+    options = list(
+      pageLength = 10,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound(columns = "tasa_positivos_100k", digits = 1) |>
+  formatCurrency(
+    columns = c("poblacion", "positivos_20220530"),
+    currency = "", interval = 3, mark = " ", digits = 0
+  )
+```
+
 Al comparar ambos mapas, se observa que el patrón cambia de forma importante: los cantones del Área Metropolitana, que dominan el mapa de conteos absolutos, ya no son necesariamente los de mayor intensidad relativa. Esto ilustra una recomendación general de la cartografía temática: para variables que dependen de la población expuesta (casos de enfermedades, delitos, accidentes, etc.) suelen ser más informativos los mapas de tasas que los de valores absolutos.
 
 ## Datos raster
