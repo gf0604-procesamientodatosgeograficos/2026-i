@@ -213,13 +213,13 @@ Tabla de casos positivos de COVID-19 en cantones de Costa Rica
 
 Como se mencionó en capítulos anteriores, el paquete sf define una clase, llamada `sf`, la cual extiende la clase `data.frame` del paquete base de R. Los objetos de la clase sf tienen una fila (o *feature*) por cada observación y una columna por cada atributo. También tienen una columna especial para almacenar las geometrías (puntos, líneas, polígonos, etc.), la cual generalmente se denomina `geometry` o `geom` (pero puede tener cualquier otro nombre). Esto permite que sf utilice métodos (i.e. funciones) de la clase `data.frame`, tales como `plot()` y `summary()`, entre otros.
 
-Además de `data.frame`, `sf` es compatible con la clase [tibble](https://tibble.tidyverse.org/reference/tibble.html), la cual también puede manipularse mediante los métodos de [dplyr](https://dplyr.tidyverse.org/). Esto permite un manejo *tidy* (i.e. ordenado, organizado) de los datos geoespaciales, de acuerdo con el enfoque de [Tidyverse](https://www.tidyverse.org/).
+Además de `data.frame`, `sf` es compatible con la clase [tibble](https://tibble.tidyverse.org/reference/tibble.html), la cual también puede manipularse mediante las funciones de [dplyr](https://dplyr.tidyverse.org/). Esto permite un manejo *tidy* (i.e. ordenado, organizado) de los datos geoespaciales, de acuerdo con el enfoque de [Tidyverse](https://www.tidyverse.org/).
 
 En la secciones siguientes, se explicará el manejo de datos de atributos en conjuntos de datos geoespaciales, mediante Tidyverse.
 
-#### El método `st_drop_geometry()`
+#### La función `st_drop_geometry()`
 
-[`st_drop_geometry()`](https://rdrr.io/cran/sf/man/st_geometry.html) es un método que remueve las geometrías de un objeto sf. Esto puede ser útil cuando se desea operar solamente con las variables no espaciales.
+[`st_drop_geometry()`](https://rdrr.io/cran/sf/man/st_geometry.html) es una función que remueve las geometrías de un objeto sf. Esto puede ser útil cuando se desea operar solamente con las variables no espaciales.
 
 ```{r}
 #| label: sin-st-drop-geometry
@@ -253,9 +253,9 @@ Como puede verse, la columna de geometrías se incluye como resultado de cualqui
 
 Frecuentemente, es necesario extraer subconjuntos del conjunto de datos original, para facilidad de manejo y para atender requerimientos específicos de un análisis.
 
-El paquete dplyr permite crear flujos de trabajo intuitivos y rápidos. Esto es útil, por ejemplo, cuando se trabaja con conjuntos de datos grandes (_big data_) y cuando se necesita integración con bases de datos. Los principales métodos de dplyr para creación de subconjuntos son `select()` y `filter()`.
+El paquete dplyr permite crear flujos de trabajo intuitivos y rápidos. Esto es útil, por ejemplo, cuando se trabaja con conjuntos de datos grandes (_big data_) y cuando se necesita integración con bases de datos. Las principales funciones de dplyr para creación de subconjuntos son `select()` y `filter()`.
 
-##### El método `select()`
+##### La función `select()`
 
 [`select()`](https://dplyr.tidyverse.org/reference/select.html) permite seleccionar y renombrar columnas de un conjunto de datos.
 
@@ -272,7 +272,7 @@ cantones |>
   dplyr::select(canton, area_km2 = area, provincia)
 ```
 
-##### El método `filter()`
+##### La función `filter()`
 
 [`filter()`](https://dplyr.tidyverse.org/reference/filter.html) filtra filas que cumplen una expresión lógica.
 
@@ -351,7 +351,7 @@ El paquete dplyr implementa varios tipos de uniones, los cuales se ilustran en l
 knitr::include_graphics(rep("img/join.jpg"))
 ```
 
-Los [métodos que implementan las uniones](https://dplyr.tidyverse.org/reference/mutate-joins.html) son:
+Las [funciones que implementan las uniones](https://dplyr.tidyverse.org/reference/mutate-joins.html) son:
 
 - `left_join()`: mantiene todas las filas del conjunto de datos del lado izquierdo y les agrega las columnas del conjunto de datos del lado derecho, en las filas en las que hay coincidencia.
 - `inner_join()`: incluye las filas que coinciden en ambos conjuntos de datos.
