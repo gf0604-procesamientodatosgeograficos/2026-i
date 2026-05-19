@@ -49,10 +49,11 @@ library(tmap)
 
 ## Conjuntos de datos de ejemplo
 
-A lo largo del capítulo se utilizan tres conjuntos de datos sobre Costa Rica: los **cantones** (polígonos), los **casos positivos de COVID-19 por cantón** (datos tabulares) y la **temperatura media anual** (raster). Las cargas detalladas se realizan más adelante, en la sección correspondiente a cada modelo de datos (sf para los dos primeros, terra para el último). Sus fuentes son:
+A lo largo del capítulo se utilizan cuatro conjuntos de datos sobre Costa Rica: los **cantones** (polígonos), los **casos positivos de COVID-19 por cantón** (datos tabulares), la **población por cantón** (datos tabulares) y la **temperatura media anual** (raster). Las cargas detalladas se realizan más adelante, en la sección correspondiente a cada modelo de datos (sf para los tres primeros, terra para el último). Sus fuentes son:
 
 - **Cantones**: capa vectorial GPKG del año 2020 (82 cantones, con geometrías simplificadas) publicada por el Instituto Geográfico Nacional (IGN) a través de un [geoservicio Web Feature Service (WFS)](http://geos.snitcr.go.cr/be/IGN_5/wfs). Se utiliza la versión de 2020 porque es la que corresponde a los datos de COVID-19 publicados por el Ministerio de Salud durante la pandemia.
 - **Casos positivos de COVID-19 en cantones**: archivos CSV publicados por el Ministerio de Salud de Costa Rica durante la pandemia; la última actualización disponible es del 2022-05-30. La fuente original en línea ya no está disponible, por lo que se trata de un conjunto de datos histórico distribuido en el repositorio del curso.
+- **Población por cantón**: archivo CSV con la población total estimada para cada cantón al año 2022, derivado de la [Estimación de Población y Vivienda 2022](https://inec.cr/estimaciones-poblacion-vivienda-2022) publicada por el Instituto Nacional de Estadística y Censos (INEC).
 - **Temperatura media anual**: capa raster GeoTIFF de la temperatura media anual de [WorldClim](https://www.worldclim.org/), un conjunto de capas climáticas globales disponibles en varias resoluciones espaciales.
 
 ## Datos vectoriales
@@ -63,7 +64,7 @@ Las operaciones con atributos en datos vectoriales incluyen:
 - Agregación (*aggregation*).
 - Unión (*joining*).
 
-Para ejemplificar estas operaciones se utilizan dos conjuntos de datos: los cantones de Costa Rica (polígonos) y los casos positivos de COVID-19 por cantón (datos tabulares).
+Para ejemplificar estas operaciones se utilizan tres conjuntos de datos: los cantones de Costa Rica (polígonos), los casos positivos de COVID-19 por cantón (datos tabulares) y la población por cantón (datos tabulares).
 
 ### Carga de los datos
 
@@ -422,6 +423,93 @@ mapa_cantones_covid <-
 # Mostrar el mapa
 mapa_cantones_covid
 ```
+
+##### Ejemplo: tasa de casos positivos de COVID-19 por 100 000 habitantes
+
+El mapa anterior muestra el **conteo absoluto** de casos positivos en cada cantón. Como los cantones más poblados (San José, Alajuela, Desamparados, entre otros) concentran naturalmente más casos por el solo hecho de tener más habitantes, este tipo de coropletas tiende a reflejar la distribución de la población, más que la intensidad real con la que se transmitió la enfermedad en cada cantón. Por esta razón, en cartografía temática es preferible mapear *tasas*, es decir, conteos normalizados por la población expuesta. A continuación se construye un segundo mapa de coropletas, pero coloreado de acuerdo con la **tasa de casos positivos por 100 000 habitantes**.
+
+Para calcular la tasa se necesita la población de cada cantón. Esta se obtiene del INEC, a partir de la *Estimación de Población y Vivienda 2022*, distribuida en el repositorio del curso como un archivo CSV.
+
+[Archivo CSV de población por cantón (INEC, 2022)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/datos/inec/poblacion-cantones-2022.csv)
+
+```{r}
+#| label: carga-datos-poblacion-cantones
+#| warning: false
+#| message: false
+#| code-fold: false
+
+# Cargar datos de población por cantón (INEC, 2022)
+poblacion_cantones <-
+  read_csv(
+    "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/inec/poblacion-cantones-2022.csv"
+  )
+```
+
+Sobre el objeto `cantones_union_covid` se aplica un segundo *left join* para agregar la columna `poblacion` y, a continuación, se utiliza `mutate()` para crear la columna `tasa_positivos_100k` con la tasa de casos por cada 100 000 habitantes.
+
+```{r}
+#| label: cantones-join-covid-poblacion
+#| warning: false
+#| message: false
+#| code-fold: false
+
+# Unir con la población y calcular la tasa por 100 000 habitantes
+cantones_union_covid_tasa <-
+  cantones_union_covid |>
+  left_join(
+    dplyr::select(poblacion_cantones, cod_canton, poblacion),
+    by = "cod_canton"
+  ) |>
+  mutate(
+    tasa_positivos_100k = positivos_20220530 / poblacion * 100000
+  )
+```
+
+```{r}
+#| label: mapa-cantones-tasa-covid
+#| warning: false
+#| message: false
+#| code-fold: true
+#| code-summary: "Código para generar el mapa"
+
+# Mapa interactivo de tasa de casos positivos de COVID 19 por 100 000 habitantes
+
+# Activar el modo interactivo
+tmap_mode("view")
+
+# Definir el mapa
+mapa_cantones_covid_tasa <-
+  tm_basemap("OpenStreetMap.Mapnik") +
+  tm_view(set_view = c(
+    lon = -84.19452,
+    lat =  9.572735,
+    zoom = 7
+  )) +
+  tm_shape(cantones_union_covid_tasa, name = "Tasa de casos positivos de COVID por 100 000 hab.") +
+  tm_polygons(
+    fill = "tasa_positivos_100k",
+    fill.scale = tm_scale_intervals(
+      style  = "quantile",
+      values = "Reds"
+    ),
+    fill.legend = tm_legend(title = "Casos por 100 000 hab."),
+    col = "black",
+    lwd = 0.5,
+    id = "canton",
+    popup.vars = c(
+      "Cantón" = "canton",
+      "Población" = "poblacion",
+      "Casos" = "positivos_20220530",
+      "Tasa por 100 000 hab." = "tasa_positivos_100k"
+    )
+  ) +
+  tm_scalebar(position = c("left", "bottom"))
+
+# Mostrar el mapa
+mapa_cantones_covid_tasa
+```
+
+Al comparar ambos mapas, se observa que el patrón cambia de forma importante: los cantones del Área Metropolitana, que dominan el mapa de conteos absolutos, ya no son necesariamente los de mayor intensidad relativa. Esto ilustra una recomendación general de la cartografía temática: para variables que dependen de la población expuesta (casos de enfermedades, delitos, accidentes, etc.) suelen ser más informativos los mapas de tasas que los de valores absolutos.
 
 ## Datos raster
 
