@@ -550,7 +550,7 @@ cantones_union_covid_tasa |>
   )
 ```
 
-Al comparar ambos mapas, se observa que el patrón cambia de forma importante: los cantones del Área Metropolitana, que dominan el mapa de conteos absolutos, ya no son necesariamente los de mayor intensidad relativa. Esto ilustra una recomendación general de la cartografía temática: para variables que dependen de la población expuesta (casos de enfermedades, delitos, accidentes, etc.) suelen ser más informativos los mapas de tasas que los de valores absolutos.
+Al comparar ambos mapas, se observa que el patrón cambia de forma importante: los cantones del Área Metropolitana, que dominan el mapa de conteos absolutos, ya no son necesariamente los de mayor intensidad relativa. Esto ilustra una recomendación general de la cartografía temática: para variables que dependen de la población expuesta (casos de enfermedades, delitos, accidentes, etc.) suelen ser más informativos los mapas de tasas que los de valores absolutos [@slocum_thematic_2022].
 
 ## Datos raster
 
