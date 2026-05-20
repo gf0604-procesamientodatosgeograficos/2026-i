@@ -580,8 +580,8 @@ mapa_cantones_covid_simbolos <-
   tm_shape(cantones_union_covid_tasa, name = "Cantones") +
   tm_polygons(
     fill_alpha = 0,
-    col = "gray60",
-    lwd = 0.5
+    col = "black",
+    lwd = 0.8
   ) +
   # Capa de símbolos proporcionales sobre el centroide de cada cantón
   tm_shape(cantones_union_covid_tasa, name = "Casos y tasa por cantón") +
