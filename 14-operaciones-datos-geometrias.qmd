@@ -1,4 +1,6 @@
-# Operaciones con geometrías
+# Operaciones con geometrías {#sec-operaciones-geometrias}
+
+En este capítulo se presentan las operaciones con geometrías de los datos geoespaciales. En el caso de los datos vectoriales, incluyen simplificación, creación de centroides y creación de áreas de amortiguamiento (*buffers*); en el caso de los datos raster, se cubren la extracción de valores en localizaciones puntuales y el recorte por polígonos.
 
 ## Resumen
 
@@ -8,24 +10,57 @@ Las operaciones con geometrías para datos vectoriales incluyen simplificación,
 
 ### Lecturas
 
-Lovelace, R., Nowosad, J., & Münchow, J. (2019). *Geocomputation with R* (capítulo 5). CRC Press. <https://geocompr.robinlovelace.net/>
+Lovelace, R., Nowosad, J., & Münchow, J. (2019). *Geocomputation with R* (1.ª ed., capítulo 5). CRC Press. <https://geocompr.robinlovelace.net/>
 
-### Carga de bibliotecas
+Lovelace, R., Nowosad, J., & Münchow, J. (2025). *Geocomputation with R* (2.ª ed., capítulo 5). CRC Press. <https://r.geocompx.org/>
+
+## Introducción
+
+Este capítulo brinda una visión general de las operaciones con geometrías en datos vectoriales implementadas en el paquete `sf` y en datos raster implementadas en el paquete `terra`. Estas operaciones trabajan con la columna de geometrías (ej. `geometry`, `geom`) del paquete `sf`, para el caso de los datos vectoriales, y con la localización geográfica de los pixeles, para el caso de los datos raster. A diferencia de las operaciones espaciales vistas en el @sec-operaciones-datos-espaciales —que se centran en relaciones topológicas entre objetos—, las operaciones con geometrías producen *nuevas* geometrías a partir de las existentes (ej. una versión simplificada, un centroide, un *buffer*).
+
+## Carga de paquetes
+
+Todos los paquetes que se utilizan en este capítulo se instalaron en capítulos anteriores: `tidyverse` en el @sec-tidyverse, `DT` en el @sec-ggplot2-plotly, y `sf`, `terra` y `tmap` en el @sec-introduccion-geoespaciales. Por lo tanto, aquí solamente se cargan con la función `library()`; si alguno no estuviera instalado, puede instalarse con `install.packages()`, como se explica en esos capítulos.
 
 ```{r}
-#| label: carga-bibliotecas
+#| label: carga-paquetes
 #| warning: false
 #| message: false
 
-# Carga de bibliotecas
+# Carga de Tidyverse (manipulación de datos)
 library(tidyverse)
+
+# Carga de DT (tablas interactivas)
 library(DT)
+
+# Carga de sf (datos vectoriales)
 library(sf)
+
+# Carga de terra (datos raster)
 library(terra)
+
+# Carga de tmap (mapas estáticos e interactivos)
 library(tmap)
 ```
 
-### Carga de datos
+## Conjuntos de datos de ejemplo
+
+A lo largo del capítulo se utilizan cuatro conjuntos de datos sobre Costa Rica: las **provincias** (polígonos), la **red vial** (líneas), los **registros de presencia de mamíferos** (puntos) y la **temperatura media anual** (raster). Las cargas detalladas se realizan más adelante, en la sección correspondiente a cada modelo de datos (sf para los tres primeros, terra para el último). Sus fuentes son:
+
+- **Provincias**: capa vectorial GPKG en el sistema de referencia CR05/CRTM05 (EPSG:8908), publicada por el Instituto Geográfico Nacional (IGN) a través de un [geoservicio Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_5_CO/wfs).
+- **Red vial**: capa vectorial GPKG con las líneas de la red vial en CR05/CRTM05, publicada por el IGN a través de un [geoservicio WFS](https://geos.snitcr.go.cr/be/IGN_200/wfs?version=1.1.0).
+- **Mamíferos**: registros de presencia de la clase [*Mammalia*](https://es.wikipedia.org/wiki/Mammalia) en Costa Rica, descargados del portal de la [Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/) ([consulta original](https://doi.org/10.15468/dl.hykn7z)).
+- **Temperatura media anual**: capa raster GeoTIFF de [WorldClim](https://www.worldclim.org/), un conjunto de capas climáticas globales disponibles en varias resoluciones espaciales.
+
+## Datos vectoriales
+
+Las operaciones con geometrías en datos vectoriales incluyen:
+
+- Simplificación.
+- Centroides.
+- Áreas de amortiguamiento (_buffers_).
+
+### Carga de los datos
 
 #### Provincias de Costa Rica
 
@@ -123,21 +158,9 @@ plot(
 )
 ```
 
-## Introducción
-
-Esta lección brinda una visión general de las operaciones con geometrías en datos vectoriales implementadas en el paquete `sf` y en datos raster implementadas en el paquete `terra`. Estas operaciones trabajan con la columna de geometrías (ej. `geometry`, `geom`) del paquete `sf`, para el caso de los datos vectoriales, y con la localización geográfica de los pixeles para el caso de los datos raster. En la sección final, se muestran varias operaciones de interacción entre los modelos raster y vectorial.
-
-## Datos vectoriales
-
-Las operaciones con geometrías en datos vectoriales incluyen:
-
-- Simplificación.  
-- Centroides. 
-- Áreas de amortiguamiento (_buffers_).  
-
 ### Simplificación
 
-La simplificación puede realizarse en geometrías de líneas y polígonos. Reduce la cantidad de memoria, disco y ancho de banda que utilizan las geometrías. Para simplificar geometrías, el paquete `sf` incluye el método `st_simplify()`, basado en el [algoritmo de Douglas-Peucker](https://es.wikipedia.org/wiki/Algoritmo_de_Ramer%E2%80%93Douglas%E2%80%93Peucker), el cual recibe el argumento `dTolerance` para controlar el nivel de generalización de las unidades del mapa. Este argumento se expresa en las unidades de medida del CRS de la capa, por lo que es conveniente utilizar un CRS con unidades de medida de distancias (ej. metros).
+La simplificación puede realizarse en geometrías de líneas y polígonos. Reduce la cantidad de memoria, disco y ancho de banda que utilizan las geometrías. Para simplificar geometrías, el paquete `sf` incluye la función `st_simplify()`, basada en el [algoritmo de Douglas-Peucker](https://es.wikipedia.org/wiki/Algoritmo_de_Ramer%E2%80%93Douglas%E2%80%93Peucker), la cual recibe el argumento `dTolerance` para controlar el nivel de generalización de las unidades del mapa. Este argumento se expresa en las unidades de medida del CRS de la capa, por lo que es conveniente utilizar un CRS con unidades de medida de distancias (ej. metros).
 
 El siguiente bloque de código simplifica la capa de provincias, primero sin preservar su [topología](https://es.wikipedia.org/wiki/Topolog%C3%ADa_geoespacial) y luego preservándola.
 
@@ -151,7 +174,7 @@ provincias_simplificadas <-
   provincias |>
   st_simplify(dTolerance = 5000, preserveTopology = FALSE)
 
-# Mapa de la capa de provincias con simplificación 
+# Mapa de la capa de provincias con simplificación
 # y sin preservación de topología
 plot(
   provincias_simplificadas$geom,
@@ -167,7 +190,7 @@ provincias_simplificadas_topologia <-
   provincias |>
   st_simplify(dTolerance = 5000, preserveTopology = TRUE)
 
-# Mapa de la capa de provincias con simplificación 
+# Mapa de la capa de provincias con simplificación
 # y con preservación de topología
 plot(
   provincias_simplificadas_topologia$geom,
@@ -190,16 +213,16 @@ print(object.size(provincias_simplificadas_topologia), units = "Kb")
 
 ### Centroides
 
-Un centroide es un punto que identifica el centro de un objeto geográfico. Puede calcularse para geometrías de líneas y de polígonos y se utilizan para brindar una representación simplificada de geometrías más complejas. Existen varios métodos para calcularlos. 
+Un centroide es un punto que identifica el centro de un objeto geográfico. Puede calcularse para geometrías de líneas y de polígonos y se utiliza para brindar una representación simplificada de geometrías más complejas. Existen varias formas de calcularlo.
 
-El paquete  `sf`  incluye la función `st_centroid()`, la cual calcula el *centroide geográfico* (comúnmente llamado "el centroide"). Es posible que el centroide geográfico se ubique fuera de la geometría "padre" (ej. en el caso de una geometría con forma de anillo). Para evitar este resultado, la función `st_point_on_surface()` se asegura de que el centroide esté siempre dentro de la geometría "padre".
+El paquete `sf` incluye la función `st_centroid()`, la cual calcula el *centroide geográfico* (comúnmente llamado "el centroide"). Es posible que el centroide geográfico se ubique fuera de la geometría "padre" (ej. en el caso de una geometría con forma de anillo). Para evitar este resultado, la función `st_point_on_surface()` se asegura de que el centroide esté siempre dentro de la geometría "padre".
 
 El siguiente bloque de código calcula los centroides para Costa Rica, mediante las dos funciones mencionadas.
 
 ```{r}
 #| label: st_centroid-cr
 
-# Costa Rica y sus centroides calculados con 
+# Costa Rica y sus centroides calculados con
 # st_centroid() y st_point_on_surface()
 
 # Mapa de provincias
@@ -254,7 +277,7 @@ El siguiente bloque de código calcula los centroides de las provincias de Costa
 plot(
   provincias$geom,
   xlim = c(280000, 660000),
-  ylim = c(880000, 1250000),  
+  ylim = c(880000, 1250000),
   main = "Centroides de provincias: st_centroid (rojo) y st_point_on_surface (verde)",
   axes = TRUE,
   graticule = TRUE
@@ -352,7 +375,7 @@ plot(
 )
 ```
 
-**Ejemplo de análisis: especies de mamíferos en riesgo de atropello en las cercanías de la ruta 32**  
+#### Ejemplo: especies de mamíferos en riesgo de atropello en las cercanías de la ruta 32
 
 Es común el uso de *buffers* en análisis de datos, para responder preguntas como, por ejemplo, "¿cuántos puntos hay alrededor de una línea?" o "¿cuáles especies pueden encontrarse en las márgenes de un río?". En este ejemplo, se utiliza un *buffer* para identificar las especies de mamíferos en riesgo de ser atropellados en las cercanías de la ruta 32.
 
@@ -453,7 +476,7 @@ mamiferos_buffer_ruta_32 <- mamiferos_buffer_ruta_32 |>
 tmap_mode("view")
 
 # Definir el mapa
-mapa <- 
+mapa <-
   # Capas base
   tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
 
@@ -478,9 +501,9 @@ mapa <-
       "Fuente" = "institutionCode",
       "Registro"  = "registro" # enlace al detalle del registro de presencia
     ),
-    popup.format = list(html.escape = FALSE) # para hacer "clicables" los enlaces HTML 
+    popup.format = list(html.escape = FALSE) # para hacer "clicables" los enlaces HTML
   ) +
-  
+
   # Definir la escala gráfica
   tm_scalebar(position = c("left", "bottom"))
 
@@ -490,10 +513,11 @@ mapa
 
 ## Datos raster
 
-### Extracción de valores raster
+### Carga de los datos
 
-La extracción de valores raster es el proceso de identificar y retornar los valores asociados con una capa raster en localizaciones específicas, generalmente determinadas por objetos vectoriales, ya sean puntos, líneas o polígonos. En el paquete terra, la extracción se implementa a través de la función [extract()](https://rdrr.io/cran/terra/man/extract.html).
+#### Temperatura media anual
 
+Para ejemplificar las operaciones de extracción de valores raster en localizaciones determinadas por geometrías vectoriales, se utiliza la capa de temperatura media anual de [WorldClim](https://www.worldclim.org/) para Costa Rica.
 
 ```{r}
 #| label: carga-datos-temperatura
@@ -509,7 +533,11 @@ temperatura <- rast(
 plot(temperatura)
 ```
 
-**Rangos de temperaturas de especies**
+### Extracción de valores raster
+
+La extracción de valores raster es el proceso de identificar y retornar los valores asociados con una capa raster en localizaciones específicas, generalmente determinadas por objetos vectoriales, ya sean puntos, líneas o polígonos. En el paquete terra, la extracción se implementa a través de la función [extract()](https://rdrr.io/cran/terra/man/extract.html).
+
+#### Ejemplo: rango de temperatura del mono congo
 
 El siguiente bloque de código obtiene los rangos de temperatura media anual del [mono congo (*Alouatta palliata*)](https://es.wikipedia.org/wiki/Alouatta_palliata):
 
@@ -517,7 +545,7 @@ El siguiente bloque de código obtiene los rangos de temperatura media anual del
 #| label: rango-temperatura-congo
 
 # Filtrado de registros de congos
-congos <- 
+congos <-
   mamiferos |>
   filter(species == "Alouatta palliata")
 
@@ -560,16 +588,28 @@ plot(
 )
 
 # Registros de presencia de congos
-plot(congos, 
-  add = TRUE, 
-  pch = 20, 
-  col = "black", 
+plot(congos,
+  add = TRUE,
+  pch = 20,
+  col = "black",
   cex = 0.7
 )
 ```
 
-**Ejercicios**
+## Ejercicios
 
-1. Obtenga el rango de precipitación anual para el mono congo y genere el mapa correspondiente. Use los datos de precipitación en https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/precipitacion.tif.
+1. Obtenga el rango de precipitación anual para el mono congo y genere el mapa correspondiente. Use los datos de precipitación en <https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/precipitacion.tif>.
 
 2. Genere los mapas de rangos de temperatura y precipitación para la [musaraña del Chirripó (*Cryptotis gracilis*)](https://es.wikipedia.org/wiki/Cryptotis_gracilis).
+
+## Recursos de interés
+
+Hijmans, R. J. (s. f.). *terra: Spatial data analysis*. <https://rspatial.org/>
+
+Lovelace, R., Nowosad, J., & Münchow, J. (2025). *Geocomputation with R* (2.ª ed., capítulo 5: *Geometry operations*). CRC Press. <https://r.geocompx.org/geometric-operations.html>
+
+Pebesma, E. (s. f.). *Manipulating Simple Feature Geometries — sf*. <https://r-spatial.github.io/sf/articles/sf3.html>
+
+Pebesma, E., & Bivand, R. (2023). *Spatial Data Science: With Applications in R*. Chapman and Hall/CRC. <https://r-spatial.org/book/>
+
+Tennekes, M., & Nowosad, J. (s. f.). *tmap: Thematic Maps in R*. <https://r-tmap.github.io/tmap/>
