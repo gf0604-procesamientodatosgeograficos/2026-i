@@ -1,0 +1,315 @@
+# Ejemplo: cambio de NDVI en el refugio Gandoca-Manzanillo {#sec-ejemplo-ndvi-gandoca}
+
+Este apéndice presenta un análisis raster-vector completo sobre dos imágenes Sentinel-2 del [Refugio Nacional de Vida Silvestre Gandoca-Manzanillo](https://www.sinac.go.cr/ES/ac/aclac/rnvsgm/Paginas/default.aspx), captadas con cinco meses de diferencia (5 de enero y 18 de junio de 2024). El ejemplo recorta cada imagen al contorno del refugio, calcula el [NDVI](https://es.wikipedia.org/wiki/%C3%8Dndice_de_vegetaci%C3%B3n_de_diferencia_normalizada) para ambas fechas y construye un mapa de cambio temporal.
+
+El procedimiento ilustra los temas del @sec-operaciones-geometrias: operaciones con geometrías raster (recorte por polígono) y la interacción raster-vector que es central en el cap. 5 de [Geocomputation with R](https://r.geocompx.org/geometry-operations.html#raster-vector).
+
+## Objetivo
+
+Detectar dónde ganó y dónde perdió cobertura vegetal el refugio Gandoca-Manzanillo entre el inicio de la estación seca y el inicio de la estación lluviosa de 2024, usando NDVI como indicador. Esta misma metodología se aplica a monitoreo de deforestación, recuperación post-incendio, fenología de cultivos, etc.
+
+## Carga de paquetes
+
+```{r}
+#| label: carga-paquetes
+#| warning: false
+#| message: false
+
+# Carga de Tidyverse (manipulación de datos)
+library(tidyverse)
+
+# Carga de DT (tablas interactivas)
+library(DT)
+
+# Carga de sf (datos vectoriales)
+library(sf)
+
+# Carga de terra (datos raster)
+library(terra)
+
+# Carga de tmap (mapas estáticos e interactivos)
+library(tmap)
+
+# Carga de leaflet (mapas interactivos para raster continuo)
+library(leaflet)
+```
+
+## Conjuntos de datos
+
+- **Imágenes Sentinel-2 de Gandoca-Manzanillo** (13 bandas, resolución 10 m, EPSG:8857): `gandoca-20240105.tif` y `gandoca-20240618.tif`. Para el cálculo del NDVI se usan las bandas B04 (rojo) y B08 (infrarrojo cercano).
+- **Polígono del refugio Gandoca-Manzanillo**: descargado del [WFS PNE del SINAC](http://geos1pne.sirefor.go.cr/wfs) (capa `PNE:areas_silvestres_protegidas`, filtrado por `nombre_asp LIKE '%Gandoca%'`). La capa contiene los dos polígonos del refugio —porción terrestre y porción marina—; ambos se unen con `st_union()` antes de recortar el raster.
+
+### Imágenes Sentinel-2
+
+```{r}
+#| label: carga-sentinel
+#| warning: false
+#| message: false
+
+# Imagen de enero de 2024 (inicio de estación seca)
+imagen_t1 <- rast(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sentinel/gandoca-20240105.tif"
+)
+
+# Imagen de junio de 2024 (inicio de estación lluviosa)
+imagen_t2 <- rast(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sentinel/gandoca-20240618.tif"
+)
+```
+
+### Refugio Gandoca-Manzanillo
+
+```{r}
+#| label: carga-refugio
+#| warning: false
+#| message: false
+
+refugio <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/refugio-gandoca-manzanillo.gpkg",
+  quiet = TRUE
+)
+
+# Fusión de las dos porciones (terrestre + marina) en un solo polígono
+refugio_union <- st_union(refugio)
+```
+
+## Procedimiento
+
+Los pasos son:
+
+1. **Reproyección** del polígono del refugio al CRS de las imágenes Sentinel-2 (EPSG:8857), para que las operaciones raster-vector sean correctas.
+2. **Recorte** (`terra::crop()`) de cada imagen al rectángulo del refugio.
+3. **Enmascarado** (`terra::mask()`) para asignar `NA` a los píxeles fuera del polígono.
+4. **Visualización true color** de las imágenes recortadas.
+5. **Cálculo del NDVI** = (B08 − B04) / (B08 + B04) con `terra::lapp()`.
+6. **Diferencia temporal** NDVI(t₂) − NDVI(t₁) y mapa de cambio.
+7. **Resumen estadístico** del NDVI por fecha.
+
+### 1. Reproyectar el polígono al CRS de las imágenes
+
+```{r}
+#| label: reproyectar-refugio
+#| warning: false
+#| message: false
+
+# CRS de las imágenes Sentinel-2: EPSG:8857
+refugio_sentinel <- st_transform(refugio_union, crs(imagen_t1))
+refugio_vect     <- vect(refugio_sentinel)   # convertir a SpatVector para terra
+```
+
+### 2 y 3. Recorte y enmascarado de cada imagen por el refugio
+
+`terra::crop()` reduce la extensión del raster al rectángulo envolvente del polígono; `terra::mask()` deja en `NA` los píxeles fuera del polígono. La combinación de ambas operaciones es la forma estándar de "recortar exactamente" un raster por una geometría vectorial.
+
+```{r}
+#| label: recorte-mascara
+#| warning: false
+#| message: false
+
+imagen_t1_refugio <- imagen_t1 |> crop(refugio_vect) |> mask(refugio_vect)
+imagen_t2_refugio <- imagen_t2 |> crop(refugio_vect) |> mask(refugio_vect)
+```
+
+### 4. Visualización true color de ambas fechas
+
+```{r}
+#| label: truecolor
+#| warning: false
+#| message: false
+#| fig-width: 10
+#| fig-height: 5
+
+# Lado a lado
+par(mfrow = c(1, 2))
+
+plotRGB(
+  imagen_t1_refugio,
+  r = 4, g = 3, b = 2,
+  stretch = "lin",
+  main = "Gandoca-Manzanillo, 2024-01-05"
+)
+
+plotRGB(
+  imagen_t2_refugio,
+  r = 4, g = 3, b = 2,
+  stretch = "lin",
+  main = "Gandoca-Manzanillo, 2024-06-18"
+)
+
+par(mfrow = c(1, 1))
+```
+
+### 5. Cálculo del NDVI para cada fecha
+
+```{r}
+#| label: ndvi
+#| warning: false
+#| message: false
+
+# Función para calcular NDVI a partir de las bandas NIR (B08) y roja (B04)
+calcular_ndvi <- function(nir, red) {
+  (nir - red) / (nir + red)
+}
+
+# NDVI de la imagen de enero
+ndvi_t1 <- lapp(imagen_t1_refugio[[c(8, 4)]], fun = calcular_ndvi)
+names(ndvi_t1) <- "NDVI"
+
+# NDVI de la imagen de junio
+ndvi_t2 <- lapp(imagen_t2_refugio[[c(8, 4)]], fun = calcular_ndvi)
+names(ndvi_t2) <- "NDVI"
+```
+
+Visualización de cada capa NDVI con paleta secuencial rojo–amarillo–verde:
+
+```{r}
+#| label: mapa-ndvi
+#| warning: false
+#| message: false
+#| fig-width: 10
+#| fig-height: 5
+
+paleta_ndvi <- colorRampPalette(c("#b2182b", "#ffffbf", "#1a9850"))(20)
+
+par(mfrow = c(1, 2))
+
+plot(
+  ndvi_t1,
+  col    = paleta_ndvi,
+  breaks = seq(-1, 1, length.out = 21),
+  zlim   = c(-1, 1),
+  main   = "NDVI – 2024-01-05"
+)
+
+plot(
+  ndvi_t2,
+  col    = paleta_ndvi,
+  breaks = seq(-1, 1, length.out = 21),
+  zlim   = c(-1, 1),
+  main   = "NDVI – 2024-06-18"
+)
+
+par(mfrow = c(1, 1))
+```
+
+### 6. Diferencia temporal y mapa de cambio
+
+La resta `ndvi_t2 − ndvi_t1` cuantifica el cambio en NDVI por píxel entre las dos fechas. Valores positivos (verde en el mapa) indican aumento de vigor vegetal; valores negativos (rojo) indican pérdida.
+
+```{r}
+#| label: diferencia-ndvi
+#| warning: false
+#| message: false
+
+# Resta píxel a píxel (operación local del álgebra de mapas)
+diferencia_ndvi <- ndvi_t2 - ndvi_t1
+names(diferencia_ndvi) <- "Δ NDVI"
+
+# Paleta divergente alrededor de 0
+paleta_diff <- colorRampPalette(c("#b2182b", "#f4a582", "#f7f7f7", "#92c5de", "#2166ac"))(20)
+
+# Despliegue del cambio
+plot(
+  diferencia_ndvi,
+  col    = paleta_diff,
+  breaks = seq(-1, 1, length.out = 21),
+  zlim   = c(-1, 1),
+  main   = "Cambio de NDVI: 2024-06-18 − 2024-01-05"
+)
+```
+
+Mapa interactivo del cambio con el contorno del refugio:
+
+```{r}
+#| label: mapa-interactivo-cambio
+#| warning: false
+#| message: false
+
+# Para Leaflet, las capas deben estar en WGS84 (EPSG:4326)
+diferencia_ndvi_wgs <- project(diferencia_ndvi, "EPSG:4326")
+refugio_wgs         <- st_transform(refugio_union, 4326)
+
+pal_diff <- colorNumeric(
+  palette  = paleta_diff,
+  domain   = c(-1, 1),
+  na.color = "transparent"
+)
+
+leaflet(options = leafletOptions(minZoom = 10)) |>
+  addProviderTiles("OpenStreetMap",     group = "OpenStreetMap") |>
+  addProviderTiles("Esri.WorldImagery", group = "Esri World Imagery") |>
+
+  # Cambio de NDVI
+  addRasterImage(
+    diferencia_ndvi_wgs,
+    colors  = pal_diff,
+    opacity = 0.85,
+    group   = "Cambio NDVI"
+  ) |>
+
+  # Contorno del refugio
+  addPolygons(
+    data        = refugio_wgs,
+    color       = "black",
+    weight      = 2,
+    fill        = FALSE,
+    group       = "Refugio Gandoca-Manzanillo"
+  ) |>
+
+  addLegend(
+    pal       = pal_diff,
+    values    = c(-1, 1),
+    title     = "Δ NDVI",
+    position  = "bottomright",
+    opacity   = 1
+  ) |>
+
+  addScaleBar(position = "bottomleft", options = scaleBarOptions(imperial = FALSE)) |>
+
+  addLayersControl(
+    baseGroups    = c("OpenStreetMap", "Esri World Imagery"),
+    overlayGroups = c("Cambio NDVI", "Refugio Gandoca-Manzanillo"),
+    options       = layersControlOptions(collapsed = FALSE)
+  )
+```
+
+### 7. Resumen estadístico del NDVI
+
+```{r}
+#| label: tabla-stats
+#| warning: false
+#| message: false
+
+# Vectores de valores NDVI sin NA
+valores_t1 <- values(ndvi_t1)[, 1]
+valores_t2 <- values(ndvi_t2)[, 1]
+
+resumen <- tibble(
+  Fecha = c("2024-01-05", "2024-06-18"),
+  `Media`              = c(mean(valores_t1, na.rm = TRUE),  mean(valores_t2, na.rm = TRUE)),
+  `Mínimo`             = c(min(valores_t1,  na.rm = TRUE),  min(valores_t2,  na.rm = TRUE)),
+  `Máximo`             = c(max(valores_t1,  na.rm = TRUE),  max(valores_t2,  na.rm = TRUE)),
+  `% píxeles NDVI ≥ 0.5` = c(
+    100 * mean(valores_t1 >= 0.5, na.rm = TRUE),
+    100 * mean(valores_t2 >= 0.5, na.rm = TRUE)
+  )
+)
+
+resumen |>
+  datatable(
+    options = list(
+      dom = "t",
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound(c("Media", "Mínimo", "Máximo"), digits = 3) |>
+  formatRound("% píxeles NDVI ≥ 0.5", digits = 1)
+```
+
+## Referencias
+
+European Space Agency (ESA). (s. f.). *Sentinel-2 Mission Overview*. <https://sentinels.copernicus.eu/web/sentinel/missions/sentinel-2>
+
+Lovelace, R., Nowosad, J., & Münchow, J. (2025). *Geocomputation with R* (2.ª ed., sección 5.5 *Raster-vector interactions*). CRC Press. <https://r.geocompx.org/geometry-operations.html#raster-vector>
+
+Sistema Nacional de Áreas de Conservación (SINAC). (s. f.). *Refugio Nacional de Vida Silvestre Gandoca-Manzanillo*. <https://www.sinac.go.cr/ES/ac/aclac/rnvsgm/Paginas/default.aspx>
