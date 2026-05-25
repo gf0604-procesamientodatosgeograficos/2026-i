@@ -6,7 +6,7 @@ En este capítulo se presentan las operaciones espaciales —las que involucran 
 
 Las operaciones espaciales, tales como las basadas en relaciones topológicas (ej. intersección, traslape, contención, cobertura), en el caso de los datos vectoriales, y el álgebra de mapas, en el caso de los datos raster, constituyen un componente esencial del procesamiento de datos geoespaciales. Varias de las operaciones con datos de atributos estudiadas en el capítulo anterior tienen contrapartes espaciales.
 
-Las operaciones espaciales para datos vectoriales incluyen creación de subconjuntos espaciales, unión de datos espaciales, agregación de datos espaciales y relaciones de distancia, entre otras. Por su parte, las operaciones espaciales para datos raster incluyen creación de subconjuntos espaciales y álgebra de mapas, entre otras.
+Las operaciones espaciales para datos vectoriales incluyen creación de subconjuntos espaciales, unión de datos espaciales, agregación de datos espaciales y relaciones de distancia, entre otras. Por su parte, las operaciones espaciales para datos raster incluyen la extracción de valores raster en localizaciones vectoriales y el álgebra de mapas, entre otras.
 
 ## Trabajo previo
 
@@ -419,7 +419,7 @@ A partir del objeto `felidos_union_cantones` pueden encadenarse las funciones de
 
 Las operaciones espaciales para datos raster incluyen:
 
-- Creación de subconjuntos espaciales (_spatial subsetting_).
+- Extracción de valores raster en localizaciones vectoriales.
 - Álgebra de mapas (_map algebra_).
 
 ### Carga de los datos
@@ -440,12 +440,16 @@ temperatura <- rast(
 plot(temperatura)
 ```
 
-### Creación de subconjuntos espaciales
+### Extracción de valores raster
 
-La función [extract()](https://rdrr.io/cran/terra/man/extract.html) extrae valores de un objeto raster.
+La extracción de valores raster es el proceso de identificar y retornar los valores de una capa raster en localizaciones específicas, determinadas por coordenadas o por objetos vectoriales (puntos, líneas o polígonos). En el paquete terra se implementa con la función [extract()](https://rdrr.io/cran/terra/man/extract.html). A diferencia de las operaciones que se cubren en el @sec-operaciones-geometrias, esta operación **no modifica las geometrías**: transfiere valores desde el raster hacia las localizaciones de interés, de forma análoga a una unión espacial entre dos capas vectoriales.
+
+#### Extracción en coordenadas puntuales
+
+El siguiente bloque obtiene la temperatura media anual en dos puntos: el Cerro Chirripó y la Catedral Metropolitana de San José.
 
 ```{r}
-#| label: ejemplo-extract
+#| label: ejemplo-extract-coordenadas
 #| warning: false
 #| message: false
 
@@ -462,26 +466,67 @@ extract(
 )
 ```
 
-La función [crop()](https://rdrr.io/cran/terra/man/crop.html) recorta un objeto `SpatRaster` de acuerdo con el contorno de otro objeto espacial, raster o vectorial.
+#### Ejemplo: rango de temperatura del puma
 
-El siguiente bloque de código recorta la capa de temperatura media anual de Costa Rica de acuerdo con el objeto vectorial del cantón Sarapiquí.
+El siguiente bloque obtiene el rango de temperatura media anual del [puma (*Puma concolor*)](https://es.wikipedia.org/wiki/Puma_concolor) en Costa Rica, a partir de sus registros de presencia.
 
 ```{r}
-#| label: ejemplo-crop-mask
+#| label: rango-temperatura-puma
 #| warning: false
 #| message: false
 
-# Recorte de la capa de temperatura
-temperatura_sarapiqui <-
-  temperatura |>
-  crop(sarapiqui) |>
-  mask(sarapiqui)
+# Filtrado de registros de pumas
+pumas <-
+  felidos |>
+  filter(species == "Puma concolor")
 
-# Despliegue de la capa recortada
-plot(temperatura_sarapiqui)
+# Columna con la temperatura de cada registro de puma
+pumas$temperatura <- terra::extract(temperatura, pumas)
+
+# Temperatura promedio del hábitat del puma
+temperatura_puma_promedio <- mean(pumas$temperatura$temperatura, na.rm = TRUE)
+
+# Temperatura mínima del hábitat del puma
+temperatura_puma_minima <- min(pumas$temperatura$temperatura, na.rm = TRUE)
+
+# Temperatura máxima del hábitat del puma
+temperatura_puma_maxima <- max(pumas$temperatura$temperatura, na.rm = TRUE)
 ```
 
-La función [mask()](https://rdrr.io/cran/terra/man/mask.html) "enmascara" (asigna `NA`) las celdas que el polígono no cubre. Es decir, respeta exactamente la forma del polígono y “borra” todo lo demás.
+El siguiente mapa muestra el rango de temperatura del puma en Costa Rica.
+
+```{r}
+#| label: mapa-rango-temperatura-puma
+#| warning: false
+#| message: false
+
+# Crear una máscara con TRUE en celdas dentro del rango
+rango_temperatura_puma <- temperatura >= temperatura_puma_minima & temperatura <= temperatura_puma_maxima
+
+# Aplicar la máscara al raster de temperatura
+mapa_rango_temperatura_puma <- mask(temperatura, rango_temperatura_puma, maskvalue = 0)
+
+# Crear paleta
+paleta_rojos <- colorRampPalette(c("blue", "yellow", "red"))
+
+# Visualizar solo las celdas dentro del rango
+plot(
+  mapa_rango_temperatura_puma,
+  col = paleta_rojos(100),
+  xlim = c(-86.0, -82.3),
+  ylim = c(8.0, 11.3),
+  main = "Rango de temperatura del puma"
+)
+
+# Registros de presencia de pumas
+plot(
+  st_geometry(pumas),
+  add = TRUE,
+  pch = 20,
+  col = "black",
+  cex = 0.7
+)
+```
 
 ### Álgebra de mapas
 
@@ -548,6 +593,8 @@ Otras operaciones de álgebra de mapas frecuentes son las **focales** (estadíst
     - [Archivo CSV de registros de presencia de vipéridos de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/datos/gbif/viperidos.csv)
 
 2. Tome la capa de [precipitación anual de WorldClim para Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/precipitacion.tif) y reclasifíquela con `terra::classify()` en tres regímenes pluviométricos: **seco** (< 2000 mm), **subhúmedo** (2000–4000 mm) y **muy húmedo** (≥ 4000 mm). Despliegue el resultado como mapa categórico.
+
+3. Obtenga el rango de precipitación anual para el ocelote (*Leopardus pardalis*) en Costa Rica y genere el mapa correspondiente. Use los datos de [precipitación anual de WorldClim](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/precipitacion.tif).
 
 ## Recursos de interés
 

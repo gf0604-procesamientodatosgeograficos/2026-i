@@ -1,10 +1,10 @@
 # Operaciones con geometrías {#sec-operaciones-geometrias}
 
-En este capítulo se presentan las operaciones con geometrías de los datos geoespaciales. En el caso de los datos vectoriales, incluyen simplificación, creación de centroides, áreas de amortiguamiento (*buffers*), recortes (*clipping*) con `st_intersection()` y uniones de geometrías con `st_union()`; en el caso de los datos raster, se cubren la extracción de valores en localizaciones puntuales y el recorte por polígonos. Para ver el flujo completo de análisis con geometrías vectoriales y raster en sendos casos de estudio, véanse los apéndices @sec-ejemplo-densidad-red-vial y @sec-ejemplo-ndvi-gandoca.
+En este capítulo se presentan las operaciones con geometrías de los datos geoespaciales. En el caso de los datos vectoriales, incluyen simplificación, creación de centroides, áreas de amortiguamiento (*buffers*), recortes (*clipping*) con `st_intersection()` y uniones de geometrías con `st_union()`; en el caso de los datos raster, se cubre el recorte (`crop` y `mask`) por polígonos vectoriales. Para ver el flujo completo de análisis con geometrías vectoriales y raster en sendos casos de estudio, véanse los apéndices @sec-ejemplo-densidad-red-vial y @sec-ejemplo-ndvi-gandoca.
 
 ## Resumen
 
-Las operaciones con geometrías para datos vectoriales incluyen simplificación, creación de centroides, creación de áreas de amortiguamiento (*buffers*), recortes (*clipping*) y uniones de geometrías, entre otras. Por su parte, las operaciones con geometrías para datos raster incluyen intersecciones geométricas, agregación y desagregación, entre otras.
+Las operaciones con geometrías para datos vectoriales incluyen simplificación, creación de centroides, creación de áreas de amortiguamiento (*buffers*), recortes (*clipping*) y uniones de geometrías, entre otras. Por su parte, las operaciones con geometrías para datos raster incluyen el recorte (`crop` y `mask`) por polígonos vectoriales, entre otras.
 
 ## Trabajo previo
 
@@ -58,7 +58,9 @@ Las operaciones con geometrías en datos vectoriales incluyen:
 
 - Simplificación.
 - Centroides.
-- Áreas de amortiguamiento (_buffers_).
+- Áreas de amortiguamiento (*buffers*).
+- Recortes (*clipping*) con `st_intersection()`.
+- Uniones de geometrías con `st_union()`.
 
 ### Carga de los datos
 
@@ -603,11 +605,15 @@ plot(
 
 ## Datos raster
 
+Las operaciones con geometrías en datos raster incluyen:
+
+- Recorte por polígonos vectoriales con `crop()` y `mask()`.
+
 ### Carga de los datos
 
 #### Temperatura media anual
 
-Para ejemplificar las operaciones de extracción de valores raster en localizaciones determinadas por geometrías vectoriales, se utiliza la capa de temperatura media anual de [WorldClim](https://www.worldclim.org/) para Costa Rica.
+Para ejemplificar las operaciones de recorte raster con polígonos vectoriales, se utiliza la capa de temperatura media anual de [WorldClim](https://www.worldclim.org/) para Costa Rica.
 
 ```{r}
 #| label: carga-datos-temperatura
@@ -623,74 +629,41 @@ temperatura <- rast(
 plot(temperatura)
 ```
 
-### Extracción de valores raster
+### Recorte (`crop` y `mask`) por polígonos
 
-La extracción de valores raster es el proceso de identificar y retornar los valores asociados con una capa raster en localizaciones específicas, generalmente determinadas por objetos vectoriales, ya sean puntos, líneas o polígonos. En el paquete terra, la extracción se implementa a través de la función [extract()](https://rdrr.io/cran/terra/man/extract.html).
+El recorte de un raster con un polígono vectorial es la contraparte raster del recorte vectorial con `st_intersection()`: **modifica la geometría del raster** —su extensión geográfica y, según el caso, las celdas que la componen— para ajustarla a la forma del polígono de referencia. En el paquete terra, esta operación se realiza en dos pasos complementarios:
 
-#### Ejemplo: rango de temperatura del mono congo
+- [`crop()`](https://rdrr.io/cran/terra/man/crop.html): recorta el raster al rectángulo envolvente (*bounding box*) del objeto vectorial. La extensión cambia, pero las celdas siguen alineadas con la cuadrícula original.
+- [`mask()`](https://rdrr.io/cran/terra/man/mask.html): asigna `NA` a las celdas que el polígono no cubre, respetando exactamente su forma.
 
-El siguiente bloque de código obtiene los rangos de temperatura media anual del [mono congo (*Alouatta palliata*)](https://es.wikipedia.org/wiki/Alouatta_palliata):
-
-```{r}
-#| label: rango-temperatura-congo
-
-# Filtrado de registros de congos
-congos <-
-  mamiferos |>
-  filter(species == "Alouatta palliata")
-
-# Columna con la temperatura de cada registro de congos con base en la capa raster de altitud
-congos$temperatura <- terra::extract(temperatura, congos)
-
-# Temperatura promedio del hábitat del congo
-temperatura_congo_promedio <- mean(congos$temperatura$temperatura, na.rm = TRUE)
-
-# Temperatura mínima del hábitat del congo
-temperatura_congo_minima <- min(congos$temperatura$temperatura, na.rm = TRUE)
-
-# Temperatura máxima del hábitat del congo
-temperatura_congo_maxima <- max(congos$temperatura$temperatura, na.rm = TRUE)
-```
-
-El siguiente mapa muestra el rango de temperatura del mono congo:
+El siguiente bloque de código recorta la capa de temperatura media anual de Costa Rica de acuerdo con el polígono de la provincia de Limón.
 
 ```{r}
-#| label: mapa-rango-temperatura-congo
+#| label: ejemplo-crop-mask
 #| warning: false
 #| message: false
 
-# Crear una máscara con TRUE en celdas dentro del rango
-rango_temperatura_congo <- temperatura >= temperatura_congo_minima & temperatura <= temperatura_congo_maxima
+# Polígono de la provincia de Limón (reproyectado a WGS84 para coincidir con la capa raster)
+limon <-
+  provincias |>
+  filter(PROVINCIA == "Limón") |>
+  st_transform(4326)
 
-# Aplicar la máscara al raster de temperatura
-mapa_rango_temperatura_congo <- mask(temperatura, rango_temperatura_congo, maskvalue = 0)
+# Recorte de la capa de temperatura
+temperatura_limon <-
+  temperatura |>
+  crop(limon) |>
+  mask(limon)
 
-# Crear paleta de rojos
-paleta_rojos <- colorRampPalette(c("blue", "yellow", "red"))
-
-# Visualizar solo las celdas dentro del rango
-plot(
-  mapa_rango_temperatura_congo,
-  col = paleta_rojos(100),
-  xlim = c(-86.0, -82.3),
-  ylim = c(8.0, 11.3),
-  main = "Rango de temperatura del mono congo"
-)
-
-# Registros de presencia de congos
-plot(congos,
-  add = TRUE,
-  pch = 20,
-  col = "black",
-  cex = 0.7
-)
+# Despliegue de la capa recortada
+plot(temperatura_limon)
 ```
 
 ## Ejercicios
 
-1. Obtenga el rango de precipitación anual para el mono congo y genere el mapa correspondiente. Use los datos de precipitación en <https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/precipitacion.tif>.
+1. Recorte la capa de [precipitación anual de WorldClim para Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/precipitacion.tif) usando el polígono de la provincia de Puntarenas. Despliegue la capa recortada con `plot()`.
 
-2. Genere los mapas de rangos de temperatura y precipitación para la [musaraña del Chirripó (*Cryptotis gracilis*)](https://es.wikipedia.org/wiki/Cryptotis_gracilis).
+2. Construya un *buffer* de 10 km alrededor de la ruta 32 y úselo para recortar (`crop` y `mask`) la capa de [precipitación anual de WorldClim](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/precipitacion.tif). Despliegue el resultado.
 
 ## Recursos de interés
 
