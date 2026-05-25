@@ -49,7 +49,9 @@ book:
         - tareas/tarea-03-g002.md
   appendices:
     - ejemplo-riqueza-felidos.qmd
+    - ejemplo-altitud-cantones.qmd
     - ejemplo-densidad-red-vial.qmd
+    - ejemplo-ndvi-gandoca.qmd
 bibliography: referencias.bib
 csl: apa-6th-edition.csl
 
