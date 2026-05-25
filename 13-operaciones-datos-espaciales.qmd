@@ -52,7 +52,7 @@ library(tmap)
 A lo largo del capítulo se utilizan tres conjuntos de datos sobre Costa Rica: los **cantones** (polígonos), los **registros de presencia de félidos silvestres** (puntos) y la **temperatura media anual** (raster). Las cargas detalladas se realizan más adelante, en la sección correspondiente a cada modelo de datos (sf para los dos primeros, terra para el último). Sus fuentes son:
 
 - **Cantones**: capa vectorial GPKG (con geometrías simplificadas) publicada por el Instituto Geográfico Nacional (IGN) a través de un [geoservicio Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_5_CO/wfs).
-- **Félidos**: registros de presencia de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) en Costa Rica, descargados del portal de la [Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/) ([consulta original](https://doi.org/10.15468/dl.qgqpe2)).
+- **Félidos**: registros de presencia de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) en Costa Rica, descargados del portal de la [Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/) ([consulta original](https://doi.org/10.15468/dl.xuza6e)).
 - **Temperatura media anual**: capa raster GeoTIFF de la temperatura media anual de [WorldClim](https://www.worldclim.org/), un conjunto de capas climáticas globales disponibles en varias resoluciones espaciales.
 
 ## Datos vectoriales
@@ -88,7 +88,7 @@ cantones <- st_read(
 
 #### Registros de presencia de félidos de Costa Rica
 
-Este archivo, con registros de presencia de especies silvestres de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) en Costa Rica, proviene de una [consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://doi.org/10.15468/dl.qgqpe2).
+Este archivo, con registros de presencia de especies silvestres de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) en Costa Rica, proviene de una [consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://doi.org/10.15468/dl.xuza6e).
 
 ```{r}
 #| label: carga-datos-felidos
@@ -215,16 +215,6 @@ sum(lengths(st_intersects(felidos, sarapiqui)) > 0)
 ```
 
 ```{r}
-#| label: ejemplo-st-touches
-#| warning: false
-#| message: false
-
-# ¿Cuántos cantones de Costa Rica son adyacentes (comparten frontera) al cantón Sarapiquí?
-# st_touches() es estricto: un polígono no se toca a sí mismo (sus interiores se solapan)
-sum(lengths(st_touches(cantones, sarapiqui)) > 0)
-```
-
-```{r}
 #| label: ejemplo-st-disjoint
 #| warning: false
 #| message: false
@@ -233,7 +223,7 @@ sum(lengths(st_touches(cantones, sarapiqui)) > 0)
 sum(lengths(st_disjoint(felidos, sarapiqui)) > 0)
 ```
 
-Estos tres predicados (`st_intersects`, `st_touches`, `st_disjoint`) son la base de la mayoría de las operaciones espaciales que se ven en el resto del capítulo, ya sea como filtro (`st_filter()`) o como argumento `join` de una unión espacial (`st_join()`).
+Estos predicados (`st_intersects`, `st_disjoint` y otros como `st_within`, `st_contains`, `st_touches`) son la base de la mayoría de las operaciones espaciales que se ven en el resto del capítulo, ya sea como filtro (`st_filter()`) o como argumento `join` de una unión espacial (`st_join()`).
 
 ### Distancia
 
