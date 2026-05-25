@@ -201,6 +201,8 @@ A las relaciones topológicas se les conoce también como *predicados espaciales
 
 La distancia entre dos objetos espaciales se calcula con la función [st_distance()](https://r-spatial.github.io/sf/reference/geos_measures.html). Cuando se aplica a dos conjuntos `x` e `y`, devuelve una matriz con la distancia desde cada elemento de `x` a cada elemento de `y`. La unidad de medida proviene del CRS: en un CRS geográfico (como WGS84) la salida está en grados o, según la implementación, en metros calculados sobre el elipsoide; en un CRS proyectado (como CR05/CRTM05, EPSG:8908) la salida está directamente en metros.
 
+Cuando los objetos son polígonos o líneas, `st_distance()` no usa un punto interno específico ni el centroide: devuelve la **distancia mínima entre cualquier par de puntos de las dos geometrías**, es decir, la distancia más corta entre sus contornos. Si los polígonos se tocan o se traslapan, el resultado es 0.
+
 El siguiente bloque calcula la distancia entre dos cantones representativos —Sarapiquí y Pérez Zeledón— a partir de sus geometrías de polígono:
 
 ```{r}
@@ -216,9 +218,25 @@ perez_zeledon <- filter(cantones, CANTÓN == "Pérez Zeledón")
 sarapiqui_cr05     <- st_transform(sarapiqui,     8908)
 perez_zeledon_cr05 <- st_transform(perez_zeledon, 8908)
 
-# Distancia entre los polígonos (en metros)
+# Distancia entre los polígonos: mínima entre sus bordes (en metros)
 st_distance(sarapiqui_cr05, perez_zeledon_cr05)
 ```
+
+Para obtener la distancia **entre centroides** —que en general es mayor que la distancia entre bordes— hay que calcular primero los centroides con `st_centroid()` y luego pasarlos a `st_distance()`:
+
+```{r}
+#| label: ejemplo-st-distance-centroides
+#| warning: false
+#| message: false
+
+# Distancia entre los centroides de los dos cantones (en metros)
+st_distance(
+  st_centroid(sarapiqui_cr05),
+  st_centroid(perez_zeledon_cr05)
+)
+```
+
+En este caso, la distancia entre bordes ronda los 68 km, mientras que la distancia entre centroides supera los 130 km: cuál es la "correcta" depende de lo que se quiera medir (proximidad de las áreas vs. separación de los centros geográficos).
 
 Cuando se quiere identificar objetos cercanos sin importar la distancia exacta, conviene utilizar el predicado [st_is_within_distance()](https://r-spatial.github.io/sf/reference/geos_binary_pred.html), que retorna `TRUE` si dos objetos están a una distancia menor o igual a un umbral. Se usa más adelante (sección de creación de subconjuntos espaciales) para identificar los registros de félidos ubicados a 10 km o menos del cantón Sarapiquí.
 
