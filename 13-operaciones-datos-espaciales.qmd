@@ -448,6 +448,61 @@ Nótese que hay registros que no están dentro del polígono de ningún cantón 
 
 A partir del objeto `felidos_union_cantones` pueden encadenarse las funciones de dplyr vistas en el @sec-operaciones-datos-atributos (`group_by()`, `summarize()`, `left_join()`) para calcular, por ejemplo, la *riqueza* de especies de félidos por unidad administrativa. En el @sec-ejemplo-riqueza-felidos se desarrolla ese flujo completo —con las áreas de conservación del SINAC como unidad territorial— y se construye el mapa de coropletas correspondiente.
 
+### Visualización con agrupamiento de marcadores (*marker clustering*)
+
+Cuando un conjunto de puntos contiene muchas observaciones cercanas o superpuestas, un mapa de puntos "plano" (como el que se generó al inicio de la sección con `tm_dots()`) puede volverse difícil de leer: los símbolos se traslapan y se pierde la noción de cuántas observaciones hay en cada lugar. Una técnica cartográfica habitual en mapas web interactivos para resolver este problema es el **agrupamiento de marcadores** (*marker clustering*): los puntos cercanos se agrupan en un único símbolo —típicamente un círculo con el número de puntos contenidos— y al hacer *zoom* el grupo se "abre" en subgrupos más pequeños o en los puntos individuales.
+
+Conviene aclarar que en este contexto la palabra "cluster" se refiere a una **agrupación visual** dependiente del nivel de *zoom*, no a un análisis estadístico de conglomerados (como k-medias o DBSCAN). El objetivo es comunicar la densidad espacial de los datos y mejorar la legibilidad, no descubrir patrones estadísticos.
+
+El paquete `tmap` (v4) implementa esta técnica a través de la función `tm_markers()` cuando el modo es interactivo (`tmap_mode("view")`); el agrupamiento está activado por defecto. Por debajo, tmap delega en el complemento [MarkerCluster](https://github.com/Leaflet/Leaflet.markercluster) de [Leaflet](https://leafletjs.com/).
+
+```{r}
+#| label: mapa-cluster-felidos
+#| warning: false
+#| message: false
+#| code-fold: true
+#| code-summary: "Código para generar el mapa con agrupamiento de marcadores"
+
+# Especificar el modo interactivo
+tmap_mode("view")
+
+# Definir el mapa con agrupamiento de marcadores
+mapa_cluster_felidos <-
+
+  # Centro y nivel inicial de zoom
+  tm_view(
+    set_view = c(lon = -84.2, lat = 9.6, zoom = 7)
+  ) +
+
+  # Capas base
+  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+
+  # Capa de cantones (polígonos), como contexto geográfico
+  tm_shape(cantones, name = "Cantones") +
+  tm_borders() +
+
+  # Capa de félidos con agrupamiento de marcadores
+  tm_shape(felidos, name = "Félidos") +
+  tm_markers(
+    popup.vars = c(
+      "Especie" = "species",
+      "Localidad" = "locality",
+      "Fecha" = "eventDate",
+      "Fuente" = "institutionCode",
+      "Registro"  = "registro"
+    ),
+    popup.format = list(html.escape = FALSE)
+  ) +
+
+  # Escala gráfica
+  tm_scalebar(position = c("left", "bottom"))
+
+# Mostrar el mapa
+mapa_cluster_felidos
+```
+
+A diferencia del mapa con `tm_dots()` del inicio del capítulo, los círculos de agrupamiento no diferencian por especie: el conteo refleja el total de registros en la vecindad sin importar la taxonomía. Esto es una limitación natural de la técnica (los grupos son visuales, no temáticos). Si se requiere distinguir agrupamientos *por categoría* —por ejemplo, un cluster por cada especie—, habría que recurrir directamente al paquete [leaflet](https://rstudio.github.io/leaflet/), que permite controlar grupos y estilos del cluster con mayor detalle. Para fines exploratorios y pedagógicos, sin embargo, el agrupamiento de marcadores de tmap suele ser suficiente.
+
 ## Datos raster
 
 Las operaciones espaciales para datos raster incluyen:
