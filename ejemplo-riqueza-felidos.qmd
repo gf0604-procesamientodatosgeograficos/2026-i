@@ -1,0 +1,210 @@
+# Ejemplo: riqueza de especies de félidos por área de conservación {#sec-ejemplo-riqueza-felidos}
+
+Este apéndice presenta un análisis espacial completo que combina registros de presencia de seis especies silvestres de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) en Costa Rica con los polígonos administrativos de las áreas de conservación del [Sistema Nacional de Áreas de Conservación (SINAC)](https://www.sinac.go.cr/), para mapear la riqueza de especies de félidos en cada una.
+
+El ejemplo se apoya en las operaciones de unión espacial vistas en el @sec-operaciones-datos-espaciales y aplica el mismo flujo de trabajo a una unidad territorial distinta (áreas de conservación en lugar de cantones).
+
+## Objetivo
+
+Identificar cuántas de las seis especies silvestres de félidos presentes en Costa Rica (Panthera onca, Puma concolor, Puma yagouaroundi, Leopardus pardalis, Leopardus wiedii y Leopardus tigrinus) han sido reportadas en cada área de conservación del SINAC. La riqueza por área permite priorizar zonas con mayor diversidad de félidos para acciones de conservación, monitoreo y manejo de fauna.
+
+## Carga de paquetes
+
+```{r}
+#| label: carga-paquetes
+#| warning: false
+#| message: false
+
+# Carga de Tidyverse (manipulación de datos)
+library(tidyverse)
+
+# Carga de DT (tablas interactivas)
+library(DT)
+
+# Carga de sf (datos vectoriales)
+library(sf)
+
+# Carga de tmap (mapas estáticos e interactivos)
+library(tmap)
+```
+
+## Conjuntos de datos
+
+- **Áreas de conservación**: capa vectorial GPKG con los polígonos de las 11 áreas de conservación administrativas, descargada del [WFS del Patrimonio Natural del Estado](http://geos1pne.sirefor.go.cr/) del SINAC. La descarga está documentada en [`datos/sinac/README.md`](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/datos/sinac/README.md).
+- **Félidos**: registros de presencia de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) en Costa Rica, descargados del portal de la [Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/) ([consulta original](https://doi.org/10.15468/dl.qgqpe2)). Es la misma capa utilizada en el @sec-operaciones-datos-espaciales.
+
+### Áreas de conservación
+
+```{r}
+#| label: carga-areas-conservacion
+#| warning: false
+#| message: false
+
+# Áreas de conservación del SINAC
+areas_conservacion <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg",
+  quiet = TRUE
+)
+```
+
+### Registros de presencia de félidos
+
+```{r}
+#| label: carga-felidos
+#| warning: false
+#| message: false
+
+# Registros de presencia de félidos silvestres de Costa Rica
+felidos <- st_read(
+  "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/gbif/felidos.csv",
+  options = c(
+    "X_POSSIBLE_NAMES=decimalLongitude",
+    "Y_POSSIBLE_NAMES=decimalLatitude"
+  ),
+  quiet = TRUE
+)
+
+# Asignar CRS WGS84
+st_crs(felidos) <- 4326
+```
+
+## Procedimiento
+
+El cálculo de la riqueza de especies de félidos por área de conservación se realiza en cuatro pasos, análogos a los del ejemplo de riqueza por cantón del @sec-operaciones-datos-espaciales:
+
+1. **Unión espacial** de los registros de félidos con los polígonos de áreas de conservación (cada registro recibe el código del área que lo contiene).
+2. **Conteo** de especies únicas por área de conservación con `n_distinct()`.
+3. **Unión no espacial** de la capa de áreas con la tabla de conteos, para asociar la riqueza a la geometría correspondiente.
+4. **Visualización** de los resultados como mapa de coropletas y tabla.
+
+### 1. Unión espacial de félidos y áreas de conservación
+
+```{r}
+#| label: union-espacial
+#| warning: false
+#| message: false
+
+# Unión espacial: a cada registro de félido se le agrega
+# el código del área de conservación que lo contiene
+felidos_union_areas <- st_join(
+  x = felidos,
+  y = dplyr::select(areas_conservacion, codigo_ac, nombre_ac, siglas_ac),
+  join = st_intersects
+)
+```
+
+### 2. Conteo de especies únicas por área de conservación
+
+```{r}
+#| label: conteo-especies
+#| warning: false
+#| message: false
+
+# Riqueza = cantidad de especies distintas por área
+riqueza_felidos_areas <-
+  felidos_union_areas |>
+  st_drop_geometry() |>
+  filter(!is.na(codigo_ac)) |>
+  group_by(codigo_ac) |>
+  summarize(riqueza_especies_felidos = n_distinct(species, na.rm = TRUE))
+```
+
+### 3. Unión no espacial de áreas con la riqueza
+
+```{r}
+#| label: union-riqueza
+#| warning: false
+#| message: false
+
+# A los polígonos de áreas se les agrega la columna de riqueza;
+# las áreas sin registros reciben 0 en lugar de NA.
+areas_union_riqueza <-
+  left_join(
+    x = areas_conservacion,
+    y = riqueza_felidos_areas,
+    by = "codigo_ac"
+  ) |>
+  replace_na(list(riqueza_especies_felidos = 0))
+```
+
+### 4. Mapa de coropletas de riqueza
+
+```{r}
+#| label: mapa-riqueza
+#| warning: false
+#| message: false
+
+# Activar el modo interactivo
+tmap_mode("view")
+
+# Mapa interactivo de riqueza de félidos por área de conservación
+mapa_riqueza_felidos_areas <-
+  tm_view(
+    set_view = c(lon = -84.2, lat = 9.6, zoom = 7)
+  ) +
+  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+
+  # Polígonos de áreas coloreados por riqueza
+  tm_shape(areas_union_riqueza, name = "Riqueza de félidos") +
+    tm_fill(
+      fill = "riqueza_especies_felidos",
+      fill.scale = tm_scale_intervals(
+        style  = "quantile",
+        values = "Greens"
+      ),
+      fill.legend = tm_legend(title = "Riqueza"),
+      id = "nombre_ac",
+      popup.vars = c(
+        "Área de conservación" = "nombre_ac",
+        "Siglas" = "siglas_ac",
+        "Riqueza de félidos" = "riqueza_especies_felidos"
+      )
+    ) +
+    tm_borders(col = "black", lwd = 0.8) +
+
+  # Puntos de félidos sobre las áreas
+  tm_shape(felidos, name = "Félidos") +
+    tm_dots(
+      fill = "species",
+      fill.scale = tm_scale(values = "brewer.set1"),
+      fill.legend = tm_legend(title = "Especie"),
+      size = 0.4,
+      id = "species",
+      popup.vars = c(
+        "Localidad" = "locality",
+        "Fecha" = "eventDate",
+        "Fuente" = "institutionCode"
+      )
+    ) +
+
+  tm_scalebar(position = c("left", "bottom"))
+
+mapa_riqueza_felidos_areas
+```
+
+### Tabla de riqueza por área de conservación
+
+```{r}
+#| label: tabla-riqueza
+#| warning: false
+#| message: false
+
+areas_union_riqueza |>
+  st_drop_geometry() |>
+  dplyr::select(nombre_ac, siglas_ac, area_ha, riqueza_especies_felidos) |>
+  arrange(desc(riqueza_especies_felidos)) |>
+  datatable(
+    colnames = c("Área de conservación", "Siglas", "Área (ha)", "Riqueza de félidos"),
+    options = list(
+      pageLength = 11,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound("area_ha", digits = 0)
+```
+
+## Referencias
+
+GBIF.org. (2025). *GBIF Occurrence Download* (Felidae, Costa Rica). <https://doi.org/10.15468/dl.qgqpe2>
+
+Sistema Nacional de Áreas de Conservación (SINAC). (s. f.). *Patrimonio Natural del Estado — Áreas de Conservación*. <http://geos1pne.sirefor.go.cr/>
