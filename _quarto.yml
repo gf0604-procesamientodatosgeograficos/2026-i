@@ -37,6 +37,7 @@ book:
       chapters:
         - 11-introduccion-manejo-datos-geoespaciales.qmd
         - 12-operaciones-datos-atributos.qmd
+        - 13-operaciones-datos-espaciales.qmd
     - part: "Tareas"
       chapters:
         - tareas/tarea-01-g001.md
