@@ -1,6 +1,6 @@
 # Operaciones con geometrías {#sec-operaciones-geometrias}
 
-En este capítulo se presentan las operaciones con geometrías de los datos geoespaciales. En el caso de los datos vectoriales, incluyen simplificación, creación de centroides y creación de áreas de amortiguamiento (*buffers*); en el caso de los datos raster, se cubren la extracción de valores en localizaciones puntuales y el recorte por polígonos.
+En este capítulo se presentan las operaciones con geometrías de los datos geoespaciales. En el caso de los datos vectoriales, incluyen simplificación, creación de centroides, áreas de amortiguamiento (*buffers*), recortes (*clipping*) con `st_intersection()` y uniones de geometrías con `st_union()`; en el caso de los datos raster, se cubren la extracción de valores en localizaciones puntuales y el recorte por polígonos. Para ver el flujo completo de análisis con geometrías vectoriales y raster en sendos casos de estudio, véanse los apéndices @sec-ejemplo-densidad-red-vial y @sec-ejemplo-ndvi-gandoca.
 
 ## Resumen
 
@@ -509,6 +509,96 @@ mapa <-
 
 # Mostrar el mapa
 mapa
+```
+
+### Recorte (clipping) con st_intersection
+
+El **recorte** (*clipping*) corta una capa de geometrías por el contorno de otra y devuelve solo las porciones que caen dentro del polígono de recorte. En `sf` se implementa con la función [st_intersection()](https://r-spatial.github.io/sf/reference/geos_binary_ops.html), que es más general que un simple recorte: cuando se intersectan dos capas con atributos, el resultado conserva los atributos de ambas.
+
+El siguiente bloque intersecta el *buffer* de 5 km de la ruta 32 (calculado en la subsección anterior) con los polígonos de los cantones, para obtener la **porción de cada cantón que queda dentro del buffer** y su área en hectáreas.
+
+```{r}
+#| label: st-intersection-buffer-cantones
+#| warning: false
+#| message: false
+
+# Cargar la capa de cantones (en WGS84)
+cantones <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg",
+  quiet = TRUE
+)
+
+# Recorte: porción de cada cantón que cae dentro del buffer de la ruta 32
+# Para que st_intersection trabaje con CRS estrictamente iguales, se reproyectan
+# ambas capas al mismo objeto CRS canónico (CR05/CRTM05, EPSG:8908) y luego
+# se calcula el área en hectáreas.
+cantones_cr05    <- st_transform(cantones,      8908)
+buffer_r32_cr05  <- st_transform(buffer_ruta_32, 8908)
+
+# Intersección de cantones con el buffer (solo se preservan las porciones dentro)
+cantones_en_buffer <- st_intersection(cantones_cr05, st_union(buffer_r32_cr05))
+
+# Cálculo del área (en hectáreas) de la porción intersectada
+cantones_en_buffer <- cantones_en_buffer |>
+  mutate(area_ha = as.numeric(st_area(cantones_en_buffer)) / 10000)
+
+# Tabla con las porciones, ordenadas por área descendente
+cantones_en_buffer |>
+  st_drop_geometry() |>
+  dplyr::select(PROVINCIA, CANTÓN, area_ha) |>
+  arrange(desc(area_ha)) |>
+  datatable(
+    colnames = c("Provincia", "Cantón", "Área dentro del buffer (ha)"),
+    options = list(
+      pageLength = 5,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound("area_ha", digits = 1)
+```
+
+### Unión de geometrías (*st_union*)
+
+La función [st_union()](https://r-spatial.github.io/sf/reference/geos_combine.html) fusiona varias geometrías en una sola, disolviendo los límites internos. Se usa, por ejemplo, para construir el contorno único de Costa Rica continental a partir de los polígonos de provincia, o como paso intermedio antes de un recorte o un buffer global.
+
+```{r}
+#| label: st-union-provincias
+#| warning: false
+#| message: false
+
+# Contorno único de Costa Rica continental (unión de las provincias)
+cr_continental <- st_union(provincias)
+
+# Despliegue
+plot(
+  cr_continental,
+  main = "Contorno único de Costa Rica continental (st_union de provincias)",
+  axes = TRUE,
+  graticule = TRUE
+)
+```
+
+Cuando se combina `st_union()` con `dplyr::group_by()` y `summarise()`, se obtiene la operación de *dissolve* tradicional de los SIG: las geometrías se fusionan dentro de cada grupo definido por uno o más atributos.
+
+```{r}
+#| label: dissolve-provincias-primera-letra
+#| warning: false
+#| message: false
+
+# Dissolve por la primera letra del nombre de la provincia (recurso ilustrativo)
+provincias_disuelto <-
+  provincias |>
+  mutate(letra_inicial = substr(PROVINCIA, 1, 1)) |>
+  group_by(letra_inicial) |>
+  summarise(geom = st_union(geom), .groups = "drop")
+
+# Despliegue
+plot(
+  provincias_disuelto[, "letra_inicial"],
+  main = "Provincias agrupadas por la inicial de su nombre",
+  axes = TRUE,
+  graticule = TRUE
+)
 ```
 
 ## Datos raster
