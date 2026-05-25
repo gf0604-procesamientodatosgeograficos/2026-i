@@ -1,0 +1,175 @@
+# Ejemplo: altitud media por cantón {#sec-ejemplo-altitud-cantones}
+
+Este apéndice presenta un análisis espacial completo de **estadísticas zonales sobre datos raster**: para cada cantón de Costa Rica se calcula la altitud media a partir de un modelo digital de elevación. El ejemplo ilustra la interacción raster-vector que se introduce en el @sec-operaciones-datos-espaciales y aplica `terra::extract()` con una función de agregación.
+
+## Objetivo
+
+Identificar la altitud media de cada cantón administrativo de Costa Rica y ordenarlos del más alto al más bajo. Esta información es útil para análisis ambientales, modelos de vulnerabilidad climática y planificación territorial. El procedimiento es generalizable a cualquier raster continuo (precipitación, temperatura, NDVI, contaminación, etc.) agregado por una unidad administrativa.
+
+## Carga de paquetes
+
+```{r}
+#| label: carga-paquetes
+#| warning: false
+#| message: false
+
+# Carga de Tidyverse (manipulación de datos)
+library(tidyverse)
+
+# Carga de DT (tablas interactivas)
+library(DT)
+
+# Carga de sf (datos vectoriales)
+library(sf)
+
+# Carga de terra (datos raster)
+library(terra)
+
+# Carga de tmap (mapas estáticos e interactivos)
+library(tmap)
+```
+
+## Conjuntos de datos
+
+- **Cantones de Costa Rica**: capa vectorial GPKG (geometrías simplificadas) publicada por el Instituto Geográfico Nacional (IGN) a través de un [geoservicio Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_5_CO/wfs). Es la misma capa utilizada en el @sec-operaciones-datos-espaciales.
+- **Altitud**: capa raster GeoTIFF (resolución 30 arc-seg, ≈ 1 km en el ecuador) de [WorldClim](https://www.worldclim.org/), en el CRS WGS84 (EPSG:4326). Cada celda contiene la altitud en metros sobre el nivel del mar.
+
+### Cantones
+
+```{r}
+#| label: carga-cantones
+#| warning: false
+#| message: false
+
+# Cantones de Costa Rica
+cantones <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg",
+  quiet = TRUE
+)
+```
+
+### Altitud
+
+```{r}
+#| label: carga-altitud
+#| warning: false
+#| message: false
+
+# Capa raster de altitud (WorldClim, EPSG:4326)
+altitud <- rast(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/altitud.tif"
+)
+
+# Despliegue rápido
+plot(altitud, main = "Altitud (m s. n. m.)")
+```
+
+## Procedimiento
+
+Los pasos son:
+
+1. **Extracción zonal**: por cada polígono de cantón, obtener la media de las celdas raster que caen dentro del polígono.
+2. **Unión** del resultado con la geometría de cantones, para tener la altitud media como una columna más del objeto `sf`.
+3. **Visualización** como coropleta interactiva.
+4. **Tabla** ordenada por altitud media descendente.
+
+### 1. Extracción zonal con terra::extract
+
+La función `terra::extract()` toma un raster y un conjunto de geometrías vectoriales, y para cada geometría calcula —si se le pasa `fun = ...`— el resumen estadístico solicitado de las celdas que la intersectan.
+
+```{r}
+#| label: extract-zonal
+#| warning: false
+#| message: false
+
+# Media de altitud por cantón
+altitud_media_por_canton <- terra::extract(
+  altitud,
+  cantones,
+  fun = mean,
+  na.rm = TRUE
+)
+
+# Inspeccionar el resultado: una fila por cantón, columnas ID + altitud
+head(altitud_media_por_canton)
+```
+
+`terra::extract()` devuelve un *data frame* con la columna `ID` (índice del polígono, en el mismo orden que `cantones`) y la columna del raster (`altitud`).
+
+### 2. Unión con la geometría de cantones
+
+Como los IDs preservan el orden, basta con agregar la columna de altitud media directamente al objeto sf.
+
+```{r}
+#| label: union-cantones-altitud
+#| warning: false
+#| message: false
+
+cantones_con_altitud <- cantones |>
+  mutate(altitud_media_m = altitud_media_por_canton$altitud)
+```
+
+### 3. Mapa de coropletas de altitud media
+
+```{r}
+#| label: mapa-altitud
+#| warning: false
+#| message: false
+
+# Activar el modo interactivo
+tmap_mode("view")
+
+mapa_altitud_cantones <-
+  tm_view(
+    set_view = c(lon = -84.2, lat = 9.6, zoom = 7)
+  ) +
+  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+
+  tm_shape(cantones_con_altitud, name = "Altitud media") +
+    tm_fill(
+      fill = "altitud_media_m",
+      fill.scale = tm_scale_intervals(
+        style  = "quantile",
+        values = "YlGnBu"
+      ),
+      fill.legend = tm_legend(title = "Altitud media (m)"),
+      id = "CANTÓN",
+      popup.vars = c(
+        "Cantón" = "CANTÓN",
+        "Provincia" = "PROVINCIA",
+        "Altitud media (m)" = "altitud_media_m"
+      )
+    ) +
+    tm_borders(col = "black", lwd = 0.8) +
+
+  tm_scalebar(position = c("left", "bottom"))
+
+mapa_altitud_cantones
+```
+
+### 4. Tabla de altitud media por cantón
+
+```{r}
+#| label: tabla-altitud
+#| warning: false
+#| message: false
+
+cantones_con_altitud |>
+  st_drop_geometry() |>
+  dplyr::select(PROVINCIA, CANTÓN, altitud_media_m) |>
+  arrange(desc(altitud_media_m)) |>
+  datatable(
+    colnames = c("Provincia", "Cantón", "Altitud media (m)"),
+    options = list(
+      pageLength = 10,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound("altitud_media_m", digits = 0)
+```
+
+## Referencias
+
+Fick, S. E., & Hijmans, R. J. (2017). *WorldClim 2: New 1-km spatial resolution climate surfaces for global land areas*. International Journal of Climatology, 37(12), 4302–4315. <https://www.worldclim.org/>
+
+Lovelace, R., Nowosad, J., & Münchow, J. (2025). *Geocomputation with R* (2.ª ed., sección 4.3.4 *Zonal operations*). CRC Press. <https://r.geocompx.org/spatial-operations.html#zonal-operations>
