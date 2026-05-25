@@ -79,6 +79,8 @@ El cálculo de la riqueza de especies de félidos por área de conservación se 
 
 ### 1. Unión espacial de félidos y áreas de conservación
 
+Los registros de GBIF vienen como puntos georreferenciados sin ninguna referencia a la división administrativa de Costa Rica. El primer paso es asociar a cada registro el polígono del área de conservación que lo contiene. Esa es justamente la operación que implementa `st_join()` con el predicado `st_intersects`: para cada punto, busca el polígono que lo intersecta y le agrega las columnas seleccionadas del conjunto de polígonos.
+
 ```{r}
 #| label: union-espacial
 #| warning: false
@@ -95,6 +97,8 @@ felidos_union_areas <- st_join(
 
 ### 2. Conteo de especies únicas por área de conservación
 
+Con cada registro etiquetado por área, calcular la riqueza es una operación de agregación: agrupar por área y contar el número de **especies distintas** —no el número de registros—. La función `n_distinct()` de dplyr cuenta valores únicos y excluye `NA` cuando se le pasa `na.rm = TRUE`. El filtro previo de `!is.na(codigo_ac)` descarta los registros que no quedaron dentro de ningún polígono (puntos fuera de cualquier área de conservación).
+
 ```{r}
 #| label: conteo-especies
 #| warning: false
@@ -110,6 +114,8 @@ riqueza_felidos_areas <-
 ```
 
 ### 3. Unión no espacial de áreas con la riqueza
+
+El resultado del paso 2 es una tabla `codigo_ac → riqueza`, sin geometrías. Para mapearla hay que reincorporarla a la capa de polígonos mediante un `left_join()` por la llave compartida (`codigo_ac`). Las áreas sin registros de félidos pasan a tener `NA`, que se sustituye por `0` con `replace_na()` para que aparezcan correctamente en el mapa coropleta como "sin especies registradas".
 
 ```{r}
 #| label: union-riqueza
@@ -182,7 +188,31 @@ mapa_riqueza_felidos_areas <-
 mapa_riqueza_felidos_areas
 ```
 
-### Tabla de riqueza por área de conservación
+### 5. Mapa estático
+
+La misma capa puede graficarse en modo estático (útil para imprimibles e informes) con `tmap_mode("plot")`:
+
+```{r}
+#| label: mapa-estatico
+#| warning: false
+#| message: false
+#| fig-width: 8
+#| fig-height: 6
+
+tmap_mode("plot")
+
+tm_shape(areas_union_riqueza) +
+  tm_fill(
+    fill = "riqueza_especies_felidos",
+    fill.scale = tm_scale_intervals(style = "quantile", values = "Greens"),
+    fill.legend = tm_legend(title = "Riqueza\nde félidos")
+  ) +
+  tm_borders(col = "black", lwd = 0.8) +
+  tm_text("siglas_ac", size = 0.7) +
+  tm_title("Riqueza de especies de félidos por área de conservación")
+```
+
+### 6. Tabla de riqueza por área de conservación
 
 ```{r}
 #| label: tabla-riqueza
