@@ -20,6 +20,8 @@ Lovelace, R., Nowosad, J., & Münchow, J. (2025). *Geocomputation with R* (2.ª 
 
 Este capítulo brinda una visión general de las operaciones espaciales para datos vectoriales implementadas en el paquete `sf`, y para datos raster implementadas en el paquete `terra`. A diferencia de las operaciones con atributos vistas en el @sec-operaciones-datos-atributos —que actúan sobre las columnas no geométricas de los conjuntos de datos—, las operaciones espaciales se apoyan en la columna de geometrías y en las relaciones topológicas entre los objetos (ej. intersección, contención, distancia) para los datos vectoriales, y en la localización geográfica de las celdas para los datos raster.
 
+Es importante distinguir las **operaciones con datos espaciales** —el tema de este capítulo— de las **operaciones con geometrías**, que se cubren en el @sec-operaciones-geometrias. Las primeras usan la geometría como criterio para seleccionar, unir o resumir datos, pero **no la modifican**: el polígono de un cantón sigue siendo el mismo polígono después de un `st_filter()` o un `st_join()`; lo que cambia son los atributos o las filas seleccionadas. Las segundas, en cambio, **producen geometrías nuevas** a partir de las existentes: una versión simplificada, un centroide, un *buffer*, la intersección de dos polígonos. Como regla práctica: si la operación responde a *"¿cuáles objetos se relacionan espacialmente con cuáles?"* pertenece a este capítulo; si responde a *"¿cómo modifico la forma del objeto?"* pertenece al siguiente.
+
 ## Carga de paquetes
 
 Todos los paquetes que se utilizan en este capítulo se instalaron en capítulos anteriores: `tidyverse` en el @sec-tidyverse, `DT` en el @sec-ggplot2-plotly, y `sf`, `terra` y `tmap` en el @sec-introduccion-geoespaciales. Por lo tanto, aquí solamente se cargan con la función `library()`; si alguno no estuviera instalado, puede instalarse con `install.packages()`, como se explica en esos capítulos.
@@ -195,7 +197,43 @@ knitr::include_graphics(rep("img/relaciones-topologicas-vectoriales.png"))
 
 Nótese que para algunas relaciones topológicas (ej. intersección, traslape), el orden no es importante, mientras que para otras sí lo es (ej. contención).
 
-A las relaciones topológicas se les conoce también como *predicados espaciales* y así se les denomina en la [documentación de sf](https://r-spatial.github.io/sf/articles/sf3.html).
+A las relaciones topológicas se les conoce también como *predicados espaciales* y así se les denomina en la [documentación de sf](https://r-spatial.github.io/sf/articles/sf3.html). Cada predicado retorna una **matriz dispersa** (de clase `sgbp`, *sparse geometry binary predicate*) que para cada elemento de `x` lista los índices de los elementos de `y` que cumplen la relación. Al envolverla con `lengths(...) > 0` se obtiene un vector lógico que indica si **al menos** un elemento de `y` la satisface.
+
+Los siguientes bloques aplican algunos predicados al cantón Sarapiquí y al conjunto de registros de félidos.
+
+```{r}
+#| label: ejemplo-st-intersects
+#| warning: false
+#| message: false
+
+# Polígono del cantón Sarapiquí
+sarapiqui <- filter(cantones, CANTÓN == "Sarapiquí")
+
+# ¿Cuántos registros de félidos intersecan el polígono de Sarapiquí?
+# (st_intersects retorna una matriz dispersa; lengths() > 0 la resume en TRUE/FALSE)
+sum(lengths(st_intersects(felidos, sarapiqui)) > 0)
+```
+
+```{r}
+#| label: ejemplo-st-touches
+#| warning: false
+#| message: false
+
+# ¿Cuántos cantones de Costa Rica son adyacentes (comparten frontera) al cantón Sarapiquí?
+# st_touches() es estricto: un polígono no se toca a sí mismo (sus interiores se solapan)
+sum(lengths(st_touches(cantones, sarapiqui)) > 0)
+```
+
+```{r}
+#| label: ejemplo-st-disjoint
+#| warning: false
+#| message: false
+
+# Predicado opuesto a st_intersects: registros de félidos completamente FUERA de Sarapiquí
+sum(lengths(st_disjoint(felidos, sarapiqui)) > 0)
+```
+
+Estos tres predicados (`st_intersects`, `st_touches`, `st_disjoint`) son la base de la mayoría de las operaciones espaciales que se ven en el resto del capítulo, ya sea como filtro (`st_filter()`) o como argumento `join` de una unión espacial (`st_join()`).
 
 ### Distancia
 
@@ -249,6 +287,11 @@ En este caso, la función [filter()](https://dplyr.tidyverse.org/reference/filte
 #### Ejemplo: registros de presencia de félidos en el cantón Sarapiquí y sus alrededores
 
 El siguiente bloque de código crea dos subconjuntos espaciales del conjunto de registros de presencia de félidos, al relacionarlo con el polígono del cantón Sarapiquí mediante los predicados espaciales [st_within()](https://r-spatial.github.io/sf/reference/geos_binary_pred.html) y [st_is_within_distance()](https://r-spatial.github.io/sf/reference/geos_binary_pred.html).
+
+Antes de leer el código, conviene tener presentes dos detalles de sintaxis:
+
+- El punto inicial de `.predicate` **no es un operador** ni accede a un componente: es simplemente parte del nombre del argumento. Por convención, algunas funciones de sf (y otros paquetes del *tidyverse*) anteponen un punto a sus argumentos para evitar colisiones con nombres de columnas del conjunto de datos del usuario (ej. si una capa tuviera una columna llamada `predicate`).
+- La expresión `function(a, b) st_is_within_distance(a, b, 10000)` define una **función anónima** —sin nombre— de dos argumentos. Se usa porque `.predicate` espera una función que reciba dos geometrías (`a` y `b`) y devuelva una relación lógica entre ellas, mientras que `st_is_within_distance()` necesita un tercer argumento (el umbral de distancia). La función anónima envuelve a `st_is_within_distance()` y le inyecta ese umbral (10 000 m), de modo que el resultado encaje con la firma esperada por `.predicate`.
 
 ```{r}
 #| label: ejemplos-creacion-subconjuntos
@@ -381,7 +424,7 @@ En sf, la unión de datos espaciales se implementa a través de la función [st_
 
 #### Ejemplo: unión de los registros de félidos con los cantones
 
-El siguiente bloque ilustra el uso de `st_join()` para agregar a cada registro de presencia de félidos el código del cantón en el que se ubica, mediante el predicado espacial `st_within()`.
+El siguiente bloque ilustra el uso de `st_join()` para agregar a cada registro de presencia de félidos el código y el nombre del cantón en el que se ubica, mediante el predicado espacial `st_within()`.
 
 ```{r}
 #| label: union-felidos-cantones
@@ -389,21 +432,21 @@ El siguiente bloque ilustra el uso de `st_join()` para agregar a cada registro d
 #| message: false
 #| code-fold: show
 
-# Unión espacial de félidos y cantones (solo la columna CÓDIGO_CANTÓN),
+# Unión espacial de félidos y cantones (columnas CÓDIGO_CANTÓN y CANTÓN),
 # mediante el predicado st_within().
-# Como resultado, CÓDIGO_CANTÓN se une al conjunto de datos de félidos.
+# Como resultado, CÓDIGO_CANTÓN y CANTÓN se unen al conjunto de datos de félidos.
 felidos_union_cantones <- st_join(
   x = felidos,
-  y = dplyr::select(cantones, CÓDIGO_CANTÓN), # selección de columna CÓDIGO_CANTÓN
+  y = dplyr::select(cantones, CÓDIGO_CANTÓN, CANTÓN),
   join = st_within
 )
 
-# Despliegue de los datos unidos de félidos y la columna CÓDIGO_CANTÓN de cantones
+# Despliegue de los datos unidos de félidos con las columnas de cantones
 felidos_union_cantones |>
   st_drop_geometry() |>
-  dplyr::select(species, locality, CÓDIGO_CANTÓN) |>
+  dplyr::select(species, locality, CÓDIGO_CANTÓN, CANTÓN) |>
   datatable(
-    colnames = c("Especie", "Localidad", "Código de cantón"),
+    colnames = c("Especie", "Localidad", "Código de cantón", "Cantón"),
     options = list(
       pageLength = 5,
       language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
@@ -411,7 +454,7 @@ felidos_union_cantones |>
   )
 ```
 
-Nótese que hay registros que no están dentro del polígono de ningún cantón y tienen un valor `NA` en `CÓDIGO_CANTÓN`. Esto puede deberse a errores de georreferenciación o a políticas de los publicadores de datos para no revelar la ubicación exacta de especies amenazadas.
+Nótese que hay registros que no están dentro del polígono de ningún cantón y tienen un valor `NA` en `CÓDIGO_CANTÓN` y `CANTÓN`. Esto puede deberse a errores de georreferenciación o a políticas de los publicadores de datos para no revelar la ubicación exacta de especies amenazadas.
 
 A partir del objeto `felidos_union_cantones` pueden encadenarse las funciones de dplyr vistas en el @sec-operaciones-datos-atributos (`group_by()`, `summarize()`, `left_join()`) para calcular, por ejemplo, la *riqueza* de especies de félidos por unidad administrativa. En el @sec-ejemplo-riqueza-felidos se desarrolla ese flujo completo —con las áreas de conservación del SINAC como unidad territorial— y se construye el mapa de coropletas correspondiente.
 
@@ -439,6 +482,8 @@ temperatura <- rast(
 # Desplegar datos
 plot(temperatura)
 ```
+
+[Descargar el archivo GeoTIFF de temperatura media anual de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/temperatura.tif)
 
 ### Extracción de valores raster
 
