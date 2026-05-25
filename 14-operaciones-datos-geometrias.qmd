@@ -463,11 +463,11 @@ Mapa interactivo:
 #| warning: false
 #| message: false
 
-# Crear columna con el enlace a los detalles del registro original
+# Crear columna con el enlace al detalle del registro en GBIF
 mamiferos_buffer_ruta_32 <- mamiferos_buffer_ruta_32 |>
   mutate(
     registro = paste0(
-      "<a href='", occurrenceID,
+      "<a href='https://www.gbif.org/occurrence/", gbifID,
       "' target='_blank'>Detalle&nbsp;del&nbsp;registro</a>"
     )
   )
