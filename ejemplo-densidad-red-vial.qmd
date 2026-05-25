@@ -1,0 +1,230 @@
+# Ejemplo: densidad de la red vial por cantón {#sec-ejemplo-densidad-red-vial}
+
+Este apéndice presenta un análisis espacial que calcula la **densidad de la red vial** —kilómetros de vía por kilómetro cuadrado— en cada uno de los cantones de Costa Rica. El ejercicio combina las operaciones con geometrías vistas en el @sec-operaciones-geometrias (intersección entre líneas y polígonos, cálculo de longitudes y áreas en un sistema de referencia proyectado) con una agregación tidyverse y la visualización como mapa de coropletas.
+
+## Objetivo
+
+Identificar los cantones con mayor y menor densidad de infraestructura vial. La densidad de la red vial es un indicador útil para análisis de accesibilidad, conectividad regional, planificación de transporte y estudios de impacto ambiental.
+
+## Carga de paquetes
+
+```{r}
+#| label: carga-paquetes
+#| warning: false
+#| message: false
+
+# Carga de Tidyverse (manipulación de datos)
+library(tidyverse)
+
+# Carga de DT (tablas interactivas)
+library(DT)
+
+# Carga de sf (datos vectoriales)
+library(sf)
+
+# Carga de tmap (mapas estáticos e interactivos)
+library(tmap)
+```
+
+## Conjuntos de datos
+
+- **Cantones de Costa Rica**: capa vectorial GPKG (geometrías simplificadas) publicada por el Instituto Geográfico Nacional (IGN) a través de un [geoservicio Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_5_CO/wfs). Es la misma capa utilizada en el @sec-operaciones-datos-espaciales.
+- **Red vial de Costa Rica**: capa vectorial GPKG con las líneas de la red vial en el sistema CR05/CRTM05 (EPSG:8908), publicada por el IGN a través de un [geoservicio WFS](https://geos.snitcr.go.cr/be/IGN_200/wfs?version=1.1.0). Es la misma capa utilizada en el @sec-operaciones-geometrias.
+
+### Cantones
+
+```{r}
+#| label: carga-cantones
+#| warning: false
+#| message: false
+
+# Cantones de Costa Rica
+cantones <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg",
+  quiet = TRUE
+)
+```
+
+### Red vial
+
+```{r}
+#| label: carga-red-vial
+#| warning: false
+#| message: false
+
+# Red vial de Costa Rica (ya viene en EPSG:8908)
+red_vial <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/red-vial-cr05.gpkg",
+  quiet = TRUE
+)
+```
+
+## Procedimiento
+
+Los cálculos de longitud y área deben realizarse en un sistema de referencia **proyectado** —con unidades en metros— para obtener resultados directamente interpretables. Por eso el análisis se hace en `EPSG:8908` (CR-SIRGAS / CRTM05), el CRS oficial de Costa Rica para datos cartográficos en metros. Al final, los resultados se transforman a WGS84 (`EPSG:4326`) únicamente para el mapa interactivo (Leaflet requiere coordenadas geográficas).
+
+Los pasos son:
+
+1. **Transformación de CRS** de la capa de cantones a `EPSG:8908`.
+2. **Intersección espacial** (`st_intersection()`) de la red vial con los cantones, para cortar cada línea vial por el límite cantonal y heredar el código del cantón en cada segmento resultante.
+3. **Cálculo de la longitud** de cada segmento con `st_length()`.
+4. **Agregación** de la longitud total de red vial por cantón.
+5. **Cálculo del área** de cada cantón con `st_area()`.
+6. **Cálculo de la densidad** = longitud total (km) / área (km²).
+7. **Visualización** como mapa de coropletas y tabla.
+
+### 1. Transformación de las capas a CR05/CRTM05
+
+Para que `st_intersection()` funcione, las dos capas deben tener exactamente el mismo objeto CRS. La capa de cantones está en WGS84 y la red vial ya viene en CR05/CRTM05, pero su metadato CRS puede diferir ligeramente del estándar EPSG:8908; por eso se aplica `st_transform(8908)` a ambas para canonicalizar el CRS.
+
+```{r}
+#| label: transformacion-crs
+#| warning: false
+#| message: false
+
+# Cantones en CRS proyectado para cálculos en metros
+cantones_cr05 <- st_transform(cantones, 8908)
+
+# Red vial reproyectada al mismo CRS canónico
+red_vial_cr05 <- st_transform(red_vial, 8908)
+```
+
+### 2. Intersección de la red vial con los cantones
+
+`st_intersection()` corta cada línea vial donde cruza el límite de un cantón y produce un nuevo objeto con los segmentos resultantes; cada segmento hereda los atributos del cantón que lo contiene.
+
+```{r}
+#| label: interseccion
+#| warning: false
+#| message: false
+
+# Intersección: cortar la red vial por los polígonos de cantones
+red_vial_por_canton <- st_intersection(red_vial_cr05, cantones_cr05)
+```
+
+### 3 y 4. Longitud por segmento y total por cantón
+
+```{r}
+#| label: longitud-por-canton
+#| warning: false
+#| message: false
+
+# Longitud en metros de cada segmento vial
+red_vial_por_canton <- red_vial_por_canton |>
+  mutate(longitud_m = as.numeric(st_length(red_vial_por_canton)))
+
+# Longitud total de red vial por cantón (en km)
+longitud_red_vial_por_canton <-
+  red_vial_por_canton |>
+  st_drop_geometry() |>
+  group_by(CÓDIGO_CANTÓN) |>
+  summarize(longitud_total_km = sum(longitud_m) / 1000)
+```
+
+### 5. Área de cada cantón
+
+```{r}
+#| label: area-cantones
+#| warning: false
+#| message: false
+
+# Área de cada cantón (km²)
+cantones_con_area <- cantones_cr05 |>
+  mutate(area_km2 = as.numeric(st_area(cantones_cr05)) / 1e6)
+```
+
+### 6. Cálculo de la densidad
+
+```{r}
+#| label: densidad
+#| warning: false
+#| message: false
+
+# Unión no espacial: a los cantones (con su área) se les agrega
+# la longitud de red vial. Los cantones sin red vial reciben 0.
+cantones_densidad <-
+  left_join(
+    x = cantones_con_area,
+    y = longitud_red_vial_por_canton,
+    by = "CÓDIGO_CANTÓN"
+  ) |>
+  replace_na(list(longitud_total_km = 0)) |>
+  mutate(densidad_km_por_km2 = longitud_total_km / area_km2)
+```
+
+### 7a. Mapa de coropletas de densidad
+
+```{r}
+#| label: mapa-densidad
+#| warning: false
+#| message: false
+
+# Transformar a WGS84 para el mapa interactivo (Leaflet)
+cantones_densidad_wgs <- st_transform(cantones_densidad, 4326)
+
+# Activar el modo interactivo
+tmap_mode("view")
+
+# Mapa de densidad de red vial por cantón
+mapa_densidad_red_vial <-
+  tm_view(
+    set_view = c(lon = -84.2, lat = 9.6, zoom = 7)
+  ) +
+  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+
+  tm_shape(cantones_densidad_wgs, name = "Densidad de red vial") +
+    tm_fill(
+      fill = "densidad_km_por_km2",
+      fill.scale = tm_scale_intervals(
+        style  = "quantile",
+        values = "Purples"
+      ),
+      fill.legend = tm_legend(title = "km/km²"),
+      id = "CANTÓN",
+      popup.vars = c(
+        "Cantón" = "CANTÓN",
+        "Provincia" = "PROVINCIA",
+        "Área (km²)" = "area_km2",
+        "Longitud (km)" = "longitud_total_km",
+        "Densidad (km/km²)" = "densidad_km_por_km2"
+      )
+    ) +
+    tm_borders(col = "black", lwd = 0.8) +
+
+  tm_scalebar(position = c("left", "bottom"))
+
+mapa_densidad_red_vial
+```
+
+### 7b. Tabla de densidad por cantón
+
+```{r}
+#| label: tabla-densidad
+#| warning: false
+#| message: false
+
+cantones_densidad |>
+  st_drop_geometry() |>
+  dplyr::select(PROVINCIA, CANTÓN, area_km2, longitud_total_km, densidad_km_por_km2) |>
+  arrange(desc(densidad_km_por_km2)) |>
+  datatable(
+    colnames = c(
+      "Provincia",
+      "Cantón",
+      "Área (km²)",
+      "Longitud de red vial (km)",
+      "Densidad (km/km²)"
+    ),
+    options = list(
+      pageLength = 10,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound(c("area_km2", "longitud_total_km", "densidad_km_por_km2"), digits = 2)
+```
+
+## Referencias
+
+Instituto Geográfico Nacional (IGN). (s. f.). *Capa de cantones de Costa Rica — geoservicio WFS IGN 5 CO*. <https://geos.snitcr.go.cr/be/IGN_5_CO/wfs>
+
+Instituto Geográfico Nacional (IGN). (s. f.). *Capa de red vial de Costa Rica — geoservicio WFS IGN 200*. <https://geos.snitcr.go.cr/be/IGN_200/wfs?version=1.1.0>
