@@ -55,3 +55,9 @@ examenes-ciclos-anteriores/
 
 # Entregas de tareas (no publicar en repo público)
 entregas-tareas/
+
+# Directorios de configuración/caché de herramientas (no son del proyecto)
+.cache/
+.claude/
+.config/
+.local/
