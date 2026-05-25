@@ -75,7 +75,7 @@ Los pasos son:
 
 ### 1. Transformación de las capas a CR05/CRTM05
 
-Para que `st_intersection()` funcione, las dos capas deben tener exactamente el mismo objeto CRS. La capa de cantones está en WGS84 y la red vial ya viene en CR05/CRTM05, pero su metadato CRS puede diferir ligeramente del estándar EPSG:8908; por eso se aplica `st_transform(8908)` a ambas para canonicalizar el CRS.
+Para que `st_intersection()` funcione, las dos capas deben tener objetos CRS **estrictamente iguales**, no solo equivalentes. Aunque la red vial ya viene en CR05/CRTM05, el WKT (la cadena de definición del CRS) que viene embebida en el archivo GPKG del IGN difiere bit-a-bit del estándar `EPSG:8908`. Si se pasa la capa tal cual, `st_intersection()` aborta con el error `st_crs(x) == st_crs(y) is not TRUE`. La solución estándar es aplicar `st_transform(8908)` a ambas capas: aunque la red vial ya estuviera "en 8908", el `transform` canonicaliza el objeto CRS al WKT oficial.
 
 ```{r}
 #| label: transformacion-crs
@@ -104,6 +104,8 @@ red_vial_por_canton <- st_intersection(red_vial_cr05, cantones_cr05)
 
 ### 3 y 4. Longitud por segmento y total por cantón
 
+Una vez recortados los segmentos, `st_length()` calcula la longitud de cada uno. Como el CRS es proyectado en metros, el resultado sale en metros (la conversión a km se hace dividiendo entre 1000). Luego, `group_by(CÓDIGO_CANTÓN) + summarize(sum(...))` produce la longitud total por cantón.
+
 ```{r}
 #| label: longitud-por-canton
 #| warning: false
@@ -123,6 +125,8 @@ longitud_red_vial_por_canton <-
 
 ### 5. Área de cada cantón
 
+El denominador de la densidad es el área del cantón, calculada con `st_area()`. De nuevo, como el CRS es proyectado en metros, el resultado sale en m² (se convierte a km² dividiendo entre 1 000 000).
+
 ```{r}
 #| label: area-cantones
 #| warning: false
@@ -134,6 +138,8 @@ cantones_con_area <- cantones_cr05 |>
 ```
 
 ### 6. Cálculo de la densidad
+
+Con la longitud total y el área en el mismo objeto sf, la densidad es una operación aritmética simple: `densidad = longitud / área`. La unión no espacial con `left_join()` reincorpora la longitud calculada al objeto de cantones (que ya tiene el área), y `replace_na()` asigna 0 a los cantones sin red vial registrada (por ejemplo, cantones insulares).
 
 ```{r}
 #| label: densidad
@@ -196,7 +202,30 @@ mapa_densidad_red_vial <-
 mapa_densidad_red_vial
 ```
 
-### 7b. Tabla de densidad por cantón
+### 7b. Mapa estático de densidad
+
+Para uso en informes imprimibles, la misma capa puede graficarse con `tmap_mode("plot")`:
+
+```{r}
+#| label: mapa-estatico-densidad
+#| warning: false
+#| message: false
+#| fig-width: 8
+#| fig-height: 6
+
+tmap_mode("plot")
+
+tm_shape(cantones_densidad_wgs) +
+  tm_fill(
+    fill = "densidad_km_por_km2",
+    fill.scale = tm_scale_intervals(style = "quantile", values = "Purples"),
+    fill.legend = tm_legend(title = "Densidad\n(km/km²)")
+  ) +
+  tm_borders(col = "black", lwd = 0.5) +
+  tm_title("Densidad de red vial por cantón")
+```
+
+### 7c. Tabla de densidad por cantón
 
 ```{r}
 #| label: tabla-densidad
