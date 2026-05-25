@@ -1,4 +1,4 @@
-# Ejemplo: densidad de la red vial por cantón {#sec-ejemplo-densidad-red-vial}
+# Ejemplo de análisis espacial: densidad de la red vial por cantón {#sec-ejemplo-densidad-red-vial}
 
 Este apéndice presenta un análisis espacial que calcula la **densidad de la red vial** —kilómetros de vía por kilómetro cuadrado— en cada uno de los cantones de Costa Rica. El ejercicio combina las operaciones con geometrías vistas en el @sec-operaciones-geometrias (intersección entre líneas y polígonos, cálculo de longitudes y áreas en un sistema de referencia proyectado) con una agregación tidyverse y la visualización como mapa de coropletas.
 

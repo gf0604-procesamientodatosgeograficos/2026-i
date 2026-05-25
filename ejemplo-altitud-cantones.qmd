@@ -1,4 +1,4 @@
-# Ejemplo: altitud media por cantón {#sec-ejemplo-altitud-cantones}
+# Ejemplo de análisis espacial: altitud media por cantón {#sec-ejemplo-altitud-cantones}
 
 Este apéndice presenta un análisis espacial completo de **estadísticas zonales sobre datos raster**: para cada cantón de Costa Rica se calcula la altitud media a partir de un modelo digital de elevación. El ejemplo ilustra la interacción raster-vector que se introduce en el @sec-operaciones-datos-espaciales y aplica `terra::extract()` con una función de agregación.
 

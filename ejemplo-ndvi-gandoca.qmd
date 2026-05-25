@@ -1,4 +1,4 @@
-# Ejemplo: cambio de NDVI en el refugio Gandoca-Manzanillo {#sec-ejemplo-ndvi-gandoca}
+# Ejemplo de análisis espacial: cambio de NDVI en el refugio Gandoca-Manzanillo {#sec-ejemplo-ndvi-gandoca}
 
 Este apéndice presenta un análisis raster-vector completo sobre dos imágenes Sentinel-2 del [Refugio Nacional de Vida Silvestre Gandoca-Manzanillo](https://www.sinac.go.cr/ES/ac/aclac/rnvsgm/Paginas/default.aspx), captadas con cinco meses de diferencia (5 de enero y 18 de junio de 2024). El ejemplo recorta cada imagen al contorno del refugio, calcula el [NDVI](https://es.wikipedia.org/wiki/%C3%8Dndice_de_vegetaci%C3%B3n_de_diferencia_normalizada) para ambas fechas y construye un mapa de cambio temporal.
 

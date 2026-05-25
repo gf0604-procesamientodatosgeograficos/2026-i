@@ -1,4 +1,4 @@
-# Ejemplo: riqueza de especies de félidos por área de conservación {#sec-ejemplo-riqueza-felidos}
+# Ejemplo de análisis espacial: riqueza de especies de félidos por área de conservación {#sec-ejemplo-riqueza-felidos}
 
 Este apéndice presenta un análisis espacial completo que combina registros de presencia de seis especies silvestres de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) en Costa Rica con los polígonos administrativos de las áreas de conservación del [Sistema Nacional de Áreas de Conservación (SINAC)](https://www.sinac.go.cr/), para mapear la riqueza de especies de félidos en cada una.
 
