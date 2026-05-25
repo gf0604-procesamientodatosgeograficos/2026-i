@@ -115,6 +115,8 @@ st_crs(felidos) <- 4326
 #| label: mapa-cantones-felidos
 #| warning: false
 #| message: false
+#| code-fold: true
+#| code-summary: "Código para generar el mapa de cantones y registros de presencia de félidos"
 
 # Crear columna con el enlace a los detalles del registro original
 felidos <- felidos |>
