@@ -24,7 +24,7 @@ Es importante distinguir las **operaciones con datos espaciales** —el tema de 
 
 ## Carga de paquetes
 
-Todos los paquetes que se utilizan en este capítulo se instalaron en capítulos anteriores: `tidyverse` en el @sec-tidyverse, `DT` en el @sec-ggplot2-plotly, y `sf`, `terra` y `tmap` en el @sec-introduccion-geoespaciales. Por lo tanto, aquí solamente se cargan con la función `library()`; si alguno no estuviera instalado, puede instalarse con `install.packages()`, como se explica en esos capítulos.
+Los paquetes principales de este capítulo (`tidyverse`, `DT`, `sf`, `terra` y `tmap`) ya se instalaron en capítulos anteriores: `tidyverse` en el @sec-tidyverse, `DT` en el @sec-ggplot2-plotly, y `sf`, `terra` y `tmap` en el @sec-introduccion-geoespaciales. Adicionalmente, en este capítulo se utiliza el paquete [leaflet](https://rstudio.github.io/leaflet/) en la subsección de agrupamiento de marcadores; si no estuviera instalado, puede agregarse con `install.packages("leaflet")`. A continuación se cargan todos con `library()`.
 
 ```{r}
 #| label: carga-paquetes
@@ -45,6 +45,9 @@ library(terra)
 
 # Carga de tmap (mapas estáticos e interactivos)
 library(tmap)
+
+# Carga de leaflet (mapas interactivos con agrupamiento de marcadores)
+library(leaflet)
 ```
 
 ## Conjuntos de datos de ejemplo
@@ -454,7 +457,7 @@ Cuando un conjunto de puntos contiene muchas observaciones cercanas o superpuest
 
 Conviene aclarar que en este contexto la palabra "cluster" se refiere a una **agrupación visual** dependiente del nivel de *zoom*, no a un análisis estadístico de conglomerados (como k-medias o DBSCAN). El objetivo es comunicar la densidad espacial de los datos y mejorar la legibilidad, no descubrir patrones estadísticos.
 
-El paquete `tmap` (v4) implementa esta técnica a través de la función `tm_markers()` cuando el modo es interactivo (`tmap_mode("view")`); el agrupamiento está activado por defecto. Por debajo, tmap delega en el complemento [MarkerCluster](https://github.com/Leaflet/Leaflet.markercluster) de [Leaflet](https://leafletjs.com/).
+Aunque `tmap` v4 expone el argumento `clustering = TRUE` en `tm_markers()`, esa opción todavía no se propaga a la capa subyacente de Leaflet. Por esa razón, en esta subsección se utiliza directamente el paquete [leaflet](https://rstudio.github.io/leaflet/) —la interfaz de R para la biblioteca de JavaScript [Leaflet](https://leafletjs.com/)—, que sí permite activar el agrupamiento mediante el argumento `clusterOptions = markerClusterOptions()` de [addMarkers()](https://rstudio.github.io/leaflet/reference/map-layers.html). Por debajo, leaflet carga el complemento [MarkerCluster](https://github.com/Leaflet/Leaflet.markercluster) y se encarga del cálculo dinámico de los grupos al hacer *zoom*.
 
 ```{r}
 #| label: mapa-cluster-felidos
@@ -463,45 +466,56 @@ El paquete `tmap` (v4) implementa esta técnica a través de la función `tm_mar
 #| code-fold: true
 #| code-summary: "Código para generar el mapa con agrupamiento de marcadores"
 
-# Especificar el modo interactivo
-tmap_mode("view")
+# Construir el contenido HTML del popup para cada registro de félido
+popups_felidos <- paste0(
+  "<b>Especie:</b> ", felidos$species,         "<br/>",
+  "<b>Localidad:</b> ", felidos$locality,      "<br/>",
+  "<b>Fecha:</b> ", felidos$eventDate,         "<br/>",
+  "<b>Fuente:</b> ", felidos$institutionCode,  "<br/>",
+  felidos$registro
+)
 
-# Definir el mapa con agrupamiento de marcadores
-mapa_cluster_felidos <-
+# Mapa interactivo con agrupamiento de marcadores
+leaflet() |>
 
   # Centro y nivel inicial de zoom
-  tm_view(
-    set_view = c(lon = -84.2, lat = 9.6, zoom = 7)
-  ) +
+  setView(lng = -84.2, lat = 9.6, zoom = 7) |>
 
   # Capas base
-  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+  addProviderTiles(providers$OpenStreetMap,    group = "OpenStreetMap") |>
+  addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
 
   # Capa de cantones (polígonos), como contexto geográfico
-  tm_shape(cantones, name = "Cantones") +
-  tm_borders() +
+  addPolygons(
+    data        = cantones,
+    weight      = 1,
+    color       = "black",
+    fillOpacity = 0,
+    label       = ~CANTÓN,
+    group       = "Cantones"
+  ) |>
 
   # Capa de félidos con agrupamiento de marcadores
-  tm_shape(felidos, name = "Félidos") +
-  tm_markers(
-    popup.vars = c(
-      "Especie" = "species",
-      "Localidad" = "locality",
-      "Fecha" = "eventDate",
-      "Fuente" = "institutionCode",
-      "Registro"  = "registro"
-    ),
-    popup.format = list(html.escape = FALSE)
-  ) +
+  addMarkers(
+    data           = felidos,
+    popup          = popups_felidos,
+    label          = ~species,
+    clusterOptions = markerClusterOptions(),
+    group          = "Félidos"
+  ) |>
+
+  # Control de capas
+  addLayersControl(
+    baseGroups    = c("OpenStreetMap", "Imágenes Esri"),
+    overlayGroups = c("Cantones", "Félidos"),
+    options       = layersControlOptions(collapsed = FALSE)
+  ) |>
 
   # Escala gráfica
-  tm_scalebar(position = c("left", "bottom"))
-
-# Mostrar el mapa
-mapa_cluster_felidos
+  addScaleBar(position = "bottomleft")
 ```
 
-A diferencia del mapa con `tm_dots()` del inicio del capítulo, los círculos de agrupamiento no diferencian por especie: el conteo refleja el total de registros en la vecindad sin importar la taxonomía. Esto es una limitación natural de la técnica (los grupos son visuales, no temáticos). Si se requiere distinguir agrupamientos *por categoría* —por ejemplo, un cluster por cada especie—, habría que recurrir directamente al paquete [leaflet](https://rstudio.github.io/leaflet/), que permite controlar grupos y estilos del cluster con mayor detalle. Para fines exploratorios y pedagógicos, sin embargo, el agrupamiento de marcadores de tmap suele ser suficiente.
+A diferencia del mapa con `tm_dots()` del inicio del capítulo, los círculos de agrupamiento no diferencian por especie: el conteo refleja el total de registros en la vecindad sin importar la taxonomía. Esto es una limitación natural de la técnica (los grupos son visuales, no temáticos). Si se requiere distinguir agrupamientos *por categoría* —por ejemplo, un cluster por cada especie—, habría que crear una capa de marcadores por especie y aplicar `addMarkers(..., clusterOptions = markerClusterOptions())` a cada una.
 
 ## Datos raster
 
