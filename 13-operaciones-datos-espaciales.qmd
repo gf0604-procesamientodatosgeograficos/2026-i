@@ -329,6 +329,9 @@ tmap_mode("view")
 # Definir el mapa
 mapa_felidos_dentro_sarapiqui <-
 
+  # Centrar y encuadrar el mapa en el polígono de Sarapiquí
+  tm_view(set_bounds = as.numeric(st_bbox(sarapiqui))) +
+
   # Capas base
   tm_basemap(c("OpenStreetMap", "CartoDB.Positron", "Esri.WorldImagery")) +
 
@@ -373,6 +376,9 @@ tmap_mode("view")
 
 # Definir el mapa
 mapa_felidos_10km_sarapiqui <-
+
+  # Centrar y encuadrar el mapa en el conjunto de félidos dentro del umbral
+  tm_view(set_bounds = as.numeric(st_bbox(felidos_10km_sarapiqui))) +
 
   # Capas base
   tm_basemap(c("OpenStreetMap", "CartoDB.Positron", "Esri.WorldImagery")) +
