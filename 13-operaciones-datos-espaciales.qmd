@@ -147,7 +147,7 @@ mapa_cantones_felidos <-
   ) +
 
   # Capas base
-  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+  tm_basemap(c("OpenStreetMap", "CartoDB.Positron", "Esri.WorldImagery")) +
 
   # Capa de cantones (polígonos)
   tm_shape(cantones, name = "Cantones") +
@@ -330,7 +330,7 @@ tmap_mode("view")
 mapa_felidos_dentro_sarapiqui <-
 
   # Capas base
-  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+  tm_basemap(c("OpenStreetMap", "CartoDB.Positron", "Esri.WorldImagery")) +
 
   # Capa de Sarapiquí (polígonos)
   tm_shape(sarapiqui, name = "Sarapiquí") +
@@ -375,7 +375,7 @@ tmap_mode("view")
 mapa_felidos_10km_sarapiqui <-
 
   # Capas base
-  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+  tm_basemap(c("OpenStreetMap", "CartoDB.Positron", "Esri.WorldImagery")) +
 
   # Capa de Sarapiquí (polígonos)
   tm_shape(sarapiqui, name = "Sarapiquí") +
@@ -485,7 +485,8 @@ leaflet() |>
   setView(lng = -84.2, lat = 9.6, zoom = 7) |>
 
   # Capas base
-  addProviderTiles(providers$OpenStreetMap,    group = "OpenStreetMap") |>
+  addProviderTiles(providers$OpenStreetMap,     group = "OpenStreetMap") |>
+  addProviderTiles(providers$CartoDB.Positron,  group = "CartoDB Positron") |>
   addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
 
   # Capa de cantones (polígonos), como contexto geográfico
@@ -509,7 +510,7 @@ leaflet() |>
 
   # Control de capas
   addLayersControl(
-    baseGroups    = c("OpenStreetMap", "Imágenes Esri"),
+    baseGroups    = c("OpenStreetMap", "CartoDB Positron", "Imágenes Esri"),
     overlayGroups = c("Cantones", "Félidos"),
     options       = layersControlOptions(collapsed = FALSE)
   ) |>
@@ -542,7 +543,8 @@ leaflet() |>
   setView(lng = -84.2, lat = 9.6, zoom = 7) |>
 
   # Capas base
-  addProviderTiles(providers$OpenStreetMap,    group = "OpenStreetMap") |>
+  addProviderTiles(providers$OpenStreetMap,     group = "OpenStreetMap") |>
+  addProviderTiles(providers$CartoDB.Positron,  group = "CartoDB Positron") |>
   addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
 
   # Capa de cantones (polígonos), como contexto geográfico
@@ -566,7 +568,7 @@ leaflet() |>
 
   # Control de capas
   addLayersControl(
-    baseGroups    = c("OpenStreetMap", "Imágenes Esri"),
+    baseGroups    = c("OpenStreetMap", "CartoDB Positron", "Imágenes Esri"),
     overlayGroups = c("Cantones", "Mapa de calor"),
     options       = layersControlOptions(collapsed = FALSE)
   ) |>
