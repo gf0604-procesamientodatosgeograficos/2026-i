@@ -24,7 +24,7 @@ Es importante distinguir las **operaciones con datos espaciales** —el tema de 
 
 ## Carga de paquetes
 
-Los paquetes principales de este capítulo (`tidyverse`, `DT`, `sf`, `terra` y `tmap`) ya se instalaron en capítulos anteriores: `tidyverse` en el @sec-tidyverse, `DT` en el @sec-ggplot2-plotly, y `sf`, `terra` y `tmap` en el @sec-introduccion-geoespaciales. Adicionalmente, en este capítulo se utiliza el paquete [leaflet](https://rstudio.github.io/leaflet/) en la subsección de agrupamiento de marcadores; si no estuviera instalado, puede agregarse con `install.packages("leaflet")`. A continuación se cargan todos con `library()`.
+Los paquetes principales de este capítulo (`tidyverse`, `DT`, `sf`, `terra` y `tmap`) ya se instalaron en capítulos anteriores: `tidyverse` en el @sec-tidyverse, `DT` en el @sec-ggplot2-plotly, y `sf`, `terra` y `tmap` en el @sec-introduccion-geoespaciales. Adicionalmente, en este capítulo se utilizan los paquetes [leaflet](https://rstudio.github.io/leaflet/) y [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras) en las subsecciones de agrupamiento de marcadores y mapas de calor; si no estuvieran instalados, pueden agregarse con `install.packages(c("leaflet", "leaflet.extras"))`. A continuación se cargan todos con `library()`.
 
 ```{r}
 #| label: carga-paquetes
@@ -48,6 +48,9 @@ library(tmap)
 
 # Carga de leaflet (mapas interactivos con agrupamiento de marcadores)
 library(leaflet)
+
+# Carga de leaflet.extras (mapas de calor sobre leaflet)
+library(leaflet.extras)
 ```
 
 ## Conjuntos de datos de ejemplo
@@ -516,6 +519,63 @@ leaflet() |>
 ```
 
 A diferencia del mapa con `tm_dots()` del inicio del capítulo, los círculos de agrupamiento no diferencian por especie: el conteo refleja el total de registros en la vecindad sin importar la taxonomía. Esto es una limitación natural de la técnica (los grupos son visuales, no temáticos). Si se requiere distinguir agrupamientos *por categoría* —por ejemplo, un cluster por cada especie—, habría que crear una capa de marcadores por especie y aplicar `addMarkers(..., clusterOptions = markerClusterOptions())` a cada una.
+
+### Visualización con mapas de calor (*heatmaps*)
+
+Un **mapa de calor** (*heatmap*) es una representación cartográfica de la **densidad** de los puntos como una superficie continua de color. Mientras que el agrupamiento de marcadores muestra la densidad como conteos discretos en círculos, el mapa de calor la muestra como un gradiente: las zonas con muchos puntos cercanos se ven "calientes" (típicamente rojas o amarillas) y las zonas con pocos puntos se ven "frías" (azules o transparentes). Es una técnica común en biogeografía, epidemiología y análisis de eventos puntuales para identificar visualmente *zonas calientes* (*hotspots*) sin necesidad de leer cifras.
+
+Conviene aclarar que el mapa de calor que genera Leaflet **no es una estimación estadística de densidad** (como una *Kernel Density Estimation*): es una aproximación visual calculada en el navegador a partir de la suma de "núcleos" gaussianos centrados en cada punto, con un radio definido en pixeles. Por eso la apariencia depende del nivel de *zoom* y del radio escogido, y no debe interpretarse como una densidad cuantitativa rigurosa.
+
+Para implementar la técnica se utiliza el paquete [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras), que extiende `leaflet` con funciones como [addHeatmap()](https://bhaskarvk.github.io/leaflet.extras/reference/heatmap.html). Por debajo, leaflet.extras carga el complemento [Leaflet.heat](https://github.com/Leaflet/Leaflet.heat).
+
+```{r}
+#| label: mapa-calor-felidos
+#| warning: false
+#| message: false
+#| code-fold: true
+#| code-summary: "Código para generar el mapa de calor de registros de félidos"
+
+# Mapa de calor con la densidad de registros de félidos
+leaflet() |>
+
+  # Centro y nivel inicial de zoom
+  setView(lng = -84.2, lat = 9.6, zoom = 7) |>
+
+  # Capas base
+  addProviderTiles(providers$OpenStreetMap,    group = "OpenStreetMap") |>
+  addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
+
+  # Capa de cantones (polígonos), como contexto geográfico
+  addPolygons(
+    data        = cantones,
+    weight      = 1,
+    color       = "black",
+    fillOpacity = 0,
+    label       = ~CANTÓN,
+    group       = "Cantones"
+  ) |>
+
+  # Capa de calor con los registros de félidos
+  addHeatmap(
+    data        = felidos,
+    radius      = 15,    # radio del núcleo gaussiano, en pixeles
+    blur        = 20,    # suavizado del gradiente
+    minOpacity  = 0.3,
+    group       = "Mapa de calor"
+  ) |>
+
+  # Control de capas
+  addLayersControl(
+    baseGroups    = c("OpenStreetMap", "Imágenes Esri"),
+    overlayGroups = c("Cantones", "Mapa de calor"),
+    options       = layersControlOptions(collapsed = FALSE)
+  ) |>
+
+  # Escala gráfica
+  addScaleBar(position = "bottomleft")
+```
+
+Los parámetros `radius` y `blur` controlan cómo se ve el mapa: valores pequeños producen "puntos calientes" más discretos (útiles para distinguir agrupaciones puntuales), mientras que valores grandes producen superficies más suaves (útiles para apreciar tendencias regionales). Conviene ajustarlos según la escala del análisis y la densidad de los datos.
 
 ## Datos raster
 

@@ -39,3 +39,6 @@ RUN R -e "devtools::install_version('geodata', version = '0.6-6', repos = 'http:
 
 # Instalación del paquete rgbif de R, versión 3.8.4
 RUN R -e "devtools::install_version('rgbif', version = '3.8.4', repos = 'http://cran.us.r-project.org')"
+
+# Instalación del paquete leaflet.extras de R, versión 2.0.2
+RUN R -e "devtools::install_version('leaflet.extras', version = '2.0.2', repos = 'http://cran.us.r-project.org')"
