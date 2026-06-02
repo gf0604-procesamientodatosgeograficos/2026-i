@@ -33,6 +33,8 @@ library(tmap)
 
 ### Cantones
 
+[Descargar el archivo de cantones (`cantones-simplificados.gpkg`)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg)
+
 ```{r}
 #| label: carga-cantones
 #| warning: false
@@ -46,6 +48,8 @@ cantones <- st_read(
 ```
 
 ### Red vial
+
+[Descargar el archivo de la red vial (`red-vial-cr05.gpkg`)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/red-vial-cr05.gpkg)
 
 ```{r}
 #| label: carga-red-vial
