@@ -68,6 +68,8 @@ Las operaciones con geometrías en datos vectoriales incluyen:
 
 Es un [archivo GPKG con los polígonos de las provincias de Costa Rica en el CRS CR05/CRTM05](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/datos/ign/provincias-cr05.gpkg). Este archivo proviene de un [geoservicio de tipo Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_5_CO/wfs) publicado por el Instituto Geográfico Nacional (IGN).
 
+[Descargar el archivo de provincias (`provincias-cr05.gpkg`)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/provincias-cr05.gpkg)
+
 ```{r}
 #| label: carga-datos-provincias-cr05
 #| message: false
@@ -98,6 +100,8 @@ plot(
 
 Es un [archivo GPKG con las líneas de la red vial de Costa Rica en el CRS CR05/CRTM05](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/datos/ign/red-vial-cr05.gpkg). Este archivo proviene de un [geoservicio de tipo Web Feature Service (WFS)](https://geos.snitcr.go.cr/be/IGN_200/wfs?version=1.1.0) publicado por el Instituto Geográfico Nacional (IGN).
 
+[Descargar el archivo de la red vial (`red-vial-cr05.gpkg`)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/red-vial-cr05.gpkg)
+
 ```{r}
 #| label: carga-datos-redvial-cr05
 #| warning: false
@@ -127,6 +131,8 @@ plot(
 #### Mamíferos de Costa Rica
 
 Es un [archivo CSV con registros de presencia de la clase *Mammalia* de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/datos/gbif/mamiferos.csv). Este archivo proviene de una [consulta al portal de datos de la Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://doi.org/10.15468/dl.hykn7z).
+
+[Descargar el archivo de mamíferos (`mamiferos.csv`)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/gbif/mamiferos.csv)
 
 ```{r}
 #| label: carga-datos-mamiferos
@@ -519,6 +525,8 @@ El **recorte** (*clipping*) corta una capa de geometrías por el contorno de otr
 
 El siguiente bloque intersecta el *buffer* de 5 km de la ruta 32 (calculado en la subsección anterior) con los polígonos de los cantones, para obtener la **porción de cada cantón que queda dentro del buffer** y su área en hectáreas.
 
+[Descargar el archivo de cantones (`cantones-simplificados.gpkg`)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg)
+
 ```{r}
 #| label: st-intersection-buffer-cantones
 #| warning: false
@@ -614,6 +622,8 @@ Las operaciones con geometrías en datos raster incluyen:
 #### Temperatura media anual
 
 Para ejemplificar las operaciones de recorte raster con polígonos vectoriales, se utiliza la capa de temperatura media anual de [WorldClim](https://www.worldclim.org/) para Costa Rica.
+
+[Descargar el archivo de temperatura (`temperatura.tif`)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/temperatura.tif)
 
 ```{r}
 #| label: carga-datos-temperatura
