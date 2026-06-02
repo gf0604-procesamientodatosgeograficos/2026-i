@@ -36,6 +36,8 @@ library(tmap)
 
 ### Cantones
 
+[Descargar el archivo de cantones (`cantones-simplificados.gpkg`)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg)
+
 ```{r}
 #| label: carga-cantones
 #| warning: false
@@ -49,6 +51,8 @@ cantones <- st_read(
 ```
 
 ### Altitud
+
+[Descargar el archivo de altitud (`altitud.tif`)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/worldclim/altitud.tif)
 
 ```{r}
 #| label: carga-altitud
