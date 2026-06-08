@@ -135,7 +135,7 @@ cantones_con_presencia <-
 #| title: "Registros de presencia"
 
 list(
-  icon  = "clipboard-data",
+  icon  = "binoculars",
   color = "primary",
   value = total_registros
 )
@@ -144,10 +144,10 @@ list(
 ```{r}
 #| label: valuebox-especies
 #| content: valuebox
-#| title: "Especies de félidos"
+#| title: "Especies"
 
 list(
-  icon  = "tags",
+  icon  = "diagram-3",
   color = "success",
   value = total_especies
 )

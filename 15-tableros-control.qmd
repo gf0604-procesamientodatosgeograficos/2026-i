@@ -127,7 +127,7 @@ Una caja de valor (*value box*) es una tarjeta especial que destaca un único in
 #| content: valuebox
 #| title: "Registros de presencia"
 list(
-  icon  = "clipboard-data",
+  icon  = "binoculars",
   color = "primary",
   value = 2007
 )
@@ -281,13 +281,13 @@ Cada caja de valor es una celda con la opción `#| content: valuebox` que devuel
 ```{r}`r ''`
 #| content: valuebox
 #| title: "Registros de presencia"
-list(icon = "clipboard-data", color = "primary", value = total_registros)
+list(icon = "binoculars", color = "primary", value = total_registros)
 ```
 
 ```{r}`r ''`
 #| content: valuebox
-#| title: "Especies de félidos"
-list(icon = "tags", color = "success", value = total_especies)
+#| title: "Especies"
+list(icon = "diagram-3", color = "success", value = total_especies)
 ```
 
 ```{r}`r ''`
