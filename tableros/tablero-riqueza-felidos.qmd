@@ -24,8 +24,8 @@ library(sf)
 # Carga de tmap (mapas estáticos e interactivos)
 library(tmap)
 
-# Carga de DT (tablas interactivas)
-library(DT)
+# Carga de plotly (gráficos interactivos)
+library(plotly)
 
 # Carga de leaflet (mapas interactivos con agrupamiento de marcadores)
 library(leaflet)
@@ -151,7 +151,7 @@ list(
 ```{r}
 #| label: valuebox-especies
 #| content: valuebox
-#| title: "Especies"
+#| title: "Riqueza de especies"
 
 list(
   icon  = "diagram-3",
@@ -190,7 +190,7 @@ list(
 
 ```{r}
 #| label: mapa-cluster
-#| title: "Marcadores agrupados"
+#| title: "Registros agrupados"
 #| message: false
 #| warning: false
 
@@ -313,22 +313,35 @@ tm_view(
 ### Column {width=40%}
 
 ```{r}
-#| label: tabla-riqueza
+#| label: grafico-riqueza
 #| title: "Riqueza por área de conservación"
 #| message: false
 #| warning: false
 
-areas_union_riqueza |>
+# Gráfico de barras horizontales de riqueza por área de conservación
+grafico_riqueza <-
+  areas_union_riqueza |>
   st_drop_geometry() |>
-  dplyr::select(nombre_ac, siglas_ac, area_ha, riqueza_especies_felidos) |>
-  arrange(desc(riqueza_especies_felidos)) |>
-  datatable(
-    colnames = c("Área de conservación", "Siglas", "Área (ha)", "Riqueza de félidos"),
-    rownames = FALSE,
-    options = list(
-      pageLength = 11,
-      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+  ggplot(aes(
+    x = riqueza_especies_felidos,
+    y = reorder(siglas_ac, riqueza_especies_felidos)
+  )) +
+  geom_col(
+    fill = "#41ab5d",
+    aes(
+      # datos que se muestran al colocar el ratón sobre una barra
+      text = paste0(
+        "Área de conservación: ", nombre_ac, "\n",
+        "Riqueza de félidos: ", riqueza_especies_felidos
+      )
     )
-  ) |>
-  formatRound("area_ha", digits = 0)
+  ) +
+  ggtitle("Riqueza de especies de félidos por área de conservación") +
+  xlab("Riqueza de especies de félidos") +
+  ylab("Área de conservación") +
+  theme_minimal()
+
+# Conversión a plotly
+ggplotly(grafico_riqueza, tooltip = "text") |>
+  config(locale = "es")
 ```
