@@ -11,8 +11,11 @@ Un tablero de control presenta diversas visualizaciones de datos (tablas, gráfi
 ### Lecturas
 
 Quarto - Quarto Dashboards. (s.f.). <https://quarto.org/docs/dashboards/>
+
 Quarto - Dashboard Layout. (s.f.). <https://quarto.org/docs/dashboards/layout.html>
+
 Quarto - Dashboard Components. (s.f.). <https://quarto.org/docs/dashboards/data-display.html>
+
 Quarto - Dashboard Examples. (s.f.). <https://quarto.org/docs/gallery/#dashboards>
 
 ## Introducción
@@ -385,5 +388,7 @@ El siguiente tablero de control se relaciona con el [Atlas de Desarrollo Humano 
 - [Código fuente](https://github.com/gf0604-procesamientodatosgeograficos/2025-i-atlas-desarrollo-humano)
 
 [Quarto Dashboards | Charles Teague | Posit](https://www.youtube.com/watch?v=_VGJIPRGTy4)
+
 [Dashboard Layout](https://quarto.org/docs/dashboards/layout.html)
+
 [Ejemplos de tableros de control desarrollados con Quarto Dashboards](https://quarto.org/docs/gallery/#dashboards)

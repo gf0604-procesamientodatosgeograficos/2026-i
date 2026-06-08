@@ -1191,7 +1191,7 @@
     "href": "15-tableros-control.html#trabajo-previo",
     "title": "15  Tableros de control",
     "section": "15.2 Trabajo previo",
-    "text": "15.2 Trabajo previo\n\n15.2.1 Lecturas\nQuarto - Quarto Dashboards. (s.f.). https://quarto.org/docs/dashboards/ Quarto - Dashboard Layout. (s.f.). https://quarto.org/docs/dashboards/layout.html Quarto - Dashboard Components. (s.f.). https://quarto.org/docs/dashboards/data-display.html Quarto - Dashboard Examples. (s.f.). https://quarto.org/docs/gallery/#dashboards",
+    "text": "15.2 Trabajo previo\n\n15.2.1 Lecturas\nQuarto - Quarto Dashboards. (s.f.). https://quarto.org/docs/dashboards/\nQuarto - Dashboard Layout. (s.f.). https://quarto.org/docs/dashboards/layout.html\nQuarto - Dashboard Components. (s.f.). https://quarto.org/docs/dashboards/data-display.html\nQuarto - Dashboard Examples. (s.f.). https://quarto.org/docs/gallery/#dashboards",
     "crumbs": [
       "VII Visualización avanzada de datos",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Tableros de control</span>"
@@ -1257,7 +1257,7 @@
     "href": "15-tableros-control.html#recursos-adicionales",
     "title": "15  Tableros de control",
     "section": "15.8 Recursos adicionales",
-    "text": "15.8 Recursos adicionales\nEl siguiente tablero de control se relaciona con el Atlas de Desarrollo Humano Cantonal 2024:\n\nTablero de control publicado en GitHub Pages\nCódigo fuente\n\nQuarto Dashboards | Charles Teague | Posit Dashboard Layout Ejemplos de tableros de control desarrollados con Quarto Dashboards",
+    "text": "15.8 Recursos adicionales\nEl siguiente tablero de control se relaciona con el Atlas de Desarrollo Humano Cantonal 2024:\n\nTablero de control publicado en GitHub Pages\nCódigo fuente\n\nQuarto Dashboards | Charles Teague | Posit\nDashboard Layout\nEjemplos de tableros de control desarrollados con Quarto Dashboards",
     "crumbs": [
       "VII Visualización avanzada de datos",
       "<span class='chapter-number'>15</span>  <span class='chapter-title'>Tableros de control</span>"
