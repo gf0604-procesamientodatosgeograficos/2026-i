@@ -311,7 +311,7 @@ La columna izquierda se declara como `.tabset` para que cada mapa ocupe una pest
 ### Column {width=60% .tabset}
 
 ```{r}`r ''`
-#| title: "Agrupamiento de marcadores"
+#| title: "Marcadores agrupados"
 leaflet() |>
   setView(lng = -84.2, lat = 9.6, zoom = 7) |>
   addProviderTiles(providers$OpenStreetMap, group = "OpenStreetMap") |>

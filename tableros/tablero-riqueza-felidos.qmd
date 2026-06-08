@@ -190,7 +190,7 @@ list(
 
 ```{r}
 #| label: mapa-cluster
-#| title: "Agrupamiento de marcadores"
+#| title: "Marcadores agrupados"
 #| message: false
 #| warning: false
 
