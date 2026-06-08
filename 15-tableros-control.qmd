@@ -1,15 +1,19 @@
-# Tableros de control
+# Tableros de control {#sec-tableros-control}
+
+En este capítulo se explica qué es un tablero de control y cómo construir uno con [Quarto Dashboards](https://quarto.org/docs/dashboards/), la capacidad de Quarto que permite combinar mapas, gráficos estadísticos y tablas en una sola interfaz. El capítulo culmina con un tablero de control completo y ejecutable sobre la **riqueza de especies de félidos** de Costa Rica, que reutiliza los datos y las visualizaciones del @sec-operaciones-datos-espaciales y del @sec-ejemplo-riqueza-felidos.
 
 ## Resumen
 
-Un tablero de control presenta diversas visualizaciones de datos (tablas, gráficos, mapas, etc.) de manera conjunta, distribuidas en arreglos de filas y columnas. Pueden contar con barras de navegación, barras de herramientas, páginas y pestañas (*tabs*).
+Un tablero de control presenta diversas visualizaciones de datos (tablas, gráficos, mapas, etc.) de manera conjunta, distribuidas en arreglos de filas y columnas. Pueden contar con barras de navegación, barras de herramientas, páginas, pestañas (*tabs*) y cajas de valor (*value boxes*) que destacan indicadores clave. Con Quarto Dashboards, un tablero puede publicarse como una página estática (ej. en GitHub Pages) a partir de un documento `.qmd` con el formato `dashboard`.
 
 ## Trabajo previo
 
 ### Lecturas
 
-Quarto - Quarto Dashboards. (s.f.). <https://quarto.org/docs/dashboards/>  
+Quarto - Quarto Dashboards. (s.f.). <https://quarto.org/docs/dashboards/>
 Quarto - Dashboard Layout. (s.f.). <https://quarto.org/docs/dashboards/layout.html>
+Quarto - Dashboard Components. (s.f.). <https://quarto.org/docs/dashboards/data-display.html>
+Quarto - Dashboard Examples. (s.f.). <https://quarto.org/docs/gallery/#dashboards>
 
 ## Introducción
 
@@ -41,13 +45,35 @@ Un tablero de control desarrollado con Quarto Dashboards tiene los siguientes co
 
 Los tableros de control son arreglos de componentes que se utilizan para proporcionar navegación y presentar datos. A continuación, se describen los elementos que se utilizan para estructurar la navegación y el diseño de los tableros de control.
 
+#### El formato `format: dashboard`
+
+Un tablero de control se especifica en un documento Quarto (`.qmd`) cuyo encabezado YAML declara el formato `dashboard`. El resto del documento se organiza con encabezados de Markdown (para las filas, columnas y páginas) y celdas computacionales (para las tarjetas):
+
+```` yaml
+---
+title: "Mi tablero de control"
+author: "Autora o autor"
+format: dashboard
+---
+````
+
 #### Navegación
 
-Todos los tableros de control tienen una barra de navegación que muestra el título y, opcionalmente, un logotipo, el nombre del autor e íconos con enlaces a redes sociales y otros sitios de interés. Los tableros de control con [múltiples páginas](https://quarto.org/docs/dashboards/layout.html#pages) también contienen un enlace a cada página en la barra de navegación.
+Todos los tableros de control tienen una barra de navegación que muestra el título y, opcionalmente, un logotipo, el nombre del autor e íconos con enlaces a redes sociales y otros sitios de interés. Los tableros de control con [múltiples páginas](https://quarto.org/docs/dashboards/layout.html#pages) también contienen un enlace a cada página en la barra de navegación. Los íconos de la barra se configuran con la opción `nav-buttons` y se toman de la colección [Bootstrap Icons](https://icons.getbootstrap.com/).
 
-#### Organización
+#### Filas y columnas
 
-Dentro de una página, los componentes del tablero de control se organizan mediante conjuntos alternos de filas y columnas. Las filas y columnas, a su vez, se definen mediante encabezados de Markdown y celdas computacionales (bloques de código).
+Dentro de una página, los componentes del tablero de control se organizan mediante conjuntos alternos de filas y columnas, definidos con encabezados de Markdown. La opción `orientation` del YAML determina si los encabezados de nivel 2 (`##`) crean filas (`orientation: rows`, el valor por defecto) o columnas (`orientation: columns`). El tamaño relativo de cada fila o columna se controla con los atributos `{height=...}` y `{width=...}`. En el siguiente ejemplo, la primera fila ocupa el 30 % de la altura y la segunda el 70 %:
+
+```` md
+## Row {height=30%}
+
+### Column
+
+### Column
+
+## Row {height=70%}
+````
 
 #### Páginas
 
@@ -55,26 +81,309 @@ Para introducir múltiples páginas, se utilizan encabezados de nivel 1 sobre lo
 
 #### Pestañas
 
-Las pestañas (*tabs*) se utilizan para incluir múltiples vistas de datos o contenido de importancia secundaria sin que interfiera con la visualización principal. Las pestañas se crean añadiendo la clase `.tabset` a una fila o columna.
+Las pestañas (*tabs*) se utilizan para incluir múltiples vistas de datos o contenido de importancia secundaria sin que interfiera con la visualización principal. Las pestañas se crean añadiendo la clase `.tabset` a una fila o columna; cada tarjeta dentro de ella se convierte en una pestaña:
+
+```` md
+### Column {.tabset}
+
+```{r}`r ''`
+#| title: "Primera vista"
+# ... código de la primera pestaña ...
+```
+
+```{r}`r ''`
+#| title: "Segunda vista"
+# ... código de la segunda pestaña ...
+```
+````
+
+#### Barras laterales
+
+Una barra lateral (clase `.sidebar`) es una columna estrecha, usualmente a la izquierda, destinada a texto explicativo, leyendas o —en tableros interactivos con Shiny— a los controles de entrada del usuario. Se crea aplicando la clase `.sidebar` a un encabezado de nivel 1:
+
+```` md
+# {.sidebar}
+
+Texto, leyendas o controles de entrada.
+
+# Contenido principal
+````
+
+El uso de barras laterales con controles interactivos (listas de selección, deslizadores, etc.) requiere un [tablero con interactividad mediante Shiny](https://quarto.org/docs/dashboards/interactivity/shiny-r.html).
 
 #### Tarjetas
 
-Las tarjetas son la unidad fundamental de visualización en un tablero de control. Constituyen el contenido de las filas y las columnas.
+Las tarjetas son la unidad fundamental de visualización en un tablero de control. Constituyen el contenido de las filas y las columnas. Cada celda computacional (bloque de código) genera automáticamente una tarjeta, y la opción de bloque `#| title:` le asigna un título a esa tarjeta.
+
+#### Cajas de valor
+
+Una caja de valor (*value box*) es una tarjeta especial que destaca un único indicador numérico, acompañado de un título, un ícono y un color. Se crea con la opción de bloque `#| content: valuebox`, devolviendo una lista con los elementos `title`, `value`, `icon` y `color`:
+
+```` md
+```{r}`r ''`
+#| content: valuebox
+#| title: "Registros de presencia"
+list(
+  icon  = "clipboard-data",
+  color = "primary",
+  value = 2007
+)
+```
+````
+
+#### Cómo embeber mapas y tablas
+
+Cualquier mapa (`leaflet`, `tmap` en modo `view`), gráfico (`plotly`, `ggplot2`) o tabla (`DT`) que sea la salida de una celda computacional se convierte automáticamente en el contenido de una tarjeta. Para que los mapas `tmap` resulten interactivos dentro del tablero, conviene activar el modo de visualización con `tmap_mode("view")`.
 
 Para más información sobre la configuración de los tableros de control, se recomienda consultar [Dashboard Layout](https://quarto.org/docs/dashboards/layout.html).
 
-## Ejemplo
+## Carga de paquetes
 
-El siguiente es un tablero de control relacionado con el [Atlas de Desarrollo Humano Cantonal 2024](https://www.undp.org/es/costa-rica/publicaciones/atlas-de-desarrollo-humano-cantonal-2024).
+El tablero de control de ejemplo de este capítulo reutiliza los paquetes ya empleados en los capítulos del ecosistema espacial: `tidyverse`, `sf`, `tmap`, `DT`, `leaflet` y `leaflet.extras`. No introduce paquetes nuevos: las cajas de valor se generan con la sintaxis nativa de Quarto Dashboards (`#| content: valuebox`), sin paquetes adicionales.
+
+```{r}
+#| label: carga-paquetes
+#| message: false
+#| warning: false
+
+# Carga de Tidyverse (manipulación de datos)
+library(tidyverse)
+
+# Carga de sf (datos vectoriales)
+library(sf)
+
+# Carga de tmap (mapas estáticos e interactivos)
+library(tmap)
+
+# Carga de DT (tablas interactivas)
+library(DT)
+
+# Carga de leaflet (mapas interactivos con agrupamiento de marcadores)
+library(leaflet)
+
+# Carga de leaflet.extras (mapas de calor sobre leaflet)
+library(leaflet.extras)
+```
+
+## Conjuntos de datos
+
+El tablero de control combina tres conjuntos de datos sobre Costa Rica, los mismos que se utilizan en el @sec-operaciones-datos-espaciales y en el @sec-ejemplo-riqueza-felidos:
+
+- **Cantones**: capa vectorial GPKG (con geometrías simplificadas) publicada por el Instituto Geográfico Nacional (IGN).
+
+  [Descargar el archivo GPKG de cantones de Costa Rica (con geometrías simplificadas)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg)
+
+- **Áreas de conservación**: capa vectorial GPKG con los polígonos de las 11 áreas de conservación administrativas del [Sistema Nacional de Áreas de Conservación (SINAC)](https://www.sinac.go.cr/).
+
+  [Descargar el archivo GPKG de áreas de conservación del SINAC](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg)
+
+- **Félidos**: registros de presencia de la familia [*Felidae*](https://es.wikipedia.org/wiki/Felidae) en Costa Rica, descargados del portal de la [Infraestructura Mundial de Información en Biodiversidad (GBIF)](https://www.gbif.org/).
+
+  [Descargar el archivo CSV de registros de presencia de félidos silvestres de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/gbif/felidos.csv)
+
+## Ejemplo: tablero de control de riqueza de félidos
+
+Como ejemplo integral, se construyó un tablero de control que resume la riqueza de especies de félidos silvestres de Costa Rica. El tablero es un documento Quarto independiente (con `format: dashboard`) que se renderiza y publica como página estática en GitHub Pages:
+
+- [Tablero de control de riqueza de félidos (publicado)](tableros/tablero-riqueza-felidos.html)
+- [Código fuente del tablero](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/tableros/tablero-riqueza-felidos.qmd)
+
+### Estructura del tablero
+
+El tablero tiene una sola página con orientación por filas (`orientation: rows`) y se organiza así:
+
+- **Fila superior** (20 % de la altura): tres **cajas de valor** con los indicadores principales —el total de registros de presencia, el número de especies y la cantidad de cantones con presencia de félidos—.
+- **Fila inferior** (80 % de la altura): dos columnas.
+  - La columna izquierda (60 % del ancho) contiene tres **pestañas** con mapas: el mapa con agrupamiento de marcadores, el mapa de calor y el mapa de coropletas de riqueza por área de conservación.
+  - La columna derecha (40 % del ancho) contiene una **tabla** interactiva con la riqueza de félidos por área de conservación.
+
+En las secciones siguientes se muestra el código fuente del tablero. Para verlo en funcionamiento, consúltese el [tablero publicado](tableros/tablero-riqueza-felidos.html).
+
+### Encabezado YAML
+
+El encabezado declara el formato `dashboard`, la orientación por filas y un botón de navegación hacia el repositorio del curso:
+
+```` yaml
+---
+title: "Riqueza de félidos de Costa Rica"
+author: "Manuel Vargas"
+format:
+  dashboard:
+    orientation: rows
+    nav-buttons:
+      - icon: github
+        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i
+lang: es
+---
+````
+
+### Carga de paquetes y datos
+
+Los primeros bloques de código cargan los paquetes, leen los tres conjuntos de datos desde GitHub y preparan los objetos que alimentan las visualizaciones (la unión espacial de félidos con áreas de conservación y con cantones, y el conteo de riqueza por área):
+
+```` md
+```{r}`r ''`
+#| label: carga-paquetes
+#| message: false
+#| warning: false
+
+library(tidyverse)
+library(sf)
+library(tmap)
+library(DT)
+library(leaflet)
+library(leaflet.extras)
+
+# Modo interactivo para los mapas tmap
+tmap_mode("view")
+```
+
+```{r}`r ''`
+#| label: carga-datos
+#| message: false
+#| warning: false
+
+# Cantones de Costa Rica (polígonos)
+cantones <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg",
+  quiet = TRUE
+)
+
+# Áreas de conservación del SINAC (polígonos)
+areas_conservacion <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg",
+  quiet = TRUE
+)
+
+# Registros de presencia de félidos silvestres (puntos)
+felidos <- st_read(
+  "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/gbif/felidos.csv",
+  options = c(
+    "X_POSSIBLE_NAMES=decimalLongitude",
+    "Y_POSSIBLE_NAMES=decimalLatitude"
+  ),
+  quiet = TRUE
+)
+st_crs(felidos) <- 4326
+```
+````
+
+### Cajas de valor
+
+Cada caja de valor es una celda con la opción `#| content: valuebox` que devuelve una lista con el ícono, el color y el valor del indicador. Las tres se agrupan en una fila:
+
+```` md
+## Row {height=20%}
+
+```{r}`r ''`
+#| content: valuebox
+#| title: "Registros de presencia"
+list(icon = "clipboard-data", color = "primary", value = total_registros)
+```
+
+```{r}`r ''`
+#| content: valuebox
+#| title: "Especies de félidos"
+list(icon = "tags", color = "success", value = total_especies)
+```
+
+```{r}`r ''`
+#| content: valuebox
+#| title: "Cantones con presencia"
+list(icon = "geo-alt", color = "info", value = cantones_con_presencia)
+```
+````
+
+### Mapas
+
+La columna izquierda se declara como `.tabset` para que cada mapa ocupe una pestaña. El mapa con agrupamiento de marcadores y el mapa de calor se construyen con `leaflet` y `leaflet.extras` (técnicas vistas en el @sec-operaciones-datos-espaciales), mientras que el mapa de coropletas de riqueza usa `tmap` (como en el @sec-ejemplo-riqueza-felidos):
+
+```` md
+### Column {width=60% .tabset}
+
+```{r}`r ''`
+#| title: "Agrupamiento de marcadores"
+leaflet() |>
+  setView(lng = -84.2, lat = 9.6, zoom = 7) |>
+  addProviderTiles(providers$OpenStreetMap, group = "OpenStreetMap") |>
+  addProviderTiles(providers$CartoDB.Positron, group = "CartoDB Positron") |>
+  addPolygons(data = cantones, weight = 1, color = "black", fillOpacity = 0,
+              label = ~CANTÓN, group = "Cantones") |>
+  addMarkers(data = felidos, label = ~species,
+             clusterOptions = markerClusterOptions(), group = "Félidos") |>
+  addLayersControl(baseGroups = c("OpenStreetMap", "CartoDB Positron"),
+                   overlayGroups = c("Cantones", "Félidos")) |>
+  addScaleBar(position = "bottomleft")
+```
+
+```{r}`r ''`
+#| title: "Mapa de calor"
+leaflet() |>
+  setView(lng = -84.2, lat = 9.6, zoom = 7) |>
+  addProviderTiles(providers$OpenStreetMap, group = "OpenStreetMap") |>
+  addPolygons(data = cantones, weight = 1, color = "black", fillOpacity = 0,
+              label = ~CANTÓN, group = "Cantones") |>
+  addHeatmap(data = felidos, radius = 15, blur = 20, minOpacity = 0.3,
+             group = "Mapa de calor") |>
+  addScaleBar(position = "bottomleft")
+```
+
+```{r}`r ''`
+#| title: "Riqueza por área de conservación"
+tm_view(set_view = c(lon = -84.2, lat = 9.6, zoom = 7)) +
+  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+  tm_shape(areas_union_riqueza, name = "Riqueza de félidos") +
+    tm_fill(fill = "riqueza_especies_felidos",
+            fill.scale = tm_scale_intervals(style = "quantile", values = "Greens"),
+            fill.legend = tm_legend(title = "Riqueza")) +
+    tm_borders(col = "black", lwd = 0.8)
+```
+````
+
+### Tabla
+
+La columna derecha contiene una tabla interactiva (`DT`) con la riqueza de félidos por área de conservación, ordenada de mayor a menor:
+
+```` md
+### Column {width=40%}
+
+```{r}`r ''`
+#| title: "Riqueza por área de conservación"
+areas_union_riqueza |>
+  st_drop_geometry() |>
+  dplyr::select(nombre_ac, siglas_ac, area_ha, riqueza_especies_felidos) |>
+  arrange(desc(riqueza_especies_felidos)) |>
+  datatable(
+    colnames = c("Área de conservación", "Siglas", "Área (ha)", "Riqueza de félidos"),
+    rownames = FALSE,
+    options = list(
+      pageLength = 11,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound("area_ha", digits = 0)
+```
+````
+
+### Publicación
+
+Como el libro es un proyecto Quarto de tipo `book`, el tablero **no** se incluye en el índice (`_quarto.yml`): es un documento independiente que se renderiza por separado con `quarto render tableros/tablero-riqueza-felidos.qmd`. Su salida (`tablero-riqueza-felidos.html`) se ubica en `docs/tableros/`, junto al resto del sitio publicado en GitHub Pages, y se enlaza desde este capítulo mediante una ruta relativa.
+
+### Ejercicios
+
+1. Agregue al tablero una cuarta pestaña con el **mapa estático** de riqueza por área de conservación (`tmap_mode("plot")`), como el que se construye en el @sec-ejemplo-riqueza-felidos.
+
+2. Agregue una caja de valor adicional con el **área de conservación de mayor riqueza** de félidos.
+
+3. Sustituya el conjunto de datos de félidos por otro grupo taxonómico de GBIF (por ejemplo, anfibios o aves) y adapte los indicadores y mapas del tablero.
+
+## Recursos adicionales
+
+El siguiente tablero de control se relaciona con el [Atlas de Desarrollo Humano Cantonal 2024](https://www.undp.org/es/costa-rica/publicaciones/atlas-de-desarrollo-humano-cantonal-2024):
 
 - [Tablero de control publicado en GitHub Pages](https://gf0604-procesamientodatosgeograficos.github.io/2025-i-atlas-desarrollo-humano/)
 - [Código fuente](https://github.com/gf0604-procesamientodatosgeograficos/2025-i-atlas-desarrollo-humano)
 
-**Ejercicio**  
-
-Agregue al mapa la capa raster de densidad de población de Costa Rica compartida por [WorldPop](https://www.worldpop.org/) en [https://data.worldpop.org/GIS/Population/Global_2021_2022_1km_UNadj/unconstrained/2022/CRI/](https://data.worldpop.org/GIS/Population/Global_2021_2022_1km_UNadj/unconstrained/2022/CRI/).
-
-## Recursos adicionales
-
-[Quarto Dashboards | Charles Teague | Posit](https://www.youtube.com/watch?v=_VGJIPRGTy4)  
-[Ejemplos de tableros de control desarrollados con Quarto Dashboards](https://quarto.org/docs/gallery/#dashboards)  
+[Quarto Dashboards | Charles Teague | Posit](https://www.youtube.com/watch?v=_VGJIPRGTy4)
+[Dashboard Layout](https://quarto.org/docs/dashboards/layout.html)
+[Ejemplos de tableros de control desarrollados con Quarto Dashboards](https://quarto.org/docs/gallery/#dashboards)

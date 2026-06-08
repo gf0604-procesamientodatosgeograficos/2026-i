@@ -1,0 +1,315 @@
+---
+title: "Riqueza de félidos de Costa Rica"
+author: "Manuel Vargas"
+format:
+  dashboard:
+    orientation: rows
+    nav-buttons:
+      - icon: github
+        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i
+lang: es
+---
+
+```{r}
+#| label: carga-paquetes
+#| message: false
+#| warning: false
+
+# Carga de Tidyverse (manipulación de datos)
+library(tidyverse)
+
+# Carga de sf (datos vectoriales)
+library(sf)
+
+# Carga de tmap (mapas estáticos e interactivos)
+library(tmap)
+
+# Carga de DT (tablas interactivas)
+library(DT)
+
+# Carga de leaflet (mapas interactivos con agrupamiento de marcadores)
+library(leaflet)
+
+# Carga de leaflet.extras (mapas de calor sobre leaflet)
+library(leaflet.extras)
+
+# Modo interactivo para los mapas tmap
+tmap_mode("view")
+```
+
+```{r}
+#| label: carga-datos
+#| message: false
+#| warning: false
+
+# Cantones de Costa Rica (polígonos)
+cantones <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg",
+  quiet = TRUE
+)
+
+# Áreas de conservación del SINAC (polígonos)
+areas_conservacion <- st_read(
+  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg",
+  quiet = TRUE
+)
+
+# Registros de presencia de félidos silvestres (puntos)
+felidos <- st_read(
+  "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/gbif/felidos.csv",
+  options = c(
+    "X_POSSIBLE_NAMES=decimalLongitude", # columna de longitud decimal
+    "Y_POSSIBLE_NAMES=decimalLatitude"   # columna de latitud decimal
+  ),
+  quiet = TRUE
+)
+
+# Asignar CRS WGS84
+st_crs(felidos) <- 4326
+
+# Crear columna con el enlace al detalle del registro en GBIF
+felidos <- felidos |>
+  mutate(
+    registro = paste0(
+      "<a href='https://www.gbif.org/occurrence/", gbifID,
+      "' target='_blank'>Detalle&nbsp;del&nbsp;registro</a>"
+    )
+  )
+```
+
+```{r}
+#| label: preparacion-riqueza
+#| message: false
+#| warning: false
+
+# Unión espacial: a cada registro de félido se le agrega
+# el código del área de conservación que lo contiene
+felidos_union_areas <- st_join(
+  x = felidos,
+  y = dplyr::select(areas_conservacion, codigo_ac, nombre_ac, siglas_ac),
+  join = st_intersects
+)
+
+# Riqueza = cantidad de especies distintas por área de conservación
+riqueza_felidos_areas <-
+  felidos_union_areas |>
+  st_drop_geometry() |>
+  filter(!is.na(codigo_ac)) |>
+  group_by(codigo_ac) |>
+  summarize(riqueza_especies_felidos = n_distinct(species, na.rm = TRUE))
+
+# A los polígonos de áreas se les agrega la columna de riqueza;
+# las áreas sin registros reciben 0 en lugar de NA.
+areas_union_riqueza <-
+  left_join(
+    x = areas_conservacion,
+    y = riqueza_felidos_areas,
+    by = "codigo_ac"
+  ) |>
+  replace_na(list(riqueza_especies_felidos = 0))
+
+# Unión espacial de félidos con cantones, para contar
+# cuántos cantones tienen al menos un registro de félidos
+felidos_union_cantones <- st_join(
+  x = felidos,
+  y = dplyr::select(cantones, CANTÓN),
+  join = st_intersects
+)
+
+# Indicadores para las cajas de valor
+total_registros <- nrow(felidos)
+total_especies  <- n_distinct(felidos$species, na.rm = TRUE)
+cantones_con_presencia <-
+  felidos_union_cantones |>
+  st_drop_geometry() |>
+  filter(!is.na(CANTÓN)) |>
+  distinct(CANTÓN) |>
+  nrow()
+```
+
+## Row {height=20%}
+
+```{r}
+#| label: valuebox-registros
+#| content: valuebox
+#| title: "Registros de presencia"
+
+list(
+  icon  = "clipboard-data",
+  color = "primary",
+  value = total_registros
+)
+```
+
+```{r}
+#| label: valuebox-especies
+#| content: valuebox
+#| title: "Especies de félidos"
+
+list(
+  icon  = "tags",
+  color = "success",
+  value = total_especies
+)
+```
+
+```{r}
+#| label: valuebox-cantones
+#| content: valuebox
+#| title: "Cantones con presencia"
+
+list(
+  icon  = "geo-alt",
+  color = "info",
+  value = cantones_con_presencia
+)
+```
+
+## Row {height=80%}
+
+### Column {width=60% .tabset}
+
+```{r}
+#| label: mapa-cluster
+#| title: "Agrupamiento de marcadores"
+#| message: false
+#| warning: false
+
+# Construir el contenido HTML del popup para cada registro de félido
+popups_felidos <- paste0(
+  "<b>Especie:</b> ", felidos$species,         "<br/>",
+  "<b>Localidad:</b> ", felidos$locality,      "<br/>",
+  "<b>Fecha:</b> ", felidos$eventDate,         "<br/>",
+  "<b>Fuente:</b> ", felidos$institutionCode,  "<br/>",
+  felidos$registro
+)
+
+# Mapa interactivo con agrupamiento de marcadores
+leaflet() |>
+  setView(lng = -84.2, lat = 9.6, zoom = 7) |>
+  addProviderTiles(providers$OpenStreetMap,     group = "OpenStreetMap") |>
+  addProviderTiles(providers$CartoDB.Positron,  group = "CartoDB Positron") |>
+  addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
+  addPolygons(
+    data        = cantones,
+    weight      = 1,
+    color       = "black",
+    fillOpacity = 0,
+    label       = ~CANTÓN,
+    group       = "Cantones"
+  ) |>
+  addMarkers(
+    data           = felidos,
+    popup          = popups_felidos,
+    label          = ~species,
+    clusterOptions = markerClusterOptions(),
+    group          = "Félidos"
+  ) |>
+  addLayersControl(
+    baseGroups    = c("OpenStreetMap", "CartoDB Positron", "Imágenes Esri"),
+    overlayGroups = c("Cantones", "Félidos"),
+    options       = layersControlOptions(collapsed = FALSE)
+  ) |>
+  addScaleBar(position = "bottomleft")
+```
+
+```{r}
+#| label: mapa-calor
+#| title: "Mapa de calor"
+#| message: false
+#| warning: false
+
+# Mapa de calor con la densidad de registros de félidos
+leaflet() |>
+  setView(lng = -84.2, lat = 9.6, zoom = 7) |>
+  addProviderTiles(providers$OpenStreetMap,     group = "OpenStreetMap") |>
+  addProviderTiles(providers$CartoDB.Positron,  group = "CartoDB Positron") |>
+  addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
+  addPolygons(
+    data        = cantones,
+    weight      = 1,
+    color       = "black",
+    fillOpacity = 0,
+    label       = ~CANTÓN,
+    group       = "Cantones"
+  ) |>
+  addHeatmap(
+    data       = felidos,
+    radius     = 15,   # radio del núcleo gaussiano, en pixeles
+    blur       = 20,   # suavizado del gradiente
+    minOpacity = 0.3,
+    group      = "Mapa de calor"
+  ) |>
+  addLayersControl(
+    baseGroups    = c("OpenStreetMap", "CartoDB Positron", "Imágenes Esri"),
+    overlayGroups = c("Cantones", "Mapa de calor"),
+    options       = layersControlOptions(collapsed = FALSE)
+  ) |>
+  addScaleBar(position = "bottomleft")
+```
+
+```{r}
+#| label: mapa-riqueza
+#| title: "Riqueza por área de conservación"
+#| message: false
+#| warning: false
+
+# Mapa de coropletas de riqueza de félidos por área de conservación
+tm_view(
+  set_view = c(lon = -84.2, lat = 9.6, zoom = 7)
+) +
+  tm_basemap(c("OpenStreetMap", "Esri.WorldImagery")) +
+  tm_shape(areas_union_riqueza, name = "Riqueza de félidos") +
+    tm_fill(
+      fill = "riqueza_especies_felidos",
+      fill.scale = tm_scale_intervals(
+        style  = "quantile",
+        values = "Greens"
+      ),
+      fill.legend = tm_legend(title = "Riqueza"),
+      id = "nombre_ac",
+      popup.vars = c(
+        "Área de conservación" = "nombre_ac",
+        "Siglas" = "siglas_ac",
+        "Riqueza de félidos" = "riqueza_especies_felidos"
+      )
+    ) +
+    tm_borders(col = "black", lwd = 0.8) +
+  tm_shape(felidos, name = "Félidos") +
+    tm_dots(
+      fill = "species",
+      fill.scale = tm_scale(values = "brewer.set1"),
+      fill.legend = tm_legend(title = "Especie"),
+      size = 0.4,
+      id = "species",
+      popup.vars = c(
+        "Localidad" = "locality",
+        "Fecha" = "eventDate",
+        "Fuente" = "institutionCode"
+      )
+    ) +
+  tm_scalebar(position = c("left", "bottom"))
+```
+
+### Column {width=40%}
+
+```{r}
+#| label: tabla-riqueza
+#| title: "Riqueza por área de conservación"
+#| message: false
+#| warning: false
+
+areas_union_riqueza |>
+  st_drop_geometry() |>
+  dplyr::select(nombre_ac, siglas_ac, area_ha, riqueza_especies_felidos) |>
+  arrange(desc(riqueza_especies_felidos)) |>
+  datatable(
+    colnames = c("Área de conservación", "Siglas", "Área (ha)", "Riqueza de félidos"),
+    rownames = FALSE,
+    options = list(
+      pageLength = 11,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound("area_ha", digits = 0)
+```
