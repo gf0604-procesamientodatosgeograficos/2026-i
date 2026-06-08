@@ -195,7 +195,7 @@ Como ejemplo integral, se construyó un tablero de control que resume la riqueza
 
 El tablero tiene una sola página con orientación por filas (`orientation: rows`) y se organiza así:
 
-- **Fila superior** (20 % de la altura): tres **cajas de valor** con los indicadores principales —el total de registros de presencia, el número de especies y la cantidad de cantones con presencia de félidos—.
+- **Fila superior** (20 % de la altura): cuatro **cajas de valor** con los indicadores principales —el total de registros de presencia, el número de especies, la cantidad de cantones con presencia de félidos y el área de conservación con mayor riqueza—.
 - **Fila inferior** (80 % de la altura): dos columnas.
   - La columna izquierda (60 % del ancho) contiene tres **pestañas** con mapas: el mapa con agrupamiento de marcadores, el mapa de calor y el mapa de coropletas de riqueza por área de conservación.
   - La columna derecha (40 % del ancho) contiene una **tabla** interactiva con la riqueza de félidos por área de conservación.
@@ -273,7 +273,7 @@ st_crs(felidos) <- 4326
 
 ### Cajas de valor
 
-Cada caja de valor es una celda con la opción `#| content: valuebox` que devuelve una lista con el ícono, el color y el valor del indicador. Las tres se agrupan en una fila:
+Cada caja de valor es una celda con la opción `#| content: valuebox` que devuelve una lista con el ícono, el color y el valor del indicador. Las cuatro se agrupan en una fila:
 
 ```` md
 ## Row {height=20%}
@@ -294,6 +294,12 @@ list(icon = "diagram-3", color = "success", value = total_especies)
 #| content: valuebox
 #| title: "Cantones con presencia"
 list(icon = "geo-alt", color = "info", value = cantones_con_presencia)
+```
+
+```{r}`r ''`
+#| content: valuebox
+#| title: "Área de conservación con mayor riqueza"
+list(icon = "trophy", color = "warning", value = siglas_area_mayor_riqueza)
 ```
 ````
 
@@ -376,7 +382,7 @@ Como el libro es un proyecto Quarto de tipo `book`, el tablero **no** se incluye
 
 1. Agregue al tablero una cuarta pestaña con el **mapa estático** de riqueza por área de conservación (`tmap_mode("plot")`), como el que se construye en el @sec-ejemplo-riqueza-felidos.
 
-2. Agregue una caja de valor adicional con el **área de conservación de mayor riqueza** de félidos.
+2. Agregue una caja de valor adicional con la **cantidad de áreas de conservación con presencia** de félidos (es decir, con riqueza mayor que cero).
 
 3. Sustituya el conjunto de datos de félidos por otro grupo taxonómico de GBIF (por ejemplo, anfibios o aves) y adapte los indicadores y mapas del tablero.
 

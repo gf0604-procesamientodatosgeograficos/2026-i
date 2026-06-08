@@ -125,6 +125,13 @@ cantones_con_presencia <-
   filter(!is.na(CANTÓN)) |>
   distinct(CANTÓN) |>
   nrow()
+
+# Siglas del área de conservación con mayor riqueza de félidos
+siglas_area_mayor_riqueza <-
+  areas_union_riqueza |>
+  st_drop_geometry() |>
+  slice_max(riqueza_especies_felidos, n = 1, with_ties = FALSE) |>
+  pull(siglas_ac)
 ```
 
 ## Row {height=20%}
@@ -162,6 +169,18 @@ list(
   icon  = "geo-alt",
   color = "info",
   value = cantones_con_presencia
+)
+```
+
+```{r}
+#| label: valuebox-area-mayor
+#| content: valuebox
+#| title: "Área de conservación con mayor riqueza"
+
+list(
+  icon  = "trophy",
+  color = "warning",
+  value = siglas_area_mayor_riqueza
 )
 ```
 
