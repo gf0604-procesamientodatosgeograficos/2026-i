@@ -198,7 +198,7 @@ Como ejemplo integral, se construyó un tablero de control que resume la riqueza
 
 El tablero tiene una sola página con orientación por filas (`orientation: rows`) y se organiza en tres filas:
 
-- **Fila superior** (15 % de la altura): cuatro **cajas de valor** con los indicadores principales —el total de registros de presencia, el número de especies, la cantidad de cantones con presencia de félidos y el área de conservación con mayor riqueza—.
+- **Fila superior** (15 % de la altura): tres **cajas de valor** con los indicadores principales —el total de registros de presencia, el número de especies y las áreas de conservación con mayor riqueza (junto con esa riqueza máxima)—.
 - **Fila central** (55 % de la altura): dos columnas.
   - La columna izquierda (60 % del ancho) contiene tres **pestañas** con mapas: el mapa de registros agrupados, el mapa de calor y el mapa de coropletas de riqueza por área de conservación.
   - La columna derecha (40 % del ancho) contiene un **gráfico** de barras horizontales (plotly) con la riqueza de félidos por área de conservación.
@@ -208,7 +208,7 @@ En las secciones siguientes se muestra el código fuente del tablero. Para verlo
 
 ### Encabezado YAML
 
-El encabezado declara el formato `dashboard`, la orientación por filas y un botón de navegación hacia el repositorio del curso:
+El encabezado declara el formato `dashboard`, la orientación por filas y un botón de navegación hacia el código fuente del tablero en GitHub:
 
 ```` yaml
 ---
@@ -219,14 +219,14 @@ format:
     orientation: rows
     nav-buttons:
       - icon: github
-        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i
+        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/tableros/tablero-riqueza-felidos.qmd
 lang: es
 ---
 ````
 
 ### Carga de paquetes y datos
 
-Los primeros bloques de código cargan los paquetes, leen los tres conjuntos de datos desde GitHub y preparan los objetos que alimentan las visualizaciones (la unión espacial de félidos con áreas de conservación y con cantones, y el conteo de riqueza por área):
+Los primeros bloques de código cargan los paquetes, leen los tres conjuntos de datos desde GitHub y preparan los objetos que alimentan las visualizaciones (la unión espacial de félidos con áreas de conservación y el conteo de riqueza por área):
 
 ```` md
 ```{r}`r ''`
@@ -278,10 +278,10 @@ st_crs(felidos) <- 4326
 
 ### Cajas de valor
 
-Cada caja de valor es una celda con la opción `#| content: valuebox` que devuelve una lista con el ícono, el color y el valor del indicador. Las cuatro se agrupan en una fila:
+Cada caja de valor es una celda con la opción `#| content: valuebox` que devuelve una lista con el ícono, el color y el valor del indicador. Las tres se agrupan en una fila. La última toma el título de la propia lista (en lugar de la opción `#| title:`) para incluir dinámicamente la riqueza máxima, y muestra todas las áreas que la alcanzan (puede haber empate):
 
 ```` md
-## Row {height=20%}
+## Row {height=15%}
 
 ```{r}`r ''`
 #| content: valuebox
@@ -297,14 +297,12 @@ list(icon = "diagram-3", color = "success", value = total_especies)
 
 ```{r}`r ''`
 #| content: valuebox
-#| title: "Cantones con presencia"
-list(icon = "geo-alt", color = "info", value = cantones_con_presencia)
-```
-
-```{r}`r ''`
-#| content: valuebox
-#| title: "Área de conservación con mayor riqueza"
-list(icon = "trophy", color = "warning", value = siglas_area_mayor_riqueza)
+list(
+  icon  = "trophy",
+  color = "warning",
+  title = paste0("Áreas de conservación con mayor riqueza (", riqueza_maxima, " especies)"),
+  value = siglas_areas_mayor_riqueza
+)
 ```
 ````
 

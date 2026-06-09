@@ -660,7 +660,7 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <h3 data-number="15.7.1" class="anchored" data-anchor-id="estructura-del-tablero"><span class="header-section-number">15.7.1</span> Estructura del tablero</h3>
 <p>El tablero tiene una sola página con orientación por filas (<code>orientation: rows</code>) y se organiza en tres filas:</p>
 <ul>
-<li><strong>Fila superior</strong> (15 % de la altura): cuatro <strong>cajas de valor</strong> con los indicadores principales —el total de registros de presencia, el número de especies, la cantidad de cantones con presencia de félidos y el área de conservación con mayor riqueza—.</li>
+<li><strong>Fila superior</strong> (15 % de la altura): tres <strong>cajas de valor</strong> con los indicadores principales —el total de registros de presencia, el número de especies y las áreas de conservación con mayor riqueza (junto con esa riqueza máxima)—.</li>
 <li><strong>Fila central</strong> (55 % de la altura): dos columnas.
 <ul>
 <li>La columna izquierda (60 % del ancho) contiene tres <strong>pestañas</strong> con mapas: el mapa de registros agrupados, el mapa de calor y el mapa de coropletas de riqueza por área de conservación.</li>
@@ -672,7 +672,7 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 </section>
 <section id="encabezado-yaml" class="level3" data-number="15.7.2">
 <h3 data-number="15.7.2" class="anchored" data-anchor-id="encabezado-yaml"><span class="header-section-number">15.7.2</span> Encabezado YAML</h3>
-<p>El encabezado declara el formato <code>dashboard</code>, la orientación por filas y un botón de navegación hacia el repositorio del curso:</p>
+<p>El encabezado declara el formato <code>dashboard</code>, la orientación por filas y un botón de navegación hacia el código fuente del tablero en GitHub:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Riqueza de félidos de Costa Rica"</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Manuel Vargas"</span></span>
@@ -681,13 +681,13 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">orientation</span><span class="kw">:</span><span class="at"> rows</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">nav-buttons</span><span class="kw">:</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> github</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/gf0604-procesamientodatosgeograficos/2026-i</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/tableros/tablero-riqueza-felidos.qmd</span></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> es</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="carga-de-paquetes-y-datos" class="level3" data-number="15.7.3">
 <h3 data-number="15.7.3" class="anchored" data-anchor-id="carga-de-paquetes-y-datos"><span class="header-section-number">15.7.3</span> Carga de paquetes y datos</h3>
-<p>Los primeros bloques de código cargan los paquetes, leen los tres conjuntos de datos desde GitHub y preparan los objetos que alimentan las visualizaciones (la unión espacial de félidos con áreas de conservación y con cantones, y el conteo de riqueza por área):</p>
+<p>Los primeros bloques de código cargan los paquetes, leen los tres conjuntos de datos desde GitHub y preparan los objetos que alimentan las visualizaciones (la unión espacial de félidos con áreas de conservación y el conteo de riqueza por área):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-paquetes</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
@@ -736,8 +736,8 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 </section>
 <section id="cajas-de-valor-1" class="level3" data-number="15.7.4">
 <h3 data-number="15.7.4" class="anchored" data-anchor-id="cajas-de-valor-1"><span class="header-section-number">15.7.4</span> Cajas de valor</h3>
-<p>Cada caja de valor es una celda con la opción <code>#| content: valuebox</code> que devuelve una lista con el ícono, el color y el valor del indicador. Las cuatro se agrupan en una fila:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height=20%}</span></span>
+<p>Cada caja de valor es una celda con la opción <code>#| content: valuebox</code> que devuelve una lista con el ícono, el color y el valor del indicador. Las tres se agrupan en una fila. La última toma el título de la propia lista (en lugar de la opción <code>#| title:</code>) para incluir dinámicamente la riqueza máxima, y muestra todas las áreas que la alcanzan (puede haber empate):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height=15%}</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
@@ -753,15 +753,13 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Cantones con presencia"</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">icon =</span> <span class="st">"geo-alt"</span>, <span class="at">color =</span> <span class="st">"info"</span>, <span class="at">value =</span> cantones_con_presencia)</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Área de conservación con mayor riqueza"</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">icon =</span> <span class="st">"trophy"</span>, <span class="at">color =</span> <span class="st">"warning"</span>, <span class="at">value =</span> siglas_area_mayor_riqueza)</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">icon  =</span> <span class="st">"trophy"</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"warning"</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Áreas de conservación con mayor riqueza ("</span>, riqueza_maxima, <span class="st">" especies)"</span>),</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> siglas_areas_mayor_riqueza</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="mapas" class="level3" data-number="15.7.5">
 <h3 data-number="15.7.5" class="anchored" data-anchor-id="mapas"><span class="header-section-number">15.7.5</span> Mapas</h3>

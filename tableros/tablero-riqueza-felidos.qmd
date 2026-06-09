@@ -6,7 +6,7 @@ format:
     orientation: rows
     nav-buttons:
       - icon: github
-        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i
+        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/tableros/tablero-riqueza-felidos.qmd
 lang: es
 ---
 
@@ -111,30 +111,19 @@ areas_union_riqueza <-
   ) |>
   replace_na(list(riqueza_especies_felidos = 0))
 
-# Unión espacial de félidos con cantones, para contar
-# cuántos cantones tienen al menos un registro de félidos
-felidos_union_cantones <- st_join(
-  x = felidos,
-  y = dplyr::select(cantones, CANTÓN),
-  join = st_intersects
-)
-
 # Indicadores para las cajas de valor
 total_registros <- nrow(felidos)
 total_especies  <- n_distinct(felidos$species, na.rm = TRUE)
-cantones_con_presencia <-
-  felidos_union_cantones |>
-  st_drop_geometry() |>
-  filter(!is.na(CANTÓN)) |>
-  distinct(CANTÓN) |>
-  nrow()
 
-# Siglas del área de conservación con mayor riqueza de félidos
-siglas_area_mayor_riqueza <-
+# Riqueza máxima y áreas de conservación que la alcanzan (puede haber empate)
+riqueza_maxima <- max(areas_union_riqueza$riqueza_especies_felidos)
+siglas_areas_mayor_riqueza <-
   areas_union_riqueza |>
   st_drop_geometry() |>
-  slice_max(riqueza_especies_felidos, n = 1, with_ties = FALSE) |>
-  pull(siglas_ac)
+  filter(riqueza_especies_felidos == riqueza_maxima) |>
+  arrange(siglas_ac) |>
+  pull(siglas_ac) |>
+  paste(collapse = ", ")
 ```
 
 ## Row {height=15%}
@@ -164,26 +153,14 @@ list(
 ```
 
 ```{r}
-#| label: valuebox-cantones
-#| content: valuebox
-#| title: "Cantones con presencia"
-
-list(
-  icon  = "geo-alt",
-  color = "info",
-  value = cantones_con_presencia
-)
-```
-
-```{r}
 #| label: valuebox-area-mayor
 #| content: valuebox
-#| title: "Área de conservación con mayor riqueza"
 
 list(
   icon  = "trophy",
   color = "warning",
-  value = siglas_area_mayor_riqueza
+  title = paste0("Áreas de conservación con mayor riqueza (", riqueza_maxima, " especies)"),
+  value = siglas_areas_mayor_riqueza
 )
 ```
 
