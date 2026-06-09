@@ -639,10 +639,8 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 </section>
 <section id="conjuntos-de-datos" class="level2" data-number="15.6">
 <h2 data-number="15.6" class="anchored" data-anchor-id="conjuntos-de-datos"><span class="header-section-number">15.6</span> Conjuntos de datos</h2>
-<p>El tablero de control combina tres conjuntos de datos sobre Costa Rica, los mismos que se utilizan en el <a href="13-operaciones-datos-espaciales.html" class="quarto-xref"><span>Capítulo 13</span></a> y en el <a href="ejemplo-riqueza-felidos.html" class="quarto-xref"><span>Apéndice A</span></a>:</p>
+<p>El tablero de control combina dos conjuntos de datos sobre Costa Rica, los mismos que se utilizan en el <a href="ejemplo-riqueza-felidos.html" class="quarto-xref"><span>Apéndice A</span></a>:</p>
 <ul>
-<li><p><strong>Cantones</strong>: capa vectorial GPKG (con geometrías simplificadas) publicada por el Instituto Geográfico Nacional (IGN).</p>
-<p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg">Descargar el archivo GPKG de cantones de Costa Rica (con geometrías simplificadas)</a></p></li>
 <li><p><strong>Áreas de conservación</strong>: capa vectorial GPKG con los polígonos de las 11 áreas de conservación administrativas del <a href="https://www.sinac.go.cr/">Sistema Nacional de Áreas de Conservación (SINAC)</a>.</p>
 <p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg">Descargar el archivo GPKG de áreas de conservación del SINAC</a></p></li>
 <li><p><strong>Félidos</strong>: registros de presencia de la familia <a href="https://es.wikipedia.org/wiki/Felidae"><em>Felidae</em></a> en Costa Rica, descargados del portal de la <a href="https://www.gbif.org/">Infraestructura Mundial de Información en Biodiversidad (GBIF)</a>.</p>
@@ -710,29 +708,23 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
 <span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
 <span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Cantones de Costa Rica (polígonos)</span></span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>cantones <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg"</span>,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Áreas de conservación del SINAC (polígonos)</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>areas_conservacion <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg"</span>,</span>
 <span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
 <span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Áreas de conservación del SINAC (polígonos)</span></span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>areas_conservacion <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg"</span>,</span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Registros de presencia de félidos silvestres (puntos)</span></span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>felidos <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/gbif/felidos.csv"</span>,</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>,</span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span></span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(felidos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
-<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Registros de presencia de félidos silvestres (puntos)</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>felidos <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/gbif/felidos.csv"</span>,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>,</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(felidos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="cajas-de-valor-1" class="level3" data-number="15.7.4">
 <h3 data-number="15.7.4" class="anchored" data-anchor-id="cajas-de-valor-1"><span class="header-section-number">15.7.4</span> Cajas de valor</h3>
@@ -772,12 +764,12 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lng =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
 <span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap, <span class="at">group =</span> <span class="st">"OpenStreetMap"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>CartoDB.Positron, <span class="at">group =</span> <span class="st">"CartoDB Positron"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> cantones, <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fillOpacity =</span> <span class="dv">0</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="sc">~</span>CANTÓN, <span class="at">group =</span> <span class="st">"Cantones"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> areas_conservacion, <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fillOpacity =</span> <span class="dv">0</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="sc">~</span>nombre_ac, <span class="at">group =</span> <span class="st">"Áreas de conservación"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">data =</span> felidos, <span class="at">label =</span> <span class="sc">~</span>species,</span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">clusterOptions =</span> <span class="fu">markerClusterOptions</span>(), <span class="at">group =</span> <span class="st">"Félidos"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLayersControl</span>(<span class="at">baseGroups =</span> <span class="fu">c</span>(<span class="st">"OpenStreetMap"</span>, <span class="st">"CartoDB Positron"</span>),</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">overlayGroups =</span> <span class="fu">c</span>(<span class="st">"Cantones"</span>, <span class="st">"Félidos"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">overlayGroups =</span> <span class="fu">c</span>(<span class="st">"Áreas de conservación"</span>, <span class="st">"Félidos"</span>)) <span class="sc">|&gt;</span></span>
 <span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addScaleBar</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>)</span>
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
@@ -786,8 +778,8 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
 <span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lng =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
 <span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap, <span class="at">group =</span> <span class="st">"OpenStreetMap"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> cantones, <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fillOpacity =</span> <span class="dv">0</span>,</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="sc">~</span>CANTÓN, <span class="at">group =</span> <span class="st">"Cantones"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> areas_conservacion, <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fillOpacity =</span> <span class="dv">0</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="sc">~</span>nombre_ac, <span class="at">group =</span> <span class="st">"Áreas de conservación"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addHeatmap</span>(<span class="at">data =</span> felidos, <span class="at">radius =</span> <span class="dv">15</span>, <span class="at">blur =</span> <span class="dv">20</span>, <span class="at">minOpacity =</span> <span class="fl">0.3</span>,</span>
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> <span class="st">"Mapa de calor"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addScaleBar</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>)</span>

@@ -45,12 +45,6 @@ tmap_mode("view")
 #| message: false
 #| warning: false
 
-# Cantones de Costa Rica (polígonos)
-cantones <- st_read(
-  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg",
-  quiet = TRUE
-)
-
 # Áreas de conservación del SINAC (polígonos)
 areas_conservacion <- st_read(
   "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg",
@@ -190,12 +184,12 @@ leaflet() |>
   addProviderTiles(providers$CartoDB.Positron,  group = "CartoDB Positron") |>
   addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
   addPolygons(
-    data        = cantones,
+    data        = areas_conservacion,
     weight      = 1,
     color       = "black",
     fillOpacity = 0,
-    label       = ~CANTÓN,
-    group       = "Cantones"
+    label       = ~nombre_ac,
+    group       = "Áreas de conservación"
   ) |>
   addMarkers(
     data           = felidos,
@@ -206,7 +200,7 @@ leaflet() |>
   ) |>
   addLayersControl(
     baseGroups    = c("OpenStreetMap", "CartoDB Positron", "Imágenes Esri"),
-    overlayGroups = c("Cantones", "Félidos"),
+    overlayGroups = c("Áreas de conservación", "Félidos"),
     options       = layersControlOptions(collapsed = FALSE)
   ) |>
   addScaleBar(position = "bottomleft")
@@ -225,12 +219,12 @@ leaflet() |>
   addProviderTiles(providers$CartoDB.Positron,  group = "CartoDB Positron") |>
   addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
   addPolygons(
-    data        = cantones,
+    data        = areas_conservacion,
     weight      = 1,
     color       = "black",
     fillOpacity = 0,
-    label       = ~CANTÓN,
-    group       = "Cantones"
+    label       = ~nombre_ac,
+    group       = "Áreas de conservación"
   ) |>
   addHeatmap(
     data       = felidos,
@@ -241,7 +235,7 @@ leaflet() |>
   ) |>
   addLayersControl(
     baseGroups    = c("OpenStreetMap", "CartoDB Positron", "Imágenes Esri"),
-    overlayGroups = c("Cantones", "Mapa de calor"),
+    overlayGroups = c("Áreas de conservación", "Mapa de calor"),
     options       = layersControlOptions(collapsed = FALSE)
   ) |>
   addScaleBar(position = "bottomleft")

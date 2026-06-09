@@ -173,11 +173,7 @@ library(leaflet.extras)
 
 ## Conjuntos de datos
 
-El tablero de control combina tres conjuntos de datos sobre Costa Rica, los mismos que se utilizan en el @sec-operaciones-datos-espaciales y en el @sec-ejemplo-riqueza-felidos:
-
-- **Cantones**: capa vectorial GPKG (con geometrías simplificadas) publicada por el Instituto Geográfico Nacional (IGN).
-
-  [Descargar el archivo GPKG de cantones de Costa Rica (con geometrías simplificadas)](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg)
+El tablero de control combina dos conjuntos de datos sobre Costa Rica, los mismos que se utilizan en el @sec-ejemplo-riqueza-felidos:
 
 - **Áreas de conservación**: capa vectorial GPKG con los polígonos de las 11 áreas de conservación administrativas del [Sistema Nacional de Áreas de Conservación (SINAC)](https://www.sinac.go.cr/).
 
@@ -251,12 +247,6 @@ tmap_mode("view")
 #| message: false
 #| warning: false
 
-# Cantones de Costa Rica (polígonos)
-cantones <- st_read(
-  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg",
-  quiet = TRUE
-)
-
 # Áreas de conservación del SINAC (polígonos)
 areas_conservacion <- st_read(
   "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg",
@@ -319,12 +309,12 @@ leaflet() |>
   setView(lng = -84.2, lat = 9.6, zoom = 7) |>
   addProviderTiles(providers$OpenStreetMap, group = "OpenStreetMap") |>
   addProviderTiles(providers$CartoDB.Positron, group = "CartoDB Positron") |>
-  addPolygons(data = cantones, weight = 1, color = "black", fillOpacity = 0,
-              label = ~CANTÓN, group = "Cantones") |>
+  addPolygons(data = areas_conservacion, weight = 1, color = "black", fillOpacity = 0,
+              label = ~nombre_ac, group = "Áreas de conservación") |>
   addMarkers(data = felidos, label = ~species,
              clusterOptions = markerClusterOptions(), group = "Félidos") |>
   addLayersControl(baseGroups = c("OpenStreetMap", "CartoDB Positron"),
-                   overlayGroups = c("Cantones", "Félidos")) |>
+                   overlayGroups = c("Áreas de conservación", "Félidos")) |>
   addScaleBar(position = "bottomleft")
 ```
 
@@ -333,8 +323,8 @@ leaflet() |>
 leaflet() |>
   setView(lng = -84.2, lat = 9.6, zoom = 7) |>
   addProviderTiles(providers$OpenStreetMap, group = "OpenStreetMap") |>
-  addPolygons(data = cantones, weight = 1, color = "black", fillOpacity = 0,
-              label = ~CANTÓN, group = "Cantones") |>
+  addPolygons(data = areas_conservacion, weight = 1, color = "black", fillOpacity = 0,
+              label = ~nombre_ac, group = "Áreas de conservación") |>
   addHeatmap(data = felidos, radius = 15, blur = 20, minOpacity = 0.3,
              group = "Mapa de calor") |>
   addScaleBar(position = "bottomleft")
