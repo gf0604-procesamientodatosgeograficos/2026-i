@@ -457,8 +457,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#cajas-de-valor-1" id="toc-cajas-de-valor-1" class="nav-link" data-scroll-target="#cajas-de-valor-1"><span class="header-section-number">15.7.4</span> Cajas de valor</a></li>
   <li><a href="#mapas" id="toc-mapas" class="nav-link" data-scroll-target="#mapas"><span class="header-section-number">15.7.5</span> Mapas</a></li>
   <li><a href="#gráfico" id="toc-gráfico" class="nav-link" data-scroll-target="#gráfico"><span class="header-section-number">15.7.6</span> Gráfico</a></li>
-  <li><a href="#publicación" id="toc-publicación" class="nav-link" data-scroll-target="#publicación"><span class="header-section-number">15.7.7</span> Publicación</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">15.7.8</span> Ejercicios</a></li>
+  <li><a href="#tabla" id="toc-tabla" class="nav-link" data-scroll-target="#tabla"><span class="header-section-number">15.7.7</span> Tabla</a></li>
+  <li><a href="#publicación" id="toc-publicación" class="nav-link" data-scroll-target="#publicación"><span class="header-section-number">15.7.8</span> Publicación</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">15.7.9</span> Ejercicios</a></li>
   </ul></li>
   <li><a href="#recursos-adicionales" id="toc-recursos-adicionales" class="nav-link" data-scroll-target="#recursos-adicionales"><span class="header-section-number">15.8</span> Recursos adicionales</a></li>
   </ul>
@@ -511,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="15.4" class="anchored" data-anchor-id="quarto-dashboards"><span class="header-section-number">15.4</span> Quarto Dashboards</h2>
 <p><a href="https://quarto.org/docs/dashboards/">Quarto Dashboards</a> es una capacidad de Quarto que permite crear tableros de control mediante los lenguajes de programación R, Python, Julia y Observable. Estos tableros de control pueden incluir componentes desarrollados en DT, Ggplot2, Plotly y Leaflet, entre otros paquetes de R. Pueden publicarse como páginas estáticas (ej. en GitHub Pages) o en un <a href="https://quarto.org/docs/dashboards/interactivity/">servidor Shiny para proporcionar mayor interactividad al usuario</a>.</p>
 <p>La <a href="#fig-dashboards-gapminder" class="quarto-xref">Figura&nbsp;<span>15.1</span></a> muestra un tablero de control desarrollado con Quarto Dashboards.</p>
-<div id="fig-dashboards-gapminder" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Tablero de control desarrollado con Quarto Dashboards" data-fig-align="center">
+<div id="fig-dashboards-gapminder" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Tablero de control desarrollado con Quarto Dashboards">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-dashboards-gapminder-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/dashboards-gapminder.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente: Quarto Dashboards."><img src="img/dashboards-gapminder.png" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Tablero de control desarrollado con Quarto Dashboards"></a>
@@ -612,7 +613,7 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 </section>
 <section id="carga-de-paquetes" class="level2" data-number="15.5">
 <h2 data-number="15.5" class="anchored" data-anchor-id="carga-de-paquetes"><span class="header-section-number">15.5</span> Carga de paquetes</h2>
-<p>El tablero de control de ejemplo de este capítulo reutiliza los paquetes ya empleados en los capítulos del ecosistema espacial y de graficación: <code>tidyverse</code>, <code>sf</code>, <code>tmap</code>, <code>plotly</code>, <code>leaflet</code> y <code>leaflet.extras</code>. No introduce paquetes nuevos: las cajas de valor se generan con la sintaxis nativa de Quarto Dashboards (<code>#| content: valuebox</code>), sin paquetes adicionales.</p>
+<p>El tablero de control de ejemplo de este capítulo reutiliza los paquetes ya empleados en los capítulos del ecosistema espacial y de graficación: <code>tidyverse</code>, <code>sf</code>, <code>tmap</code>, <code>plotly</code>, <code>DT</code>, <code>leaflet</code> y <code>leaflet.extras</code>. No introduce paquetes nuevos: las cajas de valor se generan con la sintaxis nativa de Quarto Dashboards (<code>#| content: valuebox</code>), sin paquetes adicionales.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de Tidyverse (manipulación de datos)</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -626,11 +627,14 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de plotly (gráficos interactivos)</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de leaflet (mapas interactivos con agrupamiento de marcadores)</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de DT (tablas interactivas)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de leaflet.extras (mapas de calor sobre leaflet)</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.extras)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de leaflet (mapas interactivos con agrupamiento de marcadores)</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de leaflet.extras (mapas de calor sobre leaflet)</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.extras)</span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="conjuntos-de-datos" class="level2" data-number="15.6">
@@ -654,14 +658,15 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 </ul>
 <section id="estructura-del-tablero" class="level3" data-number="15.7.1">
 <h3 data-number="15.7.1" class="anchored" data-anchor-id="estructura-del-tablero"><span class="header-section-number">15.7.1</span> Estructura del tablero</h3>
-<p>El tablero tiene una sola página con orientación por filas (<code>orientation: rows</code>) y se organiza así:</p>
+<p>El tablero tiene una sola página con orientación por filas (<code>orientation: rows</code>) y se organiza en tres filas:</p>
 <ul>
-<li><strong>Fila superior</strong> (20 % de la altura): cuatro <strong>cajas de valor</strong> con los indicadores principales —el total de registros de presencia, el número de especies, la cantidad de cantones con presencia de félidos y el área de conservación con mayor riqueza—.</li>
-<li><strong>Fila inferior</strong> (80 % de la altura): dos columnas.
+<li><strong>Fila superior</strong> (15 % de la altura): cuatro <strong>cajas de valor</strong> con los indicadores principales —el total de registros de presencia, el número de especies, la cantidad de cantones con presencia de félidos y el área de conservación con mayor riqueza—.</li>
+<li><strong>Fila central</strong> (55 % de la altura): dos columnas.
 <ul>
 <li>La columna izquierda (60 % del ancho) contiene tres <strong>pestañas</strong> con mapas: el mapa de registros agrupados, el mapa de calor y el mapa de coropletas de riqueza por área de conservación.</li>
 <li>La columna derecha (40 % del ancho) contiene un <strong>gráfico</strong> de barras horizontales (plotly) con la riqueza de félidos por área de conservación.</li>
 </ul></li>
+<li><strong>Fila inferior</strong> (30 % de la altura): una <strong>tabla</strong> interactiva (DT) con los registros de presencia de félidos a nivel individual.</li>
 </ul>
 <p>En las secciones siguientes se muestra el código fuente del tablero. Para verlo en funcionamiento, consúltese el <a href="tableros/tablero-riqueza-felidos.html">tablero publicado</a>.</p>
 </section>
@@ -692,41 +697,42 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.extras)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Modo interactivo para los mapas tmap</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"view"</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-datos</span></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Cantones de Costa Rica (polígonos)</span></span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>cantones <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg"</span>,</span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
-<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Áreas de conservación del SINAC (polígonos)</span></span>
-<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>areas_conservacion <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg"</span>,</span>
-<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
-<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Registros de presencia de félidos silvestres (puntos)</span></span>
-<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>felidos <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/gbif/felidos.csv"</span>,</span>
-<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
-<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>,</span>
-<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span></span>
-<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
-<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(felidos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
-<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.extras)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Modo interactivo para los mapas tmap</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"view"</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-datos</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Cantones de Costa Rica (polígonos)</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>cantones <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/ign/cantones-simplificados.gpkg"</span>,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Áreas de conservación del SINAC (polígonos)</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>areas_conservacion <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg"</span>,</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Registros de presencia de félidos silvestres (puntos)</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>felidos <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/gbif/felidos.csv"</span>,</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>,</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(felidos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="cajas-de-valor-1" class="level3" data-number="15.7.4">
 <h3 data-number="15.7.4" class="anchored" data-anchor-id="cajas-de-valor-1"><span class="header-section-number">15.7.4</span> Cajas de valor</h3>
@@ -830,12 +836,39 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">config</span>(<span class="at">locale =</span> <span class="st">"es"</span>)</span>
 <span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="publicación" class="level3" data-number="15.7.7">
-<h3 data-number="15.7.7" class="anchored" data-anchor-id="publicación"><span class="header-section-number">15.7.7</span> Publicación</h3>
+<section id="tabla" class="level3" data-number="15.7.7">
+<h3 data-number="15.7.7" class="anchored" data-anchor-id="tabla"><span class="header-section-number">15.7.7</span> Tabla</h3>
+<p>La fila inferior ocupa todo el ancho y contiene una tabla interactiva (<code>DT</code>) con los registros de presencia de félidos a nivel individual. Cada fila incluye el identificador único <code>gbifID</code>, la especie, las coordenadas, la localidad, el área de conservación que lo contiene (de la unión espacial) y la fecha:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height=30%}</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros de presencia de félidos"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>felidos_union_areas <span class="sc">|&gt;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    gbifID, species, decimalLongitude, decimalLatitude,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    locality, nombre_ac, eventDate</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">datatable</span>(</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">colnames =</span> <span class="fu">c</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>      <span class="st">"gbifID"</span>, <span class="st">"Especie"</span>, <span class="st">"Longitud"</span>, <span class="st">"Latitud"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Localidad"</span>, <span class="st">"Área de conservación"</span>, <span class="st">"Fecha"</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">pageLength =</span> <span class="dv">10</span>,</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">language =</span> <span class="fu">list</span>(<span class="at">url =</span> <span class="st">'//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json'</span>)</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formatRound</span>(<span class="fu">c</span>(<span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span>), <span class="at">digits =</span> <span class="dv">5</span>)</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="publicación" class="level3" data-number="15.7.8">
+<h3 data-number="15.7.8" class="anchored" data-anchor-id="publicación"><span class="header-section-number">15.7.8</span> Publicación</h3>
 <p>Como el libro es un proyecto Quarto de tipo <code>book</code>, el tablero <strong>no</strong> se incluye en el índice (<code>_quarto.yml</code>): es un documento independiente que se renderiza por separado con <code>quarto render tableros/tablero-riqueza-felidos.qmd</code>. Su salida (<code>tablero-riqueza-felidos.html</code>) se ubica en <code>docs/tableros/</code>, junto al resto del sitio publicado en GitHub Pages, y se enlaza desde este capítulo mediante una ruta relativa.</p>
 </section>
-<section id="ejercicios" class="level3" data-number="15.7.8">
-<h3 data-number="15.7.8" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">15.7.8</span> Ejercicios</h3>
+<section id="ejercicios" class="level3" data-number="15.7.9">
+<h3 data-number="15.7.9" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">15.7.9</span> Ejercicios</h3>
 <ol type="1">
 <li><p>Agregue al tablero una cuarta pestaña con el <strong>mapa estático</strong> de riqueza por área de conservación (<code>tmap_mode("plot")</code>), como el que se construye en el <a href="ejemplo-riqueza-felidos.html" class="quarto-xref"><span>Apéndice A</span></a>.</p></li>
 <li><p>Agregue una caja de valor adicional con la <strong>cantidad de áreas de conservación con presencia</strong> de félidos (es decir, con riqueza mayor que cero).</p></li>

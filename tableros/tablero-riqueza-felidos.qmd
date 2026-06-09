@@ -27,6 +27,9 @@ library(tmap)
 # Carga de plotly (gráficos interactivos)
 library(plotly)
 
+# Carga de DT (tablas interactivas)
+library(DT)
+
 # Carga de leaflet (mapas interactivos con agrupamiento de marcadores)
 library(leaflet)
 
@@ -134,7 +137,7 @@ siglas_area_mayor_riqueza <-
   pull(siglas_ac)
 ```
 
-## Row {height=20%}
+## Row {height=15%}
 
 ```{r}
 #| label: valuebox-registros
@@ -184,7 +187,7 @@ list(
 )
 ```
 
-## Row {height=80%}
+## Row {height=55%}
 
 ### Column {width=60% .tabset}
 
@@ -344,4 +347,38 @@ grafico_riqueza <-
 # Conversión a plotly
 ggplotly(grafico_riqueza, tooltip = "text") |>
   config(locale = "es")
+```
+
+## Row {height=30%}
+
+```{r}
+#| label: tabla-registros
+#| title: "Registros de presencia de félidos"
+#| message: false
+#| warning: false
+
+# Tabla interactiva con los registros de presencia de félidos
+felidos_union_areas |>
+  st_drop_geometry() |>
+  dplyr::select(
+    gbifID,
+    species,
+    decimalLongitude,
+    decimalLatitude,
+    locality,
+    nombre_ac,
+    eventDate
+  ) |>
+  datatable(
+    colnames = c(
+      "gbifID", "Especie", "Longitud", "Latitud",
+      "Localidad", "Área de conservación", "Fecha"
+    ),
+    rownames = FALSE,
+    options = list(
+      pageLength = 10,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound(c("decimalLongitude", "decimalLatitude"), digits = 5)
 ```

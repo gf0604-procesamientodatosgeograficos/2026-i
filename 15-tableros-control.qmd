@@ -142,7 +142,7 @@ Para más información sobre la configuración de los tableros de control, se re
 
 ## Carga de paquetes
 
-El tablero de control de ejemplo de este capítulo reutiliza los paquetes ya empleados en los capítulos del ecosistema espacial y de graficación: `tidyverse`, `sf`, `tmap`, `plotly`, `leaflet` y `leaflet.extras`. No introduce paquetes nuevos: las cajas de valor se generan con la sintaxis nativa de Quarto Dashboards (`#| content: valuebox`), sin paquetes adicionales.
+El tablero de control de ejemplo de este capítulo reutiliza los paquetes ya empleados en los capítulos del ecosistema espacial y de graficación: `tidyverse`, `sf`, `tmap`, `plotly`, `DT`, `leaflet` y `leaflet.extras`. No introduce paquetes nuevos: las cajas de valor se generan con la sintaxis nativa de Quarto Dashboards (`#| content: valuebox`), sin paquetes adicionales.
 
 ```{r}
 #| label: carga-paquetes
@@ -160,6 +160,9 @@ library(tmap)
 
 # Carga de plotly (gráficos interactivos)
 library(plotly)
+
+# Carga de DT (tablas interactivas)
+library(DT)
 
 # Carga de leaflet (mapas interactivos con agrupamiento de marcadores)
 library(leaflet)
@@ -193,12 +196,13 @@ Como ejemplo integral, se construyó un tablero de control que resume la riqueza
 
 ### Estructura del tablero
 
-El tablero tiene una sola página con orientación por filas (`orientation: rows`) y se organiza así:
+El tablero tiene una sola página con orientación por filas (`orientation: rows`) y se organiza en tres filas:
 
-- **Fila superior** (20 % de la altura): cuatro **cajas de valor** con los indicadores principales —el total de registros de presencia, el número de especies, la cantidad de cantones con presencia de félidos y el área de conservación con mayor riqueza—.
-- **Fila inferior** (80 % de la altura): dos columnas.
+- **Fila superior** (15 % de la altura): cuatro **cajas de valor** con los indicadores principales —el total de registros de presencia, el número de especies, la cantidad de cantones con presencia de félidos y el área de conservación con mayor riqueza—.
+- **Fila central** (55 % de la altura): dos columnas.
   - La columna izquierda (60 % del ancho) contiene tres **pestañas** con mapas: el mapa de registros agrupados, el mapa de calor y el mapa de coropletas de riqueza por área de conservación.
   - La columna derecha (40 % del ancho) contiene un **gráfico** de barras horizontales (plotly) con la riqueza de félidos por área de conservación.
+- **Fila inferior** (30 % de la altura): una **tabla** interactiva (DT) con los registros de presencia de félidos a nivel individual.
 
 En las secciones siguientes se muestra el código fuente del tablero. Para verlo en funcionamiento, consúltese el [tablero publicado](tableros/tablero-riqueza-felidos.html).
 
@@ -234,6 +238,7 @@ library(tidyverse)
 library(sf)
 library(tmap)
 library(plotly)
+library(DT)
 library(leaflet)
 library(leaflet.extras)
 
@@ -379,6 +384,36 @@ grafico_riqueza <-
 
 ggplotly(grafico_riqueza, tooltip = "text") |>
   config(locale = "es")
+```
+````
+
+### Tabla
+
+La fila inferior ocupa todo el ancho y contiene una tabla interactiva (`DT`) con los registros de presencia de félidos a nivel individual. Cada fila incluye el identificador único `gbifID`, la especie, las coordenadas, la localidad, el área de conservación que lo contiene (de la unión espacial) y la fecha:
+
+```` md
+## Row {height=30%}
+
+```{r}`r ''`
+#| title: "Registros de presencia de félidos"
+felidos_union_areas |>
+  st_drop_geometry() |>
+  dplyr::select(
+    gbifID, species, decimalLongitude, decimalLatitude,
+    locality, nombre_ac, eventDate
+  ) |>
+  datatable(
+    colnames = c(
+      "gbifID", "Especie", "Longitud", "Latitud",
+      "Localidad", "Área de conservación", "Fecha"
+    ),
+    rownames = FALSE,
+    options = list(
+      pageLength = 10,
+      language = list(url = '//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json')
+    )
+  ) |>
+  formatRound(c("decimalLongitude", "decimalLatitude"), digits = 5)
 ```
 ````
 
