@@ -266,6 +266,27 @@ st_crs(felidos) <- 4326
 ```
 ````
 
+### Simplificación de las geometrías para los mapas
+
+Los polígonos de las áreas de conservación tienen contornos muy detallados (siguen la línea de costa y los límites naturales), con más de 340 000 vértices en total. Como el tablero los dibuja en tres mapas y cada mapa de `leaflet` incrusta la geometría dentro del propio archivo HTML, esa versión detallada haría que el HTML superara los 50 MB, con la consiguiente lentitud de carga.
+
+Para evitarlo se genera una **versión simplificada** de los polígonos, siguiendo la técnica de `st_simplify()` vista en el @sec-operaciones-geometrias. Como el argumento `dTolerance` se expresa en las unidades del CRS, se proyecta la capa al CRS métrico de Costa Rica [CRTM05 (EPSG:5367)](https://epsg.io/5367), se simplifica con una tolerancia de 500 m y se regresa a WGS84 (EPSG:4326), que es el CRS que requiere `leaflet`:
+
+```` md
+```{r}`r ''`
+# Versión simplificada de las áreas, solo para dibujarlas en los mapas
+areas_conservacion_simplificadas <-
+  areas_conservacion |>
+  st_transform(5367) |>                               # CRTM05 (metros)
+  st_simplify(dTolerance = 500, preserveTopology = TRUE) |>
+  st_transform(4326)                                  # de vuelta a WGS84
+```
+````
+
+Esta simplificación reduce los vértices de unos 340 000 a unos 2 000 (cerca de un 99 % menos) y el tamaño del HTML de más de 50 MB a unos 3 MB, sin diferencia perceptible a la escala del mapa.
+
+**¿Por qué no afecta al análisis?** Porque la simplificación se usa **únicamente para dibujar** los polígonos. El cálculo de la riqueza se hace antes, con la **unión espacial sobre las geometrías originales**: `st_join()` asigna cada registro de félido al área que lo contiene usando los bordes completos, de modo que ningún punto cambia de área por la generalización. La capa simplificada solo recibe después, mediante una unión por atributo (`left_join()` por `codigo_ac`), el valor de riqueza ya calculado. Los conteos por área son idénticos con o sin simplificación; lo único que cambia es el nivel de detalle del contorno que se muestra.
+
 ### Cajas de valor
 
 Cada caja de valor es una celda con la opción `#| content: valuebox` que devuelve una lista con el ícono, el color y el valor del indicador. Las tres se agrupan en una fila. La última toma el título de la propia lista (en lugar de la opción `#| title:`) para incluir dinámicamente la riqueza máxima, y muestra todas las áreas que la alcanzan (puede haber empate):
@@ -309,7 +330,7 @@ leaflet() |>
   setView(lng = -84.2, lat = 9.6, zoom = 7) |>
   addProviderTiles(providers$OpenStreetMap, group = "OpenStreetMap") |>
   addProviderTiles(providers$CartoDB.Positron, group = "CartoDB Positron") |>
-  addPolygons(data = areas_conservacion, weight = 1, color = "black", fillOpacity = 0,
+  addPolygons(data = areas_conservacion_simplificadas, weight = 1, color = "black", fillOpacity = 0,
               label = ~nombre_ac, group = "Áreas de conservación") |>
   addMarkers(data = felidos, label = ~species,
              clusterOptions = markerClusterOptions(), group = "Félidos") |>
@@ -323,7 +344,7 @@ leaflet() |>
 leaflet() |>
   setView(lng = -84.2, lat = 9.6, zoom = 7) |>
   addProviderTiles(providers$OpenStreetMap, group = "OpenStreetMap") |>
-  addPolygons(data = areas_conservacion, weight = 1, color = "black", fillOpacity = 0,
+  addPolygons(data = areas_conservacion_simplificadas, weight = 1, color = "black", fillOpacity = 0,
               label = ~nombre_ac, group = "Áreas de conservación") |>
   addHeatmap(data = felidos, radius = 15, blur = 20, minOpacity = 0.3,
              group = "Mapa de calor") |>

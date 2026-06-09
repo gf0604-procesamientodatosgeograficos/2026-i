@@ -79,8 +79,9 @@ felidos <- felidos |>
 #| message: false
 #| warning: false
 
-# Unión espacial: a cada registro de félido se le agrega
-# el código del área de conservación que lo contiene
+# Unión espacial: a cada registro de félido se le agrega el código del área
+# de conservación que lo contiene. Se usan las geometrías ORIGINALES (sin
+# simplificar), para no perder precisión en los bordes de los polígonos.
 felidos_union_areas <- st_join(
   x = felidos,
   y = dplyr::select(areas_conservacion, codigo_ac, nombre_ac, siglas_ac),
@@ -95,11 +96,21 @@ riqueza_felidos_areas <-
   group_by(codigo_ac) |>
   summarize(riqueza_especies_felidos = n_distinct(species, na.rm = TRUE))
 
-# A los polígonos de áreas se les agrega la columna de riqueza;
-# las áreas sin registros reciben 0 en lugar de NA.
+# Versión SIMPLIFICADA de las áreas, solo para dibujarlas en los mapas.
+# La tolerancia se expresa en metros, por lo que se proyecta a CRTM05
+# (EPSG:5367) antes de simplificar y se regresa a WGS84 (EPSG:4326) para
+# leaflet. Esta capa NO se usa en la unión espacial anterior.
+areas_conservacion_simplificadas <-
+  areas_conservacion |>
+  st_transform(5367) |>
+  st_simplify(dTolerance = 500, preserveTopology = TRUE) |>
+  st_transform(4326)
+
+# A los polígonos SIMPLIFICADOS se les agrega la columna de riqueza (unión
+# por atributo, no espacial); las áreas sin registros reciben 0 en lugar de NA.
 areas_union_riqueza <-
   left_join(
-    x = areas_conservacion,
+    x = areas_conservacion_simplificadas,
     y = riqueza_felidos_areas,
     by = "codigo_ac"
   ) |>
@@ -184,7 +195,7 @@ leaflet() |>
   addProviderTiles(providers$CartoDB.Positron,  group = "CartoDB Positron") |>
   addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
   addPolygons(
-    data        = areas_conservacion,
+    data        = areas_conservacion_simplificadas,
     weight      = 1,
     color       = "black",
     fillOpacity = 0,
@@ -219,7 +230,7 @@ leaflet() |>
   addProviderTiles(providers$CartoDB.Positron,  group = "CartoDB Positron") |>
   addProviderTiles(providers$Esri.WorldImagery, group = "Imágenes Esri") |>
   addPolygons(
-    data        = areas_conservacion,
+    data        = areas_conservacion_simplificadas,
     weight      = 1,
     color       = "black",
     fillOpacity = 0,

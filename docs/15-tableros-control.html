@@ -454,12 +454,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#estructura-del-tablero" id="toc-estructura-del-tablero" class="nav-link" data-scroll-target="#estructura-del-tablero"><span class="header-section-number">15.7.1</span> Estructura del tablero</a></li>
   <li><a href="#encabezado-yaml" id="toc-encabezado-yaml" class="nav-link" data-scroll-target="#encabezado-yaml"><span class="header-section-number">15.7.2</span> Encabezado YAML</a></li>
   <li><a href="#carga-de-paquetes-y-datos" id="toc-carga-de-paquetes-y-datos" class="nav-link" data-scroll-target="#carga-de-paquetes-y-datos"><span class="header-section-number">15.7.3</span> Carga de paquetes y datos</a></li>
-  <li><a href="#cajas-de-valor-1" id="toc-cajas-de-valor-1" class="nav-link" data-scroll-target="#cajas-de-valor-1"><span class="header-section-number">15.7.4</span> Cajas de valor</a></li>
-  <li><a href="#mapas" id="toc-mapas" class="nav-link" data-scroll-target="#mapas"><span class="header-section-number">15.7.5</span> Mapas</a></li>
-  <li><a href="#gráfico" id="toc-gráfico" class="nav-link" data-scroll-target="#gráfico"><span class="header-section-number">15.7.6</span> Gráfico</a></li>
-  <li><a href="#tabla" id="toc-tabla" class="nav-link" data-scroll-target="#tabla"><span class="header-section-number">15.7.7</span> Tabla</a></li>
-  <li><a href="#publicación" id="toc-publicación" class="nav-link" data-scroll-target="#publicación"><span class="header-section-number">15.7.8</span> Publicación</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">15.7.9</span> Ejercicios</a></li>
+  <li><a href="#simplificación-de-las-geometrías-para-los-mapas" id="toc-simplificación-de-las-geometrías-para-los-mapas" class="nav-link" data-scroll-target="#simplificación-de-las-geometrías-para-los-mapas"><span class="header-section-number">15.7.4</span> Simplificación de las geometrías para los mapas</a></li>
+  <li><a href="#cajas-de-valor-1" id="toc-cajas-de-valor-1" class="nav-link" data-scroll-target="#cajas-de-valor-1"><span class="header-section-number">15.7.5</span> Cajas de valor</a></li>
+  <li><a href="#mapas" id="toc-mapas" class="nav-link" data-scroll-target="#mapas"><span class="header-section-number">15.7.6</span> Mapas</a></li>
+  <li><a href="#gráfico" id="toc-gráfico" class="nav-link" data-scroll-target="#gráfico"><span class="header-section-number">15.7.7</span> Gráfico</a></li>
+  <li><a href="#tabla" id="toc-tabla" class="nav-link" data-scroll-target="#tabla"><span class="header-section-number">15.7.8</span> Tabla</a></li>
+  <li><a href="#publicación" id="toc-publicación" class="nav-link" data-scroll-target="#publicación"><span class="header-section-number">15.7.9</span> Publicación</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">15.7.10</span> Ejercicios</a></li>
   </ul></li>
   <li><a href="#recursos-adicionales" id="toc-recursos-adicionales" class="nav-link" data-scroll-target="#recursos-adicionales"><span class="header-section-number">15.8</span> Recursos adicionales</a></li>
   </ul>
@@ -726,139 +727,154 @@ Figura&nbsp;15.1: Tablero de control desarrollado con Quarto Dashboards. Fuente:
 <span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(felidos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
 <span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="cajas-de-valor-1" class="level3" data-number="15.7.4">
-<h3 data-number="15.7.4" class="anchored" data-anchor-id="cajas-de-valor-1"><span class="header-section-number">15.7.4</span> Cajas de valor</h3>
-<p>Cada caja de valor es una celda con la opción <code>#| content: valuebox</code> que devuelve una lista con el ícono, el color y el valor del indicador. Las tres se agrupan en una fila. La última toma el título de la propia lista (en lugar de la opción <code>#| title:</code>) para incluir dinámicamente la riqueza máxima, y muestra todas las áreas que la alcanzan (puede haber empate):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height=15%}</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros de presencia"</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">icon =</span> <span class="st">"binoculars"</span>, <span class="at">color =</span> <span class="st">"primary"</span>, <span class="at">value =</span> total_registros)</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Riqueza de especies"</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">icon =</span> <span class="st">"diagram-3"</span>, <span class="at">color =</span> <span class="st">"success"</span>, <span class="at">value =</span> total_especies)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">icon  =</span> <span class="st">"trophy"</span>,</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"warning"</span>,</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Áreas de conservación con mayor riqueza ("</span>, riqueza_maxima, <span class="st">" especies)"</span>),</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> siglas_areas_mayor_riqueza</span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="simplificación-de-las-geometrías-para-los-mapas" class="level3" data-number="15.7.4">
+<h3 data-number="15.7.4" class="anchored" data-anchor-id="simplificación-de-las-geometrías-para-los-mapas"><span class="header-section-number">15.7.4</span> Simplificación de las geometrías para los mapas</h3>
+<p>Los polígonos de las áreas de conservación tienen contornos muy detallados (siguen la línea de costa y los límites naturales), con más de 340 000 vértices en total. Como el tablero los dibuja en tres mapas y cada mapa de <code>leaflet</code> incrusta la geometría dentro del propio archivo HTML, esa versión detallada haría que el HTML superara los 50 MB, con la consiguiente lentitud de carga.</p>
+<p>Para evitarlo se genera una <strong>versión simplificada</strong> de los polígonos, siguiendo la técnica de <code>st_simplify()</code> vista en el <a href="14-operaciones-datos-geometrias.html" class="quarto-xref"><span>Capítulo 14</span></a>. Como el argumento <code>dTolerance</code> se expresa en las unidades del CRS, se proyecta la capa al CRS métrico de Costa Rica <a href="https://epsg.io/5367">CRTM05 (EPSG:5367)</a>, se simplifica con una tolerancia de 500 m y se regresa a WGS84 (EPSG:4326), que es el CRS que requiere <code>leaflet</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Versión simplificada de las áreas, solo para dibujarlas en los mapas</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>areas_conservacion_simplificadas <span class="ot">&lt;-</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  areas_conservacion <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">5367</span>) <span class="sc">|&gt;</span>                               <span class="co"># CRTM05 (metros)</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">500</span>, <span class="at">preserveTopology =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>)                                  <span class="co"># de vuelta a WGS84</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Esta simplificación reduce los vértices de unos 340 000 a unos 2 000 (cerca de un 99 % menos) y el tamaño del HTML de más de 50 MB a unos 3 MB, sin diferencia perceptible a la escala del mapa.</p>
+<p><strong>¿Por qué no afecta al análisis?</strong> Porque la simplificación se usa <strong>únicamente para dibujar</strong> los polígonos. El cálculo de la riqueza se hace antes, con la <strong>unión espacial sobre las geometrías originales</strong>: <code>st_join()</code> asigna cada registro de félido al área que lo contiene usando los bordes completos, de modo que ningún punto cambia de área por la generalización. La capa simplificada solo recibe después, mediante una unión por atributo (<code>left_join()</code> por <code>codigo_ac</code>), el valor de riqueza ya calculado. Los conteos por área son idénticos con o sin simplificación; lo único que cambia es el nivel de detalle del contorno que se muestra.</p>
 </section>
-<section id="mapas" class="level3" data-number="15.7.5">
-<h3 data-number="15.7.5" class="anchored" data-anchor-id="mapas"><span class="header-section-number">15.7.5</span> Mapas</h3>
-<p>La columna izquierda se declara como <code>.tabset</code> para que cada mapa ocupe una pestaña. El mapa de registros agrupados y el mapa de calor se construyen con <code>leaflet</code> y <code>leaflet.extras</code> (técnicas vistas en el <a href="13-operaciones-datos-espaciales.html" class="quarto-xref"><span>Capítulo 13</span></a>), mientras que el mapa de coropletas de riqueza usa <code>tmap</code> (como en el <a href="ejemplo-riqueza-felidos.html" class="quarto-xref"><span>Apéndice A</span></a>):</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column {width=60% .tabset}</span></span>
+<section id="cajas-de-valor-1" class="level3" data-number="15.7.5">
+<h3 data-number="15.7.5" class="anchored" data-anchor-id="cajas-de-valor-1"><span class="header-section-number">15.7.5</span> Cajas de valor</h3>
+<p>Cada caja de valor es una celda con la opción <code>#| content: valuebox</code> que devuelve una lista con el ícono, el color y el valor del indicador. Las tres se agrupan en una fila. La última toma el título de la propia lista (en lugar de la opción <code>#| title:</code>) para incluir dinámicamente la riqueza máxima, y muestra todas las áreas que la alcanzan (puede haber empate):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height=15%}</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros agrupados"</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lng =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap, <span class="at">group =</span> <span class="st">"OpenStreetMap"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>CartoDB.Positron, <span class="at">group =</span> <span class="st">"CartoDB Positron"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> areas_conservacion, <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fillOpacity =</span> <span class="dv">0</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="sc">~</span>nombre_ac, <span class="at">group =</span> <span class="st">"Áreas de conservación"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">data =</span> felidos, <span class="at">label =</span> <span class="sc">~</span>species,</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">clusterOptions =</span> <span class="fu">markerClusterOptions</span>(), <span class="at">group =</span> <span class="st">"Félidos"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLayersControl</span>(<span class="at">baseGroups =</span> <span class="fu">c</span>(<span class="st">"OpenStreetMap"</span>, <span class="st">"CartoDB Positron"</span>),</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">overlayGroups =</span> <span class="fu">c</span>(<span class="st">"Áreas de conservación"</span>, <span class="st">"Félidos"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addScaleBar</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>)</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Mapa de calor"</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lng =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap, <span class="at">group =</span> <span class="st">"OpenStreetMap"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> areas_conservacion, <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fillOpacity =</span> <span class="dv">0</span>,</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="sc">~</span>nombre_ac, <span class="at">group =</span> <span class="st">"Áreas de conservación"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addHeatmap</span>(<span class="at">data =</span> felidos, <span class="at">radius =</span> <span class="dv">15</span>, <span class="at">blur =</span> <span class="dv">20</span>, <span class="at">minOpacity =</span> <span class="fl">0.3</span>,</span>
-<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> <span class="st">"Mapa de calor"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addScaleBar</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>)</span>
-<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Riqueza por área de conservación"</span></span>
-<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_view</span>(<span class="at">set_view =</span> <span class="fu">c</span>(<span class="at">lon =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">7</span>)) <span class="sc">+</span></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_basemap</span>(<span class="fu">c</span>(<span class="st">"OpenStreetMap"</span>, <span class="st">"Esri.WorldImagery"</span>)) <span class="sc">+</span></span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(areas_union_riqueza, <span class="at">name =</span> <span class="st">"Riqueza de félidos"</span>) <span class="sc">+</span></span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_fill</span>(<span class="at">fill =</span> <span class="st">"riqueza_especies_felidos"</span>,</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>            <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(<span class="at">style =</span> <span class="st">"quantile"</span>, <span class="at">values =</span> <span class="st">"Greens"</span>),</span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>            <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>(<span class="at">title =</span> <span class="st">"Riqueza"</span>)) <span class="sc">+</span></span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="fl">0.8</span>)</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros de presencia"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">icon =</span> <span class="st">"binoculars"</span>, <span class="at">color =</span> <span class="st">"primary"</span>, <span class="at">value =</span> total_registros)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Riqueza de especies"</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">icon =</span> <span class="st">"diagram-3"</span>, <span class="at">color =</span> <span class="st">"success"</span>, <span class="at">value =</span> total_especies)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">icon  =</span> <span class="st">"trophy"</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">color =</span> <span class="st">"warning"</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="fu">paste0</span>(<span class="st">"Áreas de conservación con mayor riqueza ("</span>, riqueza_maxima, <span class="st">" especies)"</span>),</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> siglas_areas_mayor_riqueza</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="gráfico" class="level3" data-number="15.7.6">
-<h3 data-number="15.7.6" class="anchored" data-anchor-id="gráfico"><span class="header-section-number">15.7.6</span> Gráfico</h3>
-<p>La columna derecha contiene un gráfico de barras horizontales con la riqueza de félidos por área de conservación. Siguiendo el flujo visto en el <a href="10-ggplot2-plotly.html" class="quarto-xref"><span>Capítulo 10</span></a>, el gráfico se construye primero con <code>ggplot2</code> y luego se convierte en interactivo con <code>ggplotly()</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column {width=40%}</span></span>
+<section id="mapas" class="level3" data-number="15.7.6">
+<h3 data-number="15.7.6" class="anchored" data-anchor-id="mapas"><span class="header-section-number">15.7.6</span> Mapas</h3>
+<p>La columna izquierda se declara como <code>.tabset</code> para que cada mapa ocupe una pestaña. El mapa de registros agrupados y el mapa de calor se construyen con <code>leaflet</code> y <code>leaflet.extras</code> (técnicas vistas en el <a href="13-operaciones-datos-espaciales.html" class="quarto-xref"><span>Capítulo 13</span></a>), mientras que el mapa de coropletas de riqueza usa <code>tmap</code> (como en el <a href="ejemplo-riqueza-felidos.html" class="quarto-xref"><span>Apéndice A</span></a>):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column {width=60% .tabset}</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Riqueza por área de conservación"</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>grafico_riqueza <span class="ot">&lt;-</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  areas_union_riqueza <span class="sc">|&gt;</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> riqueza_especies_felidos,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">reorder</span>(siglas_ac, riqueza_especies_felidos)</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"#41ab5d"</span>,</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Área de conservación: "</span>, nombre_ac, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Riqueza de félidos: "</span>, riqueza_especies_felidos</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    ))</span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Riqueza de especies de félidos por área de conservación"</span>) <span class="sc">+</span></span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Riqueza de especies de félidos"</span>) <span class="sc">+</span></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Área de conservación"</span>) <span class="sc">+</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(grafico_riqueza, <span class="at">tooltip =</span> <span class="st">"text"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">config</span>(<span class="at">locale =</span> <span class="st">"es"</span>)</span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros agrupados"</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lng =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap, <span class="at">group =</span> <span class="st">"OpenStreetMap"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>CartoDB.Positron, <span class="at">group =</span> <span class="st">"CartoDB Positron"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> areas_conservacion_simplificadas, <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fillOpacity =</span> <span class="dv">0</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="sc">~</span>nombre_ac, <span class="at">group =</span> <span class="st">"Áreas de conservación"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addMarkers</span>(<span class="at">data =</span> felidos, <span class="at">label =</span> <span class="sc">~</span>species,</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">clusterOptions =</span> <span class="fu">markerClusterOptions</span>(), <span class="at">group =</span> <span class="st">"Félidos"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addLayersControl</span>(<span class="at">baseGroups =</span> <span class="fu">c</span>(<span class="st">"OpenStreetMap"</span>, <span class="st">"CartoDB Positron"</span>),</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                   <span class="at">overlayGroups =</span> <span class="fu">c</span>(<span class="st">"Áreas de conservación"</span>, <span class="st">"Félidos"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addScaleBar</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>)</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Mapa de calor"</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">setView</span>(<span class="at">lng =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap, <span class="at">group =</span> <span class="st">"OpenStreetMap"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addPolygons</span>(<span class="at">data =</span> areas_conservacion_simplificadas, <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fillOpacity =</span> <span class="dv">0</span>,</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>              <span class="at">label =</span> <span class="sc">~</span>nombre_ac, <span class="at">group =</span> <span class="st">"Áreas de conservación"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addHeatmap</span>(<span class="at">data =</span> felidos, <span class="at">radius =</span> <span class="dv">15</span>, <span class="at">blur =</span> <span class="dv">20</span>, <span class="at">minOpacity =</span> <span class="fl">0.3</span>,</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>             <span class="at">group =</span> <span class="st">"Mapa de calor"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">addScaleBar</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>)</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Riqueza por área de conservación"</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_view</span>(<span class="at">set_view =</span> <span class="fu">c</span>(<span class="at">lon =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_basemap</span>(<span class="fu">c</span>(<span class="st">"OpenStreetMap"</span>, <span class="st">"Esri.WorldImagery"</span>)) <span class="sc">+</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(areas_union_riqueza, <span class="at">name =</span> <span class="st">"Riqueza de félidos"</span>) <span class="sc">+</span></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_fill</span>(<span class="at">fill =</span> <span class="st">"riqueza_especies_felidos"</span>,</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>            <span class="at">fill.scale =</span> <span class="fu">tm_scale_intervals</span>(<span class="at">style =</span> <span class="st">"quantile"</span>, <span class="at">values =</span> <span class="st">"Greens"</span>),</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>            <span class="at">fill.legend =</span> <span class="fu">tm_legend</span>(<span class="at">title =</span> <span class="st">"Riqueza"</span>)) <span class="sc">+</span></span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_borders</span>(<span class="at">col =</span> <span class="st">"black"</span>, <span class="at">lwd =</span> <span class="fl">0.8</span>)</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="tabla" class="level3" data-number="15.7.7">
-<h3 data-number="15.7.7" class="anchored" data-anchor-id="tabla"><span class="header-section-number">15.7.7</span> Tabla</h3>
-<p>La fila inferior ocupa todo el ancho y contiene una tabla interactiva (<code>DT</code>) con los registros de presencia de félidos a nivel individual. Cada fila incluye el identificador único <code>gbifID</code>, la especie, las coordenadas, la localidad, el área de conservación que lo contiene (de la unión espacial) y la fecha:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height=30%}</span></span>
+<section id="gráfico" class="level3" data-number="15.7.7">
+<h3 data-number="15.7.7" class="anchored" data-anchor-id="gráfico"><span class="header-section-number">15.7.7</span> Gráfico</h3>
+<p>La columna derecha contiene un gráfico de barras horizontales con la riqueza de félidos por área de conservación. Siguiendo el flujo visto en el <a href="10-ggplot2-plotly.html" class="quarto-xref"><span>Capítulo 10</span></a>, el gráfico se construye primero con <code>ggplot2</code> y luego se convierte en interactivo con <code>ggplotly()</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column {width=40%}</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros de presencia de félidos"</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>felidos_union_areas <span class="sc">|&gt;</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    gbifID, species, decimalLongitude, decimalLatitude,</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    locality, nombre_ac, eventDate</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">datatable</span>(</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">colnames =</span> <span class="fu">c</span>(</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>      <span class="st">"gbifID"</span>, <span class="st">"Especie"</span>, <span class="st">"Longitud"</span>, <span class="st">"Latitud"</span>,</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Localidad"</span>, <span class="st">"Área de conservación"</span>, <span class="st">"Fecha"</span></span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">pageLength =</span> <span class="dv">10</span>,</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">language =</span> <span class="fu">list</span>(<span class="at">url =</span> <span class="st">'//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json'</span>)</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formatRound</span>(<span class="fu">c</span>(<span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span>), <span class="at">digits =</span> <span class="dv">5</span>)</span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Riqueza por área de conservación"</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>grafico_riqueza <span class="ot">&lt;-</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  areas_union_riqueza <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> riqueza_especies_felidos,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">reorder</span>(siglas_ac, riqueza_especies_felidos)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"#41ab5d"</span>,</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Área de conservación: "</span>, nombre_ac, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Riqueza de félidos: "</span>, riqueza_especies_felidos</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Riqueza de especies de félidos por área de conservación"</span>) <span class="sc">+</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Riqueza de especies de félidos"</span>) <span class="sc">+</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Área de conservación"</span>) <span class="sc">+</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplotly</span>(grafico_riqueza, <span class="at">tooltip =</span> <span class="st">"text"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">config</span>(<span class="at">locale =</span> <span class="st">"es"</span>)</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="publicación" class="level3" data-number="15.7.8">
-<h3 data-number="15.7.8" class="anchored" data-anchor-id="publicación"><span class="header-section-number">15.7.8</span> Publicación</h3>
+<section id="tabla" class="level3" data-number="15.7.8">
+<h3 data-number="15.7.8" class="anchored" data-anchor-id="tabla"><span class="header-section-number">15.7.8</span> Tabla</h3>
+<p>La fila inferior ocupa todo el ancho y contiene una tabla interactiva (<code>DT</code>) con los registros de presencia de félidos a nivel individual. Cada fila incluye el identificador único <code>gbifID</code>, la especie, las coordenadas, la localidad, el área de conservación que lo contiene (de la unión espacial) y la fecha:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height=30%}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros de presencia de félidos"</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>felidos_union_areas <span class="sc">|&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    gbifID, species, decimalLongitude, decimalLatitude,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    locality, nombre_ac, eventDate</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">datatable</span>(</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">colnames =</span> <span class="fu">c</span>(</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>      <span class="st">"gbifID"</span>, <span class="st">"Especie"</span>, <span class="st">"Longitud"</span>, <span class="st">"Latitud"</span>,</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Localidad"</span>, <span class="st">"Área de conservación"</span>, <span class="st">"Fecha"</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>      <span class="at">pageLength =</span> <span class="dv">10</span>,</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>      <span class="at">language =</span> <span class="fu">list</span>(<span class="at">url =</span> <span class="st">'//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json'</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">formatRound</span>(<span class="fu">c</span>(<span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span>), <span class="at">digits =</span> <span class="dv">5</span>)</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="publicación" class="level3" data-number="15.7.9">
+<h3 data-number="15.7.9" class="anchored" data-anchor-id="publicación"><span class="header-section-number">15.7.9</span> Publicación</h3>
 <p>Como el libro es un proyecto Quarto de tipo <code>book</code>, el tablero <strong>no</strong> se incluye en el índice (<code>_quarto.yml</code>): es un documento independiente que se renderiza por separado con <code>quarto render tableros/tablero-riqueza-felidos.qmd</code>. Su salida (<code>tablero-riqueza-felidos.html</code>) se ubica en <code>docs/tableros/</code>, junto al resto del sitio publicado en GitHub Pages, y se enlaza desde este capítulo mediante una ruta relativa.</p>
 </section>
-<section id="ejercicios" class="level3" data-number="15.7.9">
-<h3 data-number="15.7.9" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">15.7.9</span> Ejercicios</h3>
+<section id="ejercicios" class="level3" data-number="15.7.10">
+<h3 data-number="15.7.10" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">15.7.10</span> Ejercicios</h3>
 <ol type="1">
 <li><p>Agregue al tablero una cuarta pestaña con el <strong>mapa estático</strong> de riqueza por área de conservación (<code>tmap_mode("plot")</code>), como el que se construye en el <a href="ejemplo-riqueza-felidos.html" class="quarto-xref"><span>Apéndice A</span></a>.</p></li>
 <li><p>Agregue una caja de valor adicional con la <strong>cantidad de áreas de conservación con presencia</strong> de félidos (es decir, con riqueza mayor que cero).</p></li>
