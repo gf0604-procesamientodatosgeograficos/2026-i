@@ -31,7 +31,7 @@ Cada persona estudiante o pareja debe mostrar que es capaz de:
 ### 1. Conjunto de datos
 - Si cuenta con datos espaciales, puede usarse el **mismo conjunto de datos de las tareas anteriores** (o cualquiera de los que usó algún miembro del equipo, si se trabaja en parejas) o puede elegirse un **conjunto de datos diferente**, en formato vectorial o raster.
 - También puede **complementarse** el conjunto de datos usado en las tareas anteriores (ej. un archivo CSV) con datos espaciales (ej. polígonos de países, provincias, cantones) mediante **uniones (*joins*) espaciales o no espaciales**.
-- Los archivos de datos deben quedar incluidos en el repositorio del proyecto (o cargarse desde una URL estable).
+- Los archivos de datos deben quedar incluidos en el repositorio del proyecto.
 
 ### 2. Tablero Quarto
 - Cree un documento Quarto llamado **`index.qmd`** con **`format: dashboard`**.
@@ -52,7 +52,7 @@ Cada persona estudiante o pareja debe mostrar que es capaz de:
     - Capa de coropletas.
     - Capa de puntos agrupados (*clustering*).
     - Mapa de calor (*heatmap*).
-- Se recomienda incluir un **control de capas** y una **leyenda**, cuando corresponda.
+- Debe incluirse un **control de capas** y una **leyenda** (cuando corresponda).
 
 ### 5. Gráficos estadísticos interactivos
 - Incluya al menos **dos gráficos estadísticos interactivos**, con los mismos lineamientos de la tarea anterior: programados con `ggplot2` y convertidos con `plotly::ggplotly()` (o construidos directamente con `plot_ly()`, en el caso de los gráficos de pastel).
@@ -67,7 +67,6 @@ Cada persona estudiante o pareja debe mostrar que es capaz de:
 
 ### 7. Operación de análisis
 - Aplique al menos **una operación de análisis** sobre el conjunto de datos, como por ejemplo:
-  - **Unión (*join*)** espacial (ej. `st_join()`) o no espacial (ej. `left_join()`).
   - **Agrupación** con `group_by()` seguida de `summarize()`, o `count()`.
   - **Filtrado** con `filter()` y expresiones lógicas.
 - Al menos **una de las capas del mapa** y **uno de los gráficos** (como en la tarea anterior) deben mostrar el resultado de esa operación.
@@ -92,7 +91,7 @@ El repositorio debe contener al menos los siguientes archivos:
 
 - `index.qmd` — el documento fuente Quarto del tablero.
 - `index.html` — el tablero renderizado.
-- Los **archivos de datos** (salvo que se carguen desde una URL estable).
+- Los **archivos de datos** con el conjunto de datos.
 - El directorio **`index_files/`** generado por Quarto al renderizar.
 
 ---
@@ -101,13 +100,13 @@ El repositorio debe contener al menos los siguientes archivos:
 
 | Criterio | Descripción | Puntos |
 |---|---|---:|
-| **Tablero Quarto** | El archivo `index.qmd` usa `format: dashboard`; está bien estructurado en filas y columnas; configurado para el idioma español; tiene un título descriptivo; y se renderiza correctamente a `index.html`. | 10 |
+| **Tablero Quarto** | El archivo `index.qmd` usa `format: dashboard`; está bien estructurado en filas y columnas; configurado para el idioma español; tiene un título descriptivo; se renderiza correctamente a `index.html`; y no despliega mensajes, advertencias u otros textos similares. | 10 |
 | **Cajas de valor** | Hay al menos tres cajas de valor, cada una con título, ícono y un valor representativo del conjunto de datos. | 15 |
 | **Mapa interactivo** | Hay al menos un mapa interactivo con al menos una capa base y una capa que muestra el resultado de la operación de análisis (ej. coropletas, puntos agrupados, mapa de calor). | 15 |
-| **Operación de análisis** | Se aplica correctamente al menos una operación de análisis (ej. unión espacial o no espacial, agrupación, filtrado). | 10 |
+| **Operación de análisis** | Se aplica correctamente al menos una operación de análisis (ej. agrupación, filtrado). | 10 |
 | **Gráfico 1** | Interactivo, con título, etiquetas en los ejes y colores, y muestra un aspecto interesante del conjunto de datos. | 10 |
 | **Gráfico 2** | Interactivo, con título, etiquetas en los ejes y colores, y muestra el resultado de la operación de análisis. | 10 |
 | **Tabla interactiva** | Generada con `DT::datatable()`, con paginación, búsqueda y ordenamiento. | 10 |
 | **Publicación en GitHub Pages** | El sitio está publicado y la URL entregada es accesible públicamente. | 10 |
-| **Repositorio** | El repositorio contiene `index.qmd`, `index.html`, los archivos de datos (si corresponde) y el directorio `index_files/`. | 10 |
+| **Repositorio** | El repositorio contiene `index.qmd`, `index.html`, los archivos de datos y el directorio `index_files/`. | 10 |
 | **Total** | | **100** |

@@ -462,7 +462,7 @@ Lunes 22 de junio a las 11:59 p.m. a través de Mediación Virtual.</p>
 <ul>
 <li>Si cuenta con datos espaciales, puede usarse el <strong>mismo conjunto de datos de las tareas anteriores</strong> (o cualquiera de los que usó algún miembro del equipo, si se trabaja en parejas) o puede elegirse un <strong>conjunto de datos diferente</strong>, en formato vectorial o raster.</li>
 <li>También puede <strong>complementarse</strong> el conjunto de datos usado en las tareas anteriores (ej. un archivo CSV) con datos espaciales (ej. polígonos de países, provincias, cantones) mediante <strong>uniones (<em>joins</em>) espaciales o no espaciales</strong>.</li>
-<li>Los archivos de datos deben quedar incluidos en el repositorio del proyecto (o cargarse desde una URL estable).</li>
+<li>Los archivos de datos deben quedar incluidos en el repositorio del proyecto.</li>
 </ul>
 </section>
 <section id="tablero-quarto" class="level3">
@@ -498,7 +498,7 @@ Lunes 22 de junio a las 11:59 p.m. a través de Mediación Virtual.</p>
 <li>Mapa de calor (<em>heatmap</em>).</li>
 </ul></li>
 </ul></li>
-<li>Se recomienda incluir un <strong>control de capas</strong> y una <strong>leyenda</strong>, cuando corresponda.</li>
+<li>Debe incluirse un <strong>control de capas</strong> y una <strong>leyenda</strong> (cuando corresponda).</li>
 </ul>
 </section>
 <section id="gráficos-estadísticos-interactivos" class="level3">
@@ -525,7 +525,6 @@ Lunes 22 de junio a las 11:59 p.m. a través de Mediación Virtual.</p>
 <ul>
 <li>Aplique al menos <strong>una operación de análisis</strong> sobre el conjunto de datos, como por ejemplo:
 <ul>
-<li><strong>Unión (<em>join</em>)</strong> espacial (ej. <code>st_join()</code>) o no espacial (ej. <code>left_join()</code>).</li>
 <li><strong>Agrupación</strong> con <code>group_by()</code> seguida de <code>summarize()</code>, o <code>count()</code>.</li>
 <li><strong>Filtrado</strong> con <code>filter()</code> y expresiones lógicas.</li>
 </ul></li>
@@ -554,7 +553,7 @@ Lunes 22 de junio a las 11:59 p.m. a través de Mediación Virtual.</p>
 <ul>
 <li><code>index.qmd</code> — el documento fuente Quarto del tablero.</li>
 <li><code>index.html</code> — el tablero renderizado.</li>
-<li>Los <strong>archivos de datos</strong> (salvo que se carguen desde una URL estable).</li>
+<li>Los <strong>archivos de datos</strong> con el conjunto de datos.</li>
 <li>El directorio <strong><code>index_files/</code></strong> generado por Quarto al renderizar.</li>
 </ul>
 <hr>
@@ -577,7 +576,7 @@ Lunes 22 de junio a las 11:59 p.m. a través de Mediación Virtual.</p>
 <tbody>
 <tr class="odd">
 <td><strong>Tablero Quarto</strong></td>
-<td>El archivo <code>index.qmd</code> usa <code>format: dashboard</code>; está bien estructurado en filas y columnas; configurado para el idioma español; tiene un título descriptivo; y se renderiza correctamente a <code>index.html</code>.</td>
+<td>El archivo <code>index.qmd</code> usa <code>format: dashboard</code>; está bien estructurado en filas y columnas; configurado para el idioma español; tiene un título descriptivo; se renderiza correctamente a <code>index.html</code>; y no despliega mensajes, advertencias u otros textos similares.</td>
 <td style="text-align: right;">10</td>
 </tr>
 <tr class="even">
@@ -592,7 +591,7 @@ Lunes 22 de junio a las 11:59 p.m. a través de Mediación Virtual.</p>
 </tr>
 <tr class="even">
 <td><strong>Operación de análisis</strong></td>
-<td>Se aplica correctamente al menos una operación de análisis (ej. unión espacial o no espacial, agrupación, filtrado).</td>
+<td>Se aplica correctamente al menos una operación de análisis (ej. agrupación, filtrado).</td>
 <td style="text-align: right;">10</td>
 </tr>
 <tr class="odd">
@@ -617,7 +616,7 @@ Lunes 22 de junio a las 11:59 p.m. a través de Mediación Virtual.</p>
 </tr>
 <tr class="odd">
 <td><strong>Repositorio</strong></td>
-<td>El repositorio contiene <code>index.qmd</code>, <code>index.html</code>, los archivos de datos (si corresponde) y el directorio <code>index_files/</code>.</td>
+<td>El repositorio contiene <code>index.qmd</code>, <code>index.html</code>, los archivos de datos y el directorio <code>index_files/</code>.</td>
 <td style="text-align: right;">10</td>
 </tr>
 <tr class="even">
