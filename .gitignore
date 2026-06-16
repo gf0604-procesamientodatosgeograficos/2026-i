@@ -49,6 +49,11 @@ rsconnect/
 /.quarto/
 **/*.quarto_ipynb
 
+# Artefactos de `quarto serve` de apps Shiny (no se publican; el sitio va en docs/)
+tableros/*.html
+tableros/*_files/
+tableros/*_data/
+
 # Exámenes (no publicar en repo público)
 examenes/
 examenes-ciclos-anteriores/
