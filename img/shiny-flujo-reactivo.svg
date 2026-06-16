@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 420" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="fr-flecha-azul" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#1f78b4"/>
+    </marker>
+    <marker id="fr-flecha-verde" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#41ab5d"/>
+    </marker>
+  </defs>
+
+  <!-- Título -->
+  <text x="430" y="32" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">Flujo reactivo de la aplicación de félidos</text>
+
+  <!-- Encabezados de columnas -->
+  <text x="120" y="72" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f78b4">Controles de entrada</text>
+  <text x="430" y="72" text-anchor="middle" font-size="14" font-weight="bold" fill="#b35900">Función reactiva</text>
+  <text x="740" y="72" text-anchor="middle" font-size="14" font-weight="bold" fill="#2e8b57">Controles de salida</text>
+
+  <!-- ===== Entradas (input) ===== -->
+  <rect x="20" y="120" width="200" height="64" rx="10" fill="#eaf3fb" stroke="#1f78b4" stroke-width="2"/>
+  <text x="120" y="148" text-anchor="middle" font-size="13" fill="#333">selectInput</text>
+  <text x="120" y="168" text-anchor="middle" font-size="13" font-family="monospace" fill="#1f78b4">input$especie</text>
+
+  <rect x="20" y="236" width="200" height="64" rx="10" fill="#eaf3fb" stroke="#1f78b4" stroke-width="2"/>
+  <text x="120" y="264" text-anchor="middle" font-size="13" fill="#333">selectInput</text>
+  <text x="120" y="284" text-anchor="middle" font-size="13" font-family="monospace" fill="#1f78b4">input$area</text>
+
+  <!-- ===== Función reactiva (centro) ===== -->
+  <rect x="320" y="150" width="220" height="120" rx="12" fill="#fff3e0" stroke="#b35900" stroke-width="2.5"/>
+  <text x="430" y="185" text-anchor="middle" font-size="14" font-weight="bold" font-family="monospace" fill="#b35900">felidos_filtrados()</text>
+  <text x="430" y="212" text-anchor="middle" font-size="12" fill="#555">Aplica los filtros</text>
+  <text x="430" y="230" text-anchor="middle" font-size="12" fill="#555">una sola vez con</text>
+  <text x="430" y="252" text-anchor="middle" font-size="12" font-family="monospace" fill="#b35900">reactive()</text>
+
+  <!-- ===== Salidas (output) ===== -->
+  <rect x="640" y="92" width="200" height="58" rx="10" fill="#eafaf0" stroke="#41ab5d" stroke-width="2"/>
+  <text x="740" y="116" text-anchor="middle" font-size="13" fill="#333">renderLeaflet → mapa</text>
+  <text x="740" y="136" text-anchor="middle" font-size="13" font-family="monospace" fill="#2e8b57">output$mapa</text>
+
+  <rect x="640" y="180" width="200" height="58" rx="10" fill="#eafaf0" stroke="#41ab5d" stroke-width="2"/>
+  <text x="740" y="204" text-anchor="middle" font-size="13" fill="#333">renderPlotly → gráfico</text>
+  <text x="740" y="224" text-anchor="middle" font-size="13" font-family="monospace" fill="#2e8b57">output$grafico</text>
+
+  <rect x="640" y="268" width="200" height="58" rx="10" fill="#eafaf0" stroke="#41ab5d" stroke-width="2"/>
+  <text x="740" y="292" text-anchor="middle" font-size="13" fill="#333">renderDataTable → tabla</text>
+  <text x="740" y="312" text-anchor="middle" font-size="13" font-family="monospace" fill="#2e8b57">output$tabla</text>
+
+  <!-- Flechas entrada -> reactiva -->
+  <line x1="220" y1="152" x2="320" y2="186" stroke="#1f78b4" stroke-width="2.5" marker-end="url(#fr-flecha-azul)"/>
+  <line x1="220" y1="268" x2="320" y2="234" stroke="#1f78b4" stroke-width="2.5" marker-end="url(#fr-flecha-azul)"/>
+
+  <!-- Flechas reactiva -> salidas -->
+  <line x1="540" y1="190" x2="640" y2="123" stroke="#41ab5d" stroke-width="2.5" marker-end="url(#fr-flecha-verde)"/>
+  <line x1="540" y1="210" x2="640" y2="209" stroke="#41ab5d" stroke-width="2.5" marker-end="url(#fr-flecha-verde)"/>
+  <line x1="540" y1="230" x2="640" y2="297" stroke="#41ab5d" stroke-width="2.5" marker-end="url(#fr-flecha-verde)"/>
+
+  <!-- Pie -->
+  <text x="430" y="375" text-anchor="middle" font-size="12" fill="#777">Al cambiar un filtro, la función reactiva se recalcula una vez y las tres salidas se actualizan.</text>
+</svg>

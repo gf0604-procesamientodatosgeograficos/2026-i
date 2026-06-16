@@ -52,6 +52,10 @@ Una aplicación Shiny tiene dos componentes principales:
 
 2. **Servidor**: un proceso de R que recibe las entradas, realiza el procesamiento necesario para generar las salidas y devuelve los resultados a la interfaz de usuario.
 
+La @fig-shiny-cliente-servidor ilustra esta relación entre el cliente (la interfaz de usuario que se ejecuta en el navegador de la persona usuaria) y el servidor (el proceso de R). El cliente envía al servidor los valores de los controles de entrada (`input`) y el servidor le devuelve los resultados (`output`) que se despliegan en los controles de salida.
+
+![Relación entre el cliente (interfaz de usuario) y el servidor (proceso de R) en una aplicación Shiny.](img/shiny-cliente-servidor.svg){#fig-shiny-cliente-servidor .lightbox fig-alt="Relación entre el cliente y el servidor en una aplicación Shiny: el cliente envía los valores de entrada (input) al servidor y este devuelve los resultados (output)" fig-align="center"}
+
 La interfaz y el servidor se comunican a través de dos listas:
 
 - `input` contiene los valores de los controles de entrada. Cada control de entrada tiene un identificador único (`inputId`); por ejemplo, un control con `inputId = "especie"` se referencia en el servidor como `input$especie`.
@@ -65,6 +69,10 @@ En una aplicación Shiny escrita con Quarto, los bloques de código en R se ejec
 - `#| context: data`: carga los datos que deben compartir todos los bloques. Se ejecuta una sola vez y su resultado queda disponible para la interfaz y el servidor.
 - `#| context: server`: contiene el código del servidor (funciones reactivas y funciones `render*`). Se ejecuta en respuesta a las acciones de la persona usuaria.
 - Sin la opción `context` (valor por defecto, `render`): el bloque pertenece a la interfaz de usuario y define controles de entrada o de salida.
+
+La @fig-shiny-contextos-codigo resume en qué sesión se ejecuta cada contexto: los bloques `setup` y `data` corren para ambas sesiones (por eso permiten compartir paquetes y datos), mientras que los bloques sin `context` pertenecen a la interfaz y los bloques `context: server` se ejecutan únicamente en el servidor.
+
+![Contextos de los bloques de código de una aplicación Shiny y la sesión en la que se ejecuta cada uno.](img/shiny-contextos-codigo.svg){#fig-shiny-contextos-codigo .lightbox fig-alt="Diagrama de los contextos setup, data, server y el contexto por defecto, indicando que setup y data se ejecutan en ambas sesiones, los bloques sin contexto en la interfaz y los bloques server en el servidor" fig-align="center"}
 
 ### Funciones reactivas
 
@@ -417,6 +425,10 @@ output$tabla <- renderDataTable({
 ````
 
 Nótese cómo cada función `render*` invoca `felidos_filtrados()` (con paréntesis). Gracias a la reactividad, cuando la persona usuaria cambia un filtro, las tres salidas se recalculan automáticamente.
+
+La @fig-shiny-flujo-reactivo muestra el flujo reactivo completo de la aplicación: los dos controles de entrada (`input$especie` e `input$area`) alimentan la función reactiva `felidos_filtrados()`, cuyo resultado comparten las tres funciones `render*` que generan el mapa, el gráfico y la tabla.
+
+![Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten las tres salidas.](img/shiny-flujo-reactivo.svg){#fig-shiny-flujo-reactivo .lightbox fig-alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla" fig-align="center"}
 
 ### Ejecución local
 

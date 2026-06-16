@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 470" font-family="Helvetica, Arial, sans-serif">
+  <!-- Título -->
+  <text x="410" y="32" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">Contextos de los bloques de código</text>
+
+  <!-- Encabezados de las dos sesiones -->
+  <rect x="30" y="58" width="370" height="40" rx="8" fill="#eaf3fb" stroke="#1f78b4" stroke-width="2"/>
+  <text x="215" y="84" text-anchor="middle" font-size="15" font-weight="bold" fill="#1f78b4">Sesión de la interfaz (navegador)</text>
+
+  <rect x="420" y="58" width="370" height="40" rx="8" fill="#eafaf0" stroke="#41ab5d" stroke-width="2"/>
+  <text x="605" y="84" text-anchor="middle" font-size="15" font-weight="bold" fill="#2e8b57">Sesión del servidor (R)</text>
+
+  <!-- context: setup (abarca ambas sesiones) -->
+  <rect x="30" y="112" width="760" height="74" rx="10" fill="#f3effa" stroke="#7c4dbe" stroke-width="2"/>
+  <text x="410" y="138" text-anchor="middle" font-size="14" font-weight="bold" font-family="monospace" fill="#7c4dbe">#| context: setup</text>
+  <text x="410" y="160" text-anchor="middle" font-size="12.5" fill="#555">Carga de paquetes. Se ejecuta al inicio en AMBAS sesiones.</text>
+  <text x="410" y="178" text-anchor="middle" font-size="12.5" fill="#555">library(shiny), library(leaflet), ...</text>
+
+  <!-- context: data (abarca ambas sesiones) -->
+  <rect x="30" y="198" width="760" height="74" rx="10" fill="#fff3e0" stroke="#b35900" stroke-width="2"/>
+  <text x="410" y="224" text-anchor="middle" font-size="14" font-weight="bold" font-family="monospace" fill="#b35900">#| context: data</text>
+  <text x="410" y="246" text-anchor="middle" font-size="12.5" fill="#555">Carga y preparación de datos. Se ejecuta UNA vez;</text>
+  <text x="410" y="264" text-anchor="middle" font-size="12.5" fill="#555">su resultado queda disponible para ambas sesiones.</text>
+
+  <!-- Bloques específicos de cada sesión -->
+  <!-- Interfaz: sin context -->
+  <rect x="30" y="288" width="370" height="120" rx="10" fill="#eaf3fb" stroke="#1f78b4" stroke-width="2"/>
+  <text x="215" y="314" text-anchor="middle" font-size="14" font-weight="bold" fill="#1f78b4">(sin context — valor por defecto)</text>
+  <text x="215" y="338" text-anchor="middle" font-size="12.5" fill="#555">Define los controles de la interfaz:</text>
+  <text x="215" y="360" text-anchor="middle" font-size="12.5" font-family="monospace" fill="#333">selectInput()</text>
+  <text x="215" y="380" text-anchor="middle" font-size="12.5" font-family="monospace" fill="#333">leafletOutput(), plotlyOutput(), ...</text>
+
+  <!-- Servidor: context server -->
+  <rect x="420" y="288" width="370" height="120" rx="10" fill="#eafaf0" stroke="#41ab5d" stroke-width="2"/>
+  <text x="605" y="314" text-anchor="middle" font-size="14" font-weight="bold" font-family="monospace" fill="#2e8b57">#| context: server</text>
+  <text x="605" y="338" text-anchor="middle" font-size="12.5" fill="#555">Contiene la lógica reactiva:</text>
+  <text x="605" y="360" text-anchor="middle" font-size="12.5" font-family="monospace" fill="#333">reactive()</text>
+  <text x="605" y="380" text-anchor="middle" font-size="12.5" font-family="monospace" fill="#333">renderLeaflet(), renderPlotly(), ...</text>
+
+  <!-- Pie -->
+  <text x="410" y="440" text-anchor="middle" font-size="12" fill="#777">El bloque del servidor corre en una sesión de R separada de la interfaz;</text>
+  <text x="410" y="457" text-anchor="middle" font-size="12" fill="#777">los contextos setup y data permiten compartir paquetes y datos entre ambas.</text>
+</svg>

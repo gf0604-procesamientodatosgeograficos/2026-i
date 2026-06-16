@@ -78,6 +78,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-1702ab35f4090e412b6131ee68bfb1ab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -538,6 +541,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><strong>Servidor</strong>: un proceso de R que recibe las entradas, realiza el procesamiento necesario para generar las salidas y devuelve los resultados a la interfaz de usuario.</li>
 </ol>
+<p>La <a href="#fig-shiny-cliente-servidor" class="quarto-xref">Figura&nbsp;<span>16.1</span></a> ilustra esta relación entre el cliente (la interfaz de usuario que se ejecuta en el navegador de la persona usuaria) y el servidor (el proceso de R). El cliente envía al servidor los valores de los controles de entrada (<code>input</code>) y el servidor le devuelve los resultados (<code>output</code>) que se despliegan en los controles de salida.</p>
+<div id="fig-shiny-cliente-servidor" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Relación entre el cliente y el servidor en una aplicación Shiny: el cliente envía los valores de entrada (input) al servidor y este devuelve los resultados (output)">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shiny-cliente-servidor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/shiny-cliente-servidor.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;16.1: Relación entre el cliente (interfaz de usuario) y el servidor (proceso de R) en una aplicación Shiny."><img src="img/shiny-cliente-servidor.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Relación entre el cliente y el servidor en una aplicación Shiny: el cliente envía los valores de entrada (input) al servidor y este devuelve los resultados (output)"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shiny-cliente-servidor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16.1: Relación entre el cliente (interfaz de usuario) y el servidor (proceso de R) en una aplicación Shiny.
+</figcaption>
+</figure>
+</div>
 <p>La interfaz y el servidor se comunican a través de dos listas:</p>
 <ul>
 <li><code>input</code> contiene los valores de los controles de entrada. Cada control de entrada tiene un identificador único (<code>inputId</code>); por ejemplo, un control con <code>inputId = "especie"</code> se referencia en el servidor como <code>input$especie</code>.</li>
@@ -553,6 +567,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>#| context: server</code>: contiene el código del servidor (funciones reactivas y funciones <code>render*</code>). Se ejecuta en respuesta a las acciones de la persona usuaria.</li>
 <li>Sin la opción <code>context</code> (valor por defecto, <code>render</code>): el bloque pertenece a la interfaz de usuario y define controles de entrada o de salida.</li>
 </ul>
+<p>La <a href="#fig-shiny-contextos-codigo" class="quarto-xref">Figura&nbsp;<span>16.2</span></a> resume en qué sesión se ejecuta cada contexto: los bloques <code>setup</code> y <code>data</code> corren para ambas sesiones (por eso permiten compartir paquetes y datos), mientras que los bloques sin <code>context</code> pertenecen a la interfaz y los bloques <code>context: server</code> se ejecutan únicamente en el servidor.</p>
+<div id="fig-shiny-contextos-codigo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Diagrama de los contextos setup, data, server y el contexto por defecto, indicando que setup y data se ejecutan en ambas sesiones, los bloques sin contexto en la interfaz y los bloques server en el servidor">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shiny-contextos-codigo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/shiny-contextos-codigo.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figura&nbsp;16.2: Contextos de los bloques de código de una aplicación Shiny y la sesión en la que se ejecuta cada uno."><img src="img/shiny-contextos-codigo.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama de los contextos setup, data, server y el contexto por defecto, indicando que setup y data se ejecutan en ambas sesiones, los bloques sin contexto en la interfaz y los bloques server en el servidor"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shiny-contextos-codigo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16.2: Contextos de los bloques de código de una aplicación Shiny y la sesión en la que se ejecuta cada uno.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="funciones-reactivas" class="level3" data-number="16.4.3">
 <h3 data-number="16.4.3" class="anchored" data-anchor-id="funciones-reactivas"><span class="header-section-number">16.4.3</span> Funciones reactivas</h3>
@@ -856,6 +881,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Nótese cómo cada función <code>render*</code> invoca <code>felidos_filtrados()</code> (con paréntesis). Gracias a la reactividad, cuando la persona usuaria cambia un filtro, las tres salidas se recalculan automáticamente.</p>
+<p>La <a href="#fig-shiny-flujo-reactivo" class="quarto-xref">Figura&nbsp;<span>16.3</span></a> muestra el flujo reactivo completo de la aplicación: los dos controles de entrada (<code>input$especie</code> e <code>input$area</code>) alimentan la función reactiva <code>felidos_filtrados()</code>, cuyo resultado comparten las tres funciones <code>render*</code> que generan el mapa, el gráfico y la tabla.</p>
+<div id="fig-shiny-flujo-reactivo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-shiny-flujo-reactivo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<a href="img/shiny-flujo-reactivo.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figura&nbsp;16.3: Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten las tres salidas."><img src="img/shiny-flujo-reactivo.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla"></a>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shiny-flujo-reactivo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;16.3: Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten las tres salidas.
+</figcaption>
+</figure>
+</div>
 </section>
 <section id="ejecución-local" class="level3" data-number="16.7.7">
 <h3 data-number="16.7.7" class="anchored" data-anchor-id="ejecución-local"><span class="header-section-number">16.7.7</span> Ejecución local</h3>
@@ -1308,6 +1344,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
 </nav>
 </div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
