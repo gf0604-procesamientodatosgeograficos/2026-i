@@ -42,6 +42,7 @@ book:
     - part: "VII Visualización avanzada de datos"
       chapters:
         - 15-tableros-control.qmd
+        - 16-shiny.qmd
     - part: "Tareas"
       chapters:
         - tareas/tarea-01-g001.md
