@@ -66,3 +66,6 @@ entregas-tareas/
 .claude/
 .config/
 .local/
+
+# Proyecto de prueba (sandbox, no es parte del libro)
+prueba/
