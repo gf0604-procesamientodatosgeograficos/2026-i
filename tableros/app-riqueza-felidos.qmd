@@ -22,8 +22,9 @@ library(sf)             # datos vectoriales
 library(plotly)         # gráficos interactivos
 library(DT)             # tablas interactivas
 library(leaflet)        # mapas interactivos
-library(leaflet.extras) # extras para leaflet
 library(shiny)          # aplicaciones interactivas
+library(bslib)          # componentes de interfaz (cajas de valor)
+library(bsicons)        # íconos de Bootstrap
 ```
 
 ```{r}
@@ -96,7 +97,34 @@ selectInput(
 )
 ```
 
-# Mapa
+# Riqueza de félidos
+
+## Row {height="20%"}
+
+```{r}
+#| label: salida-valuebox-registros
+
+# Control de salida de la caja de valor de registros de presencia
+uiOutput(outputId = "vb_registros")
+```
+
+```{r}
+#| label: salida-valuebox-especies
+
+# Control de salida de la caja de valor de riqueza de especies
+uiOutput(outputId = "vb_especies")
+```
+
+```{r}
+#| label: salida-valuebox-areas
+
+# Control de salida de la caja de valor de áreas con mayor riqueza
+uiOutput(outputId = "vb_areas")
+```
+
+## Row {.tabset}
+
+### Mapa
 
 ```{r}
 #| label: salida-mapa
@@ -105,7 +133,7 @@ selectInput(
 leafletOutput(outputId = "mapa")
 ```
 
-# Gráfico
+### Gráfico
 
 ```{r}
 #| label: salida-grafico
@@ -114,7 +142,7 @@ leafletOutput(outputId = "mapa")
 plotlyOutput(outputId = "grafico")
 ```
 
-# Tabla
+### Tabla
 
 ```{r}
 #| label: salida-tabla
@@ -144,6 +172,58 @@ felidos_filtrados <- reactive({
   }
 
   resultado
+})
+
+# Cajas de valor reactivas: cada una se construye con value_box() a partir de
+# felidos_filtrados() y se actualiza al cambiar los filtros de la barra lateral.
+
+# Total de registros de presencia de la selección actual
+output$vb_registros <- renderUI({
+  value_box(
+    title    = "Registros de presencia",
+    value    = nrow(felidos_filtrados()),
+    showcase = bs_icon("binoculars"),
+    theme    = "primary"
+  )
+})
+
+# Riqueza de especies (especies distintas) de la selección actual
+output$vb_especies <- renderUI({
+  value_box(
+    title    = "Riqueza de especies",
+    value    = n_distinct(felidos_filtrados()$species),
+    showcase = bs_icon("diagram-3"),
+    theme    = "success"
+  )
+})
+
+# Área(s) de conservación con mayor riqueza de la selección actual
+output$vb_areas <- renderUI({
+  riqueza_por_area <-
+    felidos_filtrados() |>
+    st_drop_geometry() |>
+    filter(!is.na(siglas_ac)) |>
+    group_by(siglas_ac) |>
+    summarize(riqueza = n_distinct(species), .groups = "drop")
+
+  if (nrow(riqueza_por_area) == 0) {
+    riqueza_maxima <- 0
+    siglas         <- "—"
+  } else {
+    riqueza_maxima <- max(riqueza_por_area$riqueza)
+    siglas <-
+      riqueza_por_area |>
+      filter(riqueza == riqueza_maxima) |>
+      pull(siglas_ac) |>
+      paste(collapse = ", ")
+  }
+
+  value_box(
+    title    = paste0("Áreas con mayor riqueza (", riqueza_maxima, " especies)"),
+    value    = siglas,
+    showcase = bs_icon("trophy"),
+    theme    = "warning"
+  )
 })
 
 # Mapa de registros de presencia (agrupados) sobre las áreas de conservación

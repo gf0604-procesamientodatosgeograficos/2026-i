@@ -61,6 +61,9 @@ examenes-ciclos-anteriores/
 # Entregas de tareas (no publicar en repo público)
 entregas-tareas/
 
+# Enunciado del proyecto final (aún no publicar; mantener local por ahora)
+proyecto/
+
 # Directorios de configuración/caché de herramientas (no son del proyecto)
 .cache/
 .claude/

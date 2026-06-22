@@ -107,10 +107,11 @@ El resto de este capítulo desarrolla esos cambios sobre el ejemplo de félidos.
 
 ## Instalación y carga de paquetes
 
-Además de los paquetes del ecosistema espacial y de graficación ya empleados en capítulos anteriores (`tidyverse`, `sf`, `plotly`, `DT`, `leaflet`, `leaflet.extras`), este capítulo introduce dos paquetes nuevos:
+Además de los paquetes del ecosistema espacial y de graficación ya empleados en capítulos anteriores (`tidyverse`, `sf`, `plotly`, `DT`, `leaflet`), este capítulo introduce tres paquetes nuevos:
 
 - [`shiny`](https://shiny.posit.co/): desarrollo de aplicaciones interactivas.
 - [`rsconnect`](https://rstudio.github.io/rsconnect/): publicación de aplicaciones en shinyapps.io y Posit Connect.
+- [`bsicons`](https://github.com/rstudio/bsicons): íconos de [Bootstrap](https://icons.getbootstrap.com/) para las cajas de valor. Se utiliza junto con [`bslib`](https://rstudio.github.io/bslib/), el paquete de componentes de interfaz que ya viene instalado con `shiny`.
 
 ```{r}
 #| label: instalacion-paquetes
@@ -121,6 +122,9 @@ install.packages("shiny")
 
 # Instalación de rsconnect
 install.packages("rsconnect")
+
+# Instalación de bsicons
+install.packages("bsicons")
 ```
 
 ```{r}
@@ -149,8 +153,9 @@ La aplicación de ejemplo utiliza los mismos dos conjuntos de datos del @sec-tab
 
 ## Ejemplo: aplicación interactiva de riqueza de félidos
 
-Como ejemplo integral, se transformó el tablero de control de riqueza de félidos del @sec-tableros-control en una aplicación interactiva. La aplicación incorpora una **barra lateral** con dos filtros —especie y área de conservación— y tres salidas —un mapa, un gráfico y una tabla— que se actualizan en respuesta a esos filtros.
+Como ejemplo integral, se transformó el tablero de control de riqueza de félidos del @sec-tableros-control en una aplicación interactiva. La aplicación incorpora una **barra lateral** con dos filtros —especie y área de conservación—, una fila superior con tres **cajas de valor reactivas** y tres salidas —un mapa, un gráfico y una tabla—; todas estas salidas se actualizan en respuesta a esos filtros.
 
+- [Aplicación publicada en shinyapps.io](https://mfvargas.shinyapps.io/riqueza-felidos/)
 - [Código fuente de la aplicación](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/tableros/app-riqueza-felidos.qmd)
 
 A diferencia del tablero del @sec-tableros-control, esta aplicación **no** se publica como página estática en GitHub Pages, porque requiere un servidor Shiny en ejecución. En la sección [Publicación en shinyapps.io](#sec-publicacion-shinyapps) se explica cómo desplegarla en la nube.
@@ -191,8 +196,9 @@ library(sf)             # datos vectoriales
 library(plotly)         # gráficos interactivos
 library(DT)             # tablas interactivas
 library(leaflet)        # mapas interactivos
-library(leaflet.extras) # extras para leaflet
 library(shiny)          # aplicaciones interactivas
+library(bslib)          # componentes de interfaz (cajas de valor)
+library(bsicons)        # íconos de Bootstrap
 ```
 ````
 
@@ -272,26 +278,57 @@ selectInput(
 
 Nótese el argumento `inputId` de cada `selectInput()`: `"especie"` y `"area"`. Estos identificadores se usarán en el servidor como `input$especie` e `input$area`.
 
-### Controles de salida
+### Cajas de valor reactivas
 
-Cada salida se ubica en su propia página (encabezado de nivel 1) y se declara con la función `*Output()` correspondiente, que reserva el espacio en la interfaz. El contenido lo generará luego el servidor:
+Sobre las salidas principales se coloca una fila con tres **cajas de valor**. A diferencia de las cajas estáticas del @sec-tableros-control —cuyo valor se fija una sola vez al renderizar—, estas se **recalculan con cada cambio de filtro**. Por eso son una salida más del servidor: en la interfaz solo se reserva su espacio con un control de salida genérico, `uiOutput()`, y el servidor construye la caja completa con `bslib::value_box()` dentro de `renderUI()`.
+
+Las tres cajas se agrupan en una fila (`## Row`) dentro de la página de la aplicación. Cada bloque reserva el espacio de una caja con `uiOutput()`:
 
 ```` md
-# Mapa
+# Riqueza de félidos
+
+## Row {height="20%"}
+
+```{r}`r ''`
+#| label: salida-valuebox-registros
+uiOutput(outputId = "vb_registros")
+```
+
+```{r}`r ''`
+#| label: salida-valuebox-especies
+uiOutput(outputId = "vb_especies")
+```
+
+```{r}`r ''`
+#| label: salida-valuebox-areas
+uiOutput(outputId = "vb_areas")
+```
+````
+
+Cada `outputId` (`"vb_registros"`, `"vb_especies"`, `"vb_areas"`) identifica la caja que el servidor generará con `renderUI()`.
+
+### Controles de salida
+
+Debajo de las cajas de valor, las tres salidas principales se organizan en una segunda fila con pestañas (`## Row {.tabset}`): una para el mapa, una para el gráfico y una para la tabla. Cada una se declara con la función `*Output()` correspondiente, que reserva el espacio en la interfaz. El contenido lo generará luego el servidor:
+
+```` md
+## Row {.tabset}
+
+### Mapa
 
 ```{r}`r ''`
 #| label: salida-mapa
 leafletOutput(outputId = "mapa")
 ```
 
-# Gráfico
+### Gráfico
 
 ```{r}`r ''`
 #| label: salida-grafico
 plotlyOutput(outputId = "grafico")
 ```
 
-# Tabla
+### Tabla
 
 ```{r}`r ''`
 #| label: salida-tabla
@@ -303,7 +340,7 @@ Cada `outputId` (`"mapa"`, `"grafico"`, `"tabla"`) identifica la salida y se usa
 
 ### Servidor (`context: server`)
 
-El bloque del servidor (`#| context: server`) contiene toda la lógica reactiva. Comienza con la función reactiva `felidos_filtrados()`, que aplica los dos filtros una sola vez, y continúa con las tres funciones `render*` que generan las salidas a partir de ella.
+El bloque del servidor (`#| context: server`) contiene toda la lógica reactiva. Comienza con la función reactiva `felidos_filtrados()`, que aplica los dos filtros una sola vez, y continúa con las funciones `render*` que generan las salidas a partir de ella: las tres cajas de valor, el mapa, el gráfico y la tabla.
 
 **Función reactiva de filtrado:**
 
@@ -326,6 +363,58 @@ felidos_filtrados <- reactive({
   }
 
   resultado
+})
+```
+````
+
+**Cajas de valor** (en el mismo bloque del servidor). Cada caja se construye con `value_box()` —indicando su título, valor, ícono (`bs_icon()`) y color (`theme`)— a partir de los registros filtrados. Se usan los mismos íconos y colores del tablero del @sec-tableros-control:
+
+```` md
+```{r}`r ''`
+output$vb_registros <- renderUI({
+  value_box(
+    title    = "Registros de presencia",
+    value    = nrow(felidos_filtrados()),
+    showcase = bs_icon("binoculars"),
+    theme    = "primary"
+  )
+})
+
+output$vb_especies <- renderUI({
+  value_box(
+    title    = "Riqueza de especies",
+    value    = n_distinct(felidos_filtrados()$species),
+    showcase = bs_icon("diagram-3"),
+    theme    = "success"
+  )
+})
+
+output$vb_areas <- renderUI({
+  riqueza_por_area <-
+    felidos_filtrados() |>
+    st_drop_geometry() |>
+    filter(!is.na(siglas_ac)) |>
+    group_by(siglas_ac) |>
+    summarize(riqueza = n_distinct(species), .groups = "drop")
+
+  if (nrow(riqueza_por_area) == 0) {
+    riqueza_maxima <- 0
+    siglas         <- "—"
+  } else {
+    riqueza_maxima <- max(riqueza_por_area$riqueza)
+    siglas <-
+      riqueza_por_area |>
+      filter(riqueza == riqueza_maxima) |>
+      pull(siglas_ac) |>
+      paste(collapse = ", ")
+  }
+
+  value_box(
+    title    = paste0("Áreas con mayor riqueza (", riqueza_maxima, " especies)"),
+    value    = siglas,
+    showcase = bs_icon("trophy"),
+    theme    = "warning"
+  )
 })
 ```
 ````
@@ -424,9 +513,9 @@ output$tabla <- renderDataTable({
 ```
 ````
 
-Nótese cómo cada función `render*` invoca `felidos_filtrados()` (con paréntesis). Gracias a la reactividad, cuando la persona usuaria cambia un filtro, las tres salidas se recalculan automáticamente.
+Nótese cómo cada función `render*` invoca `felidos_filtrados()` (con paréntesis). Gracias a la reactividad, cuando la persona usuaria cambia un filtro, todas las salidas —las tres cajas de valor, el mapa, el gráfico y la tabla— se recalculan automáticamente.
 
-La @fig-shiny-flujo-reactivo muestra el flujo reactivo completo de la aplicación: los dos controles de entrada (`input$especie` e `input$area`) alimentan la función reactiva `felidos_filtrados()`, cuyo resultado comparten las tres funciones `render*` que generan el mapa, el gráfico y la tabla.
+La @fig-shiny-flujo-reactivo resume este flujo para las tres salidas principales: los dos controles de entrada (`input$especie` e `input$area`) alimentan la función reactiva `felidos_filtrados()`, cuyo resultado comparten las tres funciones `render*` que generan el mapa, el gráfico y la tabla. Las cajas de valor siguen exactamente el mismo patrón: cada una invoca `felidos_filtrados()` dentro de su `renderUI()`.
 
 ![Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten las tres salidas.](img/shiny-flujo-reactivo.svg){#fig-shiny-flujo-reactivo .lightbox fig-alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla" fig-align="center"}
 
@@ -448,7 +537,7 @@ Puede consultarse más información en [Quarto - Publishing Shiny Documents](htt
 
 1. Agregue a la barra lateral un tercer filtro: un deslizador de rango de año (`sliderInput()`) que use la columna `year` del conjunto de datos de félidos, e incorpórelo a la función reactiva de filtrado.
 
-2. Agregue una fila superior con **cajas de valor reactivas** (total de registros y número de especies de la selección actual). Sugerencia: en una aplicación Shiny, las cajas de valor se generan en el servidor (por ejemplo, con `renderText()` o `shinydashboard::renderValueBox()`) y se reservan en la interfaz con el control de salida correspondiente.
+2. Agregue una **cuarta caja de valor reactiva** que muestre otro indicador de la selección actual (por ejemplo, el año más reciente con registros o la especie con más observaciones), siguiendo el patrón de `uiOutput()` en la interfaz y `value_box()` dentro de `renderUI()` en el servidor.
 
 3. Tome el tablero de control que desarrolla en su tarea y conviértalo en una aplicación Shiny, siguiendo el patrón de este capítulo: agregue `server: shiny`, una barra lateral con al menos un filtro y mueva la generación de las salidas al servidor. Este es el punto de partida del **proyecto final** del curso.
 
