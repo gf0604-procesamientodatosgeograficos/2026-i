@@ -5,7 +5,7 @@ format:
   dashboard:
     nav-buttons:
       - icon: github
-        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/tableros/app-riqueza-felidos.qmd
+        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd
 server: shiny
 lang: es
 ---

@@ -156,7 +156,8 @@ La aplicación de ejemplo utiliza los mismos dos conjuntos de datos del @sec-tab
 Como ejemplo integral, se transformó el tablero de control de riqueza de félidos del @sec-tableros-control en una aplicación interactiva. La aplicación incorpora una **barra lateral** con dos filtros —especie y área de conservación—, una fila superior con tres **cajas de valor reactivas** y tres salidas —un mapa, un gráfico y una tabla—; todas estas salidas se actualizan en respuesta a esos filtros.
 
 - [Aplicación publicada en shinyapps.io](https://mfvargas.shinyapps.io/riqueza-felidos/)
-- [Código fuente de la aplicación](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/tableros/app-riqueza-felidos.qmd)
+- [Repositorio de la aplicación en GitHub](https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos)
+- [Código fuente de la aplicación](https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd)
 
 A diferencia del tablero del @sec-tableros-control, esta aplicación **no** se publica como página estática en GitHub Pages, porque requiere un servidor Shiny en ejecución. En la sección [Publicación en shinyapps.io](#sec-publicacion-shinyapps) se explica cómo desplegarla en la nube.
 
@@ -174,7 +175,7 @@ format:
   dashboard:
     nav-buttons:
       - icon: github
-        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i/blob/main/tableros/app-riqueza-felidos.qmd
+        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd
 server: shiny
 lang: es
 ---
