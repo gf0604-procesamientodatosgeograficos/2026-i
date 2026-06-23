@@ -1345,7 +1345,7 @@
     "href": "16-shiny.html#recursos-adicionales",
     "title": "16  Aplicaciones interactivas con Shiny",
     "section": "16.8 Recursos adicionales",
-    "text": "16.8 Recursos adicionales\nLas siguientes aplicaciones interactivas sirven como referencia:\n\nAplicación del Atlas de Desarrollo Humano Cantonal de Costa Rica (edición 2025): aplicación publicada · código fuente.\nTablero interactivo de mamíferos: aplicación publicada · código fuente.\n\nQuarto - Dashboards with Shiny for R\nShiny - Galería de aplicaciones\nMastering Shiny | Hadley Wickham",
+    "text": "16.8 Recursos adicionales\nAdemás de las aplicaciones de ejemplo de este capítulo (riqueza de félidos y Atlas de Desarrollo Humano Cantonal), la siguiente aplicación, desarrollada en una versión anterior del curso, sirve como referencia:\n\nTablero interactivo de mamíferos: aplicación publicada · código fuente.\n\nQuarto - Dashboards with Shiny for R\nShiny - Galería de aplicaciones\nMastering Shiny | Hadley Wickham",
     "crumbs": [
       "VII Visualización avanzada de datos",
       "<span class='chapter-number'>16</span>  <span class='chapter-title'>Aplicaciones interactivas con Shiny</span>"

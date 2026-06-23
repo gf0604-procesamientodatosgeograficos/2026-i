@@ -498,6 +498,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p>En este capítulo se explica qué es una aplicación web interactiva y cómo desarrollarla con <a href="https://shiny.posit.co/">Shiny</a>, el paquete de R que añade interactividad del lado del servidor a los documentos Quarto. El capítulo retoma el <a href="tableros/tablero-riqueza-felidos.html">tablero de control de riqueza de félidos</a> del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a> y lo transforma, paso a paso, en una <strong>aplicación interactiva</strong> en la que la persona usuaria filtra los datos y todas las visualizaciones se actualizan en respuesta. Este ejercicio prepara el terreno para el proyecto final del curso, en el que cada estudiante convertirá el tablero de control que desarrolla en su tarea en una aplicación Shiny.</p>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Nota</span>Aplicaciones de ejemplo de este capítulo
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Este capítulo construye, paso a paso, la aplicación de <strong>riqueza de félidos</strong>. Esa aplicación y el <strong>Atlas de Desarrollo Humano Cantonal</strong> —un segundo ejemplo completo, con la misma estructura— están publicadas en línea, y su código fuente está disponible en GitHub:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Aplicación</th>
+<th>Aplicación en línea</th>
+<th>Código fuente</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Riqueza de félidos de Costa Rica</strong></td>
+<td><a href="https://mfvargas.shinyapps.io/riqueza-felidos/" class="uri">https://mfvargas.shinyapps.io/riqueza-felidos/</a></td>
+<td><a href="https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos">repositorio</a> · <a href="https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd"><code>index.qmd</code></a></td>
+</tr>
+<tr class="even">
+<td><strong>Atlas de Desarrollo Humano Cantonal (edición 2025)</strong></td>
+<td><a href="https://mfvargas.shinyapps.io/atlas-desarrollo-humano-2025/" class="uri">https://mfvargas.shinyapps.io/atlas-desarrollo-humano-2025/</a></td>
+<td><a href="https://github.com/gf0604-procesamientodatosgeograficos/atlas-desarrollo-humano-2025">repositorio</a> · <a href="https://github.com/gf0604-procesamientodatosgeograficos/atlas-desarrollo-humano-2025/blob/main/index.qmd"><code>index.qmd</code></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <section id="resumen" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="resumen"><span class="header-section-number">16.1</span> Resumen</h2>
 <p>Un tablero de control publicado como página estática (como el del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a>) muestra siempre las mismas visualizaciones: la persona usuaria puede explorar los mapas y las tablas, pero no puede cambiar <em>qué</em> datos se procesan. Una <strong>aplicación interactiva</strong> sí lo permite: incorpora controles de entrada (<em>widgets</em>) —listas de selección, deslizadores, casillas de verificación— con los que la persona usuaria configura filtros, búsquedas u ordenamientos, y las salidas se recalculan dinámicamente.</p>
@@ -543,7 +577,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Servidor</strong>: un proceso de R que recibe las entradas, realiza el procesamiento necesario para generar las salidas y devuelve los resultados a la interfaz de usuario.</li>
 </ol>
 <p>La <a href="#fig-shiny-cliente-servidor" class="quarto-xref">Figura&nbsp;<span>16.1</span></a> ilustra esta relación entre el cliente (la interfaz de usuario que se ejecuta en el navegador de la persona usuaria) y el servidor (el proceso de R). El cliente envía al servidor los valores de los controles de entrada (<code>input</code>) y el servidor le devuelve los resultados (<code>output</code>) que se despliegan en los controles de salida.</p>
-<div id="fig-shiny-cliente-servidor" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Relación entre el cliente y el servidor en una aplicación Shiny: el cliente envía los valores de entrada (input) al servidor y este devuelve los resultados (output)" data-fig-align="center">
+<div id="fig-shiny-cliente-servidor" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Relación entre el cliente y el servidor en una aplicación Shiny: el cliente envía los valores de entrada (input) al servidor y este devuelve los resultados (output)">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-shiny-cliente-servidor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/shiny-cliente-servidor.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;16.1: Relación entre el cliente (interfaz de usuario) y el servidor (proceso de R) en una aplicación Shiny."><img src="img/shiny-cliente-servidor.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Relación entre el cliente y el servidor en una aplicación Shiny: el cliente envía los valores de entrada (input) al servidor y este devuelve los resultados (output)"></a>
@@ -569,7 +603,7 @@ Figura&nbsp;16.1: Relación entre el cliente (interfaz de usuario) y el servidor
 <li>Sin la opción <code>context</code> (valor por defecto, <code>render</code>): el bloque pertenece a la interfaz de usuario y define controles de entrada o de salida.</li>
 </ul>
 <p>La <a href="#fig-shiny-contextos-codigo" class="quarto-xref">Figura&nbsp;<span>16.2</span></a> resume en qué sesión se ejecuta cada contexto: los bloques <code>setup</code> y <code>data</code> corren para ambas sesiones (por eso permiten compartir paquetes y datos), mientras que los bloques sin <code>context</code> pertenecen a la interfaz y los bloques <code>context: server</code> se ejecutan únicamente en el servidor.</p>
-<div id="fig-shiny-contextos-codigo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama de los contextos setup, data, server y el contexto por defecto, indicando que setup y data se ejecutan en ambas sesiones, los bloques sin contexto en la interfaz y los bloques server en el servidor" data-fig-align="center">
+<div id="fig-shiny-contextos-codigo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Diagrama de los contextos setup, data, server y el contexto por defecto, indicando que setup y data se ejecutan en ambas sesiones, los bloques sin contexto en la interfaz y los bloques server en el servidor">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-shiny-contextos-codigo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/shiny-contextos-codigo.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figura&nbsp;16.2: Contextos de los bloques de código de una aplicación Shiny y la sesión en la que se ejecuta cada uno."><img src="img/shiny-contextos-codigo.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama de los contextos setup, data, server y el contexto por defecto, indicando que setup y data se ejecutan en ambas sesiones, los bloques sin contexto en la interfaz y los bloques server en el servidor"></a>
@@ -964,7 +998,7 @@ Figura&nbsp;16.2: Contextos de los bloques de código de una aplicación Shiny y
 <span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Nótese cómo cada función <code>render*</code> invoca <code>felidos_filtrados()</code> (con paréntesis). Gracias a la reactividad, cuando la persona usuaria cambia un filtro, todas las salidas —las tres cajas de valor, el mapa, el gráfico y la tabla— se recalculan automáticamente.</p>
 <p>La <a href="#fig-shiny-flujo-reactivo" class="quarto-xref">Figura&nbsp;<span>16.3</span></a> resume este flujo para las tres salidas principales: los dos controles de entrada (<code>input$especie</code> e <code>input$area</code>) alimentan la función reactiva <code>felidos_filtrados()</code>, cuyo resultado comparten las tres funciones <code>render*</code> que generan el mapa, el gráfico y la tabla. Las cajas de valor siguen exactamente el mismo patrón: cada una invoca <code>felidos_filtrados()</code> dentro de su <code>renderUI()</code>.</p>
-<div id="fig-shiny-flujo-reactivo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla" data-fig-align="center">
+<div id="fig-shiny-flujo-reactivo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-shiny-flujo-reactivo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/shiny-flujo-reactivo.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figura&nbsp;16.3: Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten las tres salidas."><img src="img/shiny-flujo-reactivo.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla"></a>
@@ -1000,9 +1034,8 @@ Figura&nbsp;16.3: Flujo reactivo de la aplicación de félidos: los controles de
 </section>
 <section id="recursos-adicionales" class="level2" data-number="16.8">
 <h2 data-number="16.8" class="anchored" data-anchor-id="recursos-adicionales"><span class="header-section-number">16.8</span> Recursos adicionales</h2>
-<p>Las siguientes aplicaciones interactivas sirven como referencia:</p>
+<p>Además de las <a href="#sec-shiny">aplicaciones de ejemplo de este capítulo</a> (riqueza de félidos y Atlas de Desarrollo Humano Cantonal), la siguiente aplicación, desarrollada en una versión anterior del curso, sirve como referencia:</p>
 <ul>
-<li>Aplicación del <a href="https://www.undp.org/es/costa-rica/atlas-de-desarrollo-humano-cantonal-costa-rica">Atlas de Desarrollo Humano Cantonal de Costa Rica (edición 2025)</a>: <a href="https://mfvargas.shinyapps.io/atlas-desarrollo-humano-2025/">aplicación publicada</a> · <a href="https://github.com/gf0604-procesamientodatosgeograficos/atlas-desarrollo-humano-2025">código fuente</a>.</li>
 <li>Tablero interactivo de mamíferos: <a href="https://mfvargas.shinyapps.io/tablero-interactivo-mamiferos/">aplicación publicada</a> · <a href="https://github.com/gf0604-procesamientodatosgeograficos/2025-i-tablero-interactivo-mamiferos">código fuente</a>.</li>
 </ul>
 <p><a href="https://quarto.org/docs/dashboards/interactivity/shiny-r.html">Quarto - Dashboards with Shiny for R</a></p>

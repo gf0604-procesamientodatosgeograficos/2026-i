@@ -2,6 +2,17 @@
 
 En este capítulo se explica qué es una aplicación web interactiva y cómo desarrollarla con [Shiny](https://shiny.posit.co/), el paquete de R que añade interactividad del lado del servidor a los documentos Quarto. El capítulo retoma el [tablero de control de riqueza de félidos](tableros/tablero-riqueza-felidos.html) del @sec-tableros-control y lo transforma, paso a paso, en una **aplicación interactiva** en la que la persona usuaria filtra los datos y todas las visualizaciones se actualizan en respuesta. Este ejercicio prepara el terreno para el proyecto final del curso, en el que cada estudiante convertirá el tablero de control que desarrolla en su tarea en una aplicación Shiny.
 
+::: {.callout-note appearance="simple"}
+## Aplicaciones de ejemplo de este capítulo
+
+Este capítulo construye, paso a paso, la aplicación de **riqueza de félidos**. Esa aplicación y el **Atlas de Desarrollo Humano Cantonal** —un segundo ejemplo completo, con la misma estructura— están publicadas en línea, y su código fuente está disponible en GitHub:
+
+| Aplicación | Aplicación en línea | Código fuente |
+|---|---|---|
+| **Riqueza de félidos de Costa Rica** | <https://mfvargas.shinyapps.io/riqueza-felidos/> | [repositorio](https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos) · [`index.qmd`](https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd) |
+| **Atlas de Desarrollo Humano Cantonal (edición 2025)** | <https://mfvargas.shinyapps.io/atlas-desarrollo-humano-2025/> | [repositorio](https://github.com/gf0604-procesamientodatosgeograficos/atlas-desarrollo-humano-2025) · [`index.qmd`](https://github.com/gf0604-procesamientodatosgeograficos/atlas-desarrollo-humano-2025/blob/main/index.qmd) |
+:::
+
 ## Resumen
 
 Un tablero de control publicado como página estática (como el del @sec-tableros-control) muestra siempre las mismas visualizaciones: la persona usuaria puede explorar los mapas y las tablas, pero no puede cambiar *qué* datos se procesan. Una **aplicación interactiva** sí lo permite: incorpora controles de entrada (*widgets*) —listas de selección, deslizadores, casillas de verificación— con los que la persona usuaria configura filtros, búsquedas u ordenamientos, y las salidas se recalculan dinámicamente.
@@ -544,9 +555,8 @@ Puede consultarse más información en [Quarto - Publishing Shiny Documents](htt
 
 ## Recursos adicionales
 
-Las siguientes aplicaciones interactivas sirven como referencia:
+Además de las [aplicaciones de ejemplo de este capítulo](#sec-shiny) (riqueza de félidos y Atlas de Desarrollo Humano Cantonal), la siguiente aplicación, desarrollada en una versión anterior del curso, sirve como referencia:
 
-- Aplicación del [Atlas de Desarrollo Humano Cantonal de Costa Rica (edición 2025)](https://www.undp.org/es/costa-rica/atlas-de-desarrollo-humano-cantonal-costa-rica): [aplicación publicada](https://mfvargas.shinyapps.io/atlas-desarrollo-humano-2025/) · [código fuente](https://github.com/gf0604-procesamientodatosgeograficos/atlas-desarrollo-humano-2025).
 - Tablero interactivo de mamíferos: [aplicación publicada](https://mfvargas.shinyapps.io/tablero-interactivo-mamiferos/) · [código fuente](https://github.com/gf0604-procesamientodatosgeograficos/2025-i-tablero-interactivo-mamiferos).
 
 [Quarto - Dashboards with Shiny for R](https://quarto.org/docs/dashboards/interactivity/shiny-r.html)
