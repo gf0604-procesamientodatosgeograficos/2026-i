@@ -471,24 +471,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#arquitectura" id="toc-arquitectura" class="nav-link" data-scroll-target="#arquitectura"><span class="header-section-number">16.4.1</span> Arquitectura</a></li>
   <li><a href="#contextos-de-los-bloques-de-código" id="toc-contextos-de-los-bloques-de-código" class="nav-link" data-scroll-target="#contextos-de-los-bloques-de-código"><span class="header-section-number">16.4.2</span> Contextos de los bloques de código</a></li>
   <li><a href="#funciones-reactivas" id="toc-funciones-reactivas" class="nav-link" data-scroll-target="#funciones-reactivas"><span class="header-section-number">16.4.3</span> Funciones reactivas</a></li>
-  <li><a href="#del-tablero-a-la-aplicación" id="toc-del-tablero-a-la-aplicación" class="nav-link" data-scroll-target="#del-tablero-a-la-aplicación"><span class="header-section-number">16.4.4</span> Del tablero a la aplicación</a></li>
   </ul></li>
   <li><a href="#instalación-y-carga-de-paquetes" id="toc-instalación-y-carga-de-paquetes" class="nav-link" data-scroll-target="#instalación-y-carga-de-paquetes"><span class="header-section-number">16.5</span> Instalación y carga de paquetes</a></li>
   <li><a href="#conjuntos-de-datos" id="toc-conjuntos-de-datos" class="nav-link" data-scroll-target="#conjuntos-de-datos"><span class="header-section-number">16.6</span> Conjuntos de datos</a></li>
-  <li><a href="#ejemplo-aplicación-interactiva-de-riqueza-de-félidos" id="toc-ejemplo-aplicación-interactiva-de-riqueza-de-félidos" class="nav-link" data-scroll-target="#ejemplo-aplicación-interactiva-de-riqueza-de-félidos"><span class="header-section-number">16.7</span> Ejemplo: aplicación interactiva de riqueza de félidos</a>
+  <li><a href="#de-tablero-de-control-a-aplicación-interactiva-paso-a-paso" id="toc-de-tablero-de-control-a-aplicación-interactiva-paso-a-paso" class="nav-link" data-scroll-target="#de-tablero-de-control-a-aplicación-interactiva-paso-a-paso"><span class="header-section-number">16.7</span> De tablero de control a aplicación interactiva, paso a paso</a>
   <ul>
-  <li><a href="#encabezado-yaml" id="toc-encabezado-yaml" class="nav-link" data-scroll-target="#encabezado-yaml"><span class="header-section-number">16.7.1</span> Encabezado YAML</a></li>
-  <li><a href="#carga-de-paquetes-context-setup" id="toc-carga-de-paquetes-context-setup" class="nav-link" data-scroll-target="#carga-de-paquetes-context-setup"><span class="header-section-number">16.7.2</span> Carga de paquetes (<code>context: setup</code>)</a></li>
-  <li><a href="#carga-y-preparación-de-datos-context-data" id="toc-carga-y-preparación-de-datos-context-data" class="nav-link" data-scroll-target="#carga-y-preparación-de-datos-context-data"><span class="header-section-number">16.7.3</span> Carga y preparación de datos (<code>context: data</code>)</a></li>
-  <li><a href="#barra-lateral-con-filtros" id="toc-barra-lateral-con-filtros" class="nav-link" data-scroll-target="#barra-lateral-con-filtros"><span class="header-section-number">16.7.4</span> Barra lateral con filtros</a></li>
-  <li><a href="#cajas-de-valor-reactivas" id="toc-cajas-de-valor-reactivas" class="nav-link" data-scroll-target="#cajas-de-valor-reactivas"><span class="header-section-number">16.7.5</span> Cajas de valor reactivas</a></li>
-  <li><a href="#controles-de-salida" id="toc-controles-de-salida" class="nav-link" data-scroll-target="#controles-de-salida"><span class="header-section-number">16.7.6</span> Controles de salida</a></li>
-  <li><a href="#servidor-context-server" id="toc-servidor-context-server" class="nav-link" data-scroll-target="#servidor-context-server"><span class="header-section-number">16.7.7</span> Servidor (<code>context: server</code>)</a></li>
-  <li><a href="#ejecución-local" id="toc-ejecución-local" class="nav-link" data-scroll-target="#ejecución-local"><span class="header-section-number">16.7.8</span> Ejecución local</a></li>
-  <li><a href="#sec-publicacion-shinyapps" id="toc-sec-publicacion-shinyapps" class="nav-link" data-scroll-target="#sec-publicacion-shinyapps"><span class="header-section-number">16.7.9</span> Publicación en shinyapps.io</a></li>
-  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">16.7.10</span> Ejercicios</a></li>
+  <li><a href="#punto-de-partida-el-tablero-de-control" id="toc-punto-de-partida-el-tablero-de-control" class="nav-link" data-scroll-target="#punto-de-partida-el-tablero-de-control"><span class="header-section-number">16.7.1</span> Punto de partida: el tablero de control</a></li>
+  <li><a href="#resumen-de-los-cambios" id="toc-resumen-de-los-cambios" class="nav-link" data-scroll-target="#resumen-de-los-cambios"><span class="header-section-number">16.7.2</span> Resumen de los cambios</a></li>
+  <li><a href="#paso-1.-activar-shiny-en-el-encabezado-yaml" id="toc-paso-1.-activar-shiny-en-el-encabezado-yaml" class="nav-link" data-scroll-target="#paso-1.-activar-shiny-en-el-encabezado-yaml"><span class="header-section-number">16.7.3</span> Paso 1. Activar Shiny en el encabezado YAML</a></li>
+  <li><a href="#paso-2.-cargar-los-paquetes-en-el-contexto-setup" id="toc-paso-2.-cargar-los-paquetes-en-el-contexto-setup" class="nav-link" data-scroll-target="#paso-2.-cargar-los-paquetes-en-el-contexto-setup"><span class="header-section-number">16.7.4</span> Paso 2. Cargar los paquetes en el contexto <code>setup</code></a></li>
+  <li><a href="#paso-3.-preparar-los-datos-en-el-contexto-data" id="toc-paso-3.-preparar-los-datos-en-el-contexto-data" class="nav-link" data-scroll-target="#paso-3.-preparar-los-datos-en-el-contexto-data"><span class="header-section-number">16.7.5</span> Paso 3. Preparar los datos en el contexto <code>data</code></a></li>
+  <li><a href="#paso-4.-agregar-la-barra-lateral-con-controles-de-entrada" id="toc-paso-4.-agregar-la-barra-lateral-con-controles-de-entrada" class="nav-link" data-scroll-target="#paso-4.-agregar-la-barra-lateral-con-controles-de-entrada"><span class="header-section-number">16.7.6</span> Paso 4. Agregar la barra lateral con controles de entrada</a></li>
+  <li><a href="#sec-paso-reactiva" id="toc-sec-paso-reactiva" class="nav-link" data-scroll-target="#sec-paso-reactiva"><span class="header-section-number">16.7.7</span> Paso 5. La función reactiva de filtrado</a></li>
+  <li><a href="#paso-6.-de-cajas-de-valor-estáticas-a-reactivas" id="toc-paso-6.-de-cajas-de-valor-estáticas-a-reactivas" class="nav-link" data-scroll-target="#paso-6.-de-cajas-de-valor-estáticas-a-reactivas"><span class="header-section-number">16.7.8</span> Paso 6. De cajas de valor estáticas a reactivas</a></li>
+  <li><a href="#sec-paso-mapa" id="toc-sec-paso-mapa" class="nav-link" data-scroll-target="#sec-paso-mapa"><span class="header-section-number">16.7.9</span> Paso 7. Del mapa fijo al mapa reactivo</a></li>
+  <li><a href="#paso-8.-del-gráfico-y-la-tabla-fijos-a-reactivos" id="toc-paso-8.-del-gráfico-y-la-tabla-fijos-a-reactivos" class="nav-link" data-scroll-target="#paso-8.-del-gráfico-y-la-tabla-fijos-a-reactivos"><span class="header-section-number">16.7.10</span> Paso 8. Del gráfico y la tabla fijos a reactivos</a></li>
+  <li><a href="#sec-paso-reset" id="toc-sec-paso-reset" class="nav-link" data-scroll-target="#sec-paso-reset"><span class="header-section-number">16.7.11</span> Paso 9. El botón “Restablecer filtros”</a></li>
+  <li><a href="#el-flujo-reactivo-completo" id="toc-el-flujo-reactivo-completo" class="nav-link" data-scroll-target="#el-flujo-reactivo-completo"><span class="header-section-number">16.7.12</span> El flujo reactivo completo</a></li>
   </ul></li>
-  <li><a href="#recursos-adicionales" id="toc-recursos-adicionales" class="nav-link" data-scroll-target="#recursos-adicionales"><span class="header-section-number">16.8</span> Recursos adicionales</a></li>
+  <li><a href="#ejecución-local" id="toc-ejecución-local" class="nav-link" data-scroll-target="#ejecución-local"><span class="header-section-number">16.8</span> Ejecución local</a></li>
+  <li><a href="#sec-publicacion-shinyapps" id="toc-sec-publicacion-shinyapps" class="nav-link" data-scroll-target="#sec-publicacion-shinyapps"><span class="header-section-number">16.9</span> Publicación en shinyapps.io</a></li>
+  <li><a href="#ejercicios" id="toc-ejercicios" class="nav-link" data-scroll-target="#ejercicios"><span class="header-section-number">16.10</span> Ejercicios</a></li>
+  <li><a href="#recursos-adicionales" id="toc-recursos-adicionales" class="nav-link" data-scroll-target="#recursos-adicionales"><span class="header-section-number">16.11</span> Recursos adicionales</a></li>
   </ul>
 </nav>
     </div>
@@ -514,7 +518,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>En este capítulo se explica qué es una aplicación web interactiva y cómo desarrollarla con <a href="https://shiny.posit.co/">Shiny</a>, el paquete de R que añade interactividad del lado del servidor a los documentos Quarto. El capítulo retoma el <a href="tableros/tablero-riqueza-felidos.html">tablero de control de riqueza de félidos</a> del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a> y lo transforma, paso a paso, en una <strong>aplicación interactiva</strong> en la que la persona usuaria filtra los datos y todas las visualizaciones se actualizan en respuesta. Este ejercicio prepara el terreno para el proyecto final del curso, en el que cada estudiante convertirá el tablero de control que desarrolla en su tarea en una aplicación Shiny.</p>
+<p>En este capítulo se explica qué es una aplicación web interactiva y cómo desarrollarla con <a href="https://shiny.posit.co/">Shiny</a>, el paquete de R que añade interactividad del lado del servidor a los documentos Quarto. El capítulo está organizado como un <strong>tutorial</strong>: retoma el <a href="tableros/tablero-riqueza-felidos.html">tablero de control de riqueza de félidos</a> del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a> y lo transforma, <strong>paso a paso y elemento por elemento</strong>, en una <a href="https://mfvargas.shinyapps.io/riqueza-felidos/">aplicación interactiva</a> en la que la persona usuaria filtra los datos y todas las visualizaciones se actualizan en respuesta. Cada paso muestra el código <strong>antes</strong> (en el tablero estático) y <strong>después</strong> (en la aplicación), para que la transformación quede clara. Este ejercicio prepara el terreno para el proyecto final del curso, en el que cada estudiante convertirá el tablero de control que desarrolla en su tarea en una aplicación Shiny.</p>
 <div class="callout callout-style-simple callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -547,12 +551,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+<p>El tablero de control estático que sirve de punto de partida también está disponible en línea: <a href="https://gf0604-procesamientodatosgeograficos.github.io/2026-i-tablero-riqueza-felidos/">tablero publicado</a> · <a href="https://github.com/gf0604-procesamientodatosgeograficos/2026-i-tablero-riqueza-felidos">repositorio</a>.</p>
 </div>
 </div>
 <section id="resumen" class="level2" data-number="16.1">
 <h2 data-number="16.1" class="anchored" data-anchor-id="resumen"><span class="header-section-number">16.1</span> Resumen</h2>
 <p>Un tablero de control publicado como página estática (como el del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a>) muestra siempre las mismas visualizaciones: la persona usuaria puede explorar los mapas y las tablas, pero no puede cambiar <em>qué</em> datos se procesan. Una <strong>aplicación interactiva</strong> sí lo permite: incorpora controles de entrada (<em>widgets</em>) —listas de selección, deslizadores, casillas de verificación— con los que la persona usuaria configura filtros, búsquedas u ordenamientos, y las salidas se recalculan dinámicamente.</p>
 <p>Para lograr esto, una aplicación Shiny tiene dos componentes: una <strong>interfaz de usuario</strong>, que despliega los controles de entrada y de salida, y un <strong>servidor</strong>, un proceso de R que recibe las entradas, procesa los datos y devuelve los resultados a la interfaz. La comunicación entre ambos se realiza mediante <strong>funciones reactivas</strong>, que se ejecutan automáticamente cada vez que la persona usuaria cambia un control.</p>
+<p>La segunda mitad del capítulo aplica estos conceptos en un tutorial que convierte, paso a paso, el tablero de félidos en la aplicación interactiva.</p>
 </section>
 <section id="trabajo-previo" class="level2" data-number="16.2">
 <h2 data-number="16.2" class="anchored" data-anchor-id="trabajo-previo"><span class="header-section-number">16.2</span> Trabajo previo</h2>
@@ -594,7 +600,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Servidor</strong>: un proceso de R que recibe las entradas, realiza el procesamiento necesario para generar las salidas y devuelve los resultados a la interfaz de usuario.</li>
 </ol>
 <p>La <a href="#fig-shiny-cliente-servidor" class="quarto-xref">Figura&nbsp;<span>16.1</span></a> ilustra esta relación entre el cliente (la interfaz de usuario que se ejecuta en el navegador de la persona usuaria) y el servidor (el proceso de R). El cliente envía al servidor los valores de los controles de entrada (<code>input</code>) y el servidor le devuelve los resultados (<code>output</code>) que se despliegan en los controles de salida.</p>
-<div id="fig-shiny-cliente-servidor" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Relación entre el cliente y el servidor en una aplicación Shiny: el cliente envía los valores de entrada (input) al servidor y este devuelve los resultados (output)" data-fig-align="center">
+<div id="fig-shiny-cliente-servidor" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Relación entre el cliente y el servidor en una aplicación Shiny: el cliente envía los valores de entrada (input) al servidor y este devuelve los resultados (output)">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-shiny-cliente-servidor-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/shiny-cliente-servidor.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Figura&nbsp;16.1: Relación entre el cliente (interfaz de usuario) y el servidor (proceso de R) en una aplicación Shiny."><img src="img/shiny-cliente-servidor.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Relación entre el cliente y el servidor en una aplicación Shiny: el cliente envía los valores de entrada (input) al servidor y este devuelve los resultados (output)"></a>
@@ -606,7 +612,7 @@ Figura&nbsp;16.1: Relación entre el cliente (interfaz de usuario) y el servidor
 </div>
 <p>La interfaz y el servidor se comunican a través de dos listas:</p>
 <ul>
-<li><code>input</code> contiene los valores de los controles de entrada. Cada control de entrada tiene un identificador único (<code>inputId</code>); por ejemplo, un control con <code>inputId = "especie"</code> se referencia en el servidor como <code>input$especie</code>.</li>
+<li><code>input</code> contiene los valores de los controles de entrada. Cada control de entrada tiene un identificador único (<code>inputId</code>); por ejemplo, un control con <code>inputId = "area"</code> se referencia en el servidor como <code>input$area</code>.</li>
 <li><code>output</code> contiene los controles que se generan en el servidor (tablas, gráficos, mapas). Para cada salida hay un par de funciones: una función <code>*Output()</code> que reserva el espacio en la interfaz (por ejemplo, <code>plotlyOutput("grafico")</code>) y una función <code>render*()</code> que la genera en el servidor (por ejemplo, <code>output$grafico &lt;- renderPlotly({ ... })</code>). Ambas se vinculan por el identificador de salida (<code>outputId</code>).</li>
 </ul>
 </section>
@@ -620,7 +626,7 @@ Figura&nbsp;16.1: Relación entre el cliente (interfaz de usuario) y el servidor
 <li>Sin la opción <code>context</code> (valor por defecto, <code>render</code>): el bloque pertenece a la interfaz de usuario y define controles de entrada o de salida.</li>
 </ul>
 <p>La <a href="#fig-shiny-contextos-codigo" class="quarto-xref">Figura&nbsp;<span>16.2</span></a> resume en qué sesión se ejecuta cada contexto: los bloques <code>setup</code> y <code>data</code> corren para ambas sesiones (por eso permiten compartir paquetes y datos), mientras que los bloques sin <code>context</code> pertenecen a la interfaz y los bloques <code>context: server</code> se ejecutan únicamente en el servidor.</p>
-<div id="fig-shiny-contextos-codigo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama de los contextos setup, data, server y el contexto por defecto, indicando que setup y data se ejecutan en ambas sesiones, los bloques sin contexto en la interfaz y los bloques server en el servidor" data-fig-align="center">
+<div id="fig-shiny-contextos-codigo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Diagrama de los contextos setup, data, server y el contexto por defecto, indicando que setup y data se ejecutan en ambas sesiones, los bloques sin contexto en la interfaz y los bloques server en el servidor">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-shiny-contextos-codigo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <a href="img/shiny-contextos-codigo.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Figura&nbsp;16.2: Contextos de los bloques de código de una aplicación Shiny y la sesión en la que se ejecuta cada uno."><img src="img/shiny-contextos-codigo.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama de los contextos setup, data, server y el contexto por defecto, indicando que setup y data se ejecutan en ambas sesiones, los bloques sin contexto en la interfaz y los bloques server en el servidor"></a>
@@ -633,35 +639,25 @@ Figura&nbsp;16.2: Contextos de los bloques de código de una aplicación Shiny y
 </section>
 <section id="funciones-reactivas" class="level3" data-number="16.4.3">
 <h3 data-number="16.4.3" class="anchored" data-anchor-id="funciones-reactivas"><span class="header-section-number">16.4.3</span> Funciones reactivas</h3>
-<p>Una <strong>función reactiva</strong> se ejecuta automáticamente cada vez que cambia alguno de los valores de entrada que utiliza. Se define con <code>reactive()</code>. El siguiente ejemplo filtra los registros de félidos según la especie seleccionada por la persona usuaria en una lista de selección con <code>inputId = "especie"</code>:</p>
+<p>Una <strong>función reactiva</strong> se ejecuta automáticamente cada vez que cambia alguno de los valores de entrada que utiliza. Se define con <code>reactive()</code>. El siguiente ejemplo filtra los registros de félidos según el área de conservación seleccionada por la persona usuaria en una lista de selección con <code>inputId = "area"</code>:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Función reactiva que filtra los registros de félidos por especie</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Función reactiva que filtra los registros de félidos por área de conservación</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>felidos_filtrados <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  resultado <span class="ot">&lt;-</span> felidos</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>especie <span class="sc">!=</span> <span class="st">"Todas"</span>) {</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    resultado <span class="ot">&lt;-</span> resultado <span class="sc">|&gt;</span> <span class="fu">filter</span>(species <span class="sc">==</span> input<span class="sc">$</span>especie)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>area <span class="sc">!=</span> <span class="st">"Todas"</span>) {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    resultado <span class="ot">&lt;-</span> resultado <span class="sc">|&gt;</span> <span class="fu">filter</span>(nombre_ac <span class="sc">==</span> input<span class="sc">$</span>area)</span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  resultado</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Una función reactiva se invoca como cualquier otra función, agregando paréntesis: <code>felidos_filtrados()</code>. La gran ventaja es que <strong>se calcula una sola vez</strong> cada vez que cambia un filtro y su resultado lo comparten todas las salidas que la invocan (el mapa, el gráfico y la tabla), en lugar de repetir el filtrado en cada una.</p>
-</section>
-<section id="del-tablero-a-la-aplicación" class="level3" data-number="16.4.4">
-<h3 data-number="16.4.4" class="anchored" data-anchor-id="del-tablero-a-la-aplicación"><span class="header-section-number">16.4.4</span> Del tablero a la aplicación</h3>
-<p>En el <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a>, el tablero de control de félidos mostraba mapas, un gráfico y una tabla <strong>fijos</strong>, calculados una sola vez al renderizar la página. Para convertirlo en una aplicación interactiva, se realizan tres cambios:</p>
-<ol type="1">
-<li>Se agrega <code>server: shiny</code> al encabezado YAML.</li>
-<li>Se agregan <strong>controles de entrada</strong> (en una barra lateral) con los que la persona usuaria especifica filtros.</li>
-<li>Se mueve la generación de las salidas al <strong>servidor</strong>, dentro de funciones <code>render*</code> que dependen de una función reactiva de filtrado.</li>
-</ol>
-<p>El resto de este capítulo desarrolla esos cambios sobre el ejemplo de félidos.</p>
+<p>Una función reactiva se invoca como cualquier otra función, agregando paréntesis: <code>felidos_filtrados()</code>. La gran ventaja es que <strong>se calcula una sola vez</strong> cada vez que cambia un filtro y su resultado lo comparten todas las salidas que la invocan (las cajas de valor, el mapa, el gráfico y la tabla), en lugar de repetir el filtrado en cada una. Más adelante, en el <a href="#sec-paso-reactiva" class="quarto-xref"><span>Sección 16.7.7</span></a>, se construye la versión completa de esta función, con los tres filtros de la aplicación.</p>
 </section>
 </section>
 <section id="instalación-y-carga-de-paquetes" class="level2" data-number="16.5">
 <h2 data-number="16.5" class="anchored" data-anchor-id="instalación-y-carga-de-paquetes"><span class="header-section-number">16.5</span> Instalación y carga de paquetes</h2>
-<p>Además de los paquetes del ecosistema espacial y de graficación ya empleados en capítulos anteriores (<code>tidyverse</code>, <code>sf</code>, <code>plotly</code>, <code>DT</code>, <code>leaflet</code>), este capítulo introduce tres paquetes nuevos:</p>
+<p>Además de los paquetes del ecosistema espacial y de graficación ya empleados en capítulos anteriores (<code>tidyverse</code>, <code>sf</code>, <code>plotly</code>, <code>DT</code>, <code>leaflet</code>, <code>leaflet.extras</code>), este capítulo introduce tres paquetes nuevos:</p>
 <ul>
 <li><a href="https://shiny.posit.co/"><code>shiny</code></a>: desarrollo de aplicaciones interactivas.</li>
 <li><a href="https://rstudio.github.io/rsconnect/"><code>rsconnect</code></a>: publicación de aplicaciones en shinyapps.io y Posit Connect.</li>
@@ -687,7 +683,7 @@ Figura&nbsp;16.2: Contextos de los bloques de código de una aplicación Shiny y
 </section>
 <section id="conjuntos-de-datos" class="level2" data-number="16.6">
 <h2 data-number="16.6" class="anchored" data-anchor-id="conjuntos-de-datos"><span class="header-section-number">16.6</span> Conjuntos de datos</h2>
-<p>La aplicación de ejemplo utiliza los mismos dos conjuntos de datos del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a>:</p>
+<p>La aplicación de ejemplo utiliza los mismos dos conjuntos de datos del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a>. Para reproducir la aplicación, deben descargarse a una carpeta <code>datos/</code> ubicada junto al documento <code>index.qmd</code>:</p>
 <ul>
 <li><p><strong>Áreas de conservación</strong>: capa vectorial GPKG con los polígonos de las 11 áreas de conservación administrativas del <a href="https://www.sinac.go.cr/">Sistema Nacional de Áreas de Conservación (SINAC)</a>.</p>
 <p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg">Descargar el archivo GPKG de áreas de conservación del SINAC</a></p></li>
@@ -695,362 +691,643 @@ Figura&nbsp;16.2: Contextos de los bloques de código de una aplicación Shiny y
 <p><a href="https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/gbif/felidos.csv">Descargar el archivo CSV de registros de presencia de félidos silvestres de Costa Rica</a></p></li>
 </ul>
 </section>
-<section id="ejemplo-aplicación-interactiva-de-riqueza-de-félidos" class="level2" data-number="16.7">
-<h2 data-number="16.7" class="anchored" data-anchor-id="ejemplo-aplicación-interactiva-de-riqueza-de-félidos"><span class="header-section-number">16.7</span> Ejemplo: aplicación interactiva de riqueza de félidos</h2>
-<p>Como ejemplo integral, se transformó el tablero de control de riqueza de félidos del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a> en una aplicación interactiva. La aplicación incorpora una <strong>barra lateral</strong> con dos filtros —especie y área de conservación—, una fila superior con tres <strong>cajas de valor reactivas</strong> y tres salidas —un mapa, un gráfico y una tabla—; todas estas salidas se actualizan en respuesta a esos filtros.</p>
-<ul>
-<li><a href="https://mfvargas.shinyapps.io/riqueza-felidos/">Aplicación publicada en shinyapps.io</a></li>
-<li><a href="https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos">Repositorio de la aplicación en GitHub</a></li>
-<li><a href="https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd">Código fuente de la aplicación</a></li>
-</ul>
+<section id="de-tablero-de-control-a-aplicación-interactiva-paso-a-paso" class="level2" data-number="16.7">
+<h2 data-number="16.7" class="anchored" data-anchor-id="de-tablero-de-control-a-aplicación-interactiva-paso-a-paso"><span class="header-section-number">16.7</span> De tablero de control a aplicación interactiva, paso a paso</h2>
+<p>Esta sección es el núcleo del capítulo. Toma el tablero de control de riqueza de félidos del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a> y lo convierte en la <a href="https://mfvargas.shinyapps.io/riqueza-felidos/">aplicación interactiva publicada en shinyapps.io</a>. En cada paso se presenta primero el código <strong>antes</strong> (tal como está en el tablero) y luego el código <strong>después</strong> (tal como queda en la aplicación), de modo que el cambio sea evidente.</p>
 <p>A diferencia del tablero del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a>, esta aplicación <strong>no</strong> se publica como página estática en GitHub Pages, porque requiere un servidor Shiny en ejecución. En la sección <a href="#sec-publicacion-shinyapps">Publicación en shinyapps.io</a> se explica cómo desplegarla en la nube.</p>
-<p>En las secciones siguientes se muestra el código fuente, organizado de acuerdo con la arquitectura de la aplicación.</p>
-<section id="encabezado-yaml" class="level3" data-number="16.7.1">
-<h3 data-number="16.7.1" class="anchored" data-anchor-id="encabezado-yaml"><span class="header-section-number">16.7.1</span> Encabezado YAML</h3>
-<p>El encabezado declara el formato <code>dashboard</code> con <code>server: shiny</code> y un botón de navegación hacia el código fuente en GitHub. Es el mismo encabezado del tablero del capítulo anterior, con la única adición de <code>server: shiny</code>:</p>
+<section id="punto-de-partida-el-tablero-de-control" class="level3" data-number="16.7.1">
+<h3 data-number="16.7.1" class="anchored" data-anchor-id="punto-de-partida-el-tablero-de-control"><span class="header-section-number">16.7.1</span> Punto de partida: el tablero de control</h3>
+<p>El <a href="tableros/tablero-riqueza-felidos.html">tablero de control de félidos</a> es un documento Quarto con <code>format: dashboard</code> que, una vez renderizado, muestra siempre lo mismo:</p>
+<ul>
+<li>Una <strong>fila superior</strong> con tres <strong>cajas de valor</strong> (total de registros, riqueza de especies y áreas con mayor riqueza).</li>
+<li>Una <strong>fila central</strong> con tres pestañas de mapa (registros agrupados, mapa de calor y coropleta de riqueza por área) y, a la par, un <strong>gráfico</strong> de barras de riqueza por área.</li>
+<li>Una <strong>fila inferior</strong> con una <strong>tabla</strong> de registros de presencia.</li>
+</ul>
+<p>Todo el procesamiento ocurre una sola vez, al renderizar la página. La persona usuaria no puede filtrar ni recalcular nada. El objetivo del tutorial es agregar esa interactividad.</p>
+<p>La <a href="#fig-shiny-flujo-reactivo" class="quarto-xref">Figura&nbsp;<span>16.3</span></a>, que se retoma al final de la sección, resume hacia dónde se quiere llegar: dos o más controles de entrada que alimentan una función reactiva, cuyo resultado comparten todas las salidas.</p>
+</section>
+<section id="resumen-de-los-cambios" class="level3" data-number="16.7.2">
+<h3 data-number="16.7.2" class="anchored" data-anchor-id="resumen-de-los-cambios"><span class="header-section-number">16.7.2</span> Resumen de los cambios</h3>
+<p>La transformación se realiza con un conjunto acotado de cambios, que las secciones siguientes desarrollan uno por uno:</p>
+<ol type="1">
+<li><strong>Encabezado YAML</strong>: se agrega <code>server: shiny</code>.</li>
+<li><strong>Paquetes</strong>: el bloque de carga pasa al contexto <code>setup</code>.</li>
+<li><strong>Datos</strong>: el bloque de datos pasa al contexto <code>data</code>; el cálculo de la riqueza por área, que el tablero hacía una sola vez, se traslada al servidor para recalcularse con cada filtro.</li>
+<li><strong>Barra lateral</strong>: se agregan los <strong>controles de entrada</strong> con los que la persona usuaria filtra y configura las salidas.</li>
+<li><strong>Función reactiva</strong>: se programa <code>felidos_filtrados()</code>, que aplica los filtros una sola vez y comparte el resultado.</li>
+<li><strong>Cajas de valor, mapa, gráfico y tabla</strong> (pasos 6 a 8): cada salida fija se reemplaza por un par <code>*Output()</code> (en la interfaz) + <code>render*()</code> (en el servidor), que invoca la función reactiva.</li>
+<li><strong>Botón de restablecer</strong> (paso 9): se agrega un control que devuelve todos los filtros a sus valores iniciales.</li>
+</ol>
+</section>
+<section id="paso-1.-activar-shiny-en-el-encabezado-yaml" class="level3" data-number="16.7.3">
+<h3 data-number="16.7.3" class="anchored" data-anchor-id="paso-1.-activar-shiny-en-el-encabezado-yaml"><span class="header-section-number">16.7.3</span> Paso 1. Activar Shiny en el encabezado YAML</h3>
+<p>El único cambio en el encabezado es agregar <code>server: shiny</code>. Todo lo demás (formato <code>dashboard</code>, botón de navegación a GitHub, idioma) se conserva.</p>
+<p><strong>Antes</strong> (tablero):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Riqueza de félidos de Costa Rica (aplicación interactiva)"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Riqueza de félidos de Costa Rica"</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Manuel Vargas"</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">dashboard</span><span class="kw">:</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">nav-buttons</span><span class="kw">:</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> github</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">server</span><span class="kw">:</span><span class="at"> shiny</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">orientation</span><span class="kw">:</span><span class="at"> rows</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">nav-buttons</span><span class="kw">:</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> github</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/gf0604-procesamientodatosgeograficos/2026-i-tablero-riqueza-felidos/blob/main/index.qmd</span></span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> es</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Después</strong> (aplicación):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Riqueza de félidos de Costa Rica (aplicación interactiva)"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Manuel Vargas"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">dashboard</span><span class="kw">:</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">nav-buttons</span><span class="kw">:</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="fu">icon</span><span class="kw">:</span><span class="at"> github</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">        </span><span class="fu">href</span><span class="kw">:</span><span class="at"> https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">server</span><span class="kw">:</span><span class="at"> shiny</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lang</span><span class="kw">:</span><span class="at"> es</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="carga-de-paquetes-context-setup" class="level3" data-number="16.7.2">
-<h3 data-number="16.7.2" class="anchored" data-anchor-id="carga-de-paquetes-context-setup"><span class="header-section-number">16.7.2</span> Carga de paquetes (<code>context: setup</code>)</h3>
-<p>El primer bloque carga los paquetes. La opción <code>#| context: setup</code> indica que debe ejecutarse tanto en la interfaz de usuario como en el servidor:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-paquetes</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: setup</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)      <span class="co"># manipulación de datos</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)             <span class="co"># datos vectoriales</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)         <span class="co"># gráficos interactivos</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)             <span class="co"># tablas interactivas</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)        <span class="co"># mapas interactivos</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)          <span class="co"># aplicaciones interactivas</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bslib)          <span class="co"># componentes de interfaz (cajas de valor)</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bsicons)        <span class="co"># íconos de Bootstrap</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="carga-y-preparación-de-datos-context-data" class="level3" data-number="16.7.3">
-<h3 data-number="16.7.3" class="anchored" data-anchor-id="carga-y-preparación-de-datos-context-data"><span class="header-section-number">16.7.3</span> Carga y preparación de datos (<code>context: data</code>)</h3>
-<p>El segundo bloque carga los datos y los prepara una sola vez. La opción <code>#| context: data</code> hace que el resultado quede disponible tanto para la barra lateral (que necesita la lista de especies y de áreas) como para el servidor. El procesamiento —la unión espacial con <code>st_join()</code> y la simplificación de geometrías con <code>st_simplify()</code>— es exactamente el mismo del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a>:</p>
+<section id="paso-2.-cargar-los-paquetes-en-el-contexto-setup" class="level3" data-number="16.7.4">
+<h3 data-number="16.7.4" class="anchored" data-anchor-id="paso-2.-cargar-los-paquetes-en-el-contexto-setup"><span class="header-section-number">16.7.4</span> Paso 2. Cargar los paquetes en el contexto <code>setup</code></h3>
+<p>El bloque que carga los paquetes es casi idéntico al del tablero; el cambio clave es la opción <code>#| context: setup</code>, que hace que el bloque se ejecute <strong>tanto en la interfaz como en el servidor</strong>. Además, se cargan tres paquetes nuevos —<code>shiny</code>, <code>bslib</code> y <code>bsicons</code>— para la interactividad y las cajas de valor, y se elimina <code>tmap</code>, porque en la aplicación la coropleta de riqueza se dibuja con <code>leaflet</code> (ver <a href="#sec-paso-mapa" class="quarto-xref"><span>Sección 16.7.9</span></a>).</p>
+<p><strong>Antes</strong> (tablero):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-datos</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: data</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Áreas de conservación del SINAC (polígonos)</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>areas_conservacion <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg"</span>,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Registros de presencia de félidos silvestres (puntos)</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>felidos <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/gbif/felidos.csv"</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>,</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(felidos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Unión espacial: a cada registro se le agrega el área de conservación que lo contiene</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>felidos <span class="ot">&lt;-</span> <span class="fu">st_join</span>(</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> felidos,</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> dplyr<span class="sc">::</span><span class="fu">select</span>(areas_conservacion, codigo_ac, nombre_ac, siglas_ac),</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">join =</span> st_intersects</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Versión simplificada de las áreas, solo para dibujarlas en el mapa</span></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>areas_conservacion_simplificadas <span class="ot">&lt;-</span></span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>  areas_conservacion <span class="sc">|&gt;</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">5367</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">500</span>, <span class="at">preserveTopology =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>)</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-paquetes</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)      <span class="co"># manipulación de datos</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)             <span class="co"># datos vectoriales</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)           <span class="co"># mapas estáticos e interactivos</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)         <span class="co"># gráficos interactivos</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)             <span class="co"># tablas interactivas</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)        <span class="co"># mapas interactivos</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.extras) <span class="co"># mapas de calor sobre leaflet</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="fu">tmap_mode</span>(<span class="st">"view"</span>)       <span class="co"># modo interactivo de tmap</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Después</strong> (aplicación):</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-paquetes</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: setup</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Carga de paquetes (se ejecuta tanto en la interfaz como en el servidor)</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)      <span class="co"># manipulación de datos</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)             <span class="co"># datos vectoriales</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)         <span class="co"># gráficos interactivos</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DT)             <span class="co"># tablas interactivas</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)        <span class="co"># mapas interactivos</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet.extras) <span class="co"># mapas de calor sobre leaflet</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)          <span class="co"># aplicaciones interactivas</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bslib)          <span class="co"># componentes de interfaz (cajas de valor)</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(bsicons)        <span class="co"># íconos de Bootstrap</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="barra-lateral-con-filtros" class="level3" data-number="16.7.4">
-<h3 data-number="16.7.4" class="anchored" data-anchor-id="barra-lateral-con-filtros"><span class="header-section-number">16.7.4</span> Barra lateral con filtros</h3>
-<p>La barra lateral se crea con un encabezado de nivel 1 con la clase <code>.sidebar</code>. Dentro se colocan dos controles de entrada <code>selectInput()</code>: uno para la especie y otro para el área de conservación. Cada lista incluye la opción <code>"Todas"</code> y toma el resto de sus opciones de los datos cargados en el bloque <code>context: data</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># {.sidebar}</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filtro-especie</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId  =</span> <span class="st">"especie"</span>,</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">label    =</span> <span class="st">"Especie"</span>,</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">choices  =</span> <span class="fu">c</span>(<span class="st">"Todas"</span>, <span class="fu">sort</span>(<span class="fu">unique</span>(felidos<span class="sc">$</span>species))),</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="st">"Todas"</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filtro-area</span></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId  =</span> <span class="st">"area"</span>,</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">label    =</span> <span class="st">"Área de conservación"</span>,</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">choices  =</span> <span class="fu">c</span>(<span class="st">"Todas"</span>, <span class="fu">sort</span>(<span class="fu">unique</span>(areas_conservacion<span class="sc">$</span>nombre_ac))),</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="st">"Todas"</span></span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Nótese el argumento <code>inputId</code> de cada <code>selectInput()</code>: <code>"especie"</code> y <code>"area"</code>. Estos identificadores se usarán en el servidor como <code>input$especie</code> e <code>input$area</code>.</p>
-</section>
-<section id="cajas-de-valor-reactivas" class="level3" data-number="16.7.5">
-<h3 data-number="16.7.5" class="anchored" data-anchor-id="cajas-de-valor-reactivas"><span class="header-section-number">16.7.5</span> Cajas de valor reactivas</h3>
-<p>Sobre las salidas principales se coloca una fila con tres <strong>cajas de valor</strong>. A diferencia de las cajas estáticas del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a> —cuyo valor se fija una sola vez al renderizar—, estas se <strong>recalculan con cada cambio de filtro</strong>. Por eso son una salida más del servidor: en la interfaz solo se reserva su espacio con un control de salida genérico, <code>uiOutput()</code>, y el servidor construye la caja completa con <code>bslib::value_box()</code> dentro de <code>renderUI()</code>.</p>
-<p>Las tres cajas se agrupan en una fila (<code>## Row</code>) dentro de la página de la aplicación. Cada bloque reserva el espacio de una caja con <code>uiOutput()</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Riqueza de félidos</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height="20%"}</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-valuebox-registros</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">uiOutput</span>(<span class="at">outputId =</span> <span class="st">"vb_registros"</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-valuebox-especies</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">uiOutput</span>(<span class="at">outputId =</span> <span class="st">"vb_especies"</span>)</span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-valuebox-areas</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="fu">uiOutput</span>(<span class="at">outputId =</span> <span class="st">"vb_areas"</span>)</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Cada <code>outputId</code> (<code>"vb_registros"</code>, <code>"vb_especies"</code>, <code>"vb_areas"</code>) identifica la caja que el servidor generará con <code>renderUI()</code>.</p>
-</section>
-<section id="controles-de-salida" class="level3" data-number="16.7.6">
-<h3 data-number="16.7.6" class="anchored" data-anchor-id="controles-de-salida"><span class="header-section-number">16.7.6</span> Controles de salida</h3>
-<p>Debajo de las cajas de valor, las tres salidas principales se organizan en una segunda fila con pestañas (<code>## Row {.tabset}</code>): una para el mapa, una para el gráfico y una para la tabla. Cada una se declara con la función <code>*Output()</code> correspondiente, que reserva el espacio en la interfaz. El contenido lo generará luego el servidor:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {.tabset}</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mapa</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-mapa</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">leafletOutput</span>(<span class="at">outputId =</span> <span class="st">"mapa"</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<section id="paso-3.-preparar-los-datos-en-el-contexto-data" class="level3" data-number="16.7.5">
+<h3 data-number="16.7.5" class="anchored" data-anchor-id="paso-3.-preparar-los-datos-en-el-contexto-data"><span class="header-section-number">16.7.5</span> Paso 3. Preparar los datos en el contexto <code>data</code></h3>
+<p>El bloque de datos pasa al contexto <code>data</code>, de modo que los datos cargados queden disponibles tanto para la barra lateral (que necesita la lista de especies, de áreas y el rango de años) como para el servidor. La unión espacial con <code>st_join()</code> y la simplificación de geometrías con <code>st_simplify()</code> son las mismas del tablero.</p>
+<p>Hay dos diferencias importantes respecto al tablero:</p>
+<ul>
+<li>Se agrega una columna <code>anio</code> (extraída de <code>eventDate</code>) y se calculan <code>anio_min</code> y <code>anio_max</code>, que el deslizador de años necesita.</li>
+<li>El cálculo de la <strong>riqueza por área de conservación</strong> —que el tablero hacía una sola vez en este bloque— <strong>ya no se hace aquí</strong>. Como debe recalcularse con cada filtro, se traslada al servidor, dentro de las funciones <code>render*</code> (ver pasos 6 a 8).</li>
+</ul>
+<p><strong>Antes</strong> (tablero): el bloque cargaba los datos y, además, calculaba de una vez la riqueza por área y los indicadores de las cajas de valor:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: preparacion-riqueza</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Unión espacial: a cada registro se le agrega el área que lo contiene</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>felidos_union_areas <span class="ot">&lt;-</span> <span class="fu">st_join</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> felidos,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> dplyr<span class="sc">::</span><span class="fu">select</span>(areas_conservacion, codigo_ac, nombre_ac, siglas_ac),</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">join =</span> st_intersects</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Riqueza = cantidad de especies distintas por área de conservación</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>riqueza_felidos_areas <span class="ot">&lt;-</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  felidos_union_areas <span class="sc">|&gt;</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(codigo_ac)) <span class="sc">|&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(codigo_ac) <span class="sc">|&gt;</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">riqueza_especies_felidos =</span> <span class="fu">n_distinct</span>(species, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Áreas simplificadas (solo para dibujarlas) con la riqueza unida por atributo</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>areas_union_riqueza <span class="ot">&lt;-</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(areas_conservacion_simplificadas, riqueza_felidos_areas, <span class="at">by =</span> <span class="st">"codigo_ac"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">riqueza_especies_felidos =</span> <span class="dv">0</span>))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Indicadores fijos para las cajas de valor</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>total_registros <span class="ot">&lt;-</span> <span class="fu">nrow</span>(felidos)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>total_especies  <span class="ot">&lt;-</span> <span class="fu">n_distinct</span>(felidos<span class="sc">$</span>species, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co"># ... (riqueza máxima y áreas que la alcanzan)</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Después</strong> (aplicación): el bloque solo carga y prepara lo que es <strong>común y estático</strong> (la unión espacial, el año y las áreas simplificadas). Lo que depende de los filtros se calculará después, en el servidor:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: carga-datos</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: data</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Áreas de conservación del SINAC (polígonos)</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>areas_conservacion <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"datos/areas-conservacion.gpkg"</span>, <span class="at">quiet =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="fu">### Gráfico</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-grafico</span></span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="fu">plotlyOutput</span>(<span class="at">outputId =</span> <span class="st">"grafico"</span>)</span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tabla</span></span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-tabla</span></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">dataTableOutput</span>(<span class="at">outputId =</span> <span class="st">"tabla"</span>)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Cada <code>outputId</code> (<code>"mapa"</code>, <code>"grafico"</code>, <code>"tabla"</code>) identifica la salida y se usará en el servidor para asignarle su contenido: <code>output$mapa</code>, <code>output$grafico</code> y <code>output$tabla</code>.</p>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Registros de presencia de félidos silvestres (puntos)</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>felidos <span class="ot">&lt;-</span> <span class="fu">st_read</span>(</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"datos/felidos.csv"</span>,</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">c</span>(</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"X_POSSIBLE_NAMES=decimalLongitude"</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Y_POSSIBLE_NAMES=decimalLatitude"</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">quiet =</span> <span class="cn">TRUE</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(felidos) <span class="ot">&lt;-</span> <span class="dv">4326</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Unión espacial: a cada registro se le agrega el área que lo contiene</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>felidos <span class="ot">&lt;-</span> <span class="fu">st_join</span>(</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> felidos,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> dplyr<span class="sc">::</span><span class="fu">select</span>(areas_conservacion, codigo_ac, nombre_ac, siglas_ac),</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">join =</span> st_intersects</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Año del registro (para el deslizador de rango de años)</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>felidos<span class="sc">$</span>anio <span class="ot">&lt;-</span> <span class="fu">suppressWarnings</span>(<span class="fu">as.integer</span>(<span class="fu">substr</span>(<span class="fu">as.character</span>(felidos<span class="sc">$</span>eventDate), <span class="dv">1</span>, <span class="dv">4</span>)))</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>anio_min <span class="ot">&lt;-</span> <span class="fu">min</span>(felidos<span class="sc">$</span>anio, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>anio_max <span class="ot">&lt;-</span> <span class="fu">max</span>(felidos<span class="sc">$</span>anio, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Versión SIMPLIFICADA de las áreas, solo para dibujarlas en el mapa</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>areas_conservacion_simplificadas <span class="ot">&lt;-</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  areas_conservacion <span class="sc">|&gt;</span></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">5367</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_simplify</span>(<span class="at">dTolerance =</span> <span class="dv">500</span>, <span class="at">preserveTopology =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_transform</span>(<span class="dv">4326</span>)</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="servidor-context-server" class="level3" data-number="16.7.7">
-<h3 data-number="16.7.7" class="anchored" data-anchor-id="servidor-context-server"><span class="header-section-number">16.7.7</span> Servidor (<code>context: server</code>)</h3>
-<p>El bloque del servidor (<code>#| context: server</code>) contiene toda la lógica reactiva. Comienza con la función reactiva <code>felidos_filtrados()</code>, que aplica los dos filtros una sola vez, y continúa con las funciones <code>render*</code> que generan las salidas a partir de ella: las tres cajas de valor, el mapa, el gráfico y la tabla.</p>
-<p><strong>Función reactiva de filtrado:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: servidor</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: server</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtra los registros según los valores de la barra lateral.</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Se calcula una sola vez y la comparten las tres salidas.</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>felidos_filtrados <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  resultado <span class="ot">&lt;-</span> felidos</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>especie <span class="sc">!=</span> <span class="st">"Todas"</span>) {</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>    resultado <span class="ot">&lt;-</span> resultado <span class="sc">|&gt;</span> <span class="fu">filter</span>(species <span class="sc">==</span> input<span class="sc">$</span>especie)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>area <span class="sc">!=</span> <span class="st">"Todas"</span>) {</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>    resultado <span class="ot">&lt;-</span> resultado <span class="sc">|&gt;</span> <span class="fu">filter</span>(nombre_ac <span class="sc">==</span> input<span class="sc">$</span>area)</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<section id="paso-4.-agregar-la-barra-lateral-con-controles-de-entrada" class="level3" data-number="16.7.6">
+<h3 data-number="16.7.6" class="anchored" data-anchor-id="paso-4.-agregar-la-barra-lateral-con-controles-de-entrada"><span class="header-section-number">16.7.6</span> Paso 4. Agregar la barra lateral con controles de entrada</h3>
+<p>El tablero no tiene controles de entrada. La aplicación agrega una <strong>barra lateral</strong> —un encabezado de nivel 1 con la clase <code>.sidebar</code>— con cinco controles, cada uno de un tipo distinto, para ilustrar la variedad de <em>widgets</em> disponibles:</p>
+<ul>
+<li><code>checkboxGroupInput()</code>: casillas de verificación para elegir <strong>una o varias</strong> especies a la vez.</li>
+<li><code>selectInput()</code>: lista desplegable de <strong>opción única</strong> para el área de conservación (con la opción <code>"Todas"</code>).</li>
+<li><code>sliderInput()</code>: deslizador de <strong>rango</strong> para el año del registro.</li>
+<li><code>radioButtons()</code>: <strong>opción única</strong> entre alternativas visibles; controla cómo se dibujan los registros en el mapa (sustituye a las tres pestañas de mapa del tablero).</li>
+<li><code>actionButton()</code>: botón que dispara una acción en el servidor; aquí, restablecer los filtros (ver <a href="#sec-paso-reset" class="quarto-xref"><span>Sección 16.7.11</span></a>).</li>
+</ul>
+<p>Nótese que las tres pestañas de mapa del tablero (registros agrupados, mapa de calor y coropleta) se reorganizan: la coropleta pasa a mostrarse siempre, y la elección entre <em>agrupados</em>, <em>individuales</em> y <em>mapa de calor</em> se convierte en el control <code>radioButtons</code> <code>"vis_puntos"</code>.</p>
+<p><strong>Después</strong> (aplicación): la barra lateral con los cinco controles.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># {.sidebar}</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filtro-especies</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># checkboxGroupInput: selección múltiple; inician todas las especies marcadas</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="fu">checkboxGroupInput</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId  =</span> <span class="st">"especies"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">label    =</span> <span class="st">"Especies"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">choices  =</span> <span class="fu">sort</span>(<span class="fu">unique</span>(felidos<span class="sc">$</span>species)),</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="fu">sort</span>(<span class="fu">unique</span>(felidos<span class="sc">$</span>species))</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filtro-area</span></span>
 <span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  resultado</span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Cajas de valor</strong> (en el mismo bloque del servidor). Cada caja se construye con <code>value_box()</code> —indicando su título, valor, ícono (<code>bs_icon()</code>) y color (<code>theme</code>)— a partir de los registros filtrados. Se usan los mismos íconos y colores del tablero del <a href="15-tableros-control.html" class="quarto-xref"><span>Capítulo 15</span></a>:</p>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co"># selectInput: lista desplegable de opción única (con la opción "Todas")</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="fu">selectInput</span>(</span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId  =</span> <span class="st">"area"</span>,</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">label    =</span> <span class="st">"Área de conservación"</span>,</span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">choices  =</span> <span class="fu">c</span>(<span class="st">"Todas"</span>, <span class="fu">sort</span>(<span class="fu">unique</span>(areas_conservacion<span class="sc">$</span>nombre_ac))),</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="st">"Todas"</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: filtro-anios</span></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="co"># sliderInput: deslizador de rango para filtrar por el año del registro</span></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a><span class="fu">sliderInput</span>(</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId =</span> <span class="st">"anios"</span>,</span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">label   =</span> <span class="st">"Rango de años"</span>,</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">min     =</span> anio_min,</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">max     =</span> anio_max,</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">value   =</span> <span class="fu">c</span>(anio_min, anio_max),</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">step    =</span> <span class="dv">1</span>,</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep     =</span> <span class="st">""</span></span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: control-visualizacion</span></span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a><span class="co"># radioButtons: opción única para la forma de dibujar los registros en el mapa</span></span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="fu">radioButtons</span>(</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId  =</span> <span class="st">"vis_puntos"</span>,</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">label    =</span> <span class="st">"Visualización de registros"</span>,</span>
+<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">choices  =</span> <span class="fu">c</span>(<span class="st">"Agrupados"</span>, <span class="st">"Individuales"</span>, <span class="st">"Mapa de calor"</span>),</span>
+<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">selected =</span> <span class="st">"Agrupados"</span></span>
+<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: boton-reset</span></span>
+<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a><span class="co"># actionButton: restablece todos los controles a sus valores iniciales</span></span>
+<span id="cb11-58"><a href="#cb11-58" aria-hidden="true" tabindex="-1"></a><span class="fu">actionButton</span>(</span>
+<span id="cb11-59"><a href="#cb11-59" aria-hidden="true" tabindex="-1"></a>  <span class="at">inputId =</span> <span class="st">"reset"</span>,</span>
+<span id="cb11-60"><a href="#cb11-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">label   =</span> <span class="st">"Restablecer filtros"</span></span>
+<span id="cb11-61"><a href="#cb11-61" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-62"><a href="#cb11-62" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Cada control tiene un <code>inputId</code> único (<code>"especies"</code>, <code>"area"</code>, <code>"anios"</code>, <code>"vis_puntos"</code>, <code>"reset"</code>). El servidor los lee como <code>input$especies</code>, <code>input$area</code>, <code>input$anios</code>, <code>input$vis_puntos</code> e <code>input$reset</code>.</p>
+</section>
+<section id="sec-paso-reactiva" class="level3" data-number="16.7.7">
+<h3 data-number="16.7.7" class="anchored" data-anchor-id="sec-paso-reactiva"><span class="header-section-number">16.7.7</span> Paso 5. La función reactiva de filtrado</h3>
+<p>Este es el <strong>corazón</strong> de la transformación. El tablero filtraba (en realidad, no filtraba nada: usaba todos los datos) de forma fija. La aplicación define una sola función reactiva, <code>felidos_filtrados()</code>, que aplica los tres filtros de la barra lateral. Se calcula una sola vez por cambio y todas las salidas comparten su resultado.</p>
+<p>A partir de aquí, todo el código nuevo vive en un único bloque del servidor (<code>#| context: server</code>):</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>vb_registros <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">value_box</span>(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Registros de presencia"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">value    =</span> <span class="fu">nrow</span>(<span class="fu">felidos_filtrados</span>()),</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">showcase =</span> <span class="fu">bs_icon</span>(<span class="st">"binoculars"</span>),</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme    =</span> <span class="st">"primary"</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>vb_especies <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">value_box</span>(</span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Riqueza de especies"</span>,</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">value    =</span> <span class="fu">n_distinct</span>(<span class="fu">felidos_filtrados</span>()<span class="sc">$</span>species),</span>
-<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">showcase =</span> <span class="fu">bs_icon</span>(<span class="st">"diagram-3"</span>),</span>
-<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme    =</span> <span class="st">"success"</span></span>
-<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>vb_areas <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
-<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  riqueza_por_area <span class="ot">&lt;-</span></span>
-<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">felidos_filtrados</span>() <span class="sc">|&gt;</span></span>
-<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
-<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(siglas_ac)) <span class="sc">|&gt;</span></span>
-<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siglas_ac) <span class="sc">|&gt;</span></span>
-<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">riqueza =</span> <span class="fu">n_distinct</span>(species), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
-<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(riqueza_por_area) <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>    riqueza_maxima <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>    siglas         <span class="ot">&lt;-</span> <span class="st">"—"</span></span>
-<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>    riqueza_maxima <span class="ot">&lt;-</span> <span class="fu">max</span>(riqueza_por_area<span class="sc">$</span>riqueza)</span>
-<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>    siglas <span class="ot">&lt;-</span></span>
-<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>      riqueza_por_area <span class="sc">|&gt;</span></span>
-<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(riqueza <span class="sc">==</span> riqueza_maxima) <span class="sc">|&gt;</span></span>
-<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pull</span>(siglas_ac) <span class="sc">|&gt;</span></span>
-<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(<span class="at">collapse =</span> <span class="st">", "</span>)</span>
-<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">value_box</span>(</span>
-<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="fu">paste0</span>(<span class="st">"Áreas con mayor riqueza ("</span>, riqueza_maxima, <span class="st">" especies)"</span>),</span>
-<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">value    =</span> siglas,</span>
-<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">showcase =</span> <span class="fu">bs_icon</span>(<span class="st">"trophy"</span>),</span>
-<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme    =</span> <span class="st">"warning"</span></span>
-<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Mapa</strong> (en el mismo bloque del servidor). Cada registro filtrado se dibuja como un marcador agrupado (<em>cluster</em>) sobre los polígonos de las áreas de conservación:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>mapa <span class="ot">&lt;-</span> <span class="fu">renderLeaflet</span>({</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setView</span>(<span class="at">lng =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">7</span>) <span class="sc">|&gt;</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap,    <span class="at">group =</span> <span class="st">"OpenStreetMap"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>CartoDB.Positron, <span class="at">group =</span> <span class="st">"CartoDB Positron"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addPolygons</span>(</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> areas_conservacion_simplificadas,</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">fillOpacity =</span> <span class="dv">0</span>,</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="sc">~</span>nombre_ac, <span class="at">group =</span> <span class="st">"Áreas de conservación"</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addCircleMarkers</span>(</span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">data =</span> <span class="fu">felidos_filtrados</span>(),</span>
-<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">radius =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"#41ab5d"</span>, <span class="at">stroke =</span> <span class="cn">FALSE</span>, <span class="at">fillOpacity =</span> <span class="fl">0.7</span>,</span>
-<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">label =</span> <span class="sc">~</span>species,</span>
-<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">popup =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;b&gt;Especie:&lt;/b&gt; "</span>, species,   <span class="st">"&lt;br/&gt;"</span>,</span>
-<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;b&gt;Localidad:&lt;/b&gt; "</span>, locality, <span class="st">"&lt;br/&gt;"</span>,</span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;b&gt;Fecha:&lt;/b&gt; "</span>, eventDate</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">clusterOptions =</span> <span class="fu">markerClusterOptions</span>(), <span class="at">group =</span> <span class="st">"Félidos"</span></span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addLayersControl</span>(</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>      <span class="at">baseGroups =</span> <span class="fu">c</span>(<span class="st">"OpenStreetMap"</span>, <span class="st">"CartoDB Positron"</span>),</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>      <span class="at">overlayGroups =</span> <span class="fu">c</span>(<span class="st">"Áreas de conservación"</span>, <span class="st">"Félidos"</span>),</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>      <span class="at">options =</span> <span class="fu">layersControlOptions</span>(<span class="at">collapsed =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addScaleBar</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>)</span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Gráfico</strong> (en el mismo bloque del servidor). La riqueza de especies por área se recalcula sobre los datos filtrados y se grafica con <code>ggplot2</code>, convirtiéndolo luego en interactivo con <code>ggplotly()</code>:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>grafico <span class="ot">&lt;-</span> <span class="fu">renderPlotly</span>({</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  riqueza_por_area <span class="ot">&lt;-</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">felidos_filtrados</span>() <span class="sc">|&gt;</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(siglas_ac)) <span class="sc">|&gt;</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siglas_ac, nombre_ac) <span class="sc">|&gt;</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">riqueza =</span> <span class="fu">n_distinct</span>(species), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: servidor</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| context: server</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filtra los registros según los valores de la barra lateral.</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Se calcula una sola vez y la comparten todas las salidas.</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>felidos_filtrados <span class="ot">&lt;-</span> <span class="fu">reactive</span>({</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  resultado <span class="ot">&lt;-</span> felidos</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtro por especies (selección múltiple del checkboxGroupInput)</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  resultado <span class="ot">&lt;-</span> resultado <span class="sc">|&gt;</span> <span class="fu">filter</span>(species <span class="sc">%in%</span> input<span class="sc">$</span>especies)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtro por área de conservación</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>area <span class="sc">!=</span> <span class="st">"Todas"</span>) {</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    resultado <span class="ot">&lt;-</span> resultado <span class="sc">|&gt;</span> <span class="fu">filter</span>(nombre_ac <span class="sc">==</span> input<span class="sc">$</span>area)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filtro por rango de años (se conservan los registros sin fecha)</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  resultado <span class="ot">&lt;-</span> resultado <span class="sc">|&gt;</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="fu">is.na</span>(anio) <span class="sc">|</span> (anio <span class="sc">&gt;=</span> input<span class="sc">$</span>anios[<span class="dv">1</span>] <span class="sc">&amp;</span> anio <span class="sc">&lt;=</span> input<span class="sc">$</span>anios[<span class="dv">2</span>]))</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>  resultado</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="co"># ... (a continuación, en el mismo bloque, las funciones render* de los pasos 6 a 8</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co">#      y el observeEvent del paso 7)</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="paso-6.-de-cajas-de-valor-estáticas-a-reactivas" class="level3" data-number="16.7.8">
+<h3 data-number="16.7.8" class="anchored" data-anchor-id="paso-6.-de-cajas-de-valor-estáticas-a-reactivas"><span class="header-section-number">16.7.8</span> Paso 6. De cajas de valor estáticas a reactivas</h3>
+<p>En el tablero, cada caja de valor se reserva con la opción de bloque <code>#| content: valuebox</code> y su valor se fija una sola vez (a partir de los indicadores <code>total_registros</code>, <code>total_especies</code>, etc.). En la aplicación, el valor debe <strong>recalcularse con cada filtro</strong>, así que la caja se convierte en una salida más del servidor: en la interfaz se reserva el espacio con un control de salida genérico, <code>uiOutput()</code>, y el servidor construye la caja completa con <code>bslib::value_box()</code> dentro de <code>renderUI()</code>.</p>
+<p><strong>Antes</strong> (tablero): la fila de cajas, con valores fijos.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height=15%}</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: valuebox-registros</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros de presencia"</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">icon =</span> <span class="st">"binoculars"</span>, <span class="at">color =</span> <span class="st">"primary"</span>, <span class="at">value =</span> total_registros)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: valuebox-especies</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| content: valuebox</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Riqueza de especies"</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="fu">list</span>(<span class="at">icon =</span> <span class="st">"diagram-3"</span>, <span class="at">color =</span> <span class="st">"success"</span>, <span class="at">value =</span> total_especies)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Después</strong> (aplicación): en la interfaz solo se reserva el espacio de cada caja con <code>uiOutput()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Riqueza de félidos</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height="15%"}</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-valuebox-registros</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="fu">uiOutput</span>(<span class="at">outputId =</span> <span class="st">"vb_registros"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  grafico_riqueza <span class="ot">&lt;-</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    riqueza_por_area <span class="sc">|&gt;</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> riqueza, <span class="at">y =</span> <span class="fu">reorder</span>(siglas_ac, riqueza))) <span class="sc">+</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"#41ab5d"</span>,</span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Área de conservación: "</span>, nombre_ac, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Riqueza de félidos: "</span>, riqueza</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>      ))</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Riqueza de especies de félidos"</span>) <span class="sc">+</span></span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Área de conservación"</span>) <span class="sc">+</span></span>
-<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
-<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplotly</span>(grafico_riqueza, <span class="at">tooltip =</span> <span class="st">"text"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">config</span>(<span class="at">locale =</span> <span class="st">"es"</span>)</span>
-<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p><strong>Tabla</strong> (en el mismo bloque del servidor). Una tabla <code>DT</code> con los registros filtrados:</p>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-valuebox-especies</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="fu">uiOutput</span>(<span class="at">outputId =</span> <span class="st">"vb_especies"</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-valuebox-areas</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">uiOutput</span>(<span class="at">outputId =</span> <span class="st">"vb_areas"</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y en el servidor, cada caja se construye con <code>value_box()</code> a partir de <code>felidos_filtrados()</code>. Se usan los mismos íconos (<code>bs_icon()</code>) y colores (<code>theme</code>) del tablero:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>tabla <span class="ot">&lt;-</span> <span class="fu">renderDataTable</span>({</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">felidos_filtrados</span>() <span class="sc">|&gt;</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>      gbifID, species, decimalLongitude, decimalLatitude,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>      locality, nombre_ac, eventDate</span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">datatable</span>(</span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">colnames =</span> <span class="fu">c</span>(</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gbifID"</span>, <span class="st">"Especie"</span>, <span class="st">"Longitud"</span>, <span class="st">"Latitud"</span>,</span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Localidad"</span>, <span class="st">"Área de conservación"</span>, <span class="st">"Fecha"</span></span>
-<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>      ),</span>
-<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>      <span class="at">options =</span> <span class="fu">list</span>(</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">pageLength =</span> <span class="dv">10</span>,</span>
-<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">language =</span> <span class="fu">list</span>(<span class="at">url =</span> <span class="st">'//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json'</span>)</span>
-<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>      )</span>
-<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
-<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">formatRound</span>(<span class="fu">c</span>(<span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span>), <span class="at">digits =</span> <span class="dv">5</span>)</span>
-<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Nótese cómo cada función <code>render*</code> invoca <code>felidos_filtrados()</code> (con paréntesis). Gracias a la reactividad, cuando la persona usuaria cambia un filtro, todas las salidas —las tres cajas de valor, el mapa, el gráfico y la tabla— se recalculan automáticamente.</p>
-<p>La <a href="#fig-shiny-flujo-reactivo" class="quarto-xref">Figura&nbsp;<span>16.3</span></a> resume este flujo para las tres salidas principales: los dos controles de entrada (<code>input$especie</code> e <code>input$area</code>) alimentan la función reactiva <code>felidos_filtrados()</code>, cuyo resultado comparten las tres funciones <code>render*</code> que generan el mapa, el gráfico y la tabla. Las cajas de valor siguen exactamente el mismo patrón: cada una invoca <code>felidos_filtrados()</code> dentro de su <code>renderUI()</code>.</p>
-<div id="fig-shiny-flujo-reactivo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla" data-fig-align="center">
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (dentro del bloque #| context: server)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>vb_registros <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">value_box</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Registros de presencia"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">value    =</span> <span class="fu">nrow</span>(<span class="fu">felidos_filtrados</span>()),</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">showcase =</span> <span class="fu">bs_icon</span>(<span class="st">"binoculars"</span>),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme    =</span> <span class="st">"primary"</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>vb_especies <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">value_box</span>(</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="st">"Riqueza de especies"</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">value    =</span> <span class="fu">n_distinct</span>(<span class="fu">felidos_filtrados</span>()<span class="sc">$</span>species),</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">showcase =</span> <span class="fu">bs_icon</span>(<span class="st">"diagram-3"</span>),</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme    =</span> <span class="st">"success"</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>vb_areas <span class="ot">&lt;-</span> <span class="fu">renderUI</span>({</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  riqueza_por_area <span class="ot">&lt;-</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">felidos_filtrados</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(siglas_ac)) <span class="sc">|&gt;</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siglas_ac) <span class="sc">|&gt;</span></span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">riqueza =</span> <span class="fu">n_distinct</span>(species), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(riqueza_por_area) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>    riqueza_maxima <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a>    siglas         <span class="ot">&lt;-</span> <span class="st">"—"</span></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true" tabindex="-1"></a>    riqueza_maxima <span class="ot">&lt;-</span> <span class="fu">max</span>(riqueza_por_area<span class="sc">$</span>riqueza)</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true" tabindex="-1"></a>    siglas <span class="ot">&lt;-</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true" tabindex="-1"></a>      riqueza_por_area <span class="sc">|&gt;</span></span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(riqueza <span class="sc">==</span> riqueza_maxima) <span class="sc">|&gt;</span></span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pull</span>(siglas_ac) <span class="sc">|&gt;</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true" tabindex="-1"></a>      <span class="fu">paste</span>(<span class="at">collapse =</span> <span class="st">", "</span>)</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">value_box</span>(</span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true" tabindex="-1"></a>    <span class="at">title    =</span> <span class="fu">paste0</span>(<span class="st">"Áreas con mayor riqueza ("</span>, riqueza_maxima, <span class="st">" especies)"</span>),</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">value    =</span> siglas,</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">showcase =</span> <span class="fu">bs_icon</span>(<span class="st">"trophy"</span>),</span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">theme    =</span> <span class="st">"warning"</span></span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Patrón de las cajas de valor reactivas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para que una caja de valor reaccione a los filtros, <strong>no</strong> se usa <code>#| content: valuebox</code>. Se usa el par <code>uiOutput()</code> (interfaz) + <code>renderUI()</code> con <code>value_box()</code> (servidor). Este es el patrón que el proyecto final espera.</p>
+</div>
+</div>
+</section>
+<section id="sec-paso-mapa" class="level3" data-number="16.7.9">
+<h3 data-number="16.7.9" class="anchored" data-anchor-id="sec-paso-mapa"><span class="header-section-number">16.7.9</span> Paso 7. Del mapa fijo al mapa reactivo</h3>
+<p>El tablero tenía <strong>tres mapas separados</strong>, cada uno en su pestaña: registros agrupados (<code>leaflet</code> + <code>addMarkers</code> con <em>cluster</em>), mapa de calor (<code>leaflet.extras</code> + <code>addHeatmap</code>) y coropleta de riqueza por área (<code>tmap</code>). En la aplicación, los tres se funden en <strong>un solo mapa reactivo</strong>:</p>
+<ul>
+<li>La <strong>coropleta</strong> se dibuja siempre, ahora con <code>leaflet</code> (<code>colorNumeric()</code> + <code>addPolygons()</code> + <code>addLegend()</code>) en lugar de <code>tmap</code>, para que conviva con los puntos en el mismo mapa.</li>
+<li>Los <strong>registros</strong> se dibujan según el control <code>radioButtons</code> <code>"vis_puntos"</code>: agrupados (<code>markerClusterOptions()</code>), individuales (sin agrupamiento) o como mapa de calor (<code>addHeatmap()</code>).</li>
+</ul>
+<p>En la interfaz solo se reserva el espacio del mapa con <code>leafletOutput()</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height="55%"}</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column {width="60%"}</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-mapa</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros de presencia"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="fu">leafletOutput</span>(<span class="at">outputId =</span> <span class="st">"mapa"</span>)</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Y el servidor lo genera con <code>renderLeaflet()</code>, invocando <code>felidos_filtrados()</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (dentro del bloque #| context: server)</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>mapa <span class="ot">&lt;-</span> <span class="fu">renderLeaflet</span>({</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  datos <span class="ot">&lt;-</span> <span class="fu">felidos_filtrados</span>()</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Riqueza por área entre los datos filtrados</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  riqueza_por_area <span class="ot">&lt;-</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    datos <span class="sc">|&gt;</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(codigo_ac)) <span class="sc">|&gt;</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(codigo_ac) <span class="sc">|&gt;</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">riqueza =</span> <span class="fu">n_distinct</span>(species), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unión por atributo a los polígonos simplificados; áreas sin registros = 0</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  areas_riqueza <span class="ot">&lt;-</span></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">left_join</span>(areas_conservacion_simplificadas, riqueza_por_area, <span class="at">by =</span> <span class="st">"codigo_ac"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">replace_na</span>(<span class="fu">list</span>(<span class="at">riqueza =</span> <span class="dv">0</span>))</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Paleta de coropletas (verde) según la riqueza de especies</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  paleta_riqueza <span class="ot">&lt;-</span> <span class="fu">colorNumeric</span>(<span class="at">palette =</span> <span class="st">"Greens"</span>, <span class="at">domain =</span> areas_riqueza<span class="sc">$</span>riqueza)</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Mapa base</span></span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  mapa <span class="ot">&lt;-</span> <span class="fu">leaflet</span>() <span class="sc">|&gt;</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">setView</span>(<span class="at">lng =</span> <span class="sc">-</span><span class="fl">84.2</span>, <span class="at">lat =</span> <span class="fl">9.6</span>, <span class="at">zoom =</span> <span class="dv">8</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>OpenStreetMap,    <span class="at">group =</span> <span class="st">"OpenStreetMap"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addProviderTiles</span>(providers<span class="sc">$</span>CartoDB.Positron, <span class="at">group =</span> <span class="st">"CartoDB Positron"</span>)</span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Coropleta de riqueza por área de conservación (+ leyenda), siempre visible</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  mapa <span class="ot">&lt;-</span> mapa <span class="sc">|&gt;</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addPolygons</span>(</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>      <span class="at">data        =</span> areas_riqueza,</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>      <span class="at">weight      =</span> <span class="dv">1</span>,</span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>      <span class="at">color       =</span> <span class="st">"black"</span>,</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>      <span class="at">fillColor   =</span> <span class="sc">~</span><span class="fu">paleta_riqueza</span>(riqueza),</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>      <span class="at">fillOpacity =</span> <span class="fl">0.7</span>,</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>      <span class="at">label       =</span> <span class="sc">~</span>nombre_ac,</span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">popup       =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;b&gt;Área de conservación:&lt;/b&gt; "</span>, nombre_ac, <span class="st">"&lt;br/&gt;"</span>,</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;b&gt;Siglas:&lt;/b&gt; "</span>, siglas_ac, <span class="st">"&lt;br/&gt;"</span>,</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"&lt;b&gt;Riqueza de félidos:&lt;/b&gt; "</span>, riqueza</span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">group       =</span> <span class="st">"Riqueza por área de conservación"</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addLegend</span>(</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>      <span class="at">data     =</span> areas_riqueza,</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>      <span class="at">position =</span> <span class="st">"bottomright"</span>,</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>      <span class="at">pal      =</span> paleta_riqueza,</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>      <span class="at">values   =</span> <span class="sc">~</span>riqueza,</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>      <span class="at">title    =</span> <span class="st">"Riqueza"</span>,</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>      <span class="at">opacity  =</span> <span class="fl">0.7</span></span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>  grupo_areas <span class="ot">&lt;-</span> <span class="st">"Riqueza por área de conservación"</span></span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Registros de presencia: según el radioButtons "vis_puntos"</span></span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (input<span class="sc">$</span>vis_puntos <span class="sc">==</span> <span class="st">"Mapa de calor"</span>) {</span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>    mapa <span class="ot">&lt;-</span> mapa <span class="sc">|&gt;</span></span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>      <span class="fu">addHeatmap</span>(</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>        <span class="at">data =</span> datos, <span class="at">radius =</span> <span class="dv">15</span>, <span class="at">blur =</span> <span class="dv">20</span>, <span class="at">minOpacity =</span> <span class="fl">0.3</span>,</span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>        <span class="at">group =</span> <span class="st">"Mapa de calor"</span></span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>    grupo_registros <span class="ot">&lt;-</span> <span class="st">"Mapa de calor"</span></span>
+<span id="cb17-63"><a href="#cb17-63" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># "Agrupados" usa agrupamiento de marcadores; "Individuales" no</span></span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a>    opciones_cluster <span class="ot">&lt;-</span></span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (input<span class="sc">$</span>vis_puntos <span class="sc">==</span> <span class="st">"Agrupados"</span>) <span class="fu">markerClusterOptions</span>() <span class="cf">else</span> <span class="cn">NULL</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a>    mapa <span class="ot">&lt;-</span> mapa <span class="sc">|&gt;</span></span>
+<span id="cb17-69"><a href="#cb17-69" aria-hidden="true" tabindex="-1"></a>      <span class="fu">addCircleMarkers</span>(</span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a>        <span class="at">data        =</span> datos,</span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a>        <span class="at">radius      =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">weight =</span> <span class="dv">1</span>, <span class="at">stroke =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a>        <span class="at">fillColor   =</span> <span class="st">"#cb181d"</span>, <span class="at">fillOpacity =</span> <span class="fl">0.9</span>,</span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a>        <span class="at">label       =</span> <span class="sc">~</span>species,</span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>        <span class="at">popup       =</span> <span class="sc">~</span><span class="fu">paste0</span>(</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>          <span class="st">"&lt;b&gt;Especie:&lt;/b&gt; "</span>, species,   <span class="st">"&lt;br/&gt;"</span>,</span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>          <span class="st">"&lt;b&gt;Localidad:&lt;/b&gt; "</span>, locality, <span class="st">"&lt;br/&gt;"</span>,</span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>          <span class="st">"&lt;b&gt;Fecha:&lt;/b&gt; "</span>, eventDate</span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a>        <span class="at">clusterOptions =</span> opciones_cluster,</span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>        <span class="at">group          =</span> <span class="st">"Félidos"</span></span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>    grupo_registros <span class="ot">&lt;-</span> <span class="st">"Félidos"</span></span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>  mapa <span class="sc">|&gt;</span></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addLayersControl</span>(</span>
+<span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a>      <span class="at">baseGroups    =</span> <span class="fu">c</span>(<span class="st">"OpenStreetMap"</span>, <span class="st">"CartoDB Positron"</span>),</span>
+<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>      <span class="at">overlayGroups =</span> <span class="fu">c</span>(grupo_areas, grupo_registros),</span>
+<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a>      <span class="at">options       =</span> <span class="fu">layersControlOptions</span>(<span class="at">collapsed =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a>    <span class="fu">addScaleBar</span>(<span class="at">position =</span> <span class="st">"bottomleft"</span>)</span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="paso-8.-del-gráfico-y-la-tabla-fijos-a-reactivos" class="level3" data-number="16.7.10">
+<h3 data-number="16.7.10" class="anchored" data-anchor-id="paso-8.-del-gráfico-y-la-tabla-fijos-a-reactivos"><span class="header-section-number">16.7.10</span> Paso 8. Del gráfico y la tabla fijos a reactivos</h3>
+<p>El gráfico y la tabla siguen el mismo patrón: en la interfaz se reserva el espacio con <code>plotlyOutput()</code> y <code>dataTableOutput()</code>, y en el servidor se generan con <code>renderPlotly()</code> y <code>renderDataTable()</code>, recalculándose a partir de <code>felidos_filtrados()</code>. El código de cada salida es prácticamente el mismo del tablero; la única diferencia es que los datos de entrada ya no son fijos, sino el resultado de la función reactiva.</p>
+<p>En la interfaz:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">### Column {width="40%"}</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-grafico</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Riqueza por área de conservación"</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plotlyOutput</span>(<span class="at">outputId =</span> <span class="st">"grafico"</span>)</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Row {height="30%"}</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: salida-tabla</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#| title: "Registros de presencia de félidos"</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">dataTableOutput</span>(<span class="at">outputId =</span> <span class="st">"tabla"</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>En el servidor:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (dentro del bloque #| context: server)</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>grafico <span class="ot">&lt;-</span> <span class="fu">renderPlotly</span>({</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  riqueza_por_area <span class="ot">&lt;-</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">felidos_filtrados</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(siglas_ac)) <span class="sc">|&gt;</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(siglas_ac, nombre_ac) <span class="sc">|&gt;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarize</span>(<span class="at">riqueza =</span> <span class="fu">n_distinct</span>(species), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  grafico_riqueza <span class="ot">&lt;-</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>    riqueza_por_area <span class="sc">|&gt;</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> riqueza, <span class="at">y =</span> <span class="fu">reorder</span>(siglas_ac, riqueza))) <span class="sc">+</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>      <span class="at">fill =</span> <span class="st">"#41ab5d"</span>,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">aes</span>(<span class="at">text =</span> <span class="fu">paste0</span>(</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Área de conservación: "</span>, nombre_ac, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>,</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Riqueza de félidos: "</span>, riqueza</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>      ))</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">+</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">"Riqueza de especies de félidos"</span>) <span class="sc">+</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">"Área de conservación"</span>) <span class="sc">+</span></span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>()</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplotly</span>(grafico_riqueza, <span class="at">tooltip =</span> <span class="st">"text"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">config</span>(<span class="at">locale =</span> <span class="st">"es"</span>)</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>output<span class="sc">$</span>tabla <span class="ot">&lt;-</span> <span class="fu">renderDataTable</span>({</span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">felidos_filtrados</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    <span class="fu">st_drop_geometry</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">select</span>(</span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>      gbifID, species, decimalLongitude, decimalLatitude,</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>      locality, nombre_ac, eventDate</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    <span class="fu">datatable</span>(</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>      <span class="at">colnames =</span> <span class="fu">c</span>(</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gbifID"</span>, <span class="st">"Especie"</span>, <span class="st">"Longitud"</span>, <span class="st">"Latitud"</span>,</span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Localidad"</span>, <span class="st">"Área de conservación"</span>, <span class="st">"Fecha"</span></span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>      ),</span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>      <span class="at">rownames =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>      <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>        <span class="at">pageLength =</span> <span class="dv">10</span>,</span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>        <span class="at">language =</span> <span class="fu">list</span>(<span class="at">url =</span> <span class="st">'//cdn.datatables.net/plug-ins/1.10.11/i18n/Spanish.json'</span>)</span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">|&gt;</span></span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    <span class="fu">formatRound</span>(<span class="fu">c</span>(<span class="st">"decimalLongitude"</span>, <span class="st">"decimalLatitude"</span>), <span class="at">digits =</span> <span class="dv">5</span>)</span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Gracias a la reactividad, cuando la persona usuaria cambia un filtro, <strong>todas</strong> las salidas —las tres cajas de valor, el mapa, el gráfico y la tabla— se recalculan automáticamente, porque todas invocan <code>felidos_filtrados()</code>.</p>
+</section>
+<section id="sec-paso-reset" class="level3" data-number="16.7.11">
+<h3 data-number="16.7.11" class="anchored" data-anchor-id="sec-paso-reset"><span class="header-section-number">16.7.11</span> Paso 9. El botón “Restablecer filtros”</h3>
+<p>El botón <code>actionButton</code> de la barra lateral (paso 4) se conecta en el servidor con <code>observeEvent()</code>: cuando la persona usuaria hace clic (<code>input$reset</code>), las funciones <code>update*Input()</code> devuelven cada control a su valor inicial. Es un ejemplo de cómo el servidor también puede <strong>modificar la interfaz</strong>, no solo leerla.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode md code-with-copy"><code class="sourceCode markdown"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># (dentro del bloque #| context: server)</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="fu">observeEvent</span>(input<span class="sc">$</span>reset, {</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateCheckboxGroupInput</span>(session, <span class="st">"especies"</span>, <span class="at">selected =</span> <span class="fu">sort</span>(<span class="fu">unique</span>(felidos<span class="sc">$</span>species)))</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateSelectInput</span>(session, <span class="st">"area"</span>, <span class="at">selected =</span> <span class="st">"Todas"</span>)</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateSliderInput</span>(session, <span class="st">"anios"</span>, <span class="at">value =</span> <span class="fu">c</span>(anio_min, anio_max))</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateRadioButtons</span>(session, <span class="st">"vis_puntos"</span>, <span class="at">selected =</span> <span class="st">"Agrupados"</span>)</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copiar al portapapeles" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="el-flujo-reactivo-completo" class="level3" data-number="16.7.12">
+<h3 data-number="16.7.12" class="anchored" data-anchor-id="el-flujo-reactivo-completo"><span class="header-section-number">16.7.12</span> El flujo reactivo completo</h3>
+<p>La <a href="#fig-shiny-flujo-reactivo" class="quarto-xref">Figura&nbsp;<span>16.3</span></a> resume el resultado de la transformación: los controles de entrada de la barra lateral alimentan la función reactiva <code>felidos_filtrados()</code>, cuyo resultado comparten todas las funciones <code>render*</code> que generan las salidas. Cambiar cualquier filtro dispara, una sola vez, el recálculo de la función reactiva y, con él, la actualización automática de todas las salidas.</p>
+<div id="fig-shiny-flujo-reactivo" class="lightbox quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center" alt="Diagrama del flujo reactivo: los controles de entrada alimentan felidos_filtrados(), que a su vez alimenta las cajas de valor, el mapa, el gráfico y la tabla">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-shiny-flujo-reactivo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<a href="img/shiny-flujo-reactivo.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figura&nbsp;16.3: Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten las tres salidas."><img src="img/shiny-flujo-reactivo.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla"></a>
+<a href="img/shiny-flujo-reactivo.svg" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Figura&nbsp;16.3: Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten todas las salidas."><img src="img/shiny-flujo-reactivo.svg" class="img-fluid quarto-figure quarto-figure-center figure-img" alt="Diagrama del flujo reactivo: los controles de entrada alimentan felidos_filtrados(), que a su vez alimenta las cajas de valor, el mapa, el gráfico y la tabla"></a>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-shiny-flujo-reactivo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;16.3: Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten las tres salidas.
+Figura&nbsp;16.3: Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten todas las salidas.
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="ejecución-local" class="level3" data-number="16.7.8">
-<h3 data-number="16.7.8" class="anchored" data-anchor-id="ejecución-local"><span class="header-section-number">16.7.8</span> Ejecución local</h3>
-<p>Para ejecutar la aplicación en la estación de trabajo, se abre el documento <code>.qmd</code> en RStudio y se presiona el botón <strong>Run Document</strong>. RStudio inicia un servidor Shiny local y abre la aplicación en una ventana o en el navegador. Mientras el documento esté en ejecución, la sesión de R queda ocupada atendiendo la aplicación.</p>
 </section>
-<section id="sec-publicacion-shinyapps" class="level3" data-number="16.7.9">
-<h3 data-number="16.7.9" class="anchored" data-anchor-id="sec-publicacion-shinyapps"><span class="header-section-number">16.7.9</span> Publicación en shinyapps.io</h3>
+<section id="ejecución-local" class="level2" data-number="16.8">
+<h2 data-number="16.8" class="anchored" data-anchor-id="ejecución-local"><span class="header-section-number">16.8</span> Ejecución local</h2>
+<p>Para ejecutar la aplicación en la estación de trabajo, se abre el documento <code>index.qmd</code> en RStudio y se presiona el botón <strong>Run Document</strong>. RStudio inicia un servidor Shiny local y abre la aplicación en una ventana o en el navegador. Mientras el documento esté en ejecución, la sesión de R queda ocupada atendiendo la aplicación.</p>
+</section>
+<section id="sec-publicacion-shinyapps" class="level2" data-number="16.9">
+<h2 data-number="16.9" class="anchored" data-anchor-id="sec-publicacion-shinyapps"><span class="header-section-number">16.9</span> Publicación en shinyapps.io</h2>
 <p>Una aplicación Shiny no puede publicarse como página estática; necesita un servidor. La forma más sencilla de ponerla en línea es <a href="https://www.shinyapps.io/">shinyapps.io</a>, un servicio de Posit con un plan gratuito. Los pasos son:</p>
 <ol type="1">
 <li>Cree una cuenta en <a href="https://www.shinyapps.io/">shinyapps.io</a>.</li>
 <li>Obtenga su <em>token</em> de autenticación en <strong>Account - Tokens - Show - Copy to clipboard</strong>.</li>
-<li>Con la aplicación en ejecución en RStudio, presione el botón <strong>Publish</strong>, elija la opción shinyapps.io e ingrese el <em>token</em> cuando se le solicite. Seleccione todos los archivos requeridos para que la aplicación funcione (el archivo <code>.qmd</code> y cualquier archivo de datos local).</li>
+<li>Con la aplicación en ejecución en RStudio, presione el botón <strong>Publish</strong>, elija la opción shinyapps.io e ingrese el <em>token</em> cuando se le solicite. Seleccione todos los archivos requeridos para que la aplicación funcione (el archivo <code>index.qmd</code> y los archivos de la carpeta <code>datos/</code>).</li>
 </ol>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Importante</span>El plan gratuito permite un máximo de cinco aplicaciones
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Todas las dependencias del documento (incluidos <code>bslib</code> y <code>bsicons</code>) deben estar instaladas en el mismo entorno desde el que se publica, para que entren en el paquete que se sube al servidor.</p>
+</div>
+</div>
 <p>Puede consultarse más información en <a href="https://quarto.org/docs/interactive/shiny/running.html">Quarto - Publishing Shiny Documents</a>.</p>
 </section>
-<section id="ejercicios" class="level3" data-number="16.7.10">
-<h3 data-number="16.7.10" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">16.7.10</span> Ejercicios</h3>
+<section id="ejercicios" class="level2" data-number="16.10">
+<h2 data-number="16.10" class="anchored" data-anchor-id="ejercicios"><span class="header-section-number">16.10</span> Ejercicios</h2>
 <ol type="1">
-<li><p>Agregue a la barra lateral un tercer filtro: un deslizador de rango de año (<code>sliderInput()</code>) que use la columna <code>year</code> del conjunto de datos de félidos, e incorpórelo a la función reactiva de filtrado.</p></li>
+<li><p>En la barra lateral, agregue un <strong>sexto control de entrada</strong> (por ejemplo, un <code>selectInput()</code> para elegir la fuente de los datos, columna <code>institutionCode</code>) e incorpórelo a la función reactiva <code>felidos_filtrados()</code>.</p></li>
 <li><p>Agregue una <strong>cuarta caja de valor reactiva</strong> que muestre otro indicador de la selección actual (por ejemplo, el año más reciente con registros o la especie con más observaciones), siguiendo el patrón de <code>uiOutput()</code> en la interfaz y <code>value_box()</code> dentro de <code>renderUI()</code> en el servidor.</p></li>
-<li><p>Tome el tablero de control que desarrolla en su tarea y conviértalo en una aplicación Shiny, siguiendo el patrón de este capítulo: agregue <code>server: shiny</code>, una barra lateral con al menos un filtro y mueva la generación de las salidas al servidor. Este es el punto de partida del <strong>proyecto final</strong> del curso.</p></li>
+<li><p>Agregue al control <code>radioButtons</code> <code>"vis_puntos"</code> una <strong>cuarta opción</strong> de visualización de los registros (por ejemplo, círculos cuyo tamaño dependa de alguna variable) y prográmela en el <code>renderLeaflet()</code> del servidor.</p></li>
+<li><p>Tome el tablero de control que desarrolla en su tarea y conviértalo en una aplicación Shiny, siguiendo los pasos de este capítulo: agregue <code>server: shiny</code>, mueva los paquetes y los datos a los contextos <code>setup</code> y <code>data</code>, agregue una barra lateral con al menos un filtro, programe una función reactiva y mueva la generación de las salidas al servidor. Este es el punto de partida del <strong>proyecto final</strong> del curso.</p></li>
 </ol>
 </section>
-</section>
-<section id="recursos-adicionales" class="level2" data-number="16.8">
-<h2 data-number="16.8" class="anchored" data-anchor-id="recursos-adicionales"><span class="header-section-number">16.8</span> Recursos adicionales</h2>
+<section id="recursos-adicionales" class="level2" data-number="16.11">
+<h2 data-number="16.11" class="anchored" data-anchor-id="recursos-adicionales"><span class="header-section-number">16.11</span> Recursos adicionales</h2>
 <p>Además de las <a href="#sec-shiny">aplicaciones de ejemplo de este capítulo</a> (riqueza de félidos y Atlas de Desarrollo Humano Cantonal), la siguiente aplicación, desarrollada en una versión anterior del curso, sirve como referencia:</p>
 <ul>
 <li>Tablero interactivo de mamíferos: <a href="https://mfvargas.shinyapps.io/tablero-interactivo-mamiferos/">aplicación publicada</a> · <a href="https://github.com/gf0604-procesamientodatosgeograficos/2025-i-tablero-interactivo-mamiferos">código fuente</a>.</li>

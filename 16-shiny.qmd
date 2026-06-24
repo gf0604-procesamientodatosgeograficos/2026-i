@@ -1,6 +1,6 @@
 # Aplicaciones interactivas con Shiny {#sec-shiny}
 
-En este capítulo se explica qué es una aplicación web interactiva y cómo desarrollarla con [Shiny](https://shiny.posit.co/), el paquete de R que añade interactividad del lado del servidor a los documentos Quarto. El capítulo retoma el [tablero de control de riqueza de félidos](tableros/tablero-riqueza-felidos.html) del @sec-tableros-control y lo transforma, paso a paso, en una **aplicación interactiva** en la que la persona usuaria filtra los datos y todas las visualizaciones se actualizan en respuesta. Este ejercicio prepara el terreno para el proyecto final del curso, en el que cada estudiante convertirá el tablero de control que desarrolla en su tarea en una aplicación Shiny.
+En este capítulo se explica qué es una aplicación web interactiva y cómo desarrollarla con [Shiny](https://shiny.posit.co/), el paquete de R que añade interactividad del lado del servidor a los documentos Quarto. El capítulo está organizado como un **tutorial**: retoma el [tablero de control de riqueza de félidos](tableros/tablero-riqueza-felidos.html) del @sec-tableros-control y lo transforma, **paso a paso y elemento por elemento**, en una [aplicación interactiva](https://mfvargas.shinyapps.io/riqueza-felidos/) en la que la persona usuaria filtra los datos y todas las visualizaciones se actualizan en respuesta. Cada paso muestra el código **antes** (en el tablero estático) y **después** (en la aplicación), para que la transformación quede clara. Este ejercicio prepara el terreno para el proyecto final del curso, en el que cada estudiante convertirá el tablero de control que desarrolla en su tarea en una aplicación Shiny.
 
 ::: {.callout-note appearance="simple"}
 ## Aplicaciones de ejemplo de este capítulo
@@ -11,6 +11,8 @@ Este capítulo construye, paso a paso, la aplicación de **riqueza de félidos**
 |---|---|---|
 | **Riqueza de félidos de Costa Rica** | <https://mfvargas.shinyapps.io/riqueza-felidos/> | [repositorio](https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos) · [`index.qmd`](https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd) |
 | **Atlas de Desarrollo Humano Cantonal (edición 2025)** | <https://mfvargas.shinyapps.io/atlas-desarrollo-humano-2025/> | [repositorio](https://github.com/gf0604-procesamientodatosgeograficos/atlas-desarrollo-humano-2025) · [`index.qmd`](https://github.com/gf0604-procesamientodatosgeograficos/atlas-desarrollo-humano-2025/blob/main/index.qmd) |
+
+El tablero de control estático que sirve de punto de partida también está disponible en línea: [tablero publicado](https://gf0604-procesamientodatosgeograficos.github.io/2026-i-tablero-riqueza-felidos/) · [repositorio](https://github.com/gf0604-procesamientodatosgeograficos/2026-i-tablero-riqueza-felidos).
 :::
 
 ## Resumen
@@ -18,6 +20,8 @@ Este capítulo construye, paso a paso, la aplicación de **riqueza de félidos**
 Un tablero de control publicado como página estática (como el del @sec-tableros-control) muestra siempre las mismas visualizaciones: la persona usuaria puede explorar los mapas y las tablas, pero no puede cambiar *qué* datos se procesan. Una **aplicación interactiva** sí lo permite: incorpora controles de entrada (*widgets*) —listas de selección, deslizadores, casillas de verificación— con los que la persona usuaria configura filtros, búsquedas u ordenamientos, y las salidas se recalculan dinámicamente.
 
 Para lograr esto, una aplicación Shiny tiene dos componentes: una **interfaz de usuario**, que despliega los controles de entrada y de salida, y un **servidor**, un proceso de R que recibe las entradas, procesa los datos y devuelve los resultados a la interfaz. La comunicación entre ambos se realiza mediante **funciones reactivas**, que se ejecutan automáticamente cada vez que la persona usuaria cambia un control.
+
+La segunda mitad del capítulo aplica estos conceptos en un tutorial que convierte, paso a paso, el tablero de félidos en la aplicación interactiva.
 
 ## Trabajo previo
 
@@ -69,7 +73,7 @@ La @fig-shiny-cliente-servidor ilustra esta relación entre el cliente (la inter
 
 La interfaz y el servidor se comunican a través de dos listas:
 
-- `input` contiene los valores de los controles de entrada. Cada control de entrada tiene un identificador único (`inputId`); por ejemplo, un control con `inputId = "especie"` se referencia en el servidor como `input$especie`.
+- `input` contiene los valores de los controles de entrada. Cada control de entrada tiene un identificador único (`inputId`); por ejemplo, un control con `inputId = "area"` se referencia en el servidor como `input$area`.
 - `output` contiene los controles que se generan en el servidor (tablas, gráficos, mapas). Para cada salida hay un par de funciones: una función `*Output()` que reserva el espacio en la interfaz (por ejemplo, `plotlyOutput("grafico")`) y una función `render*()` que la genera en el servidor (por ejemplo, `output$grafico <- renderPlotly({ ... })`). Ambas se vinculan por el identificador de salida (`outputId`).
 
 ### Contextos de los bloques de código
@@ -87,16 +91,16 @@ La @fig-shiny-contextos-codigo resume en qué sesión se ejecuta cada contexto: 
 
 ### Funciones reactivas
 
-Una **función reactiva** se ejecuta automáticamente cada vez que cambia alguno de los valores de entrada que utiliza. Se define con `reactive()`. El siguiente ejemplo filtra los registros de félidos según la especie seleccionada por la persona usuaria en una lista de selección con `inputId = "especie"`:
+Una **función reactiva** se ejecuta automáticamente cada vez que cambia alguno de los valores de entrada que utiliza. Se define con `reactive()`. El siguiente ejemplo filtra los registros de félidos según el área de conservación seleccionada por la persona usuaria en una lista de selección con `inputId = "area"`:
 
 ```` md
 ```{r}`r ''`
-# Función reactiva que filtra los registros de félidos por especie
+# Función reactiva que filtra los registros de félidos por área de conservación
 felidos_filtrados <- reactive({
   resultado <- felidos
 
-  if (input$especie != "Todas") {
-    resultado <- resultado |> filter(species == input$especie)
+  if (input$area != "Todas") {
+    resultado <- resultado |> filter(nombre_ac == input$area)
   }
 
   resultado
@@ -104,21 +108,11 @@ felidos_filtrados <- reactive({
 ```
 ````
 
-Una función reactiva se invoca como cualquier otra función, agregando paréntesis: `felidos_filtrados()`. La gran ventaja es que **se calcula una sola vez** cada vez que cambia un filtro y su resultado lo comparten todas las salidas que la invocan (el mapa, el gráfico y la tabla), en lugar de repetir el filtrado en cada una.
-
-### Del tablero a la aplicación
-
-En el @sec-tableros-control, el tablero de control de félidos mostraba mapas, un gráfico y una tabla **fijos**, calculados una sola vez al renderizar la página. Para convertirlo en una aplicación interactiva, se realizan tres cambios:
-
-1. Se agrega `server: shiny` al encabezado YAML.
-2. Se agregan **controles de entrada** (en una barra lateral) con los que la persona usuaria especifica filtros.
-3. Se mueve la generación de las salidas al **servidor**, dentro de funciones `render*` que dependen de una función reactiva de filtrado.
-
-El resto de este capítulo desarrolla esos cambios sobre el ejemplo de félidos.
+Una función reactiva se invoca como cualquier otra función, agregando paréntesis: `felidos_filtrados()`. La gran ventaja es que **se calcula una sola vez** cada vez que cambia un filtro y su resultado lo comparten todas las salidas que la invocan (las cajas de valor, el mapa, el gráfico y la tabla), en lugar de repetir el filtrado en cada una. Más adelante, en el @sec-paso-reactiva, se construye la versión completa de esta función, con los tres filtros de la aplicación.
 
 ## Instalación y carga de paquetes
 
-Además de los paquetes del ecosistema espacial y de graficación ya empleados en capítulos anteriores (`tidyverse`, `sf`, `plotly`, `DT`, `leaflet`), este capítulo introduce tres paquetes nuevos:
+Además de los paquetes del ecosistema espacial y de graficación ya empleados en capítulos anteriores (`tidyverse`, `sf`, `plotly`, `DT`, `leaflet`, `leaflet.extras`), este capítulo introduce tres paquetes nuevos:
 
 - [`shiny`](https://shiny.posit.co/): desarrollo de aplicaciones interactivas.
 - [`rsconnect`](https://rstudio.github.io/rsconnect/): publicación de aplicaciones en shinyapps.io y Posit Connect.
@@ -152,7 +146,7 @@ library(rsconnect)
 
 ## Conjuntos de datos
 
-La aplicación de ejemplo utiliza los mismos dos conjuntos de datos del @sec-tableros-control:
+La aplicación de ejemplo utiliza los mismos dos conjuntos de datos del @sec-tableros-control. Para reproducir la aplicación, deben descargarse a una carpeta `datos/` ubicada junto al documento `index.qmd`:
 
 - **Áreas de conservación**: capa vectorial GPKG con los polígonos de las 11 áreas de conservación administrativas del [Sistema Nacional de Áreas de Conservación (SINAC)](https://www.sinac.go.cr/).
 
@@ -162,21 +156,57 @@ La aplicación de ejemplo utiliza los mismos dos conjuntos de datos del @sec-tab
 
   [Descargar el archivo CSV de registros de presencia de félidos silvestres de Costa Rica](https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/gbif/felidos.csv)
 
-## Ejemplo: aplicación interactiva de riqueza de félidos
+## De tablero de control a aplicación interactiva, paso a paso
 
-Como ejemplo integral, se transformó el tablero de control de riqueza de félidos del @sec-tableros-control en una aplicación interactiva. La aplicación incorpora una **barra lateral** con dos filtros —especie y área de conservación—, una fila superior con tres **cajas de valor reactivas** y tres salidas —un mapa, un gráfico y una tabla—; todas estas salidas se actualizan en respuesta a esos filtros.
-
-- [Aplicación publicada en shinyapps.io](https://mfvargas.shinyapps.io/riqueza-felidos/)
-- [Repositorio de la aplicación en GitHub](https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos)
-- [Código fuente de la aplicación](https://github.com/gf0604-procesamientodatosgeograficos/2026-i-aplicacion-riqueza-felidos/blob/main/index.qmd)
+Esta sección es el núcleo del capítulo. Toma el tablero de control de riqueza de félidos del @sec-tableros-control y lo convierte en la [aplicación interactiva publicada en shinyapps.io](https://mfvargas.shinyapps.io/riqueza-felidos/). En cada paso se presenta primero el código **antes** (tal como está en el tablero) y luego el código **después** (tal como queda en la aplicación), de modo que el cambio sea evidente.
 
 A diferencia del tablero del @sec-tableros-control, esta aplicación **no** se publica como página estática en GitHub Pages, porque requiere un servidor Shiny en ejecución. En la sección [Publicación en shinyapps.io](#sec-publicacion-shinyapps) se explica cómo desplegarla en la nube.
 
-En las secciones siguientes se muestra el código fuente, organizado de acuerdo con la arquitectura de la aplicación.
+### Punto de partida: el tablero de control
 
-### Encabezado YAML
+El [tablero de control de félidos](tableros/tablero-riqueza-felidos.html) es un documento Quarto con `format: dashboard` que, una vez renderizado, muestra siempre lo mismo:
 
-El encabezado declara el formato `dashboard` con `server: shiny` y un botón de navegación hacia el código fuente en GitHub. Es el mismo encabezado del tablero del capítulo anterior, con la única adición de `server: shiny`:
+- Una **fila superior** con tres **cajas de valor** (total de registros, riqueza de especies y áreas con mayor riqueza).
+- Una **fila central** con tres pestañas de mapa (registros agrupados, mapa de calor y coropleta de riqueza por área) y, a la par, un **gráfico** de barras de riqueza por área.
+- Una **fila inferior** con una **tabla** de registros de presencia.
+
+Todo el procesamiento ocurre una sola vez, al renderizar la página. La persona usuaria no puede filtrar ni recalcular nada. El objetivo del tutorial es agregar esa interactividad.
+
+La @fig-shiny-flujo-reactivo, que se retoma al final de la sección, resume hacia dónde se quiere llegar: dos o más controles de entrada que alimentan una función reactiva, cuyo resultado comparten todas las salidas.
+
+### Resumen de los cambios
+
+La transformación se realiza con un conjunto acotado de cambios, que las secciones siguientes desarrollan uno por uno:
+
+1. **Encabezado YAML**: se agrega `server: shiny`.
+2. **Paquetes**: el bloque de carga pasa al contexto `setup`.
+3. **Datos**: el bloque de datos pasa al contexto `data`; el cálculo de la riqueza por área, que el tablero hacía una sola vez, se traslada al servidor para recalcularse con cada filtro.
+4. **Barra lateral**: se agregan los **controles de entrada** con los que la persona usuaria filtra y configura las salidas.
+5. **Función reactiva**: se programa `felidos_filtrados()`, que aplica los filtros una sola vez y comparte el resultado.
+6. **Cajas de valor, mapa, gráfico y tabla** (pasos 6 a 8): cada salida fija se reemplaza por un par `*Output()` (en la interfaz) + `render*()` (en el servidor), que invoca la función reactiva.
+7. **Botón de restablecer** (paso 9): se agrega un control que devuelve todos los filtros a sus valores iniciales.
+
+### Paso 1. Activar Shiny en el encabezado YAML
+
+El único cambio en el encabezado es agregar `server: shiny`. Todo lo demás (formato `dashboard`, botón de navegación a GitHub, idioma) se conserva.
+
+**Antes** (tablero):
+
+```` yaml
+---
+title: "Riqueza de félidos de Costa Rica"
+author: "Manuel Vargas"
+format:
+  dashboard:
+    orientation: rows
+    nav-buttons:
+      - icon: github
+        href: https://github.com/gf0604-procesamientodatosgeograficos/2026-i-tablero-riqueza-felidos/blob/main/index.qmd
+lang: es
+---
+````
+
+**Después** (aplicación):
 
 ```` yaml
 ---
@@ -192,9 +222,31 @@ lang: es
 ---
 ````
 
-### Carga de paquetes (`context: setup`)
+### Paso 2. Cargar los paquetes en el contexto `setup`
 
-El primer bloque carga los paquetes. La opción `#| context: setup` indica que debe ejecutarse tanto en la interfaz de usuario como en el servidor:
+El bloque que carga los paquetes es casi idéntico al del tablero; el cambio clave es la opción `#| context: setup`, que hace que el bloque se ejecute **tanto en la interfaz como en el servidor**. Además, se cargan tres paquetes nuevos —`shiny`, `bslib` y `bsicons`— para la interactividad y las cajas de valor, y se elimina `tmap`, porque en la aplicación la coropleta de riqueza se dibuja con `leaflet` (ver @sec-paso-mapa).
+
+**Antes** (tablero):
+
+```` md
+```{r}`r ''`
+#| label: carga-paquetes
+#| message: false
+#| warning: false
+
+library(tidyverse)      # manipulación de datos
+library(sf)             # datos vectoriales
+library(tmap)           # mapas estáticos e interactivos
+library(plotly)         # gráficos interactivos
+library(DT)             # tablas interactivas
+library(leaflet)        # mapas interactivos
+library(leaflet.extras) # mapas de calor sobre leaflet
+
+tmap_mode("view")       # modo interactivo de tmap
+```
+````
+
+**Después** (aplicación):
 
 ```` md
 ```{r}`r ''`
@@ -203,20 +255,64 @@ El primer bloque carga los paquetes. La opción `#| context: setup` indica que d
 #| message: false
 #| warning: false
 
+# Carga de paquetes (se ejecuta tanto en la interfaz como en el servidor)
 library(tidyverse)      # manipulación de datos
 library(sf)             # datos vectoriales
 library(plotly)         # gráficos interactivos
 library(DT)             # tablas interactivas
 library(leaflet)        # mapas interactivos
+library(leaflet.extras) # mapas de calor sobre leaflet
 library(shiny)          # aplicaciones interactivas
 library(bslib)          # componentes de interfaz (cajas de valor)
 library(bsicons)        # íconos de Bootstrap
 ```
 ````
 
-### Carga y preparación de datos (`context: data`)
+### Paso 3. Preparar los datos en el contexto `data`
 
-El segundo bloque carga los datos y los prepara una sola vez. La opción `#| context: data` hace que el resultado quede disponible tanto para la barra lateral (que necesita la lista de especies y de áreas) como para el servidor. El procesamiento —la unión espacial con `st_join()` y la simplificación de geometrías con `st_simplify()`— es exactamente el mismo del @sec-tableros-control:
+El bloque de datos pasa al contexto `data`, de modo que los datos cargados queden disponibles tanto para la barra lateral (que necesita la lista de especies, de áreas y el rango de años) como para el servidor. La unión espacial con `st_join()` y la simplificación de geometrías con `st_simplify()` son las mismas del tablero.
+
+Hay dos diferencias importantes respecto al tablero:
+
+- Se agrega una columna `anio` (extraída de `eventDate`) y se calculan `anio_min` y `anio_max`, que el deslizador de años necesita.
+- El cálculo de la **riqueza por área de conservación** —que el tablero hacía una sola vez en este bloque— **ya no se hace aquí**. Como debe recalcularse con cada filtro, se traslada al servidor, dentro de las funciones `render*` (ver pasos 6 a 8).
+
+**Antes** (tablero): el bloque cargaba los datos y, además, calculaba de una vez la riqueza por área y los indicadores de las cajas de valor:
+
+```` md
+```{r}`r ''`
+#| label: preparacion-riqueza
+#| message: false
+#| warning: false
+
+# Unión espacial: a cada registro se le agrega el área que lo contiene
+felidos_union_areas <- st_join(
+  x = felidos,
+  y = dplyr::select(areas_conservacion, codigo_ac, nombre_ac, siglas_ac),
+  join = st_intersects
+)
+
+# Riqueza = cantidad de especies distintas por área de conservación
+riqueza_felidos_areas <-
+  felidos_union_areas |>
+  st_drop_geometry() |>
+  filter(!is.na(codigo_ac)) |>
+  group_by(codigo_ac) |>
+  summarize(riqueza_especies_felidos = n_distinct(species, na.rm = TRUE))
+
+# Áreas simplificadas (solo para dibujarlas) con la riqueza unida por atributo
+areas_union_riqueza <-
+  left_join(areas_conservacion_simplificadas, riqueza_felidos_areas, by = "codigo_ac") |>
+  replace_na(list(riqueza_especies_felidos = 0))
+
+# Indicadores fijos para las cajas de valor
+total_registros <- nrow(felidos)
+total_especies  <- n_distinct(felidos$species, na.rm = TRUE)
+# ... (riqueza máxima y áreas que la alcanzan)
+```
+````
+
+**Después** (aplicación): el bloque solo carga y prepara lo que es **común y estático** (la unión espacial, el año y las áreas simplificadas). Lo que depende de los filtros se calculará después, en el servidor:
 
 ```` md
 ```{r}`r ''`
@@ -226,14 +322,11 @@ El segundo bloque carga los datos y los prepara una sola vez. La opción `#| con
 #| warning: false
 
 # Áreas de conservación del SINAC (polígonos)
-areas_conservacion <- st_read(
-  "https://github.com/gf0604-procesamientodatosgeograficos/2026-i/raw/refs/heads/main/datos/sinac/areas-conservacion.gpkg",
-  quiet = TRUE
-)
+areas_conservacion <- st_read("datos/areas-conservacion.gpkg", quiet = TRUE)
 
 # Registros de presencia de félidos silvestres (puntos)
 felidos <- st_read(
-  "https://raw.githubusercontent.com/gf0604-procesamientodatosgeograficos/2026-i/refs/heads/main/datos/gbif/felidos.csv",
+  "datos/felidos.csv",
   options = c(
     "X_POSSIBLE_NAMES=decimalLongitude",
     "Y_POSSIBLE_NAMES=decimalLatitude"
@@ -242,14 +335,19 @@ felidos <- st_read(
 )
 st_crs(felidos) <- 4326
 
-# Unión espacial: a cada registro se le agrega el área de conservación que lo contiene
+# Unión espacial: a cada registro se le agrega el área que lo contiene
 felidos <- st_join(
   x = felidos,
   y = dplyr::select(areas_conservacion, codigo_ac, nombre_ac, siglas_ac),
   join = st_intersects
 )
 
-# Versión simplificada de las áreas, solo para dibujarlas en el mapa
+# Año del registro (para el deslizador de rango de años)
+felidos$anio <- suppressWarnings(as.integer(substr(as.character(felidos$eventDate), 1, 4)))
+anio_min <- min(felidos$anio, na.rm = TRUE)
+anio_max <- max(felidos$anio, na.rm = TRUE)
+
+# Versión SIMPLIFICADA de las áreas, solo para dibujarlas en el mapa
 areas_conservacion_simplificadas <-
   areas_conservacion |>
   st_transform(5367) |>
@@ -258,27 +356,39 @@ areas_conservacion_simplificadas <-
 ```
 ````
 
-### Barra lateral con filtros
+### Paso 4. Agregar la barra lateral con controles de entrada
 
-La barra lateral se crea con un encabezado de nivel 1 con la clase `.sidebar`. Dentro se colocan dos controles de entrada `selectInput()`: uno para la especie y otro para el área de conservación. Cada lista incluye la opción `"Todas"` y toma el resto de sus opciones de los datos cargados en el bloque `context: data`:
+El tablero no tiene controles de entrada. La aplicación agrega una **barra lateral** —un encabezado de nivel 1 con la clase `.sidebar`— con cinco controles, cada uno de un tipo distinto, para ilustrar la variedad de *widgets* disponibles:
+
+- `checkboxGroupInput()`: casillas de verificación para elegir **una o varias** especies a la vez.
+- `selectInput()`: lista desplegable de **opción única** para el área de conservación (con la opción `"Todas"`).
+- `sliderInput()`: deslizador de **rango** para el año del registro.
+- `radioButtons()`: **opción única** entre alternativas visibles; controla cómo se dibujan los registros en el mapa (sustituye a las tres pestañas de mapa del tablero).
+- `actionButton()`: botón que dispara una acción en el servidor; aquí, restablecer los filtros (ver @sec-paso-reset).
+
+Nótese que las tres pestañas de mapa del tablero (registros agrupados, mapa de calor y coropleta) se reorganizan: la coropleta pasa a mostrarse siempre, y la elección entre *agrupados*, *individuales* y *mapa de calor* se convierte en el control `radioButtons` `"vis_puntos"`.
+
+**Después** (aplicación): la barra lateral con los cinco controles.
 
 ```` md
 # {.sidebar}
 
 ```{r}`r ''`
-#| label: filtro-especie
+#| label: filtro-especies
 
-selectInput(
-  inputId  = "especie",
-  label    = "Especie",
-  choices  = c("Todas", sort(unique(felidos$species))),
-  selected = "Todas"
+# checkboxGroupInput: selección múltiple; inician todas las especies marcadas
+checkboxGroupInput(
+  inputId  = "especies",
+  label    = "Especies",
+  choices  = sort(unique(felidos$species)),
+  selected = sort(unique(felidos$species))
 )
 ```
 
 ```{r}`r ''`
 #| label: filtro-area
 
+# selectInput: lista desplegable de opción única (con la opción "Todas")
 selectInput(
   inputId  = "area",
   label    = "Área de conservación",
@@ -286,20 +396,115 @@ selectInput(
   selected = "Todas"
 )
 ```
+
+```{r}`r ''`
+#| label: filtro-anios
+
+# sliderInput: deslizador de rango para filtrar por el año del registro
+sliderInput(
+  inputId = "anios",
+  label   = "Rango de años",
+  min     = anio_min,
+  max     = anio_max,
+  value   = c(anio_min, anio_max),
+  step    = 1,
+  sep     = ""
+)
+```
+
+```{r}`r ''`
+#| label: control-visualizacion
+
+# radioButtons: opción única para la forma de dibujar los registros en el mapa
+radioButtons(
+  inputId  = "vis_puntos",
+  label    = "Visualización de registros",
+  choices  = c("Agrupados", "Individuales", "Mapa de calor"),
+  selected = "Agrupados"
+)
+```
+
+```{r}`r ''`
+#| label: boton-reset
+
+# actionButton: restablece todos los controles a sus valores iniciales
+actionButton(
+  inputId = "reset",
+  label   = "Restablecer filtros"
+)
+```
 ````
 
-Nótese el argumento `inputId` de cada `selectInput()`: `"especie"` y `"area"`. Estos identificadores se usarán en el servidor como `input$especie` e `input$area`.
+Cada control tiene un `inputId` único (`"especies"`, `"area"`, `"anios"`, `"vis_puntos"`, `"reset"`). El servidor los lee como `input$especies`, `input$area`, `input$anios`, `input$vis_puntos` e `input$reset`.
 
-### Cajas de valor reactivas
+### Paso 5. La función reactiva de filtrado {#sec-paso-reactiva}
 
-Sobre las salidas principales se coloca una fila con tres **cajas de valor**. A diferencia de las cajas estáticas del @sec-tableros-control —cuyo valor se fija una sola vez al renderizar—, estas se **recalculan con cada cambio de filtro**. Por eso son una salida más del servidor: en la interfaz solo se reserva su espacio con un control de salida genérico, `uiOutput()`, y el servidor construye la caja completa con `bslib::value_box()` dentro de `renderUI()`.
+Este es el **corazón** de la transformación. El tablero filtraba (en realidad, no filtraba nada: usaba todos los datos) de forma fija. La aplicación define una sola función reactiva, `felidos_filtrados()`, que aplica los tres filtros de la barra lateral. Se calcula una sola vez por cambio y todas las salidas comparten su resultado.
 
-Las tres cajas se agrupan en una fila (`## Row`) dentro de la página de la aplicación. Cada bloque reserva el espacio de una caja con `uiOutput()`:
+A partir de aquí, todo el código nuevo vive en un único bloque del servidor (`#| context: server`):
+
+```` md
+```{r}`r ''`
+#| label: servidor
+#| context: server
+
+# Filtra los registros según los valores de la barra lateral.
+# Se calcula una sola vez y la comparten todas las salidas.
+felidos_filtrados <- reactive({
+  resultado <- felidos
+
+  # Filtro por especies (selección múltiple del checkboxGroupInput)
+  resultado <- resultado |> filter(species %in% input$especies)
+
+  # Filtro por área de conservación
+  if (input$area != "Todas") {
+    resultado <- resultado |> filter(nombre_ac == input$area)
+  }
+
+  # Filtro por rango de años (se conservan los registros sin fecha)
+  resultado <- resultado |>
+    filter(is.na(anio) | (anio >= input$anios[1] & anio <= input$anios[2]))
+
+  resultado
+})
+
+# ... (a continuación, en el mismo bloque, las funciones render* de los pasos 6 a 8
+#      y el observeEvent del paso 7)
+```
+````
+
+### Paso 6. De cajas de valor estáticas a reactivas
+
+En el tablero, cada caja de valor se reserva con la opción de bloque `#| content: valuebox` y su valor se fija una sola vez (a partir de los indicadores `total_registros`, `total_especies`, etc.). En la aplicación, el valor debe **recalcularse con cada filtro**, así que la caja se convierte en una salida más del servidor: en la interfaz se reserva el espacio con un control de salida genérico, `uiOutput()`, y el servidor construye la caja completa con `bslib::value_box()` dentro de `renderUI()`.
+
+**Antes** (tablero): la fila de cajas, con valores fijos.
+
+```` md
+## Row {height=15%}
+
+```{r}`r ''`
+#| label: valuebox-registros
+#| content: valuebox
+#| title: "Registros de presencia"
+
+list(icon = "binoculars", color = "primary", value = total_registros)
+```
+
+```{r}`r ''`
+#| label: valuebox-especies
+#| content: valuebox
+#| title: "Riqueza de especies"
+
+list(icon = "diagram-3", color = "success", value = total_especies)
+```
+````
+
+**Después** (aplicación): en la interfaz solo se reserva el espacio de cada caja con `uiOutput()`.
 
 ```` md
 # Riqueza de félidos
 
-## Row {height="20%"}
+## Row {height="15%"}
 
 ```{r}`r ''`
 #| label: salida-valuebox-registros
@@ -317,72 +522,12 @@ uiOutput(outputId = "vb_areas")
 ```
 ````
 
-Cada `outputId` (`"vb_registros"`, `"vb_especies"`, `"vb_areas"`) identifica la caja que el servidor generará con `renderUI()`.
-
-### Controles de salida
-
-Debajo de las cajas de valor, las tres salidas principales se organizan en una segunda fila con pestañas (`## Row {.tabset}`): una para el mapa, una para el gráfico y una para la tabla. Cada una se declara con la función `*Output()` correspondiente, que reserva el espacio en la interfaz. El contenido lo generará luego el servidor:
-
-```` md
-## Row {.tabset}
-
-### Mapa
-
-```{r}`r ''`
-#| label: salida-mapa
-leafletOutput(outputId = "mapa")
-```
-
-### Gráfico
-
-```{r}`r ''`
-#| label: salida-grafico
-plotlyOutput(outputId = "grafico")
-```
-
-### Tabla
-
-```{r}`r ''`
-#| label: salida-tabla
-dataTableOutput(outputId = "tabla")
-```
-````
-
-Cada `outputId` (`"mapa"`, `"grafico"`, `"tabla"`) identifica la salida y se usará en el servidor para asignarle su contenido: `output$mapa`, `output$grafico` y `output$tabla`.
-
-### Servidor (`context: server`)
-
-El bloque del servidor (`#| context: server`) contiene toda la lógica reactiva. Comienza con la función reactiva `felidos_filtrados()`, que aplica los dos filtros una sola vez, y continúa con las funciones `render*` que generan las salidas a partir de ella: las tres cajas de valor, el mapa, el gráfico y la tabla.
-
-**Función reactiva de filtrado:**
+Y en el servidor, cada caja se construye con `value_box()` a partir de `felidos_filtrados()`. Se usan los mismos íconos (`bs_icon()`) y colores (`theme`) del tablero:
 
 ```` md
 ```{r}`r ''`
-#| label: servidor
-#| context: server
+# (dentro del bloque #| context: server)
 
-# Filtra los registros según los valores de la barra lateral.
-# Se calcula una sola vez y la comparten las tres salidas.
-felidos_filtrados <- reactive({
-  resultado <- felidos
-
-  if (input$especie != "Todas") {
-    resultado <- resultado |> filter(species == input$especie)
-  }
-
-  if (input$area != "Todas") {
-    resultado <- resultado |> filter(nombre_ac == input$area)
-  }
-
-  resultado
-})
-```
-````
-
-**Cajas de valor** (en el mismo bloque del servidor). Cada caja se construye con `value_box()` —indicando su título, valor, ícono (`bs_icon()`) y color (`theme`)— a partir de los registros filtrados. Se usan los mismos íconos y colores del tablero del @sec-tableros-control:
-
-```` md
-```{r}`r ''`
 output$vb_registros <- renderUI({
   value_box(
     title    = "Registros de presencia",
@@ -431,45 +576,160 @@ output$vb_areas <- renderUI({
 ```
 ````
 
-**Mapa** (en el mismo bloque del servidor). Cada registro filtrado se dibuja como un marcador agrupado (*cluster*) sobre los polígonos de las áreas de conservación:
+::: {.callout-tip}
+## Patrón de las cajas de valor reactivas
+Para que una caja de valor reaccione a los filtros, **no** se usa `#| content: valuebox`. Se usa el par `uiOutput()` (interfaz) + `renderUI()` con `value_box()` (servidor). Este es el patrón que el proyecto final espera.
+:::
+
+### Paso 7. Del mapa fijo al mapa reactivo {#sec-paso-mapa}
+
+El tablero tenía **tres mapas separados**, cada uno en su pestaña: registros agrupados (`leaflet` + `addMarkers` con *cluster*), mapa de calor (`leaflet.extras` + `addHeatmap`) y coropleta de riqueza por área (`tmap`). En la aplicación, los tres se funden en **un solo mapa reactivo**:
+
+- La **coropleta** se dibuja siempre, ahora con `leaflet` (`colorNumeric()` + `addPolygons()` + `addLegend()`) en lugar de `tmap`, para que conviva con los puntos en el mismo mapa.
+- Los **registros** se dibujan según el control `radioButtons` `"vis_puntos"`: agrupados (`markerClusterOptions()`), individuales (sin agrupamiento) o como mapa de calor (`addHeatmap()`).
+
+En la interfaz solo se reserva el espacio del mapa con `leafletOutput()`:
+
+```` md
+## Row {height="55%"}
+
+### Column {width="60%"}
+
+```{r}`r ''`
+#| label: salida-mapa
+#| title: "Registros de presencia"
+leafletOutput(outputId = "mapa")
+```
+````
+
+Y el servidor lo genera con `renderLeaflet()`, invocando `felidos_filtrados()`:
 
 ```` md
 ```{r}`r ''`
+# (dentro del bloque #| context: server)
+
 output$mapa <- renderLeaflet({
-  leaflet() |>
-    setView(lng = -84.2, lat = 9.6, zoom = 7) |>
+  datos <- felidos_filtrados()
+
+  # Riqueza por área entre los datos filtrados
+  riqueza_por_area <-
+    datos |>
+    st_drop_geometry() |>
+    filter(!is.na(codigo_ac)) |>
+    group_by(codigo_ac) |>
+    summarize(riqueza = n_distinct(species), .groups = "drop")
+
+  # Unión por atributo a los polígonos simplificados; áreas sin registros = 0
+  areas_riqueza <-
+    left_join(areas_conservacion_simplificadas, riqueza_por_area, by = "codigo_ac") |>
+    replace_na(list(riqueza = 0))
+
+  # Paleta de coropletas (verde) según la riqueza de especies
+  paleta_riqueza <- colorNumeric(palette = "Greens", domain = areas_riqueza$riqueza)
+
+  # Mapa base
+  mapa <- leaflet() |>
+    setView(lng = -84.2, lat = 9.6, zoom = 8) |>
     addProviderTiles(providers$OpenStreetMap,    group = "OpenStreetMap") |>
-    addProviderTiles(providers$CartoDB.Positron, group = "CartoDB Positron") |>
+    addProviderTiles(providers$CartoDB.Positron, group = "CartoDB Positron")
+
+  # Coropleta de riqueza por área de conservación (+ leyenda), siempre visible
+  mapa <- mapa |>
     addPolygons(
-      data = areas_conservacion_simplificadas,
-      weight = 1, color = "black", fillOpacity = 0,
-      label = ~nombre_ac, group = "Áreas de conservación"
-    ) |>
-    addCircleMarkers(
-      data = felidos_filtrados(),
-      radius = 5, color = "#41ab5d", stroke = FALSE, fillOpacity = 0.7,
-      label = ~species,
-      popup = ~paste0(
-        "<b>Especie:</b> ", species,   "<br/>",
-        "<b>Localidad:</b> ", locality, "<br/>",
-        "<b>Fecha:</b> ", eventDate
+      data        = areas_riqueza,
+      weight      = 1,
+      color       = "black",
+      fillColor   = ~paleta_riqueza(riqueza),
+      fillOpacity = 0.7,
+      label       = ~nombre_ac,
+      popup       = ~paste0(
+        "<b>Área de conservación:</b> ", nombre_ac, "<br/>",
+        "<b>Siglas:</b> ", siglas_ac, "<br/>",
+        "<b>Riqueza de félidos:</b> ", riqueza
       ),
-      clusterOptions = markerClusterOptions(), group = "Félidos"
+      group       = "Riqueza por área de conservación"
     ) |>
+    addLegend(
+      data     = areas_riqueza,
+      position = "bottomright",
+      pal      = paleta_riqueza,
+      values   = ~riqueza,
+      title    = "Riqueza",
+      opacity  = 0.7
+    )
+  grupo_areas <- "Riqueza por área de conservación"
+
+  # Registros de presencia: según el radioButtons "vis_puntos"
+  if (input$vis_puntos == "Mapa de calor") {
+    mapa <- mapa |>
+      addHeatmap(
+        data = datos, radius = 15, blur = 20, minOpacity = 0.3,
+        group = "Mapa de calor"
+      )
+    grupo_registros <- "Mapa de calor"
+  } else {
+    # "Agrupados" usa agrupamiento de marcadores; "Individuales" no
+    opciones_cluster <-
+      if (input$vis_puntos == "Agrupados") markerClusterOptions() else NULL
+
+    mapa <- mapa |>
+      addCircleMarkers(
+        data        = datos,
+        radius      = 5, color = "white", weight = 1, stroke = TRUE,
+        fillColor   = "#cb181d", fillOpacity = 0.9,
+        label       = ~species,
+        popup       = ~paste0(
+          "<b>Especie:</b> ", species,   "<br/>",
+          "<b>Localidad:</b> ", locality, "<br/>",
+          "<b>Fecha:</b> ", eventDate
+        ),
+        clusterOptions = opciones_cluster,
+        group          = "Félidos"
+      )
+    grupo_registros <- "Félidos"
+  }
+
+  mapa |>
     addLayersControl(
-      baseGroups = c("OpenStreetMap", "CartoDB Positron"),
-      overlayGroups = c("Áreas de conservación", "Félidos"),
-      options = layersControlOptions(collapsed = FALSE)
+      baseGroups    = c("OpenStreetMap", "CartoDB Positron"),
+      overlayGroups = c(grupo_areas, grupo_registros),
+      options       = layersControlOptions(collapsed = FALSE)
     ) |>
     addScaleBar(position = "bottomleft")
 })
 ```
 ````
 
-**Gráfico** (en el mismo bloque del servidor). La riqueza de especies por área se recalcula sobre los datos filtrados y se grafica con `ggplot2`, convirtiéndolo luego en interactivo con `ggplotly()`:
+### Paso 8. Del gráfico y la tabla fijos a reactivos
+
+El gráfico y la tabla siguen el mismo patrón: en la interfaz se reserva el espacio con `plotlyOutput()` y `dataTableOutput()`, y en el servidor se generan con `renderPlotly()` y `renderDataTable()`, recalculándose a partir de `felidos_filtrados()`. El código de cada salida es prácticamente el mismo del tablero; la única diferencia es que los datos de entrada ya no son fijos, sino el resultado de la función reactiva.
+
+En la interfaz:
+
+```` md
+### Column {width="40%"}
+
+```{r}`r ''`
+#| label: salida-grafico
+#| title: "Riqueza por área de conservación"
+plotlyOutput(outputId = "grafico")
+```
+
+## Row {height="30%"}
+
+```{r}`r ''`
+#| label: salida-tabla
+#| title: "Registros de presencia de félidos"
+dataTableOutput(outputId = "tabla")
+```
+````
+
+En el servidor:
 
 ```` md
 ```{r}`r ''`
+# (dentro del bloque #| context: server)
+
 output$grafico <- renderPlotly({
   riqueza_por_area <-
     felidos_filtrados() |>
@@ -495,13 +755,7 @@ output$grafico <- renderPlotly({
   ggplotly(grafico_riqueza, tooltip = "text") |>
     config(locale = "es")
 })
-```
-````
 
-**Tabla** (en el mismo bloque del servidor). Una tabla `DT` con los registros filtrados:
-
-```` md
-```{r}`r ''`
 output$tabla <- renderDataTable({
   felidos_filtrados() |>
     st_drop_geometry() |>
@@ -525,33 +779,59 @@ output$tabla <- renderDataTable({
 ```
 ````
 
-Nótese cómo cada función `render*` invoca `felidos_filtrados()` (con paréntesis). Gracias a la reactividad, cuando la persona usuaria cambia un filtro, todas las salidas —las tres cajas de valor, el mapa, el gráfico y la tabla— se recalculan automáticamente.
+Gracias a la reactividad, cuando la persona usuaria cambia un filtro, **todas** las salidas —las tres cajas de valor, el mapa, el gráfico y la tabla— se recalculan automáticamente, porque todas invocan `felidos_filtrados()`.
 
-La @fig-shiny-flujo-reactivo resume este flujo para las tres salidas principales: los dos controles de entrada (`input$especie` e `input$area`) alimentan la función reactiva `felidos_filtrados()`, cuyo resultado comparten las tres funciones `render*` que generan el mapa, el gráfico y la tabla. Las cajas de valor siguen exactamente el mismo patrón: cada una invoca `felidos_filtrados()` dentro de su `renderUI()`.
+### Paso 9. El botón "Restablecer filtros" {#sec-paso-reset}
 
-![Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten las tres salidas.](img/shiny-flujo-reactivo.svg){#fig-shiny-flujo-reactivo .lightbox fig-alt="Diagrama del flujo reactivo: input$especie e input$area alimentan felidos_filtrados(), que a su vez alimenta output$mapa, output$grafico y output$tabla" fig-align="center"}
+El botón `actionButton` de la barra lateral (paso 4) se conecta en el servidor con `observeEvent()`: cuando la persona usuaria hace clic (`input$reset`), las funciones `update*Input()` devuelven cada control a su valor inicial. Es un ejemplo de cómo el servidor también puede **modificar la interfaz**, no solo leerla.
 
-### Ejecución local
+```` md
+```{r}`r ''`
+# (dentro del bloque #| context: server)
 
-Para ejecutar la aplicación en la estación de trabajo, se abre el documento `.qmd` en RStudio y se presiona el botón **Run Document**. RStudio inicia un servidor Shiny local y abre la aplicación en una ventana o en el navegador. Mientras el documento esté en ejecución, la sesión de R queda ocupada atendiendo la aplicación.
+observeEvent(input$reset, {
+  updateCheckboxGroupInput(session, "especies", selected = sort(unique(felidos$species)))
+  updateSelectInput(session, "area", selected = "Todas")
+  updateSliderInput(session, "anios", value = c(anio_min, anio_max))
+  updateRadioButtons(session, "vis_puntos", selected = "Agrupados")
+})
+```
+````
 
-### Publicación en shinyapps.io {#sec-publicacion-shinyapps}
+### El flujo reactivo completo
+
+La @fig-shiny-flujo-reactivo resume el resultado de la transformación: los controles de entrada de la barra lateral alimentan la función reactiva `felidos_filtrados()`, cuyo resultado comparten todas las funciones `render*` que generan las salidas. Cambiar cualquier filtro dispara, una sola vez, el recálculo de la función reactiva y, con él, la actualización automática de todas las salidas.
+
+![Flujo reactivo de la aplicación de félidos: los controles de entrada alimentan la función reactiva, cuyo resultado comparten todas las salidas.](img/shiny-flujo-reactivo.svg){#fig-shiny-flujo-reactivo .lightbox fig-alt="Diagrama del flujo reactivo: los controles de entrada alimentan felidos_filtrados(), que a su vez alimenta las cajas de valor, el mapa, el gráfico y la tabla" fig-align="center"}
+
+## Ejecución local
+
+Para ejecutar la aplicación en la estación de trabajo, se abre el documento `index.qmd` en RStudio y se presiona el botón **Run Document**. RStudio inicia un servidor Shiny local y abre la aplicación en una ventana o en el navegador. Mientras el documento esté en ejecución, la sesión de R queda ocupada atendiendo la aplicación.
+
+## Publicación en shinyapps.io {#sec-publicacion-shinyapps}
 
 Una aplicación Shiny no puede publicarse como página estática; necesita un servidor. La forma más sencilla de ponerla en línea es [shinyapps.io](https://www.shinyapps.io/), un servicio de Posit con un plan gratuito. Los pasos son:
 
 1. Cree una cuenta en [shinyapps.io](https://www.shinyapps.io/).
 2. Obtenga su *token* de autenticación en **Account - Tokens - Show - Copy to clipboard**.
-3. Con la aplicación en ejecución en RStudio, presione el botón **Publish**, elija la opción shinyapps.io e ingrese el *token* cuando se le solicite. Seleccione todos los archivos requeridos para que la aplicación funcione (el archivo `.qmd` y cualquier archivo de datos local).
+3. Con la aplicación en ejecución en RStudio, presione el botón **Publish**, elija la opción shinyapps.io e ingrese el *token* cuando se le solicite. Seleccione todos los archivos requeridos para que la aplicación funcione (el archivo `index.qmd` y los archivos de la carpeta `datos/`).
+
+::: {.callout-important}
+## El plan gratuito permite un máximo de cinco aplicaciones
+Todas las dependencias del documento (incluidos `bslib` y `bsicons`) deben estar instaladas en el mismo entorno desde el que se publica, para que entren en el paquete que se sube al servidor.
+:::
 
 Puede consultarse más información en [Quarto - Publishing Shiny Documents](https://quarto.org/docs/interactive/shiny/running.html).
 
-### Ejercicios
+## Ejercicios
 
-1. Agregue a la barra lateral un tercer filtro: un deslizador de rango de año (`sliderInput()`) que use la columna `year` del conjunto de datos de félidos, e incorpórelo a la función reactiva de filtrado.
+1. En la barra lateral, agregue un **sexto control de entrada** (por ejemplo, un `selectInput()` para elegir la fuente de los datos, columna `institutionCode`) e incorpórelo a la función reactiva `felidos_filtrados()`.
 
 2. Agregue una **cuarta caja de valor reactiva** que muestre otro indicador de la selección actual (por ejemplo, el año más reciente con registros o la especie con más observaciones), siguiendo el patrón de `uiOutput()` en la interfaz y `value_box()` dentro de `renderUI()` en el servidor.
 
-3. Tome el tablero de control que desarrolla en su tarea y conviértalo en una aplicación Shiny, siguiendo el patrón de este capítulo: agregue `server: shiny`, una barra lateral con al menos un filtro y mueva la generación de las salidas al servidor. Este es el punto de partida del **proyecto final** del curso.
+3. Agregue al control `radioButtons` `"vis_puntos"` una **cuarta opción** de visualización de los registros (por ejemplo, círculos cuyo tamaño dependa de alguna variable) y prográmela en el `renderLeaflet()` del servidor.
+
+4. Tome el tablero de control que desarrolla en su tarea y conviértalo en una aplicación Shiny, siguiendo los pasos de este capítulo: agregue `server: shiny`, mueva los paquetes y los datos a los contextos `setup` y `data`, agregue una barra lateral con al menos un filtro, programe una función reactiva y mueva la generación de las salidas al servidor. Este es el punto de partida del **proyecto final** del curso.
 
 ## Recursos adicionales
 
