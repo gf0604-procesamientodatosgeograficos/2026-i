@@ -53,6 +53,9 @@ book:
         - tareas/tarea-03-g002.md
         - tareas/tarea-04-g001.md
         - tareas/tarea-04-g002.md
+    - part: "Proyecto final"
+      chapters:
+        - proyecto/proyecto-final-g001.md
   appendices:
     - ejemplo-riqueza-felidos.qmd
     - ejemplo-altitud-cantones.qmd
