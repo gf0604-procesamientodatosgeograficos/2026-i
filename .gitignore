@@ -61,9 +61,10 @@ examenes-ciclos-anteriores/
 # Entregas de tareas (no publicar en repo público)
 entregas-tareas/
 
-# Enunciado del proyecto final (g001 ya está en el libro; g002 aún no se publica)
+# Enunciado del proyecto final (g001 y g002 ya están en el libro)
 proyecto/*
 !proyecto/proyecto-final-g001.md
+!proyecto/proyecto-final-g002.md
 
 # Directorios de configuración/caché de herramientas (no son del proyecto)
 .cache/
