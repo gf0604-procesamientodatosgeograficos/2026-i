@@ -61,6 +61,9 @@ examenes-ciclos-anteriores/
 # Entregas de tareas (no publicar en repo público)
 entregas-tareas/
 
+# Calificaciones finales descargadas de Mediación Virtual (no publicar en repo público)
+calificaciones-finales/
+
 # Enunciado del proyecto final (g001 y g002 ya están en el libro)
 proyecto/*
 !proyecto/proyecto-final-g001.md
