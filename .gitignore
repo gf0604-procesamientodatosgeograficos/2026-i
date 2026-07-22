@@ -64,6 +64,9 @@ entregas-tareas/
 # Calificaciones finales descargadas de Mediación Virtual (no publicar en repo público)
 calificaciones-finales/
 
+# Actas de notas de eMatrícula (no publicar en repo público)
+actas/
+
 # Enunciado del proyecto final (g001 y g002 ya están en el libro)
 proyecto/*
 !proyecto/proyecto-final-g001.md
